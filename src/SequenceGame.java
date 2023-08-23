@@ -377,7 +377,7 @@ public class SequenceGame {
 		int cardNumber = c.getCardNumber();
 
 		//add the button for this card to player handMap
-		player.getHandMap().put(new Integer(cardNumber), b);
+		player.getHandMap().put(cardNumber, b);
 		
 		//set action when a hand card is selected
 		b.setBorder(empty);
