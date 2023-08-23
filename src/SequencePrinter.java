@@ -111,26 +111,7 @@ public class SequencePrinter {
 		
 		ASequenceCardMethodBuilder(c);
 		
-		/* printing an array of ImageIcons
-		String[][] cardImages = {
-				{"corner.png", "AC.png", "KC.png", "QC.png", "10C.png", "9C.png", "8C.png", "7C.png", "6C.png", "corner.png"},
-				{"AD.png", "7S.png", "8S.png", "9S.png", "10S.png", "QS.png", "KS.png", "AS.png", "5C.png", "2S.png"},
-				{"KD.png", "6S.png", "10C.png", "9C.png", "8C.png", "7C.png", "6C.png", "2D.png", "4C.png", "3S.png"},
-				{"QD.png", "5S.png", "QC.png", "8H.png", "7H.png", "6H.png", "5C.png", "3D.png", "3C.png", "4S.png"},
-				{"10D.png", "4S.png", "KC.png", "9H.png", "2H.png", "5H.png", "4C.png", "4D.png", "2C.png", "5S.png"},
-				{"9D.png", "3S.png", "AC.png", "10H.png", "3H.png", "4H.png", "3C.png", "5D.png", "AH.png", "6S.png"},
-				{"8D.png", "2S.png", "AD.png", "QH.png", "KH.png", "AH.png", "2C.png", "6D.png", "KH.png", "7S.png"},
-				{"7D.png", "2H.png", "KD.png", "QD.png", "10D.png", "9D.png", "8D.png", "7D.png", "QH.png", "8S.png"},
-				{"6D.png", "3H.png", "4H.png", "5H.png", "6H.png", "7H.png", "8H.png", "9H.png", "10H.png", "9S.png"},
-				{"corner.png", "5D.png", "4D.png", "3D.png", "2D.png", "AS.png", "KS.png", "QS.png", "10S.png", "corner.png"},
-				};
-		for(int i=0; i<10; i++) {
-			System.out.print("{");
-			for(int j=0; j<10; j++)
-				System.out.printf("new ImageIcon(getClass().getResource(\"greyCards/%s\")), ", cardImages[i][j]);
-			System.out.println("}");
-		}
-			*/
+		
 		
 	}
 

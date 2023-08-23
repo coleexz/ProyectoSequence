@@ -28,51 +28,30 @@ public class CardDealer {
 		for(int i=0; i<104; i++) {
 			int r = rand.nextInt(104);
 
-			/* **If case to detect when a card's new position matches its current position**
-				if(i == r) {
-					System.out.println("Lucky duck occurred at " + i);
-				}
-				else {
-			 */
 			int temp = gameDeck[i];
 			gameDeck[i] = gameDeck[r];
 			gameDeck[r] = temp;
 			//}
 		}
 
-		//print out the shuffled deck
-		/*
-		System.out.println("The shuffled deck is: ");
-		for (int i = 0; i < 104; i ++) 
-			System.out.print(new ASequenceCard(gameDeck[i]).getImageFileName() + " ");
-		*/
-	}// end of shuffle
+	}
 	
 	
 	
 	void shuffle(Object[] o) {
 
-		//used to shuffle players
 		int n = o.length;
 
 		for(int i=0; i<n; i++) {
 			int r = rand.nextInt(n);
 
-			/* **If case to detect when a card's new position matches its current position**
-				if(i == r) {
-					System.out.println("Lucky duck occurred at " + i);
-				}
-				else {
-			 */
 			Object temp = o[i];
 			o[i] = o[r];
 			o[r] = temp;
 			//}
 		}
-	}// end of shuffle(Object o)
+	}
 	
-	
-
 	ASequenceCard dealCard(ASequencePlayer p) {
 		
 		//deal a card to player p

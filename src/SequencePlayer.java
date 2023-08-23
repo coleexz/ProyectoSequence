@@ -2,11 +2,11 @@ import java.util.HashMap;
 
 import javax.swing.JButton;
 
-public class HumanSequencePlayer extends ASequencePlayer {
+public class SequencePlayer extends ASequencePlayer {
 	
 	private HashMap<Integer, JButton> handMap;
 	
-	public HumanSequencePlayer(int number) {
+	public SequencePlayer(int number) {
 		
 		super(number);
 		
