@@ -26,6 +26,7 @@ public class LOGIN extends JFrame implements ActionListener {
     JTextField usernamefield = new JTextField();
     JPasswordField passwordfield = new JPasswordField();
     JButton botonlogin = new JButton();
+    JButton botonCrearPlayer = new JButton();
     
     public LOGIN(){
         setSize(500, 500);
@@ -41,7 +42,7 @@ public class LOGIN extends JFrame implements ActionListener {
         bienvenido.setBounds(170,10,200,100);
         panellogin.add(bienvenido);
         
-        usernamefield.setText("Usuario: ");
+        usernamefield.setText("Usuario");
         usernamefield.setBounds(100, 150,300,50);
         panellogin.add(usernamefield);
         
@@ -51,10 +52,14 @@ public class LOGIN extends JFrame implements ActionListener {
         
       
         botonlogin.setText("Iniciar sesion");
-        botonlogin.setBounds(200, 320, 100, 50);
+        botonlogin.setBounds(100, 320, 120, 50);
         botonlogin.addActionListener(this);
         panellogin.add(botonlogin);
         
+        botonCrearPlayer.setText("Crear Player");
+        botonCrearPlayer.setBounds(270, 320, 120, 50);
+        botonCrearPlayer.addActionListener(this);
+        panellogin.add(botonCrearPlayer);
     }
     
     @Override
@@ -72,12 +77,19 @@ public class LOGIN extends JFrame implements ActionListener {
                     passwordfield.setText("");
                     MENUPRINCIPAL menu = new MENUPRINCIPAL();
                     menu.setVisible(true);
+                    this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, "No se encontro dicha cuenta");
                 }
             } else {
                JOptionPane.showMessageDialog(this,"Debe de llenar los espacios para ingresar");
             }
+        }
+        
+        if (e.getSource() == botonCrearPlayer) {
+            CREATE create = new CREATE();
+            create.setVisible(true);
+            this.dispose();
         }
         
         if(e.getSource()==usernamefield){
