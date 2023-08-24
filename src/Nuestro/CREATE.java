@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -51,11 +52,13 @@ public class CREATE extends JFrame implements ActionListener{
         
         lblUsuario.setText("User: ");
         lblUsuario.setBounds(80, 180, 100, 30);
+        lblUsuario.setFont(new Font(null,Font.BOLD, 20));
         lblUsuario.setForeground(Color.white);
         panelCreatePlayer.add(lblUsuario);
         
         lblPassword.setText("Password: ");
-        lblPassword.setBounds(80, 270, 100, 30);
+        lblPassword.setBounds(80, 270, 110, 30);
+        lblPassword.setFont(new Font(null,Font.BOLD, 20));
         lblPassword.setForeground(Color.white);
         panelCreatePlayer.add(lblPassword);
         
@@ -84,6 +87,31 @@ public class CREATE extends JFrame implements ActionListener{
             LOGIN login = new LOGIN();
             login.setVisible(true);
             this.dispose();
+        }
+        
+        if (e.getSource() == botonCrearPlayer) {
+            if(userfield.getText().isEmpty()|| passwordfield.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "LLene todos los campos");
+            }else{
+                String username=userfield.getText();
+                String password=passwordfield.getText();
+                //guardar usuario
+                if(Player.buscarUser(username) == null){
+                   Player.addUser(username, password);
+                   Player.UsuarioLogeado = username;
+                   JOptionPane.showMessageDialog(null, "Se ha registrado el usuario");
+     //LOGIN login = new LOGIN();
+     //login.setVisible(true);
+                   MENUPRINCIPAL menu=new MENUPRINCIPAL();
+                   menu.setVisible(true);
+                   userfield.setText("");
+                   passwordfield.setText("");
+                   this.dispose();
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "El nombre de usuario ya existe");
+                }    
+            }
         }
     }
 }

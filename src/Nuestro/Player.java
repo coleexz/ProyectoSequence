@@ -3,6 +3,7 @@ package Nuestro;
 public class Player extends Userr {
     
     public static Player[] usersArray = new Player[100]; 
+    public static String UsuarioLogeado;
     
     public Player(String _user, String _pass, int _puntos) {
         super(_user, _pass, _puntos);

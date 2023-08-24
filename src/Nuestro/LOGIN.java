@@ -4,6 +4,8 @@
  */
 package Nuestro;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -27,6 +29,8 @@ public class LOGIN extends JFrame implements ActionListener {
     JPasswordField passwordfield = new JPasswordField();
     JButton botonlogin = new JButton();
     JButton botonCrearPlayer = new JButton();
+    JLabel lblUsuario = new JLabel();
+    JLabel lblPassword = new JLabel();
     
     public LOGIN(){
         setSize(500, 500);
@@ -42,12 +46,12 @@ public class LOGIN extends JFrame implements ActionListener {
         bienvenido.setBounds(170,10,200,100);
         panellogin.add(bienvenido);
         
-        usernamefield.setText("Usuario");
-        usernamefield.setBounds(100, 150,300,50);
+        usernamefield.setText("");
+        usernamefield.setBounds(200, 150,200,50);
         panellogin.add(usernamefield);
         
-        passwordfield.setBounds(100,225,300,50);
-        passwordfield.setText("Contraseña: ");
+        passwordfield.setBounds(200,225,200,50);
+        passwordfield.setText("");
         panellogin.add(passwordfield);
         
       
@@ -60,6 +64,14 @@ public class LOGIN extends JFrame implements ActionListener {
         botonCrearPlayer.setBounds(270, 320, 120, 50);
         botonCrearPlayer.addActionListener(this);
         panellogin.add(botonCrearPlayer);
+        
+        lblUsuario.setText("User: ");
+        lblUsuario.setBounds(100, 150, 100, 30);
+        panellogin.add(lblUsuario);
+        
+        lblPassword.setText("Password: ");
+        lblPassword.setBounds(100, 225, 110, 30);
+        panellogin.add(lblPassword);
     }
     
     @Override
@@ -78,6 +90,7 @@ public class LOGIN extends JFrame implements ActionListener {
                     MENUPRINCIPAL menu = new MENUPRINCIPAL();
                     menu.setVisible(true);
                     this.dispose();
+
                 } else {
                     JOptionPane.showMessageDialog(this, "No se encontro dicha cuenta");
                 }
