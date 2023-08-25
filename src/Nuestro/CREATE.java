@@ -33,6 +33,8 @@ public class CREATE extends JFrame implements ActionListener{
     JLabel lblConfirmar = new JLabel();
     JLabel lblConfirmarPassword = new JLabel();
     JLabel lblTitulo = new JLabel();
+    JLabel lblEscondidaPassword = new JLabel();
+    JLabel lblEscondidaUser = new JLabel();
     JButton botonCrearPlayer = new JButton();
     JButton botonRegresar = new JButton();
     
@@ -55,18 +57,22 @@ public class CREATE extends JFrame implements ActionListener{
         
         Nombrefield.setText("");
         Nombrefield.setBounds(210, 180, 200, 30);
+        Nombrefield.setFont(new Font(null,Font.PLAIN,18));
         panelCreatePlayer.add(Nombrefield);
        
         userfield.setText("");
         userfield.setBounds(210, 270, 200, 30);
+        userfield.setFont(new Font(null,Font.PLAIN,18));
         panelCreatePlayer.add(userfield);
         
         passwordfield.setText("");
         passwordfield.setBounds(210, 360, 200, 30);
+        passwordfield.setFont(new Font(null,Font.PLAIN,18));        
         panelCreatePlayer.add(passwordfield);
         
         confirmarpasswordfield.setText("");
         confirmarpasswordfield.setBounds(210, 450, 200, 30);
+        confirmarpasswordfield.setFont(new Font(null,Font.PLAIN,18));
         panelCreatePlayer.add(confirmarpasswordfield);
         
         lblNombre.setText("Nombre: ");
@@ -80,6 +86,12 @@ public class CREATE extends JFrame implements ActionListener{
         lblUsuario.setFont(new Font(null,Font.BOLD, 20));
         lblUsuario.setForeground(Color.white);
         panelCreatePlayer.add(lblUsuario);
+        
+        lblEscondidaUser.setText("");
+        lblEscondidaUser.setBounds(210, 305, 220, 20);
+        lblEscondidaUser.setFont(new Font(null,Font.BOLD, 14));
+        lblEscondidaUser.setForeground(Color.red);
+        panelCreatePlayer.add(lblEscondidaUser);
         
         lblPassword.setText("Contraseña: ");
         lblPassword.setBounds(70, 360, 130, 30);
@@ -99,16 +111,24 @@ public class CREATE extends JFrame implements ActionListener{
         lblConfirmarPassword.setForeground(Color.white);
         panelCreatePlayer.add(lblConfirmarPassword); 
         
+        lblEscondidaPassword.setText("");
+        lblEscondidaPassword.setBounds(210, 480, 220, 20);
+        lblEscondidaPassword.setFont(new Font(null,Font.BOLD, 14));
+        lblEscondidaPassword.setForeground(Color.red);
+        panelCreatePlayer.add(lblEscondidaPassword);
+        
         botonRegresar.setText("Regresar");
-        botonRegresar.setBounds(80, 580, 100, 30);
+        botonRegresar.setBounds(80, 570, 120, 30);
         botonRegresar.addActionListener(this);
         botonRegresar.setBackground(Color.white);
+        botonRegresar.setFont(new Font(null,Font.BOLD,18));
         panelCreatePlayer.add(botonRegresar);
         
         botonCrearPlayer.setText("Crear Player");
-        botonCrearPlayer.setBounds(280, 580, 120, 30);
+        botonCrearPlayer.setBounds(250, 570, 150, 30);
         botonCrearPlayer.addActionListener(this);
         botonCrearPlayer.setBackground(Color.white);
+        botonCrearPlayer.setFont(new Font(null,Font.BOLD,18));
         panelCreatePlayer.add(botonCrearPlayer);
     }
 
@@ -126,20 +146,26 @@ public class CREATE extends JFrame implements ActionListener{
             }else{
                 String username=userfield.getText();
                 String password=passwordfield.getText();
-                //guardar usuario
-                if(Player.buscarUser(username) == null){
-                   Player.addUser(username, password);
-                   Player.UsuarioLogeado = username;
-                   JOptionPane.showMessageDialog(null, "Se ha registrado el usuario");
+                String confirmarpassword = confirmarpasswordfield.getText();
 
-                   MENUPRINCIPAL menu=new MENUPRINCIPAL();
-                   menu.setVisible(true);
-                   userfield.setText("");
-                   passwordfield.setText("");
-                   this.dispose();
-                }
-                else{
-                    JOptionPane.showMessageDialog(null, "El nombre de usuario ya existe");
+                if(Player.buscarUser(username) == null){
+                    if (password.equals(confirmarpassword)){
+                        Player.addUser(username, password);
+                        Player.UsuarioLogeado = username;
+                        JOptionPane.showMessageDialog(null, "Se ha registrado el usuario");
+
+                        MENUPRINCIPAL menu=new MENUPRINCIPAL();
+                        menu.setVisible(true);
+                        userfield.setText("");
+                        passwordfield.setText("");
+                        this.dispose();
+                    } else {
+                        lblEscondidaPassword.setText("No coincide con la contrasena");
+                        confirmarpasswordfield.setText("");
+                    }
+                } else{
+                    lblEscondidaUser.setText("El nombre de usuario ya existe");
+                    userfield.setText("");
                 }    
             }
         }

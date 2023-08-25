@@ -1,9 +1,12 @@
 package Nuestro;
 
+import java.util.Date;
+
 public class Player extends Userr {
     
     public static Player[] usersArray = new Player[100]; 
     public static String UsuarioLogeado;
+    String[] fechas;
     
     public Player(String _user, String _pass, int _puntos) {
         super(_user, _pass, _puntos);
@@ -70,6 +73,18 @@ public class Player extends Userr {
                 }
             }
         }
+    }
+    
+    public Date getfECHA(){
+        Date fecha=new Date();
+        return fecha;
+    }
+    
+    public void agregarFecha(String fecha, String jugador1, String jugador2, String resultado) {
+        String[] nuevoArreglo = new String[fechas.length + 1];
+        System.arraycopy(fechas, 0, nuevoArreglo, 0, fechas.length);
+        nuevoArreglo[fechas.length] = (fechas.length)+" "+fecha+"  Jugador1: "+jugador1+"  Jugador2: "+jugador2+"  Resultado: "+resultado;
+        fechas = nuevoArreglo;
     }
 }
 
