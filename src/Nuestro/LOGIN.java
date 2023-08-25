@@ -63,11 +63,11 @@ public class LOGIN extends JFrame implements ActionListener {
         botonCrearPlayer.addActionListener(this);
         panellogin.add(botonCrearPlayer);
         
-        lblUsuario.setText("User: ");
+        lblUsuario.setText("Usuario: ");
         lblUsuario.setBounds(100, 150, 100, 30);
         panellogin.add(lblUsuario);
         
-        lblPassword.setText("Password: ");
+        lblPassword.setText("Contraseña: ");
         lblPassword.setBounds(100, 225, 110, 30);
         panellogin.add(lblPassword);
     }
