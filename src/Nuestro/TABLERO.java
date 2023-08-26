@@ -23,6 +23,7 @@ public class TABLERO extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         jLayeredPane5.setVisible(true);
+        System.out.println("hola");
     }
 
    
