@@ -68,13 +68,13 @@ public class Player extends Userr {
             users.add(new Player(_user, _pass, 0,color));
         }
     }
-    
+    //obtener fecha de creacion del user
     public Date getfECHA(){
         Date fecha=new Date();
         return fecha;
     }
-    
-    public void agregarFecha(String fecha, String jugador1, String jugador2, String resultado) {
+    //mostrar los logs
+    public void Logs (String fecha, String jugador1, String jugador2, String resultado) {
         String[] nuevoArreglo = new String[fechas.length + 1];
         System.arraycopy(fechas, 0, nuevoArreglo, 0, fechas.length);
         nuevoArreglo[fechas.length] = (fechas.length)+" "+fecha+"  Jugador1: "+jugador1+"  Jugador2: "+jugador2+"  Resultado: "+resultado;
