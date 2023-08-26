@@ -73,6 +73,18 @@ public class MENUPRINCIPAL extends JFrame implements ActionListener {
             login.setVisible(true);
             this.dispose();
         }
+        
+        if (e.getSource() == botonReportes) {
+            Reportes reportes = new Reportes();
+            reportes.setVisible(true);
+            this.dispose();
+        }
+        
+        if (e.getSource() == botonConfiguracion) {
+            MENUS menus = new MENUS();
+            menus.setVisible(true);
+            this.dispose();
+        }
     }
     
 }

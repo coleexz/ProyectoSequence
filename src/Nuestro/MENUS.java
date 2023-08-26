@@ -110,7 +110,6 @@ public class MENUS extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(800, 800));
         setMinimumSize(new java.awt.Dimension(800, 800));
-        setPreferredSize(new java.awt.Dimension(800, 800));
         setResizable(false);
 
         jLabel1.setText("BIENVENIDO AL MENU DE CONFIGURACIÓN");

@@ -147,10 +147,11 @@ public class CREATE extends JFrame implements ActionListener{
                 String username=userfield.getText();
                 String password=passwordfield.getText();
                 String confirmarpassword = confirmarpasswordfield.getText();
+                char cha = 'k';
 
                 if(Player.buscarUser(username) == null){
                     if (password.equals(confirmarpassword)){
-                        Player.addUser(username, password);
+                        Player.addUser(username, password, cha);
                         Player.UsuarioLogeado = username;
                         JOptionPane.showMessageDialog(null, "Se ha registrado el usuario");
 
