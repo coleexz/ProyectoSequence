@@ -1,15 +1,15 @@
 package Nuestro;
 
-import java.util.Date;
+import java.util.ArrayList;
 
 public class Player extends Userr {
     
-    public static Player[] usersArray = new Player[100]; 
-    public static String UsuarioLogeado;
-    String[] fechas;
+    public static ArrayList<Player> users = new ArrayList();
     
-    public Player(String _user, String _pass, int _puntos) {
-        super(_user, _pass, _puntos);
+    
+    
+    public Player(String _user, String _pass, int _puntos,char color) {
+        super(_user, _pass, _puntos,color);
     }
 
     public String getUser() {
@@ -31,60 +31,41 @@ public class Player extends Userr {
     public int getPuntos() {
         return puntos;
     }
+    
+     public char getColor(){
+        return color;
+    }
+  
+    public void setColor(char color){
+        this.color = color;
+    }
 
-    public static Player buscarUser(String _user){
-        return buscarUser(_user, 0);
-    }
     
-    private static Player buscarUser(String _user, int index){
-        if (index >= usersArray.length)
-            return null;
-        
-        Player actual = usersArray[index];
-        
-        if (actual != null && actual.getUser().equals(_user))
-            return actual;
-        return buscarUser(_user, index + 1);
-    }
-    
-    public static void eraseUser(Player _user){
-        for (int i = 0; i < usersArray.length; i++) {
-            if (usersArray[i] == _user) {
-                usersArray[i] = null;
-                break;
+    public static Player buscarUser(String _user) {
+        for (Player player : users) {
+            if (player.getUser().equals(_user)) {
+                return player;
             }
         }
+        return null;
     }
-    
+
+    public static void eraseUser(Player _user) {
+        users.remove(_user);
+    }
+
     public static void addLog(String _user, String _message) {
-        for (Player usr : usersArray) {
-            if (usr != null && usr.getUser().equals(_user)) {
-                usr.juegos.add(_message);
-            }
+        Player player = buscarUser(_user);
+        if (player != null) {
+            player.juegos.add(_message);
         }
     }
-    
-    public static void addUser(String _user, String _pass){
+
+    public static void addUser(String _user, String _pass,char color) {
         if (buscarUser(_user) == null) {
-            for (int i = 0; i < usersArray.length; i++) {
-                if (usersArray[i] == null) {
-                    usersArray[i] = new Player(_user, _pass, 0);
-                    break;
-                }
-            }
+            users.add(new Player(_user, _pass, 0,color));
         }
     }
     
-    public Date getfECHA(){
-        Date fecha=new Date();
-        return fecha;
-    }
-    
-    public void agregarFecha(String fecha, String jugador1, String jugador2, String resultado) {
-        String[] nuevoArreglo = new String[fechas.length + 1];
-        System.arraycopy(fechas, 0, nuevoArreglo, 0, fechas.length);
-        nuevoArreglo[fechas.length] = (fechas.length)+" "+fecha+"  Jugador1: "+jugador1+"  Jugador2: "+jugador2+"  Resultado: "+resultado;
-        fechas = nuevoArreglo;
-    }
 }
 

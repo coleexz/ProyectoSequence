@@ -3,16 +3,17 @@ package Nuestro;
 import java.util.ArrayList;
 
 public abstract class Userr implements IUser {
-    protected String user;
-    protected String pass;
+    protected String user,pass;
+    protected char color;
     protected int puntos;
     protected static ArrayList<String> juegos;
 
-    public Userr(String _user, String _pass, int _puntos) {
+    public Userr(String _user, String _pass, int _puntos,char color) {
         this.user = _user;
         this.pass = _pass;
         this.puntos = _puntos;
         this.juegos = new ArrayList<>();
+        this.color = color;
     }
 
     public ArrayList<String> getLogs() {
@@ -43,6 +44,12 @@ public abstract class Userr implements IUser {
         this.puntos += 3;
     }
     
+    public char getColor(){
+        return color;
+    }
   
+    public void setColor(char color){
+        this.color = color;
+    }
      
 }

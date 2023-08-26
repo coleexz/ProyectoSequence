@@ -27,6 +27,15 @@ public class SequenceGameGUI extends JFrame {
     ImageIcon redToken = new ImageIcon(getClass().getResource("tokens/redToken.png"));
     ImageIcon blueToken = new ImageIcon(getClass().getResource("tokens/blueToken.png"));
     ImageIcon greenToken = new ImageIcon(getClass().getResource("tokens/greenToken.png"));
+    ImageIcon purpleToken = new ImageIcon(getClass().getResource("tokens/purpleToken.png"));
+    ImageIcon yellowToken = new ImageIcon(getClass().getResource("tokens/yellowToken.png"));
+    ImageIcon skyblueToken = new ImageIcon(getClass().getResource("tokens/skyblueToken.png"));
+    ImageIcon orangeToken = new ImageIcon(getClass().getResource("tokens/orangeToken.png"));
+    ImageIcon blackToken = new ImageIcon(getClass().getResource("tokens/blackToken.png"));
+    
+  
+    
+    
 
     ImageIcon[][] normalCardImages = {
         {new ImageIcon(getClass().getResource("normalCards/corner.png")), new ImageIcon(getClass().getResource("normalCards/AC.png")), new ImageIcon(getClass().getResource("normalCards/KC.png")), new ImageIcon(getClass().getResource("normalCards/QC.png")), new ImageIcon(getClass().getResource("normalCards/10C.png")), new ImageIcon(getClass().getResource("normalCards/9C.png")), new ImageIcon(getClass().getResource("normalCards/8C.png")), new ImageIcon(getClass().getResource("normalCards/7C.png")), new ImageIcon(getClass().getResource("normalCards/6C.png")), new ImageIcon(getClass().getResource("normalCards/corner.png"))},
@@ -128,6 +137,26 @@ public class SequenceGameGUI extends JFrame {
         Image Gimg = greenToken.getImage();
         Image GnewImg = Gimg.getScaledInstance(tbw, tbh, java.awt.Image.SCALE_SMOOTH);
         greenToken = new ImageIcon(GnewImg);
+        
+        Image Pimg = purpleToken.getImage();
+        Image PnewImg = Pimg.getScaledInstance(tbw, tbh, java.awt.Image.SCALE_SMOOTH);
+        purpleToken = new ImageIcon(PnewImg);
+        
+        Image Simg = skyblueToken.getImage();
+        Image SnewImg = Simg.getScaledInstance(tbw, tbh, java.awt.Image.SCALE_SMOOTH);
+        skyblueToken = new ImageIcon(SnewImg);
+        
+        Image blackimg = blackToken.getImage();
+        Image blacknewImg = blackimg.getScaledInstance(tbw, tbh, java.awt.Image.SCALE_SMOOTH);
+        blackToken = new ImageIcon(blacknewImg);
+        
+        Image Oimg = orangeToken.getImage();
+        Image OnewImg = Oimg.getScaledInstance(tbw, tbh, java.awt.Image.SCALE_SMOOTH);
+        orangeToken = new ImageIcon(OnewImg);
+        
+        Image Yimg = yellowToken.getImage();
+        Image YnewImg = Yimg.getScaledInstance(tbw, tbh, java.awt.Image.SCALE_SMOOTH);
+        yellowToken = new ImageIcon(YnewImg);
 
         //add cards to the board 
         for (int i = 0; i < 10; i++) {
@@ -226,6 +255,14 @@ public class SequenceGameGUI extends JFrame {
                                 t.setIcon(greenToken);
                                 t.setDisabledIcon(greenToken);
                                 break;
+                            case 'p':
+                                t.setIcon(purpleToken);
+                                t.setDisabledIcon(purpleToken);
+                            break;
+                            case 'y':
+                                t.setIcon(yellowToken);
+                                t.setDisabledIcon(yellowToken);
+                            break;
                         }
                         //3. reset all disabled icons
                         makeAllDisabledCardsNormal();

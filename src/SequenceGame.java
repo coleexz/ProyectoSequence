@@ -33,7 +33,7 @@ public class SequenceGame {
     String startUpTime, winBy;
     int turn = 0;
     SequenceLog log;
-    int wincount=0;
+    int wincount = 0;
 
     public SequenceGame(int numberOfPlayers) throws InterruptedException {
 
@@ -101,8 +101,8 @@ public class SequenceGame {
                         ASequenceCard c = Dealer.dealCard(playerList[j]);
 
                         //add hand cards to GUI for player (the only player)
-                            displayNewHandCard(c, (SequencePlayer) playerList[j]);
-                        
+                        displayNewHandCard(c, (SequencePlayer) playerList[j]);
+
                     }
                 }
                 break;
@@ -110,10 +110,10 @@ public class SequenceGame {
 
     }//end of deal cards
 
-    void ChangeCards(){
-        
+    void ChangeCards() {
+
     }
-    
+
     boolean isGameOver(int x, int y) {
         /*
 		 * input x, y coordinate of the token just played
@@ -133,19 +133,19 @@ public class SequenceGame {
 
         //check corners
         //Top-left
-        if (board[0][1] != ' ' && board[0][1] == board[0][2] && board[0][2] == board[0][3] && board[0][3] == board[0][4] && board[0][4]==board[0][5]) {
+        if (board[0][1] != ' ' && board[0][1] == board[0][2] && board[0][2] == board[0][3] && board[0][3] == board[0][4] && board[0][4] == board[0][5]) {
             gameResult = board[0][1];
             winner = currentPlayer.playerName;
             winBy = "Top-Left Corner (0)";
             return true;
         }
-        if (board[1][0] != ' ' && board[1][0] == board[2][0] && board[2][0] == board[3][0] && board[3][0] == board[4][0] && board[4][0]==board[5][0]) {
+        if (board[1][0] != ' ' && board[1][0] == board[2][0] && board[2][0] == board[3][0] && board[3][0] == board[4][0] && board[4][0] == board[5][0]) {
             gameResult = board[1][0];
             winner = currentPlayer.playerName;
             winBy = "Top-Left Corner (1)";
             return true;
         }
-        if (board[1][1] != ' ' && board[1][1] == board[2][2] && board[2][2] == board[3][3] && board[3][3] == board[4][4] && board[4][4]==board[5][5]) {
+        if (board[1][1] != ' ' && board[1][1] == board[2][2] && board[2][2] == board[3][3] && board[3][3] == board[4][4] && board[4][4] == board[5][5]) {
             gameResult = board[1][1];
             winner = currentPlayer.playerName;
             winBy = "Top-Left Corner (2)";
@@ -153,7 +153,7 @@ public class SequenceGame {
         }
 
         //Top-right
-        if (board[0][5] != ' ' && board[0][5] == board[0][6] && board[0][6] == board[0][7] && board[0][7] == board[0][8] && board[0][8] == board [0][9]) {
+        if (board[0][5] != ' ' && board[0][5] == board[0][6] && board[0][6] == board[0][7] && board[0][7] == board[0][8] && board[0][8] == board[0][9]) {
             gameResult = board[0][5];
             winner = currentPlayer.playerName;
             winBy = "Top-Right Corner (0)";
@@ -199,7 +199,7 @@ public class SequenceGame {
             winBy = "Bottom-Right Corner (0)";
             return true;
         }
-        if (board[8][9] != ' ' && board[8][9] == board[7][9] && board[7][9] == board[6][9] && board[6][9] == board[5][9] && board[5][9] ==board[4][9]) {
+        if (board[8][9] != ' ' && board[8][9] == board[7][9] && board[7][9] == board[6][9] && board[6][9] == board[5][9] && board[5][9] == board[4][9]) {
             gameResult = board[8][9];
             winner = currentPlayer.playerName;
             winBy = "Bottom-Right Corner (1)";
@@ -455,7 +455,7 @@ public class SequenceGame {
 
         switch (numberOfPlayers) {
             case 4:
-                
+
                 ASequencePlayer p0 = playerList[0];
                 SequencePlayer human1;
                 human1 = (SequencePlayer) p0;
@@ -498,7 +498,7 @@ public class SequenceGame {
                 }
 
                 //ESCOGER COLOR DEL JUGADOR
-                JList<ImageIcon> list = new JList<ImageIcon>(new ImageIcon[]{gui.redToken, gui.blueToken, gui.greenToken});
+                JList<ImageIcon> list = new JList<ImageIcon>(new ImageIcon[]{gui.redToken, gui.blueToken, gui.greenToken, gui.yellowToken,gui.purpleToken,gui.blackToken,gui.orangeToken,gui.skyblueToken});
                 JOptionPane.showMessageDialog(
                         gui, list, "Please choose your color", JOptionPane.PLAIN_MESSAGE);
 
@@ -510,23 +510,60 @@ public class SequenceGame {
                             gui, list, "Please choose your color", JOptionPane.PLAIN_MESSAGE);
                 }
 
+                switch (list.getSelectedIndex()) {
+                    case 0:
+                        human1.playerColor = 'r';
+                        human2.playerColor = 'b';
+                        human3.playerColor = 'g';
+                        human4.playerColor = 'y';
+
+                        break;
+                    case 1:
+                        human1.playerColor = 'b';
+                        human2.playerColor = 'r';
+                        human3.playerColor = 'y';
+                        human4.playerColor = 'g';
+                        break;
+                    case 2:
+                        human1.playerColor = 'g';
+                        human2.playerColor = 'y';
+                        human3.playerColor = 'r';
+                        human4.playerColor = 'b';
+                        break;
+                        
+                    case 3:
+                        human1.playerColor = 'y';
+                        human2.playerColor = 'b';
+                        human3.playerColor = 'g';
+                        human4.playerColor = 'p';
+                    break;
+                    
+                    case 4:
+                        human1.playerColor = 'y';
+                        human2.playerColor = 'b';
+                        human3.playerColor = 'g';
+                        human4.playerColor = 'p';
+                    break;
+                    
+                    case 5:
+                        
+                    break;
+                    
+                    case 6:
+                        
+                    break;
+                    
+                    case 7:
+                        
+                    break;
+                    
+                
+                }
+                
                 //log players' info
                 String playerInfo = "1 User's name: " + human1.playerName + "(" + human1.playerColor + ")" + "2 User's name: " + human2.playerName + "(" + human2.playerColor + ")" + "3 User's name: " + human3.playerName + "(" + human3.playerColor + ")" + "4 User's name: " + human3.playerName + "(" + human3.playerColor + ")";
                 log.updateLog(playerInfo);
 
-                switch(list.getSelectedIndex()) {
-				case 0: 
-					human1.playerColor = 'r';
-					
-				break;
-				case 1: human1.playerColor = 'b'; 
-					
-				break;
-				case 2: human1.playerColor = 'g'; 
-					
-				break;
-			}
-                
                 //let the game begin
                 if (p0 instanceof SequencePlayer) {
                     //human starts first
@@ -563,11 +600,9 @@ public class SequenceGame {
                             }
                         }
 
-                       
                         currentPlayer = human2;
                         currentPlayerColor = human2.playerColor;
 
-                        
                         log.updateLog("CPU turn " + turn + ":"
                                 + "\n\tCurrent hand: " + currentPlayer.getHand());
 
@@ -579,8 +614,152 @@ public class SequenceGame {
                         turn++;
 
                     }//outer while
-                }//end of if
-                
+                } else if (p1 instanceof SequencePlayer) {
+                    while (true) {
+                        if (isGameOver(lastPlayedX, lastPlayedY)) {
+                            //game is over
+                            endGame();
+                            break;
+                        } else {
+                            currentPlayer = human2;
+                            currentPlayerColor = human2.playerColor;
+                            human2.enableAllHandCards();
+
+                            //log human's hand
+                            log.updateLog("Human turn " + turn + ":"
+                                    + "\n\tCurrent hand: " + currentPlayer.getHand());
+
+                            //wait until human player makes a move
+                            synchronized (this) {
+                                wait();
+                            }
+                            //log human's move
+                            log.updateLog("\tMove: " + lastPlayedCard.getCardName()
+                                    + " at " + "(" + lastPlayedX + ", " + lastPlayedY + ")");
+
+                            //check if the move wins
+                            if (isGameOver(lastPlayedX, lastPlayedY)) {
+                                //game is over
+                                endGame();
+                                break;
+                            }
+                            synchronized (this) {
+                                wait();
+                            }
+                        }
+
+                        currentPlayer = human3;
+                        currentPlayerColor = human3.playerColor;
+
+                        log.updateLog("CPU turn " + turn + ":"
+                                + "\n\tCurrent hand: " + currentPlayer.getHand());
+
+                        //log cpu's move
+                        log.updateLog("\tMove: " + lastPlayedCard.getCardName()
+                                + " at " + "(" + lastPlayedX + ", " + lastPlayedY + ")");
+
+                        //update turn
+                        turn++;
+
+                    }//outer while
+                } else if (p2 instanceof SequencePlayer) {
+                    while (true) {
+                        if (isGameOver(lastPlayedX, lastPlayedY)) {
+                            //game is over
+                            endGame();
+                            break;
+                        } else {
+                            currentPlayer = human3;
+                            currentPlayerColor = human3.playerColor;
+                            human3.enableAllHandCards();
+
+                            //log human's hand
+                            log.updateLog("Human turn " + turn + ":"
+                                    + "\n\tCurrent hand: " + currentPlayer.getHand());
+
+                            //wait until human player makes a move
+                            synchronized (this) {
+                                wait();
+                            }
+                            //log human's move
+                            log.updateLog("\tMove: " + lastPlayedCard.getCardName()
+                                    + " at " + "(" + lastPlayedX + ", " + lastPlayedY + ")");
+
+                            //check if the move wins
+                            if (isGameOver(lastPlayedX, lastPlayedY)) {
+                                //game is over
+                                endGame();
+                                break;
+                            }
+                            synchronized (this) {
+                                wait();
+                            }
+                        }
+
+                        currentPlayer = human4;
+                        currentPlayerColor = human4.playerColor;
+
+                        log.updateLog("CPU turn " + turn + ":"
+                                + "\n\tCurrent hand: " + currentPlayer.getHand());
+
+                        //log cpu's move
+                        log.updateLog("\tMove: " + lastPlayedCard.getCardName()
+                                + " at " + "(" + lastPlayedX + ", " + lastPlayedY + ")");
+
+                        //update turn
+                        turn++;
+
+                    }//outer while
+                } else if (p3 instanceof SequencePlayer) {
+                    while (true) {
+                        if (isGameOver(lastPlayedX, lastPlayedY)) {
+                            //game is over
+                            endGame();
+                            break;
+                        } else {
+                            currentPlayer = human4;
+                            currentPlayerColor = human4.playerColor;
+                            human4.enableAllHandCards();
+
+                            //log human's hand
+                            log.updateLog("Human turn " + turn + ":"
+                                    + "\n\tCurrent hand: " + currentPlayer.getHand());
+
+                            //wait until human player makes a move
+                            synchronized (this) {
+                                wait();
+                            }
+                            //log human's move
+                            log.updateLog("\tMove: " + lastPlayedCard.getCardName()
+                                    + " at " + "(" + lastPlayedX + ", " + lastPlayedY + ")");
+
+                            //check if the move wins
+                            if (isGameOver(lastPlayedX, lastPlayedY)) {
+                                //game is over
+                                endGame();
+                                break;
+                            }
+                            synchronized (this) {
+                                wait();
+                            }
+                        }
+
+                        currentPlayer = human1;
+                        currentPlayerColor = human1.playerColor;
+
+                        log.updateLog("CPU turn " + turn + ":"
+                                + "\n\tCurrent hand: " + currentPlayer.getHand());
+
+                        //log cpu's move
+                        log.updateLog("\tMove: " + lastPlayedCard.getCardName()
+                                + " at " + "(" + lastPlayedX + ", " + lastPlayedY + ")");
+
+                        //update turn
+                        turn++;
+
+                    }//outer while
+                }
+
             case 2:
                 break;
             case 3:

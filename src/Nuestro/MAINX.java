@@ -9,8 +9,9 @@ package Nuestro;
  * @author AdminColeexz
  */
 public class MAINX {
-    public static void main(String[] args) {
-        LOGIN login = new LOGIN();
-        login.setVisible(true);
+    public static void main(String[] args) {  
+        MENUS menu = new MENUS();
+        menu.setVisible(true);
+
     }
 }
