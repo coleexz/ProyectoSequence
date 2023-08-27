@@ -9,6 +9,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -25,22 +26,41 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
 
     char turnoJugador = 'a';
     String posColocar = "";
-    public int numjugadores = 2;
+    public static int numjugadores = 4;
     private Player jugadores[];
+   
 
     ImageIcon redToken = new javax.swing.ImageIcon(getClass().getResource("/tokens/redToken.png"));
     ImageIcon blueToken = new javax.swing.ImageIcon(getClass().getResource("/tokens/blueToken.png"));
     ImageIcon yellowToken = new javax.swing.ImageIcon(getClass().getResource("/tokens/yellowToken.png"));
     ImageIcon greenToken = new javax.swing.ImageIcon(getClass().getResource("/tokens/greenToken.png"));
 
-    public TABLERO() {
+    public TABLERO(int numjugadores) {
         initComponents();
         pack();
         setLocationRelativeTo(null);
         setResizable(false);
 
+        cuatrocartas.setVisible(false);
+        cincocartas.setVisible(false);
+        seiscartas.setVisible(false);
+        sietecartas.setVisible(false);
+
+        dosjugadoresizq.setVisible(false);
+        tresjugadoresizq.setVisible(false);
+        cuatrojugadoresizq.setVisible(false);
+        seisjugadoresizq.setVisible(false);
+        ochojugadoresizq.setVisible(false);
+
+        dosjugadoresder.setVisible(false);
+        tresjugadoresder.setVisible(false);
+        cuatrojugadoresder.setVisible(false);
+        seisjugadoresder.setVisible(false);
+        ochojugadoresder.setVisible(false);
+
         agregarAcciones();
         vaciarTablero();
+        habilitarPaneles();
 
         Image Rimg = redToken.getImage();
         Image RnewImg = Rimg.getScaledInstance(50, 80, java.awt.Image.SCALE_SMOOTH);
@@ -80,6 +100,36 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
         tableroIconos[0][9] = "null";
     }
 
+    public void habilitarPaneles() {
+        switch (numjugadores) {
+            case 2:
+                dosjugadoresizq.setVisible(true);
+                dosjugadoresder.setVisible(true);
+                sietecartas.setVisible(true);
+                break;
+            case 3:
+                tresjugadoresizq.setVisible(true);
+                tresjugadoresder.setVisible(true);
+                seiscartas.setVisible(true);
+                break;
+            case 4:
+                cuatrojugadoresizq.setVisible(true);
+                cuatrojugadoresder.setVisible(true);
+                sietecartas.setVisible(true);
+                break;
+            case 6:
+                seisjugadoresizq.setVisible(true);
+                seisjugadoresder.setVisible(true);
+                cincocartas.setVisible(true);
+                break;
+            case 8:
+                ochojugadoresizq.setVisible(true);
+                ochojugadoresder.setVisible(true);
+                cuatrocartas.setVisible(true);
+
+        }
+    }
+
     public boolean chequearIconoVacio(String pos) {
         int x = Integer.parseInt(Character.toString(pos.charAt(0)));
         int y = Integer.parseInt(Character.toString(pos.charAt(1)));
@@ -94,12 +144,11 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
 
     public boolean chequearGane(String currentColor) {
         int rowCount = 0;
-        int diagCount = 0; 
+        int diagCount = 0;
 
-       
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-             
+
                 if (checkConsecutive(tableroIconos, i, j, 0, 1, currentColor, 5)) {
                     rowCount++;
                     if (rowCount >= 2) {
@@ -109,7 +158,6 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                     rowCount = 0;
                 }
 
-             
                 if (checkConsecutive(tableroIconos, i, j, 1, 1, currentColor, 5)
                         || checkConsecutive(tableroIconos, i, j, 1, -1, currentColor, 5)) {
                     diagCount++;
@@ -122,7 +170,6 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
             }
         }
 
-        
         return false;
     }
 
@@ -149,15 +196,21 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
 
         switch (numjugadores) {
             case 2:
+
+            case 3:
+
+                break;
+
+            case 4:
+
                 System.out.println(turnoJugador);
                 switch (turnoJugador) {
+
                     case 'a':
 
                         if (chequearIconoVacio(x + "" + y)) {
                             getBoton(posColocar).setIcon(redToken);
                             tableroIconos[x][y] = "r";
-
-                            BOTON.setIcon(redToken);
 
                             turnoJugador = 'b';
                             if (chequearGane("r") || chequearGane("b") || chequearGane("g") || chequearGane("y")) {
@@ -176,8 +229,6 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                             getBoton(posColocar).setIcon(blueToken);
                             tableroIconos[x][y] = "b";
 
-                            BOTON.setIcon(blueToken);
-
                             turnoJugador = 'c';
                             if (chequearGane("r") || chequearGane("b") || chequearGane("g") || chequearGane("y")) {
 
@@ -193,8 +244,6 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                         if (chequearIconoVacio(x + "" + y)) {
                             getBoton(posColocar).setIcon(greenToken);
                             tableroIconos[x][y] = "g";
-
-                            BOTON.setIcon(greenToken);
 
                             turnoJugador = 'd';
                             if (chequearGane("r") || chequearGane("b") || chequearGane("g") || chequearGane("y")) {
@@ -212,8 +261,6 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                             getBoton(posColocar).setIcon(yellowToken);
                             tableroIconos[x][y] = "y";
 
-                            BOTON.setIcon(yellowToken);
-
                             turnoJugador = 'a';
                             if (chequearGane("r") || chequearGane("b") || chequearGane("g") || chequearGane("y")) {
 
@@ -226,14 +273,6 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                         break;
 
                 }
-                break;
-
-            case 3:
-
-                break;
-
-            case 4:
-
                 break;
 
             case 6:
@@ -791,7 +830,7 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TABLERO().setVisible(true);
+                new TABLERO(numjugadores).setVisible(true);
             }
         });
     }
@@ -800,9 +839,33 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLayeredPane5 = new javax.swing.JLayeredPane();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel19 = new javax.swing.JPanel();
+        layeredpanecartas = new javax.swing.JLayeredPane();
+        cincocartas = new javax.swing.JPanel();
+        cincocartasboton1 = new javax.swing.JButton();
+        cincocartasboton2 = new javax.swing.JButton();
+        cincocartasboton3 = new javax.swing.JButton();
+        cincocartasboton4 = new javax.swing.JButton();
+        cincocartasboton5 = new javax.swing.JButton();
+        cuatrocartas = new javax.swing.JPanel();
+        cuatrocartasboton1 = new javax.swing.JButton();
+        cuatrocartasboton2 = new javax.swing.JButton();
+        cuatrocartasboton3 = new javax.swing.JButton();
+        cuatrocartasboton4 = new javax.swing.JButton();
+        sietecartas = new javax.swing.JPanel();
+        sietecartasboton1 = new javax.swing.JButton();
+        sietecartasboton2 = new javax.swing.JButton();
+        sietecartasboton3 = new javax.swing.JButton();
+        sietecartasboton4 = new javax.swing.JButton();
+        sietecartasboton5 = new javax.swing.JButton();
+        sietecartasboton6 = new javax.swing.JButton();
+        sietecartasboton7 = new javax.swing.JButton();
+        seiscartas = new javax.swing.JPanel();
+        seiscartasboton1 = new javax.swing.JButton();
+        seiscartasboton2 = new javax.swing.JButton();
+        seiscartasboton3 = new javax.swing.JButton();
+        seiscartasboton4 = new javax.swing.JButton();
+        seiscartasboton5 = new javax.swing.JButton();
+        seiscartasboton6 = new javax.swing.JButton();
         TABLERO = new javax.swing.JLayeredPane();
         boton01 = new javax.swing.JButton();
         boton00 = new javax.swing.JButton();
@@ -905,71 +968,209 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
         boton98 = new javax.swing.JButton();
         boton99 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jLayeredPane2 = new javax.swing.JLayeredPane();
-        jPanel16 = new javax.swing.JPanel();
-        BOTON = new javax.swing.JButton();
-        jPanel11 = new javax.swing.JPanel();
-        jPanel17 = new javax.swing.JPanel();
-        jPanel18 = new javax.swing.JPanel();
-        jLayeredPane3 = new javax.swing.JLayeredPane();
-        jPanel15 = new javax.swing.JPanel();
-        jPanel14 = new javax.swing.JPanel();
-        jPanel13 = new javax.swing.JPanel();
-        jPanel12 = new javax.swing.JPanel();
+        layeredpaneizq = new javax.swing.JLayeredPane();
+        dosjugadoresizq = new javax.swing.JPanel();
+        tresjugadoresizq = new javax.swing.JPanel();
+        cuatrojugadoresizq = new javax.swing.JPanel();
+        seisjugadoresizq = new javax.swing.JPanel();
+        ochojugadoresizq = new javax.swing.JPanel();
+        layeredpaneder = new javax.swing.JLayeredPane();
+        dosjugadoresder = new javax.swing.JPanel();
+        tresjugadoresder = new javax.swing.JPanel();
+        cuatrojugadoresder = new javax.swing.JPanel();
+        seisjugadoresder = new javax.swing.JPanel();
+        ochojugadoresder = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(getSize());
+        setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        cincocartas.setBackground(new java.awt.Color(0, 0, 0));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 697, Short.MAX_VALUE)
+        javax.swing.GroupLayout cincocartasLayout = new javax.swing.GroupLayout(cincocartas);
+        cincocartas.setLayout(cincocartasLayout);
+        cincocartasLayout.setHorizontalGroup(
+            cincocartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cincocartasLayout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addComponent(cincocartasboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cincocartasboton2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cincocartasboton3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cincocartasboton4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cincocartasboton5, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(71, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 202, Short.MAX_VALUE)
-        );
-
-        jPanel19.setBackground(new java.awt.Color(0, 0, 0));
-
-        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
-        jPanel19.setLayout(jPanel19Layout);
-        jPanel19Layout.setHorizontalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 697, Short.MAX_VALUE)
-        );
-        jPanel19Layout.setVerticalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 190, Short.MAX_VALUE)
-        );
-
-        jLayeredPane5.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane5.setLayer(jPanel19, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout jLayeredPane5Layout = new javax.swing.GroupLayout(jLayeredPane5);
-        jLayeredPane5.setLayout(jLayeredPane5Layout);
-        jLayeredPane5Layout.setHorizontalGroup(
-            jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane5Layout.createSequentialGroup()
+        cincocartasLayout.setVerticalGroup(
+            cincocartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cincocartasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(cincocartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cincocartasboton5, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cincocartasboton4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cincocartasboton3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cincocartasboton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cincocartasboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(59, Short.MAX_VALUE))
+        );
+
+        cuatrocartas.setBackground(new java.awt.Color(0, 0, 0));
+
+        cuatrocartasboton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cuatrocartasboton4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout cuatrocartasLayout = new javax.swing.GroupLayout(cuatrocartas);
+        cuatrocartas.setLayout(cuatrocartasLayout);
+        cuatrocartasLayout.setHorizontalGroup(
+            cuatrocartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cuatrocartasLayout.createSequentialGroup()
+                .addGap(108, 108, 108)
+                .addComponent(cuatrocartasboton3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cuatrocartasboton2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cuatrocartasboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cuatrocartasboton4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(127, Short.MAX_VALUE))
+        );
+        cuatrocartasLayout.setVerticalGroup(
+            cuatrocartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cuatrocartasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(cuatrocartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cuatrocartasboton3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cuatrocartasboton4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cuatrocartasboton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cuatrocartasboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(71, Short.MAX_VALUE))
+        );
+
+        sietecartas.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout sietecartasLayout = new javax.swing.GroupLayout(sietecartas);
+        sietecartas.setLayout(sietecartasLayout);
+        sietecartasLayout.setHorizontalGroup(
+            sietecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sietecartasLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(sietecartasboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sietecartasboton2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sietecartasboton3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sietecartasboton4, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sietecartasboton5, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sietecartasboton6, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sietecartasboton7, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(42, Short.MAX_VALUE))
+        );
+        sietecartasLayout.setVerticalGroup(
+            sietecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sietecartasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(sietecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(sietecartasboton7, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sietecartasboton6, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sietecartasboton5, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sietecartasboton4, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sietecartasboton3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sietecartasboton2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sietecartasboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(57, Short.MAX_VALUE))
+        );
+
+        seiscartas.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout seiscartasLayout = new javax.swing.GroupLayout(seiscartas);
+        seiscartas.setLayout(seiscartasLayout);
+        seiscartasLayout.setHorizontalGroup(
+            seiscartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(seiscartasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(seiscartasboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(seiscartasboton2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(seiscartasboton3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(seiscartasboton4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(seiscartasboton5, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(seiscartasboton6, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+        seiscartasLayout.setVerticalGroup(
+            seiscartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(seiscartasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(seiscartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(seiscartasboton6, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seiscartasboton5, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seiscartasboton4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seiscartasboton3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seiscartasboton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seiscartasboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(59, Short.MAX_VALUE))
+        );
+
+        layeredpanecartas.setLayer(cincocartas, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        layeredpanecartas.setLayer(cuatrocartas, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        layeredpanecartas.setLayer(sietecartas, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        layeredpanecartas.setLayer(seiscartas, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout layeredpanecartasLayout = new javax.swing.GroupLayout(layeredpanecartas);
+        layeredpanecartas.setLayout(layeredpanecartasLayout);
+        layeredpanecartasLayout.setHorizontalGroup(
+            layeredpanecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layeredpanecartasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cuatrocartas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane5Layout.createSequentialGroup()
+            .addGroup(layeredpanecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layeredpanecartasLayout.createSequentialGroup()
                     .addContainerGap(16, Short.MAX_VALUE)
-                    .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cincocartas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
+            .addGroup(layeredpanecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layeredpanecartasLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(seiscartas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(layeredpanecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layeredpanecartasLayout.createSequentialGroup()
+                    .addContainerGap(16, Short.MAX_VALUE)
+                    .addComponent(sietecartas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()))
         );
-        jLayeredPane5Layout.setVerticalGroup(
-            jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane5Layout.createSequentialGroup()
+        layeredpanecartasLayout.setVerticalGroup(
+            layeredpanecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(cuatrocartas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layeredpanecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layeredpanecartasLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cincocartas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+            .addGroup(layeredpanecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layeredpanecartasLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(seiscartas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+            .addGroup(layeredpanecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layeredpanecartasLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(sietecartas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
@@ -1482,119 +1683,139 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
         jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\AdminColeexz\\Documents\\NetBeansProjects\\ProyectoSequence\\src\\tokens\\tableroimg.jpg")); // NOI18N
         TABLERO.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 900));
 
-        jLayeredPane2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        layeredpaneizq.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
-        jPanel16.setLayout(jPanel16Layout);
-        jPanel16Layout.setHorizontalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(BOTON, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
-        jPanel16Layout.setVerticalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGap(224, 224, 224)
-                .addComponent(BOTON, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(386, Short.MAX_VALUE))
-        );
-
-        jLayeredPane2.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 1090));
-
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout dosjugadoresizqLayout = new javax.swing.GroupLayout(dosjugadoresizq);
+        dosjugadoresizq.setLayout(dosjugadoresizqLayout);
+        dosjugadoresizqLayout.setHorizontalGroup(
+            dosjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 250, Short.MAX_VALUE)
         );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        dosjugadoresizqLayout.setVerticalGroup(
+            dosjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1090, Short.MAX_VALUE)
         );
 
-        jLayeredPane2.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 1090));
+        layeredpaneizq.add(dosjugadoresizq, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 1090));
 
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout tresjugadoresizqLayout = new javax.swing.GroupLayout(tresjugadoresizq);
+        tresjugadoresizq.setLayout(tresjugadoresizqLayout);
+        tresjugadoresizqLayout.setHorizontalGroup(
+            tresjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 250, Short.MAX_VALUE)
         );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        tresjugadoresizqLayout.setVerticalGroup(
+            tresjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1090, Short.MAX_VALUE)
         );
 
-        jLayeredPane2.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 1090));
+        layeredpaneizq.add(tresjugadoresizq, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 1090));
 
-        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
-        jPanel18.setLayout(jPanel18Layout);
-        jPanel18Layout.setHorizontalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout cuatrojugadoresizqLayout = new javax.swing.GroupLayout(cuatrojugadoresizq);
+        cuatrojugadoresizq.setLayout(cuatrojugadoresizqLayout);
+        cuatrojugadoresizqLayout.setHorizontalGroup(
+            cuatrojugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 250, Short.MAX_VALUE)
         );
-        jPanel18Layout.setVerticalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        cuatrojugadoresizqLayout.setVerticalGroup(
+            cuatrojugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1090, Short.MAX_VALUE)
         );
 
-        jLayeredPane2.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 1090));
+        layeredpaneizq.add(cuatrojugadoresizq, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 1090));
 
-        jLayeredPane3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        javax.swing.GroupLayout seisjugadoresizqLayout = new javax.swing.GroupLayout(seisjugadoresizq);
+        seisjugadoresizq.setLayout(seisjugadoresizqLayout);
+        seisjugadoresizqLayout.setHorizontalGroup(
+            seisjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 250, Short.MAX_VALUE)
+        );
+        seisjugadoresizqLayout.setVerticalGroup(
+            seisjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1090, Short.MAX_VALUE)
+        );
 
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        layeredpaneizq.add(seisjugadoresizq, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 1090));
+
+        javax.swing.GroupLayout ochojugadoresizqLayout = new javax.swing.GroupLayout(ochojugadoresizq);
+        ochojugadoresizq.setLayout(ochojugadoresizqLayout);
+        ochojugadoresizqLayout.setHorizontalGroup(
+            ochojugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 250, Short.MAX_VALUE)
+        );
+        ochojugadoresizqLayout.setVerticalGroup(
+            ochojugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1090, Short.MAX_VALUE)
+        );
+
+        layeredpaneizq.add(ochojugadoresizq, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 1090));
+
+        layeredpaneder.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        javax.swing.GroupLayout dosjugadoresderLayout = new javax.swing.GroupLayout(dosjugadoresder);
+        dosjugadoresder.setLayout(dosjugadoresderLayout);
+        dosjugadoresderLayout.setHorizontalGroup(
+            dosjugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 240, Short.MAX_VALUE)
         );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        dosjugadoresderLayout.setVerticalGroup(
+            dosjugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1090, Short.MAX_VALUE)
         );
 
-        jLayeredPane3.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 1090));
+        layeredpaneder.add(dosjugadoresder, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 1090));
 
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout tresjugadoresderLayout = new javax.swing.GroupLayout(tresjugadoresder);
+        tresjugadoresder.setLayout(tresjugadoresderLayout);
+        tresjugadoresderLayout.setHorizontalGroup(
+            tresjugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 240, Short.MAX_VALUE)
         );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        tresjugadoresderLayout.setVerticalGroup(
+            tresjugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1090, Short.MAX_VALUE)
         );
 
-        jLayeredPane3.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 1090));
+        layeredpaneder.add(tresjugadoresder, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 1090));
 
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout cuatrojugadoresderLayout = new javax.swing.GroupLayout(cuatrojugadoresder);
+        cuatrojugadoresder.setLayout(cuatrojugadoresderLayout);
+        cuatrojugadoresderLayout.setHorizontalGroup(
+            cuatrojugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 240, Short.MAX_VALUE)
         );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        cuatrojugadoresderLayout.setVerticalGroup(
+            cuatrojugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1090, Short.MAX_VALUE)
         );
 
-        jLayeredPane3.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 1090));
+        layeredpaneder.add(cuatrojugadoresder, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 1090));
 
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout seisjugadoresderLayout = new javax.swing.GroupLayout(seisjugadoresder);
+        seisjugadoresder.setLayout(seisjugadoresderLayout);
+        seisjugadoresderLayout.setHorizontalGroup(
+            seisjugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 240, Short.MAX_VALUE)
         );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        seisjugadoresderLayout.setVerticalGroup(
+            seisjugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1090, Short.MAX_VALUE)
         );
 
-        jLayeredPane3.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 1090));
+        layeredpaneder.add(seisjugadoresder, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 1090));
+
+        javax.swing.GroupLayout ochojugadoresderLayout = new javax.swing.GroupLayout(ochojugadoresder);
+        ochojugadoresder.setLayout(ochojugadoresderLayout);
+        ochojugadoresderLayout.setHorizontalGroup(
+            ochojugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 240, Short.MAX_VALUE)
+        );
+        ochojugadoresderLayout.setVerticalGroup(
+            ochojugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1090, Short.MAX_VALUE)
+        );
+
+        layeredpaneder.add(ochojugadoresder, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 1090));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1602,13 +1823,13 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(layeredpaneizq, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 704, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(layeredpanecartas, javax.swing.GroupLayout.PREFERRED_SIZE, 704, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TABLERO))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(layeredpaneder, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -1618,20 +1839,23 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(TABLERO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(layeredpanecartas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1090, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 903, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(layeredpaneizq, javax.swing.GroupLayout.PREFERRED_SIZE, 1090, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(layeredpaneder, javax.swing.GroupLayout.PREFERRED_SIZE, 903, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cuatrocartasboton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cuatrocartasboton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cuatrocartasboton4ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BOTON;
     private javax.swing.JLayeredPane TABLERO;
     private javax.swing.JButton boton00;
     private javax.swing.JButton boton01;
@@ -1733,20 +1957,46 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton boton97;
     private javax.swing.JButton boton98;
     private javax.swing.JButton boton99;
+    private javax.swing.JPanel cincocartas;
+    private javax.swing.JButton cincocartasboton1;
+    private javax.swing.JButton cincocartasboton2;
+    private javax.swing.JButton cincocartasboton3;
+    private javax.swing.JButton cincocartasboton4;
+    private javax.swing.JButton cincocartasboton5;
+    private javax.swing.JPanel cuatrocartas;
+    private javax.swing.JButton cuatrocartasboton1;
+    private javax.swing.JButton cuatrocartasboton2;
+    private javax.swing.JButton cuatrocartasboton3;
+    private javax.swing.JButton cuatrocartasboton4;
+    private javax.swing.JPanel cuatrojugadoresder;
+    private javax.swing.JPanel cuatrojugadoresizq;
+    private javax.swing.JPanel dosjugadoresder;
+    private javax.swing.JPanel dosjugadoresizq;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLayeredPane jLayeredPane2;
-    private javax.swing.JLayeredPane jLayeredPane3;
-    private javax.swing.JLayeredPane jLayeredPane5;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel19;
+    private javax.swing.JLayeredPane layeredpanecartas;
+    private javax.swing.JLayeredPane layeredpaneder;
+    private javax.swing.JLayeredPane layeredpaneizq;
+    private javax.swing.JPanel ochojugadoresder;
+    private javax.swing.JPanel ochojugadoresizq;
+    private javax.swing.JPanel seiscartas;
+    private javax.swing.JButton seiscartasboton1;
+    private javax.swing.JButton seiscartasboton2;
+    private javax.swing.JButton seiscartasboton3;
+    private javax.swing.JButton seiscartasboton4;
+    private javax.swing.JButton seiscartasboton5;
+    private javax.swing.JButton seiscartasboton6;
+    private javax.swing.JPanel seisjugadoresder;
+    private javax.swing.JPanel seisjugadoresizq;
+    private javax.swing.JPanel sietecartas;
+    private javax.swing.JButton sietecartasboton1;
+    private javax.swing.JButton sietecartasboton2;
+    private javax.swing.JButton sietecartasboton3;
+    private javax.swing.JButton sietecartasboton4;
+    private javax.swing.JButton sietecartasboton5;
+    private javax.swing.JButton sietecartasboton6;
+    private javax.swing.JButton sietecartasboton7;
+    private javax.swing.JPanel tresjugadoresder;
+    private javax.swing.JPanel tresjugadoresizq;
     // End of variables declaration//GEN-END:variables
 
 }

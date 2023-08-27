@@ -22,17 +22,21 @@ public class MENUS extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         initComponents();
 
+        cantjugadoresbox.removeAllItems();
         cantjugadoresbox.addItem("2");
         cantjugadoresbox.addItem("3");
         cantjugadoresbox.addItem("4");
         cantjugadoresbox.addItem("6");
         cantjugadoresbox.addItem("8");
 
+      
+        colorpropiobox.removeAllItems();
         colorpropiobox.addItem("azul");
         colorpropiobox.addItem("rojo");
         colorpropiobox.addItem("verde");
         colorpropiobox.addItem("amarillo");
         
+        colorequipobox.removeAllItems();
         colorequipobox.addItem("azul");
         colorequipobox.addItem("rojo");
         colorequipobox.addItem("verde");

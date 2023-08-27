@@ -10,8 +10,8 @@ package Nuestro;
  */
 public class MAINX {
     public static void main(String[] args) {  
-        LOGIN login = new LOGIN();
-        login.setVisible(true);
+        MENUPRINCIPAL principal = new MENUPRINCIPAL();
+        principal.setVisible(true);
 
     }
 }

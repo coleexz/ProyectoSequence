@@ -68,6 +68,13 @@ public class MENUPRINCIPAL extends JFrame implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        
+        if(e.getSource() == botonJugar){
+            MENUS menureportes = new MENUS();
+            TABLERO tablero = new TABLERO(menureportes.cantjugadores);
+            tablero.setVisible(true);
+            this.dispose();
+        }
         if (e.getSource() == botonLogout) {
             LOGIN login = new LOGIN();
             login.setVisible(true);
