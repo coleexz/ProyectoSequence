@@ -70,8 +70,8 @@ public class MENUPRINCIPAL extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         
         if(e.getSource() == botonJugar){
-            MENUS menureportes = new MENUS();
-            TABLERO tablero = new TABLERO(menureportes.cantjugadores);
+            CONFIG menureportes = new CONFIG();
+            TABLERO tablero = new TABLERO(menureportes.numerojugadores);
             tablero.setVisible(true);
             this.dispose();
         }
@@ -88,7 +88,7 @@ public class MENUPRINCIPAL extends JFrame implements ActionListener {
         }
         
         if (e.getSource() == botonConfiguracion) {
-            MENUS menus = new MENUS();
+            CONFIG menus = new CONFIG();
             menus.setVisible(true);
             this.dispose();
         }

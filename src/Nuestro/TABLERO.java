@@ -63,19 +63,19 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
         habilitarPaneles();
 
         Image Rimg = redToken.getImage();
-        Image RnewImg = Rimg.getScaledInstance(50, 80, java.awt.Image.SCALE_SMOOTH);
+        Image RnewImg = Rimg.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
         redToken = new ImageIcon(RnewImg);
 
         Image Bimg = blueToken.getImage();
-        Image BnewImg = Bimg.getScaledInstance(50, 80, java.awt.Image.SCALE_SMOOTH);
+        Image BnewImg = Bimg.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
         blueToken = new ImageIcon(BnewImg);
 
         Image Yimg = yellowToken.getImage();
-        Image YnewImg = Yimg.getScaledInstance(50, 80, java.awt.Image.SCALE_SMOOTH);
+        Image YnewImg = Yimg.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
         yellowToken = new ImageIcon(YnewImg);
 
         Image Gimg = greenToken.getImage();
-        Image GnewImg = Gimg.getScaledInstance(50, 80, java.awt.Image.SCALE_SMOOTH);
+        Image GnewImg = Gimg.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
         greenToken = new ImageIcon(GnewImg);
 
     }
