@@ -1,5 +1,7 @@
 package Nuestro;
 
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -79,6 +81,31 @@ public class Player extends Userr {
         System.arraycopy(fechas, 0, nuevoArreglo, 0, fechas.length);
         nuevoArreglo[fechas.length] = (fechas.length)+" "+fecha+"  Jugador1: "+jugador1+"  Jugador2: "+jugador2+"  Resultado: "+resultado;
         fechas = nuevoArreglo;
+    }
+    //guarda el usuario en el archivo que se creo
+    public static void saveUsersToFile(String filename) {
+        try (RandomAccessFile file = new RandomAccessFile(filename, "rw")) {
+            for (Player player : users) {
+                file.writeUTF(player.getUser());
+                file.writeUTF(player.getPass());
+                file.writeChar(player.getColor());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    //carga los usuarios creados y guardados en el archivo
+    public static void loadUsersFromFile(String filename) {
+        try (RandomAccessFile file = new RandomAccessFile(filename, "r")) {
+            while (file.getFilePointer() < file.length()) {
+                String user = file.readUTF();
+                String pass = file.readUTF();
+                char color = file.readChar();
+                users.add(new Player(user, pass, 0, color));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 

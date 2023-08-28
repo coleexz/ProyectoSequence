@@ -29,6 +29,7 @@ public class LOGIN extends JFrame implements ActionListener {
     JButton botonCrearPlayer = new JButton();
     JLabel lblUsuario = new JLabel();
     JLabel lblPassword = new JLabel();
+    CREATE create;
     
     public LOGIN(){
         setSize(500, 500);
@@ -70,6 +71,9 @@ public class LOGIN extends JFrame implements ActionListener {
         lblPassword.setText("Contraseña: ");
         lblPassword.setBounds(100, 225, 110, 30);
         panellogin.add(lblPassword);
+        
+        create = new CREATE();        
+        Player.loadUsersFromFile("users.dat");
     }
     
     @Override
@@ -110,9 +114,5 @@ public class LOGIN extends JFrame implements ActionListener {
         if(e.getSource()==passwordfield){
             passwordfield.setText("");
         }
-        
-        
     }
-    
-    
 }

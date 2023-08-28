@@ -8,6 +8,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -130,6 +132,24 @@ public class CREATE extends JFrame implements ActionListener{
         botonCrearPlayer.setBackground(Color.white);
         botonCrearPlayer.setFont(new Font(null,Font.BOLD,18));
         panelCreatePlayer.add(botonCrearPlayer);
+        
+        createUsersFile();        
+        Player.loadUsersFromFile("users.dat");
+    }
+    //crea el archivo donde se guardaran los usuarios
+    static void createUsersFile() {
+        File file = new File("users.dat");
+
+        try {
+            if (file.createNewFile()) {
+                System.out.println("Archivo creado: " + file.getName());
+            } else {
+                System.out.println("El archivo ya existe.");
+            }
+        } catch (IOException e) {
+            System.err.println("Error. No se pudo crear el archivo");
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -153,6 +173,9 @@ public class CREATE extends JFrame implements ActionListener{
                     if (password.equals(confirmarpassword)){
                         Player.addUser(username, password, cha);
                         Player.UsuarioLogeado = username;
+                        
+                        Player.saveUsersToFile("users.dat");
+                        
                         JOptionPane.showMessageDialog(null, "Se ha registrado el usuario");
 
                         MENUPRINCIPAL menu=new MENUPRINCIPAL();
