@@ -6,6 +6,8 @@ package Nuestro;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -72,8 +74,23 @@ public class LOGIN extends JFrame implements ActionListener {
         lblPassword.setBounds(100, 225, 110, 30);
         panellogin.add(lblPassword);
         
-        create = new CREATE();        
+        createUsersFile();   
         Player.loadUsersFromFile("users.dat");
+    }
+    //crea el archivo donde se guardaran los usuarios
+    static void createUsersFile() {
+        File file = new File("users.dat");
+
+        try {
+            if (file.createNewFile()) {
+                System.out.println("Archivo creado: " + file.getName());
+            } else {
+                System.out.println("El archivo ya existe.");
+            }
+        } catch (IOException e) {
+            System.err.println("Error. No se pudo crear el archivo");
+            e.printStackTrace();
+        }
     }
     
     @Override

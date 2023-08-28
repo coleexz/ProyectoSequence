@@ -132,24 +132,6 @@ public class CREATE extends JFrame implements ActionListener{
         botonCrearPlayer.setBackground(Color.white);
         botonCrearPlayer.setFont(new Font(null,Font.BOLD,18));
         panelCreatePlayer.add(botonCrearPlayer);
-        
-        createUsersFile();        
-        Player.loadUsersFromFile("users.dat");
-    }
-    //crea el archivo donde se guardaran los usuarios
-    static void createUsersFile() {
-        File file = new File("users.dat");
-
-        try {
-            if (file.createNewFile()) {
-                System.out.println("Archivo creado: " + file.getName());
-            } else {
-                System.out.println("El archivo ya existe.");
-            }
-        } catch (IOException e) {
-            System.err.println("Error. No se pudo crear el archivo");
-            e.printStackTrace();
-        }
     }
 
     @Override
