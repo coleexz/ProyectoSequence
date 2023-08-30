@@ -156,7 +156,7 @@ public class CREATE extends JFrame implements ActionListener{
                         Player.addUser(username, password, cha);
                         Player.UsuarioLogeado = username;
                         
-                        Player.saveUsersToFile("users.dat");
+                        Player.saveUsersToFile("Users/users.usr");
                         
                         JOptionPane.showMessageDialog(null, "Se ha registrado el usuario");
 

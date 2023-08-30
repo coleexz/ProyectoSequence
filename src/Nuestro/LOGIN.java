@@ -31,7 +31,6 @@ public class LOGIN extends JFrame implements ActionListener {
     JButton botonCrearPlayer = new JButton();
     JLabel lblUsuario = new JLabel();
     JLabel lblPassword = new JLabel();
-    CREATE create;
     
     public LOGIN(){
         setSize(500, 500);
@@ -75,12 +74,22 @@ public class LOGIN extends JFrame implements ActionListener {
         panellogin.add(lblPassword);
         
         createUsersFile();   
-        Player.loadUsersFromFile("users.dat");
+        Player.loadUsersFromFile("Users/users.usr");
     }
     //crea el archivo donde se guardaran los usuarios
     static void createUsersFile() {
-        File file = new File("users.dat");
-
+        File directory = new File("Users");
+        if (!directory.exists()) {
+            if (directory.mkdir()) {
+                System.out.println("Se creo el directorio: " + directory.getName());
+            } else {
+                System.out.println("Error. No se pudo crear el directorio");
+            }
+        } else {
+            System.out.println("El directorio ya existe");
+        } 
+            
+        File file = new File(directory, "users.usr");
         try {
             if (file.createNewFile()) {
                 System.out.println("Archivo creado: " + file.getName());
@@ -89,7 +98,6 @@ public class LOGIN extends JFrame implements ActionListener {
             }
         } catch (IOException e) {
             System.err.println("Error. No se pudo crear el archivo");
-            e.printStackTrace();
         }
     }
     
@@ -99,17 +107,20 @@ public class LOGIN extends JFrame implements ActionListener {
         if(e.getSource()==botonlogin){
             String user,pass;
             user=usernamefield.getText();
-            pass=passwordfield.getText().toString();
+            pass=passwordfield.getText();
             
             if(!user.isEmpty() && !pass.isEmpty()){
                 if(Player.buscarUser(user)!=null){
-                    JOptionPane.showMessageDialog(this, "inicio de sesion terminado exitosamente\nprocedera al menu principal!");
-                    usernamefield.setText("");
-                    passwordfield.setText("");
-                    MENUPRINCIPAL menu = new MENUPRINCIPAL();
-                    menu.setVisible(true);
-                    this.dispose();
-
+                    if (Player.buscarUser(user).getPass().equals(pass)) {
+                        JOptionPane.showMessageDialog(this, "inicio de sesion terminado exitosamente\nprocedera al menu principal!");
+                        usernamefield.setText("");
+                        passwordfield.setText("");
+                        MENUPRINCIPAL menu = new MENUPRINCIPAL();
+                        menu.setVisible(true);
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Contrasena incorrecta");
+                    }
                 } else {
                     JOptionPane.showMessageDialog(this, "No se encontro dicha cuenta");
                 }
