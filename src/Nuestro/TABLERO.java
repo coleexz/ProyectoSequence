@@ -30,7 +30,7 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
     private String tableroIconos[][] = new String[10][10]; //tablero para verificar que si los iconos son del compañero o no
     private String tableroCartas[][] = new String[10][10]; //tablero para conseguir las cartas y verificar si son cartas especiales
     private ArrayList<ImageIcon> imagenes = new ArrayList();
-    
+    String hola;
 
     char turnoJugador = 'a';
     String posColocar = "";
