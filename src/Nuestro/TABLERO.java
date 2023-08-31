@@ -994,7 +994,6 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
         ochojugadoresder = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(getSize());
         setResizable(false);
 
         cincocartas.setBackground(new java.awt.Color(0, 0, 0));
@@ -1692,7 +1691,7 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
         boton99.setEnabled(false);
         TABLERO.add(boton99, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, 50, 80));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\AdminColeexz\\Documents\\NetBeansProjects\\ProyectoSequence\\src\\tokens\\tableroimg.jpg")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tokens/tableroimg.jpg"))); // NOI18N
         TABLERO.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 900));
 
         layeredpaneizq.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
