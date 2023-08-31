@@ -4,12 +4,18 @@
  */
 package Nuestro;
 
+import com.sun.tools.javac.Main;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,6 +29,8 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
 
     private String tableroIconos[][] = new String[10][10]; //tablero para verificar que si los iconos son del compañero o no
     private String tableroCartas[][] = new String[10][10]; //tablero para conseguir las cartas y verificar si son cartas especiales
+    private ArrayList<ImageIcon> imagenes = new ArrayList();
+    
 
     char turnoJugador = 'a';
     String posColocar = "";
@@ -35,7 +43,7 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
     ImageIcon yellowToken = new javax.swing.ImageIcon(getClass().getResource("/tokens/yellowToken.png"));
     ImageIcon greenToken = new javax.swing.ImageIcon(getClass().getResource("/tokens/greenToken.png"));
 
-    public TABLERO(int numjugadores) {
+    public TABLERO(int numjugadores){
         initComponents();
         pack();
         setLocationRelativeTo(null);
@@ -61,6 +69,7 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
         agregarAcciones();
         vaciarTablero();
         habilitarPaneles();
+        
 
         Image Rimg = redToken.getImage();
         Image RnewImg = Rimg.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
@@ -77,9 +86,11 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
         Image Gimg = greenToken.getImage();
         Image GnewImg = Gimg.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
         greenToken = new ImageIcon(GnewImg);
+        
+        
 
     }
-
+    
     public void generarJugadores(int numjugadores) {
 //        jugadores = new Player[numjugadores];
 //        for(int i = 0; i<numjugadores; i++){
@@ -204,6 +215,7 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
             case 4:
 
                 System.out.println(turnoJugador);
+               
                 switch (turnoJugador) {
 
                     case 'a':
@@ -830,7 +842,7 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TABLERO(numjugadores).setVisible(true);
+                    new TABLERO(numjugadores).setVisible(true);
             }
         });
     }

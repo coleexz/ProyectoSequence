@@ -43,7 +43,6 @@ public class CONFIG extends javax.swing.JFrame implements ActionListener{
         COLORPROPIO.addItem("amarillo");
         
         AgregarAcciones();
-        
     }
 
     /**
@@ -167,7 +166,7 @@ public class CONFIG extends javax.swing.JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
        if(e.getSource() == VOLVER){
-           numerojugadores = Integer.valueOf(CANTIDADJUGADORES.getSelectedItem().toString());
+           numerojugadores = Integer.parseInt(CANTIDADJUGADORES.getSelectedItem().toString());
            System.out.println(numerojugadores);
            MENUPRINCIPAL principal = new MENUPRINCIPAL();
            principal.setVisible(true);
