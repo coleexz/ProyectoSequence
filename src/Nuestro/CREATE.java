@@ -143,6 +143,9 @@ public class CREATE extends JFrame implements ActionListener{
         }
         
         if (e.getSource() == botonCrearPlayer) {
+            lblEscondidaUser.setText("");
+            lblEscondidaPassword.setText("");
+            
             if(userfield.getText().isEmpty()|| passwordfield.getText().isEmpty() || Nombrefield.getText().isEmpty() || confirmarpasswordfield.getText().isEmpty()){
                 JOptionPane.showMessageDialog(null, "LLene todos los campos");
             }else{

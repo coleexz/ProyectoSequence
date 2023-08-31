@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -31,6 +32,7 @@ public class LOGIN extends JFrame implements ActionListener {
     JButton botonCrearPlayer = new JButton();
     JLabel lblUsuario = new JLabel();
     JLabel lblPassword = new JLabel();
+    static RandomAccessFile raf;
     
     public LOGIN(){
         setSize(500, 500);
@@ -76,7 +78,7 @@ public class LOGIN extends JFrame implements ActionListener {
         createUsersFile();   
         Player.loadUsersFromFile("Users/users.usr");
     }
-    //crea el archivo donde se guardaran los usuarios
+    //crea el directorio y luego el archivo donde se guardaran los usuarios
     static void createUsersFile() {
         File directory = new File("Users");
         if (!directory.exists()) {
@@ -87,15 +89,10 @@ public class LOGIN extends JFrame implements ActionListener {
             }
         } else {
             System.out.println("El directorio ya existe");
-        } 
-            
-        File file = new File(directory, "users.usr");
+        }             
+        
         try {
-            if (file.createNewFile()) {
-                System.out.println("Archivo creado: " + file.getName());
-            } else {
-                System.out.println("El archivo ya existe.");
-            }
+            raf = new RandomAccessFile("Users/users.usr", "rw");
         } catch (IOException e) {
             System.err.println("Error. No se pudo crear el archivo");
         }
