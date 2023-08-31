@@ -84,6 +84,7 @@ public class Player extends Userr {
     //guarda el usuario en el archivo que se creo
     public static void saveUsersToFile(String filename) {
         try {
+            LOGIN.raf.seek(0);
             for (Player player : users) {
                 LOGIN.raf.writeUTF(player.getUser());
                 LOGIN.raf.writeUTF(player.getPass());
@@ -100,7 +101,7 @@ public class Player extends Userr {
                 String user = LOGIN.raf.readUTF();
                 String pass = LOGIN.raf.readUTF();
                 char color = LOGIN.raf.readChar();
-                users.add(new Player(user, pass, 0, color));
+                addUser(user, pass, color);
             }
         } catch (IOException e) {
             System.out.println("Error. No se pudieron cargar los usuarios");

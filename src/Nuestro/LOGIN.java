@@ -77,6 +77,10 @@ public class LOGIN extends JFrame implements ActionListener {
         
         createUsersFile();   
         Player.loadUsersFromFile("Users/users.usr");
+        
+        for (int i = 0; i < Player.users.size(); i++) {
+            System.out.println(Player.users.get(i).user);
+        }
     }
     //crea el directorio y luego el archivo donde se guardaran los usuarios
     static void createUsersFile() {
