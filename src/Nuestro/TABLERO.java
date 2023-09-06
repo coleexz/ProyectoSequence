@@ -10,6 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -71,6 +74,11 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
         {"6D","3H","4H","5H","6H","7H","8H","9H","10H","9S"},
         {"JD","5D","4D","3D","2D","AS","KS","QS","10S","JC"}
     };
+    
+    Random random = new Random();
+    ScheduledExecutorService executorService;
+    boolean ActivarTemporizador = false;
+    int posicion;
 
     public TABLERO(int numjugadores) {
         initComponents();
@@ -121,6 +129,8 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
         setInitIcons();
         FillButtonArray();
         DesactivarBotones();
+        setTimer();
+        JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
     }
 
     public void resizeHandCards() {
@@ -144,8 +154,7 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
         botonesBaraja[6] = sietecartasboton7;
     }
     
-    public void LlenarBarajaJugadores() {
-        Random random = new Random();
+    public void LlenarBarajaJugadores() {        
         int i1, j1, i2, j2, i3, j3, i4, j4;
         
         for (int i = 0; i < 7; i++) {
@@ -172,6 +181,48 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
         for (int i = 0; i < 7; i++) {
             botonesBaraja[i].setIcon(imgsBaraja1[i]);
         }
+    }
+    
+    public void setTimer(){        
+        if (executorService != null && !executorService.isShutdown()) 
+            executorService.shutdownNow();
+        executorService = Executors.newSingleThreadScheduledExecutor();
+        executorService.schedule(() -> {
+            JOptionPane.showMessageDialog(null, "2 minutos han pasado, perdiste tu turno!");
+            if (turnoJugador == 'a') { 
+                turnoJugador = 'b';
+                JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
+                ActivarTemporizador = true;
+                for (int i = 0; i < 7; i++) {
+                    botonesBaraja[i].setIcon(imgsBaraja2[i]);
+                }
+            } else if (turnoJugador == 'b') {
+                turnoJugador = 'c';
+                JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
+                ActivarTemporizador = true;
+                for (int i = 0; i < 7; i++) {
+                    botonesBaraja[i].setIcon(imgsBaraja3[i]);
+                }
+            } else if (turnoJugador == 'c') {
+                turnoJugador = 'd';
+                JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
+                ActivarTemporizador = true;
+                for (int i = 0; i < 7; i++) {
+                    botonesBaraja[i].setIcon(imgsBaraja4[i]);
+                }
+            } else if (turnoJugador == 'd') {
+                turnoJugador = 'a';
+                JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
+                ActivarTemporizador = true;
+                for (int i = 0; i < 7; i++) {
+                    botonesBaraja[i].setIcon(imgsBaraja1[i]);
+                }
+            }
+            if (ActivarTemporizador) 
+                setTimer();
+            else 
+                executorService.shutdown();
+        }, 10, TimeUnit.SECONDS);
     }
 
     public void generarJugadores(int numjugadores) {
@@ -314,7 +365,11 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                                 JOptionPane.showMessageDialog(this, "¡Terminó el juego!");
                                 System.exit(0);
                             }
-                            
+                                    int i1 = random.nextInt(10);
+                                    int j1 = random.nextInt(10);
+                                    imgsBaraja1[getPosicion()] = handCardImages[i1][j1];
+                                    handCardID1[getPosicion()] = handCardNames[i1][j1];
+                                    
                                     for (int i = 0; i < 7; i++) {
                                         botonesBaraja[i].setIcon(imgsBaraja2[i]);
                                     }
@@ -323,6 +378,8 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                                     DesactivarBotones();
                                     layeredpanecartas.setVisible(false);
                                     JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
+                                    ActivarTemporizador = false;
+                                    setTimer();
                                     layeredpanecartas.setVisible(true);
                         } else {
                             JOptionPane.showMessageDialog(this, "Ya hay una fcha puesta");
@@ -349,6 +406,8 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                                     DesactivarBotones();
                                     layeredpanecartas.setVisible(false);
                                     JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
+                                    ActivarTemporizador = false;
+                                    setTimer();
                                     layeredpanecartas.setVisible(true);
                         } else {
                             JOptionPane.showMessageDialog(this, "Ya hay una fcha puesta");
@@ -374,6 +433,8 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                                     DesactivarBotones();
                                     layeredpanecartas.setVisible(false);
                                     JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
+                                    ActivarTemporizador = false;
+                                    setTimer();
                                     layeredpanecartas.setVisible(true);
                         } else {
                             JOptionPane.showMessageDialog(this, "Ya hay una fcha puesta");
@@ -399,6 +460,8 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                                     DesactivarBotones();
                                     layeredpanecartas.setVisible(false);
                                     JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
+                                    ActivarTemporizador = false;
+                                    setTimer();
                                     layeredpanecartas.setVisible(true);
                         } else {
                             JOptionPane.showMessageDialog(this, "Ya hay una fcha puesta");
@@ -1454,6 +1517,16 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                 botones[i].setEnabled(false);
         }
     }
+    
+    public void setPosicion(int pos) {
+        posicion = pos;
+    }
+    
+    public int getPosicion() {
+        return posicion;
+    }
+    
+    
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -2564,6 +2637,7 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                 EraseHighlight();
                 DesactivarBotones();
                 ActivarBotonesDisponibles(handCardID1[0]);
+                setPosicion(0);
                 break;
             case 'b':
                 JOptionPane.showMessageDialog(null, handCardID2[0]);
@@ -2594,6 +2668,7 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                 EraseHighlight();
                 DesactivarBotones();
                 ActivarBotonesDisponibles(handCardID1[1]);
+                setPosicion(1);
                 break;
             case 'b':
                 JOptionPane.showMessageDialog(null, handCardID2[1]);
@@ -2624,6 +2699,7 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                 EraseHighlight();
                 DesactivarBotones();
                 ActivarBotonesDisponibles(handCardID1[2]);
+                setPosicion(2);
                 break;
             case 'b':
                 JOptionPane.showMessageDialog(null, handCardID2[2]);
@@ -2654,6 +2730,7 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                 EraseHighlight();
                 DesactivarBotones();
                 ActivarBotonesDisponibles(handCardID1[3]);
+                setPosicion(3);
                 break;
             case 'b':
                 JOptionPane.showMessageDialog(null, handCardID2[3]);
@@ -2684,6 +2761,7 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                 EraseHighlight();
                 DesactivarBotones();
                 ActivarBotonesDisponibles(handCardID1[4]);
+                setPosicion(4);
                 break;
             case 'b':
                 JOptionPane.showMessageDialog(null, handCardID2[4]);
@@ -2714,6 +2792,7 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                 EraseHighlight();
                 DesactivarBotones();
                 ActivarBotonesDisponibles(handCardID1[5]);
+                setPosicion(5);
                 break;
             case 'b':
                 JOptionPane.showMessageDialog(null, handCardID2[5]);
@@ -2744,6 +2823,7 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                 EraseHighlight();
                 DesactivarBotones();
                 ActivarBotonesDisponibles(handCardID1[6]);
+                setPosicion(6);
                 break;
             case 'b':
                 JOptionPane.showMessageDialog(null, handCardID2[6]);
