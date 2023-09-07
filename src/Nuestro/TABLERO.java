@@ -48,7 +48,7 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
     private String[] handCardID2 = new String[7];
     private String[] handCardID3 = new String[7];
     private String[] handCardID4 = new String[7];
-
+    //array para cargar las imagenes de la baraja
     private ImageIcon[][] handCardImages = {
         {new javax.swing.ImageIcon(getClass().getResource("/handCards/JS.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/AC.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/KC.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/QC.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/10C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/9C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/8C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/7C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/6C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/JH.png"))},
         {new javax.swing.ImageIcon(getClass().getResource("/handCards/AD.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/7S.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/8S.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/9S.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/10S.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/QS.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/KS.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/AS.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/5C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/2S.png"))},
@@ -61,7 +61,7 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
         {new javax.swing.ImageIcon(getClass().getResource("/handCards/6D.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/3H.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/4H.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/5H.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/6H.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/7H.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/8H.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/9H.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/10H.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/9S.png"))},
         {new javax.swing.ImageIcon(getClass().getResource("/handCards/JD.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/5D.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/4D.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/3D.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/2D.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/AS.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/KS.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/QS.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/10S.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/JC.png"))}
     };
-    
+    //arreglo de los nombres de las cartas en el mismo orden del arreglo de las imagenes para luego identificar que carta se selecciono de la baraja
     private String[][] handCardNames = {
         {"JS","AC","KC","QC","10C","9C","8C","7C","6C","JH"},
         {"AD","7S","8S","9S","10S","QS","KS","AS","5C","2S"},
@@ -132,7 +132,7 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
         setTimer();
         JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
     }
-
+    //resize las imagenes de las cartas de las barajas
     public void resizeHandCards() {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -143,7 +143,7 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
             }
         }
     }
-    
+    //arreglo con los JButtons de la baraja para luego definir el icon de cada boton segun progrese el juego y para no escribir mucho codigo ya que se usaran for loops para poner los icons en los botones
     public void llenarArregloBotonesBaraja() {
         botonesBaraja[0] = sietecartasboton1;
         botonesBaraja[1] = sietecartasboton2;
@@ -153,9 +153,9 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
         botonesBaraja[5] = sietecartasboton6;
         botonesBaraja[6] = sietecartasboton7;
     }
-    
+    //arreglo para almacenar las imagenes que se le pondran a los botones inicialmente, se usan las mismas posiciones para dos arreglos (imgsBaraja y handCardID) para identificar que carta contiene cada boton
     public void LlenarBarajaJugadores() {        
-        int i1, j1, i2, j2, i3, j3, i4, j4;
+        int i1, j1, i2, j2, i3, j3, i4, j4; //se crean variables donde se almacenen los numeros random para utilizar ese mismo numero en imgsBaraja y en handCardID
         
         for (int i = 0; i < 7; i++) {
             i1 = random.nextInt(10);
@@ -166,34 +166,34 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
             j3 = random.nextInt(10);
             i4 = random.nextInt(10);
             j4 = random.nextInt(10);
-            imgsBaraja1[i] = handCardImages[i1][j1];
-            handCardID1[i] = handCardNames[i1][j1];
+            imgsBaraja1[i] = handCardImages[i1][j1]; //imgsBaraja es el arreglo donde se cargan las imagenes de las cartas que iran en la baraja
+            handCardID1[i] = handCardNames[i1][j1]; //handCardID es el arreglo donde se guarda el nombre de la imagen que representa la carta
             imgsBaraja2[i] = handCardImages[i2][j2];
             handCardID2[i] = handCardNames[i2][j2];
             imgsBaraja3[i] = handCardImages[i3][j3];
             handCardID3[i] = handCardNames[i3][j3];
             imgsBaraja4[i] = handCardImages[i4][j4];
-            handCardID4[i] = handCardNames[i4][j4];
+            handCardID4[i] = handCardNames[i4][j4];  //se hizo un arreglo para cada jugador considerando 4 jugadores activos
         } 
     }
-    
+    //colocar icons a los botones de la baraja del primer jugador, se llama desde el constructor por que de lo contrario no se mostraria hasta que se aprete un boton o se haga una accion
     public void setInitIcons() {
         for (int i = 0; i < 7; i++) {
             botonesBaraja[i].setIcon(imgsBaraja1[i]);
         }
     }
-    
+    //temporizador, una vez que se termina se cambia de jugador y se cambian los iconos de la baraja
     public void setTimer(){        
-        if (executorService != null && !executorService.isShutdown()) 
+        if (executorService != null && !executorService.isShutdown()) //se revisa que el contador no este activo, si esta activo se desactiva para reiniciarlo
             executorService.shutdownNow();
-        executorService = Executors.newSingleThreadScheduledExecutor();
-        executorService.schedule(() -> {
+        executorService = Executors.newSingleThreadScheduledExecutor(); //se usa otro thread para el contador para que no quede inactivo el tablero
+        executorService.schedule(() -> { 
             JOptionPane.showMessageDialog(null, "2 minutos han pasado, perdiste tu turno!");
             if (turnoJugador == 'a') { 
                 turnoJugador = 'b';
                 JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
-                ActivarTemporizador = true;
-                for (int i = 0; i < 7; i++) {
+                ActivarTemporizador = true; //se coloca true para que se vuelva a llamar a la funcion setTimer, de lo contrario no se podria reactivar el timer hasta que se coloque una ficha o se haga una accion
+                for (int i = 0; i < 7; i++) { //se cambia la baraja a la del jugador siguiente
                     botonesBaraja[i].setIcon(imgsBaraja2[i]);
                 }
             } else if (turnoJugador == 'b') {
@@ -218,11 +218,11 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                     botonesBaraja[i].setIcon(imgsBaraja1[i]);
                 }
             }
-            if (ActivarTemporizador) 
+            if (ActivarTemporizador)   //si se acaba el timer se vuelve a llamar a la misma funcion para reiniciarlo, si no se hace esto el timer no se podria reiniciar hasta que se haga una accion
                 setTimer();
             else 
-                executorService.shutdown();
-        }, 10, TimeUnit.SECONDS);
+                executorService.shutdown(); //si no se acabo el timer antes que se colocara una ficha solo se desactiva el timer
+        }, 10, TimeUnit.SECONDS);                                 //el delay se cambiara a dos minutos 
     }
 
     public void generarJugadores(int numjugadores) {
@@ -351,10 +351,7 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                 System.out.println(turnoJugador);
 
                 switch (turnoJugador) {
-
                     case 'a':
-                        
-                        
                         if (chequearIconoVacio(x + "" + y)) {
                             getBoton(posColocar).setIcon(redToken);
                             tableroIconos[x][y] = "r";
@@ -364,23 +361,25 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
 
                                 JOptionPane.showMessageDialog(this, "¡Terminó el juego!");
                                 System.exit(0);
-                            }
+                            }       
+                                    //si se coloca una ficha se elimina la carta que se uso de la baraja y se coloca una nueva aleatoriamente
                                     int i1 = random.nextInt(10);
                                     int j1 = random.nextInt(10);
-                                    imgsBaraja1[getPosicion()] = handCardImages[i1][j1];
+                                    imgsBaraja1[getPosicion()] = handCardImages[i1][j1]; //al tocar el boton de la baraja se obtiene la posicion del arreglo que corresponde a la carta y esa es la que se cambiara
                                     handCardID1[getPosicion()] = handCardNames[i1][j1];
-                                    
+                                    //se cambian los icons de los botones para que muestre la baraja del siguiente jugador
                                     for (int i = 0; i < 7; i++) {
                                         botonesBaraja[i].setIcon(imgsBaraja2[i]);
                                     }
-                                    
+                                    //se borran las casillas disponibles y se desactivan todos los botones excepto los que ya tienen una ficha, ya hay un metodo que verifica que no se coloque otra ficha donde ya hay una asi que no afecta que quede el boton activo
                                     EraseHighlight();
                                     DesactivarBotones();
+                                    //se desaparece la baraja por un momento mientras el siguiente jugador comienza su turno para que nadie le vea sus cartas
                                     layeredpanecartas.setVisible(false);
                                     JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
-                                    ActivarTemporizador = false;
-                                    setTimer();
-                                    layeredpanecartas.setVisible(true);
+                                    ActivarTemporizador = false;    //si se coloco una ficha, no se vuelve a llamar a set timer de nuevo dentro de si misma, solamente se desactivara para luego volverlo a activar
+                                    setTimer(); //iniciar timer
+                                    layeredpanecartas.setVisible(true); //se muestra la baraja de nuevo una vez que el siguiente jugador esta listo
                         } else {
                             JOptionPane.showMessageDialog(this, "Ya hay una fcha puesta");
                         }
@@ -398,6 +397,11 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                                 JOptionPane.showMessageDialog(this, "¡Terminó el juego!");
                                 System.exit(0);
                             }
+                                    int i2 = random.nextInt(10);
+                                    int j2 = random.nextInt(10);
+                                    imgsBaraja2[getPosicion()] = handCardImages[i2][j2];
+                                    handCardID2[getPosicion()] = handCardNames[i2][j2];
+                                    
                                     for (int i = 0; i < 7; i++) {
                                         botonesBaraja[i].setIcon(imgsBaraja3[i]);
                                     }      
@@ -425,6 +429,11 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                                 JOptionPane.showMessageDialog(this, "¡Terminó el juego!");
                                 System.exit(0);
                             }
+                                    int i3 = random.nextInt(10);
+                                    int j3 = random.nextInt(10);
+                                    imgsBaraja3[getPosicion()] = handCardImages[i3][j3];
+                                    handCardID3[getPosicion()] = handCardNames[i3][j3];
+                                    
                                     for (int i = 0; i < 7; i++) {
                                         botonesBaraja[i].setIcon(imgsBaraja4[i]);
                                     }
@@ -452,6 +461,11 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                                 JOptionPane.showMessageDialog(this, "¡Terminó el juego!");
                                 System.exit(0);
                             }
+                                    int i4 = random.nextInt(10);
+                                    int j4 = random.nextInt(10);
+                                    imgsBaraja4[getPosicion()] = handCardImages[i4][j4];
+                                    handCardID4 [getPosicion()] = handCardNames[i4][j4];
+                                    
                                     for (int i = 0; i < 7; i++) {
                                         botonesBaraja[i].setIcon(imgsBaraja1[i]);
                                     }
@@ -998,7 +1012,7 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
         boton98.addActionListener(this);
         boton99.addActionListener(this);
     }
-    
+    //arreglo para luego desactivar todos los botones del tablero o resaltar movimientos validos, se hizo para usarlo en un for loop y  no tener tanto codigo
     public void FillButtonArray() {
         botones[0] = boton00;
         botones[1] = boton01;
@@ -1101,7 +1115,7 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
         botones[98] = boton98;
         botones[99] = boton99;
     }
-    
+    //activar solo los botones donde se pueda colocar una ficha dependiendo de la carta que se eligio de la baraja, y se resaltan en verde los que se activan
     public void ActivarBotonesDisponibles(String NombreCarta) {
         switch (NombreCarta) {
             case "JS":
@@ -1504,20 +1518,20 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                 System.out.println("No se reconocio la carta");
         }      
     }
-    
+    //borrar resaltado de movimientos validos
     public void EraseHighlight() {
         for (int i = 0; i < 100; i++) {
             botones[i].setOpaque(false);
         }
     }
-    
+    //desactivar los botones que no tengan una ficha puesta (si se desactivan los que tienen una ficha puesta no se muestra el color de la ficha)
     public void DesactivarBotones() {
         for (int i = 0; i < 100; i++) {
             if (botones[i].getIcon() == null)
                 botones[i].setEnabled(false);
         }
     }
-    
+    //getter y setter para obtener la posicion del arreglo de botones de la baraja para saber a cual de las posiciones se le cambiara el icon
     public void setPosicion(int pos) {
         posicion = pos;
     }
@@ -2633,29 +2647,32 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
         // TODO add your handling code here:
         switch (turnoJugador) {
             case 'a':
-                JOptionPane.showMessageDialog(null, handCardID1[0]);
-                EraseHighlight();
-                DesactivarBotones();
-                ActivarBotonesDisponibles(handCardID1[0]);
-                setPosicion(0);
+                JOptionPane.showMessageDialog(null, handCardID1[0]); //confirmar que se esta identificando correctamente la carta seleccionada de la baraja
+                EraseHighlight(); //en caso de que se selecciono una carta de la baraja pero luego se quiere usar otra carta se borran los movimientos validos de la carta seleccionada anteriormente
+                DesactivarBotones(); // se desactivan los botones donde no se puede colocar una ficha ya que no corresponde a la carta elegida
+                ActivarBotonesDisponibles(handCardID1[0]); //se usa de parametro el nombre de la carta para activar los botones validos
+                setPosicion(0); //identificar que carta de la baraja se cambiara
                 break;
             case 'b':
                 JOptionPane.showMessageDialog(null, handCardID2[0]);
                 EraseHighlight();
                 DesactivarBotones();
                 ActivarBotonesDisponibles(handCardID2[0]);
+                setPosicion(0);
                 break;
             case 'c':
                 JOptionPane.showMessageDialog(null, handCardID3[0]);
                 EraseHighlight();
                 DesactivarBotones();
                 ActivarBotonesDisponibles(handCardID3[0]);
+                setPosicion(0);
                 break;
             case 'd':
                 JOptionPane.showMessageDialog(null, handCardID4[0]);
                 EraseHighlight();
                 DesactivarBotones();
                 ActivarBotonesDisponibles(handCardID4[0]);
+                setPosicion(0);
                 break;
         }
     }//GEN-LAST:event_sietecartasboton1ActionPerformed
@@ -2675,18 +2692,21 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                 EraseHighlight();
                 DesactivarBotones();
                 ActivarBotonesDisponibles(handCardID2[1]);
+                setPosicion(1);
                 break;
             case 'c':
                 JOptionPane.showMessageDialog(null, handCardID3[1]);
                 EraseHighlight();
                 DesactivarBotones();
                 ActivarBotonesDisponibles(handCardID3[1]);
+                setPosicion(1);
                 break;
             case 'd':
                 JOptionPane.showMessageDialog(null, handCardID4[1]);
                 EraseHighlight();
                 DesactivarBotones();
                 ActivarBotonesDisponibles(handCardID4[1]);
+                setPosicion(1);
                 break;
         }
     }//GEN-LAST:event_sietecartasboton2ActionPerformed
@@ -2706,18 +2726,21 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                 EraseHighlight();
                 DesactivarBotones();
                 ActivarBotonesDisponibles(handCardID2[2]);
+                setPosicion(2);
                 break;
             case 'c':
                 JOptionPane.showMessageDialog(null, handCardID3[2]);
                 EraseHighlight();
                 DesactivarBotones();
                 ActivarBotonesDisponibles(handCardID3[2]);
+                setPosicion(2);
                 break;
             case 'd':
                 JOptionPane.showMessageDialog(null, handCardID4[2]);
                 EraseHighlight();
                 DesactivarBotones();
                 ActivarBotonesDisponibles(handCardID4[2]);
+                setPosicion(2);
                 break;
         }
     }//GEN-LAST:event_sietecartasboton3ActionPerformed
@@ -2737,18 +2760,21 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                 EraseHighlight();
                 DesactivarBotones();
                 ActivarBotonesDisponibles(handCardID2[3]);
+                setPosicion(3);
                 break;
             case 'c':
                 JOptionPane.showMessageDialog(null, handCardID3[3]);
                 EraseHighlight();
                 DesactivarBotones();
                 ActivarBotonesDisponibles(handCardID3[3]);
+                setPosicion(3);
                 break;
             case 'd':
                 JOptionPane.showMessageDialog(null, handCardID4[3]);
                 EraseHighlight();
                 DesactivarBotones();
                 ActivarBotonesDisponibles(handCardID4[3]);
+                setPosicion(3);
                 break;
         }
     }//GEN-LAST:event_sietecartasboton4ActionPerformed
@@ -2768,18 +2794,21 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                 EraseHighlight();
                 DesactivarBotones();
                 ActivarBotonesDisponibles(handCardID2[4]);
+                setPosicion(4);
                 break;
             case 'c':
                 JOptionPane.showMessageDialog(null, handCardID3[4]);
                 EraseHighlight();
                 DesactivarBotones();
                 ActivarBotonesDisponibles(handCardID3[4]);
+                setPosicion(4);
                 break;
             case 'd':
                 JOptionPane.showMessageDialog(null, handCardID4[4]);
                 EraseHighlight();
                 DesactivarBotones();
                 ActivarBotonesDisponibles(handCardID4[4]);
+                setPosicion(4);
                 break;
         }
     }//GEN-LAST:event_sietecartasboton5ActionPerformed
@@ -2799,18 +2828,21 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                 EraseHighlight();
                 DesactivarBotones();
                 ActivarBotonesDisponibles(handCardID2[5]);
+                setPosicion(5);
                 break;
             case 'c':
                 JOptionPane.showMessageDialog(null, handCardID3[5]);
                 EraseHighlight();
                 DesactivarBotones();
                 ActivarBotonesDisponibles(handCardID3[5]);
+                setPosicion(5);
                 break;
             case 'd':
                 JOptionPane.showMessageDialog(null, handCardID4[5]);
                 EraseHighlight();
                 DesactivarBotones();
                 ActivarBotonesDisponibles(handCardID4[5]);
+                setPosicion(5);
                 break;
         }
     }//GEN-LAST:event_sietecartasboton6ActionPerformed
@@ -2830,18 +2862,21 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                 EraseHighlight();
                 DesactivarBotones();
                 ActivarBotonesDisponibles(handCardID2[6]);
+                setPosicion(6);
                 break;
             case 'c':
                 JOptionPane.showMessageDialog(null, handCardID3[6]);
                 EraseHighlight();
                 DesactivarBotones();
                 ActivarBotonesDisponibles(handCardID3[6]);
+                setPosicion(6);
                 break;
             case 'd':
                 JOptionPane.showMessageDialog(null, handCardID4[6]);
                 EraseHighlight();
                 DesactivarBotones();
                 ActivarBotonesDisponibles(handCardID4[6]);
+                setPosicion(6);
                 break;
         }
     }//GEN-LAST:event_sietecartasboton7ActionPerformed
