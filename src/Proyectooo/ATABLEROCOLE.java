@@ -2,17 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Nuestro;
+package Proyectooo;
 
-import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -21,7 +18,7 @@ import javax.swing.JOptionPane;
  *
  * @author AdminColeexz
  */
-public class TABLERO extends javax.swing.JFrame implements ActionListener {
+public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
     private String tableroIconos[][] = new String[10][10]; //tablero para verificar que si los iconos son del compañero o no
     private String tableroCartas[][] = new String[10][10]; //tablero para conseguir las cartas y verificar si son cartas especiales
@@ -31,23 +28,13 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
     String posColocar = "";
     public static int numjugadores = 4;
     private Player jugadores[];
-    
+
     ImageIcon redToken = new javax.swing.ImageIcon(getClass().getResource("/tokens/redToken.png"));
     ImageIcon blueToken = new javax.swing.ImageIcon(getClass().getResource("/tokens/blueToken.png"));
     ImageIcon yellowToken = new javax.swing.ImageIcon(getClass().getResource("/tokens/yellowToken.png"));
     ImageIcon greenToken = new javax.swing.ImageIcon(getClass().getResource("/tokens/greenToken.png"));
-    
-    private JButton botonesBaraja[] = new JButton[7];
-    private JButton[] botones = new JButton[100];
-    private ImageIcon[] imgsBaraja1 = new ImageIcon[7];
-    private ImageIcon[] imgsBaraja2 = new ImageIcon[7];
-    private ImageIcon[] imgsBaraja3 = new ImageIcon[7];
-    private ImageIcon[] imgsBaraja4 = new ImageIcon[7];
-    
-    private String[] handCardID1 = new String[7];
-    private String[] handCardID2 = new String[7];
-    private String[] handCardID3 = new String[7];
-    private String[] handCardID4 = new String[7];
+
+   
     //array para cargar las imagenes de la baraja
     private ImageIcon[][] handCardImages = {
         {new javax.swing.ImageIcon(getClass().getResource("/handCards/JS.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/AC.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/KC.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/QC.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/10C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/9C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/8C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/7C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/6C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/JH.png"))},
@@ -63,24 +50,20 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
     };
     //arreglo de los nombres de las cartas en el mismo orden del arreglo de las imagenes para luego identificar que carta se selecciono de la baraja
     private String[][] handCardNames = {
-        {"JS","AC","KC","QC","10C","9C","8C","7C","6C","JH"},
-        {"AD","7S","8S","9S","10S","QS","KS","AS","5C","2S"},
-        {"KD","6S","10C","9C","8C","7C","6C","2D","4C","3S"},
-        {"QD","5S","QC","8H","7H","6H","5C","3D","3C","4S"},
-        {"10D","4S","KC","9H","2H","5H","4C","4D","2C","5S"},
-        {"9D","3S","AC","10H","3H","4H","3C","5D","AH","6S"},
-        {"8D","2S","AD","QH","KH","AH","2C","6D","KH","7S"},
-        {"7D","2H","KD","QD","10D","9D","8D","7D","QH","8S"},
-        {"6D","3H","4H","5H","6H","7H","8H","9H","10H","9S"},
-        {"JD","5D","4D","3D","2D","AS","KS","QS","10S","JC"}
+        {"JS", "AC", "KC", "QC", "10C", "9C", "8C", "7C", "6C", "JH"},
+        {"AD", "7S", "8S", "9S", "10S", "QS", "KS", "AS", "5C", "2S"},
+        {"KD", "6S", "10C", "9C", "8C", "7C", "6C", "2D", "4C", "3S"},
+        {"QD", "5S", "QC", "8H", "7H", "6H", "5C", "3D", "3C", "4S"},
+        {"10D", "4S", "KC", "9H", "2H", "5H", "4C", "4D", "2C", "5S"},
+        {"9D", "3S", "AC", "10H", "3H", "4H", "3C", "5D", "AH", "6S"},
+        {"8D", "2S", "AD", "QH", "KH", "AH", "2C", "6D", "KH", "7S"},
+        {"7D", "2H", "KD", "QD", "10D", "9D", "8D", "7D", "QH", "8S"},
+        {"6D", "3H", "4H", "5H", "6H", "7H", "8H", "9H", "10H", "9S"},
+        {"JD", "5D", "4D", "3D", "2D", "AS", "KS", "QS", "10S", "JC"}
     };
-    
-    Random random = new Random();
-    ScheduledExecutorService executorService;
-    boolean ActivarTemporizador = false;
-    int posicion;
 
-    public TABLERO(int numjugadores) {
+   
+    public ATABLEROCOLE(int numjugadores) {
         initComponents();
         pack();
         setLocationRelativeTo(null);
@@ -123,115 +106,9 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
         Image GnewImg = Gimg.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
         greenToken = new ImageIcon(GnewImg);
 
-        resizeHandCards();
-        llenarArregloBotonesBaraja();
-        LlenarBarajaJugadores();
-        setInitIcons();
-        FillButtonArray();
-        DesactivarBotones();
-        setTimer();
         JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
     }
     //resize las imagenes de las cartas de las barajas
-    public void resizeHandCards() {
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                Image handImg = handCardImages[i][j].getImage();
-                Image newHandImg = handImg.getScaledInstance(80, 120, java.awt.Image.SCALE_SMOOTH);
-                ImageIcon newHandIcon = new ImageIcon(newHandImg);
-                handCardImages[i][j] = newHandIcon;
-            }
-        }
-    }
-    //arreglo con los JButtons de la baraja para luego definir el icon de cada boton segun progrese el juego y para no escribir mucho codigo ya que se usaran for loops para poner los icons en los botones
-    public void llenarArregloBotonesBaraja() {
-        botonesBaraja[0] = sietecartasboton1;
-        botonesBaraja[1] = sietecartasboton2;
-        botonesBaraja[2] = sietecartasboton3;
-        botonesBaraja[3] = sietecartasboton4;
-        botonesBaraja[4] = sietecartasboton5;
-        botonesBaraja[5] = sietecartasboton6;
-        botonesBaraja[6] = sietecartasboton7;
-    }
-    //arreglo para almacenar las imagenes que se le pondran a los botones inicialmente, se usan las mismas posiciones para dos arreglos (imgsBaraja y handCardID) para identificar que carta contiene cada boton
-    public void LlenarBarajaJugadores() {        
-        int i1, j1, i2, j2, i3, j3, i4, j4; //se crean variables donde se almacenen los numeros random para utilizar ese mismo numero en imgsBaraja y en handCardID
-        
-        for (int i = 0; i < 7; i++) {
-            i1 = random.nextInt(10);
-            j1 = random.nextInt(10);
-            i2 = random.nextInt(10);
-            j2 = random.nextInt(10);
-            i3 = random.nextInt(10);
-            j3 = random.nextInt(10);
-            i4 = random.nextInt(10);
-            j4 = random.nextInt(10);
-            imgsBaraja1[i] = handCardImages[i1][j1]; //imgsBaraja es el arreglo donde se cargan las imagenes de las cartas que iran en la baraja
-            handCardID1[i] = handCardNames[i1][j1]; //handCardID es el arreglo donde se guarda el nombre de la imagen que representa la carta
-            imgsBaraja2[i] = handCardImages[i2][j2];
-            handCardID2[i] = handCardNames[i2][j2];
-            imgsBaraja3[i] = handCardImages[i3][j3];
-            handCardID3[i] = handCardNames[i3][j3];
-            imgsBaraja4[i] = handCardImages[i4][j4];
-            handCardID4[i] = handCardNames[i4][j4];  //se hizo un arreglo para cada jugador considerando 4 jugadores activos
-        } 
-    }
-    //colocar icons a los botones de la baraja del primer jugador, se llama desde el constructor por que de lo contrario no se mostraria hasta que se aprete un boton o se haga una accion
-    public void setInitIcons() {
-        for (int i = 0; i < 7; i++) {
-            botonesBaraja[i].setIcon(imgsBaraja1[i]);
-        }
-    }
-    //temporizador, una vez que se termina se cambia de jugador y se cambian los iconos de la baraja
-    public void setTimer(){        
-        if (executorService != null && !executorService.isShutdown()) //se revisa que el contador no este activo, si esta activo se desactiva para reiniciarlo
-            executorService.shutdownNow();
-        executorService = Executors.newSingleThreadScheduledExecutor(); //se usa otro thread para el contador para que no quede inactivo el tablero
-        executorService.schedule(() -> { 
-            JOptionPane.showMessageDialog(null, "2 minutos han pasado, perdiste tu turno!");
-            if (turnoJugador == 'a') { 
-                turnoJugador = 'b';
-                JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
-                ActivarTemporizador = true; //se coloca true para que se vuelva a llamar a la funcion setTimer, de lo contrario no se podria reactivar el timer hasta que se coloque una ficha o se haga una accion
-                for (int i = 0; i < 7; i++) { //se cambia la baraja a la del jugador siguiente
-                    botonesBaraja[i].setIcon(imgsBaraja2[i]);
-                }
-            } else if (turnoJugador == 'b') {
-                turnoJugador = 'c';
-                JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
-                ActivarTemporizador = true;
-                for (int i = 0; i < 7; i++) {
-                    botonesBaraja[i].setIcon(imgsBaraja3[i]);
-                }
-            } else if (turnoJugador == 'c') {
-                turnoJugador = 'd';
-                JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
-                ActivarTemporizador = true;
-                for (int i = 0; i < 7; i++) {
-                    botonesBaraja[i].setIcon(imgsBaraja4[i]);
-                }
-            } else if (turnoJugador == 'd') {
-                turnoJugador = 'a';
-                JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
-                ActivarTemporizador = true;
-                for (int i = 0; i < 7; i++) {
-                    botonesBaraja[i].setIcon(imgsBaraja1[i]);
-                }
-            }
-            if (ActivarTemporizador)   //si se acaba el timer se vuelve a llamar a la misma funcion para reiniciarlo, si no se hace esto el timer no se podria reiniciar hasta que se haga una accion
-                setTimer();
-            else 
-                executorService.shutdown(); //si no se acabo el timer antes que se colocara una ficha solo se desactiva el timer
-        }, 10, TimeUnit.SECONDS);                                 //el delay se cambiara a dos minutos 
-    }
-
-    public void generarJugadores(int numjugadores) {
-//        jugadores = new Player[numjugadores];
-//        for(int i = 0; i<numjugadores; i++){
-//            jugadores[i] = new Player(i);
-//        }
-//        
-    }
 
     public void vaciarTablero() {
         for (int i = 0; i < 10; i++) {
@@ -361,29 +238,21 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
 
                                 JOptionPane.showMessageDialog(this, "¡Terminó el juego!");
                                 System.exit(0);
-                            }       
-                                    //si se coloca una ficha se elimina la carta que se uso de la baraja y se coloca una nueva aleatoriamente
-                                    int i1 = random.nextInt(10);
-                                    int j1 = random.nextInt(10);
-                                    imgsBaraja1[getPosicion()] = handCardImages[i1][j1]; //al tocar el boton de la baraja se obtiene la posicion del arreglo que corresponde a la carta y esa es la que se cambiara
-                                    handCardID1[getPosicion()] = handCardNames[i1][j1];
-                                    //se cambian los icons de los botones para que muestre la baraja del siguiente jugador
-                                    for (int i = 0; i < 7; i++) {
-                                        botonesBaraja[i].setIcon(imgsBaraja2[i]);
-                                    }
-                                    //se borran las casillas disponibles y se desactivan todos los botones excepto los que ya tienen una ficha, ya hay un metodo que verifica que no se coloque otra ficha donde ya hay una asi que no afecta que quede el boton activo
-                                    EraseHighlight();
-                                    DesactivarBotones();
-                                    //se desaparece la baraja por un momento mientras el siguiente jugador comienza su turno para que nadie le vea sus cartas
-                                    layeredpanecartas.setVisible(false);
-                                    JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
-                                    ActivarTemporizador = false;    //si se coloco una ficha, no se vuelve a llamar a set timer de nuevo dentro de si misma, solamente se desactivara para luego volverlo a activar
-                                    setTimer(); //iniciar timer
-                                    layeredpanecartas.setVisible(true); //se muestra la baraja de nuevo una vez que el siguiente jugador esta listo
+                            }
+                            //si se coloca una ficha se elimina la carta que se uso de la baraja y se coloca una nueva aleatoriamente
+                          
+                            //se borran las casillas disponibles y se desactivan todos los botones excepto los que ya tienen una ficha, ya hay un metodo que verifica que no se coloque otra ficha donde ya hay una asi que no afecta que quede el boton activo
+
+                            //se desaparece la baraja por un momento mientras el siguiente jugador comienza su turno para que nadie le vea sus cartas
+                            layeredpanecartas.setVisible(false);
+                            JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
+                           //se coloco una ficha, no se vuelve a llamar a set timer de nuevo dentro de si misma, solamente se desactivara para luego volverlo a activar
+                            ; //iniciar timer
+                            layeredpanecartas.setVisible(true); //se muestra la baraja de nuevo una vez que el siguiente jugador esta listo
                         } else {
                             JOptionPane.showMessageDialog(this, "Ya hay una fcha puesta");
                         }
-                        
+
                         break;
 
                     case 'b':
@@ -397,22 +266,13 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                                 JOptionPane.showMessageDialog(this, "¡Terminó el juego!");
                                 System.exit(0);
                             }
-                                    int i2 = random.nextInt(10);
-                                    int j2 = random.nextInt(10);
-                                    imgsBaraja2[getPosicion()] = handCardImages[i2][j2];
-                                    handCardID2[getPosicion()] = handCardNames[i2][j2];
-                                    
-                                    for (int i = 0; i < 7; i++) {
-                                        botonesBaraja[i].setIcon(imgsBaraja3[i]);
-                                    }      
-                                    
-                                    EraseHighlight();
-                                    DesactivarBotones();
-                                    layeredpanecartas.setVisible(false);
-                                    JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
-                                    ActivarTemporizador = false;
-                                    setTimer();
-                                    layeredpanecartas.setVisible(true);
+                           
+
+                            layeredpanecartas.setVisible(false);
+                            JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
+                           
+
+                            layeredpanecartas.setVisible(true);
                         } else {
                             JOptionPane.showMessageDialog(this, "Ya hay una fcha puesta");
                         }
@@ -429,22 +289,13 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                                 JOptionPane.showMessageDialog(this, "¡Terminó el juego!");
                                 System.exit(0);
                             }
-                                    int i3 = random.nextInt(10);
-                                    int j3 = random.nextInt(10);
-                                    imgsBaraja3[getPosicion()] = handCardImages[i3][j3];
-                                    handCardID3[getPosicion()] = handCardNames[i3][j3];
-                                    
-                                    for (int i = 0; i < 7; i++) {
-                                        botonesBaraja[i].setIcon(imgsBaraja4[i]);
-                                    }
-                                    
-                                    EraseHighlight();
-                                    DesactivarBotones();
-                                    layeredpanecartas.setVisible(false);
-                                    JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
-                                    ActivarTemporizador = false;
-                                    setTimer();
-                                    layeredpanecartas.setVisible(true);
+                           
+
+                            layeredpanecartas.setVisible(false);
+                            JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
+                          
+
+                            layeredpanecartas.setVisible(true);
                         } else {
                             JOptionPane.showMessageDialog(this, "Ya hay una fcha puesta");
                         }
@@ -461,22 +312,11 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                                 JOptionPane.showMessageDialog(this, "¡Terminó el juego!");
                                 System.exit(0);
                             }
-                                    int i4 = random.nextInt(10);
-                                    int j4 = random.nextInt(10);
-                                    imgsBaraja4[getPosicion()] = handCardImages[i4][j4];
-                                    handCardID4 [getPosicion()] = handCardNames[i4][j4];
-                                    
-                                    for (int i = 0; i < 7; i++) {
-                                        botonesBaraja[i].setIcon(imgsBaraja1[i]);
-                                    }
-                                    
-                                    EraseHighlight();
-                                    DesactivarBotones();
-                                    layeredpanecartas.setVisible(false);
-                                    JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
-                                    ActivarTemporizador = false;
-                                    setTimer();
-                                    layeredpanecartas.setVisible(true);
+                           
+                            layeredpanecartas.setVisible(false);
+                            JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
+                          
+                            layeredpanecartas.setVisible(true);
                         } else {
                             JOptionPane.showMessageDialog(this, "Ya hay una fcha puesta");
                         }
@@ -1012,535 +852,6 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
         boton98.addActionListener(this);
         boton99.addActionListener(this);
     }
-    //arreglo para luego desactivar todos los botones del tablero o resaltar movimientos validos, se hizo para usarlo en un for loop y  no tener tanto codigo
-    public void FillButtonArray() {
-        botones[0] = boton00;
-        botones[1] = boton01;
-        botones[2] = boton02;
-        botones[3] = boton03;
-        botones[4] = boton04;
-        botones[5] = boton05;
-        botones[6] = boton06;
-        botones[7] = boton07;
-        botones[8] = boton08;
-        botones[9] = boton09;
-        botones[10] = boton10;
-        botones[11] = boton11;
-        botones[12] = boton12;
-        botones[13] = boton13;
-        botones[14] = boton14;
-        botones[15] = boton15;
-        botones[16] = boton16;
-        botones[17] = boton17;
-        botones[18] = boton18;
-        botones[19] = boton19;
-        botones[20] = boton20;
-        botones[21] = boton21;
-        botones[22] = boton22;
-        botones[23] = boton23;
-        botones[24] = boton24;
-        botones[25] = boton25;
-        botones[26] = boton26;
-        botones[27] = boton27;
-        botones[28] = boton28;
-        botones[29] = boton29;
-        botones[30] = boton30;
-        botones[31] = boton31;
-        botones[32] = boton32;
-        botones[33] = boton33;
-        botones[34] = boton34;
-        botones[35] = boton35;
-        botones[36] = boton36;
-        botones[37] = boton37;
-        botones[38] = boton38;
-        botones[39] = boton39;
-        botones[40] = boton40;
-        botones[41] = boton41;
-        botones[42] = boton42;
-        botones[43] = boton43;
-        botones[44] = boton44;
-        botones[45] = boton45;
-        botones[46] = boton46;
-        botones[47] = boton47;
-        botones[48] = boton48;
-        botones[49] = boton49;
-        botones[50] = boton50;
-        botones[51] = boton51;
-        botones[52] = boton52;
-        botones[53] = boton53;
-        botones[54] = boton54;
-        botones[55] = boton55;
-        botones[56] = boton56;
-        botones[57] = boton57;
-        botones[58] = boton58;
-        botones[59] = boton59;
-        botones[60] = boton60;
-        botones[61] = boton61;
-        botones[62] = boton62;
-        botones[63] = boton63;
-        botones[64] = boton64;
-        botones[65] = boton65;
-        botones[66] = boton66;
-        botones[67] = boton67;
-        botones[68] = boton68;
-        botones[69] = boton69;
-        botones[70] = boton70;
-        botones[71] = boton71;
-        botones[72] = boton72;
-        botones[73] = boton73;
-        botones[74] = boton74;
-        botones[75] = boton75;
-        botones[76] = boton76;
-        botones[77] = boton77;
-        botones[78] = boton78;
-        botones[79] = boton79;
-        botones[80] = boton80;
-        botones[81] = boton81;
-        botones[82] = boton82;
-        botones[83] = boton83;
-        botones[84] = boton84;
-        botones[85] = boton85;
-        botones[86] = boton86;
-        botones[87] = boton87;
-        botones[88] = boton88;
-        botones[89] = boton89;
-        botones[90] = boton90;
-        botones[91] = boton91;
-        botones[92] = boton92;
-        botones[93] = boton93;
-        botones[94] = boton94;
-        botones[95] = boton95;
-        botones[96] = boton96;
-        botones[97] = boton97;
-        botones[98] = boton98;
-        botones[99] = boton99;
-    }
-    //activar solo los botones donde se pueda colocar una ficha dependiendo de la carta que se eligio de la baraja, y se resaltan en verde los que se activan
-    public void ActivarBotonesDisponibles(String NombreCarta) {
-        switch (NombreCarta) {
-            case "JS":
-                //carta especial
-                break;
-            case "AC":
-                boton10.setEnabled(true);
-                boton10.setOpaque(true);
-                boton10.setBackground(Color.green);
-                boton25.setEnabled(true);
-                boton25.setOpaque(true);
-                boton25.setBackground(Color.green);
-                break;
-            case "KC":
-                boton20.setEnabled(true);
-                boton20.setOpaque(true);
-                boton20.setBackground(Color.green);
-                boton24.setEnabled(true);
-                boton24.setOpaque(true);
-                boton24.setBackground(Color.green);
-                break;
-            case "QC":
-                boton23.setEnabled(true);
-                boton23.setOpaque(true);
-                boton23.setBackground(Color.green);
-                boton30.setEnabled(true);
-                boton30.setOpaque(true);
-                boton30.setBackground(Color.green);
-                break;
-            case "10C":
-                boton22.setEnabled(true);
-                boton22.setOpaque(true);
-                boton22.setBackground(Color.green);
-                boton40.setEnabled(true);
-                boton40.setOpaque(true);
-                boton40.setBackground(Color.green);
-                break;
-            case "9C":
-                boton32.setEnabled(true);
-                boton32.setOpaque(true);
-                boton32.setBackground(Color.green);
-                boton50.setEnabled(true);
-                boton50.setOpaque(true);
-                boton50.setBackground(Color.green);
-                break;
-            case "8C":
-                boton42.setEnabled(true);
-                boton42.setOpaque(true);
-                boton42.setBackground(Color.green);
-                boton60.setEnabled(true);
-                boton60.setOpaque(true);
-                boton60.setBackground(Color.green);
-                break;
-            case "7C":
-                boton52.setEnabled(true);
-                boton52.setOpaque(true);
-                boton52.setBackground(Color.green);
-                boton70.setEnabled(true);
-                boton70.setOpaque(true);
-                boton70.setBackground(Color.green);
-                break;
-            case "6C":
-                boton62.setEnabled(true);
-                boton62.setOpaque(true);
-                boton62.setBackground(Color.green);
-                boton80.setEnabled(true);
-                boton80.setOpaque(true);
-                boton80.setBackground(Color.green);
-                break;
-            case "JH":
-                //carta especial
-                break;
-            case "AD" :
-                boton01.setEnabled(true);
-                boton01.setOpaque(true);
-                boton01.setBackground(Color.green);
-                boton26.setEnabled(true);
-                boton26.setOpaque(true);
-                boton26.setBackground(Color.green);
-                break;
-            case "7S":
-                boton11.setEnabled(true);
-                boton11.setOpaque(true);
-                boton11.setBackground(Color.green);
-                boton96.setEnabled(true);
-                boton96.setOpaque(true);
-                boton96.setBackground(Color.green);
-                break;
-            case "8S":
-                boton21.setEnabled(true);
-                boton21.setOpaque(true);
-                boton21.setBackground(Color.green);
-                boton97.setEnabled(true);
-                boton97.setOpaque(true);
-                boton97.setBackground(Color.green);
-                break;
-            case "9S":
-                boton31.setEnabled(true);
-                boton31.setOpaque(true);
-                boton31.setBackground(Color.green);
-                boton98.setEnabled(true);
-                boton98.setOpaque(true);
-                boton98.setBackground(Color.green);
-                break;
-            case "10S":
-                boton41.setEnabled(true);
-                boton41.setOpaque(true);
-                boton41.setBackground(Color.green);
-                boton89.setEnabled(true);
-                boton89.setOpaque(true);
-                boton89.setBackground(Color.green);
-                break;
-            case "QS":
-                boton51.setEnabled(true);
-                boton51.setOpaque(true);
-                boton51.setBackground(Color.green);
-                boton79.setEnabled(true);
-                boton79.setOpaque(true);
-                boton79.setBackground(Color.green);
-                break;
-            case "KS":
-                boton61.setEnabled(true);
-                boton61.setOpaque(true);
-                boton61.setBackground(Color.green);
-                boton69.setEnabled(true);
-                boton69.setOpaque(true);
-                boton69.setBackground(Color.green);
-                break;
-            case "AS":
-                boton59.setEnabled(true);
-                boton59.setOpaque(true);
-                boton59.setBackground(Color.green);
-                boton71.setEnabled(true);
-                boton71.setOpaque(true);
-                boton71.setBackground(Color.green);
-                break;
-            case "5C":
-                boton63.setEnabled(true);
-                boton63.setOpaque(true);
-                boton63.setBackground(Color.green);
-                boton81.setEnabled(true);
-                boton81.setOpaque(true);
-                boton81.setBackground(Color.green);
-                break;
-            case "2S":
-                boton16.setEnabled(true);
-                boton16.setOpaque(true);
-                boton16.setBackground(Color.green);
-                boton91.setEnabled(true);
-                boton91.setOpaque(true);
-                boton91.setBackground(Color.green);
-                break;
-            case "KD":
-                boton02.setEnabled(true);
-                boton02.setOpaque(true);
-                boton02.setBackground(Color.green);
-                boton27.setEnabled(true);
-                boton27.setOpaque(true);
-                boton27.setBackground(Color.green);
-                break;
-            case"6S":
-                boton12.setEnabled(true);
-                boton12.setOpaque(true);
-                boton12.setBackground(Color.green);
-                boton95.setEnabled(true);
-                boton95.setOpaque(true);
-                boton95.setBackground(Color.green);
-                break; 
-            case "2D":
-                boton49.setEnabled(true);
-                boton49.setOpaque(true);
-                boton49.setBackground(Color.green);
-                boton72.setEnabled(true);
-                boton72.setOpaque(true);
-                boton72.setBackground(Color.green);
-                break; 
-            case "4C":
-                boton64.setEnabled(true);
-                boton64.setOpaque(true);
-                boton64.setBackground(Color.green);
-                boton82.setEnabled(true);
-                boton82.setOpaque(true);
-                boton82.setBackground(Color.green);
-                break; 
-            case "3S":
-                boton15.setEnabled(true);
-                boton15.setOpaque(true);
-                boton15.setBackground(Color.green);
-                boton92.setEnabled(true);
-                boton92.setOpaque(true);
-                boton92.setBackground(Color.green);
-                break;
-            case "QD":
-                boton03.setEnabled(true);
-                boton03.setOpaque(true);
-                boton03.setBackground(Color.green);
-                boton37.setEnabled(true);
-                boton37.setOpaque(true);
-                boton37.setBackground(Color.green);
-                break;
-            case "5S":
-                boton13.setEnabled(true);
-                boton13.setOpaque(true);
-                boton13.setBackground(Color.green);
-                boton94.setEnabled(true);
-                boton94.setOpaque(true);
-                boton94.setBackground(Color.green);
-                break;
-            case "8H":
-                boton33.setEnabled(true);
-                boton33.setOpaque(true);
-                boton33.setBackground(Color.green);
-                boton68.setEnabled(true);
-                boton68.setOpaque(true);
-                boton68.setBackground(Color.green);
-                break;
-            case "7H":
-                boton43.setEnabled(true);
-                boton43.setOpaque(true);
-                boton43.setBackground(Color.green);
-                boton58.setEnabled(true);
-                boton58.setOpaque(true);
-                boton58.setBackground(Color.green);
-                break;
-            case "6H":
-                boton48.setEnabled(true);
-                boton48.setOpaque(true);
-                boton48.setBackground(Color.green);
-                boton53.setEnabled(true);
-                boton53.setOpaque(true);
-                boton53.setBackground(Color.green);
-                break;
-            case "3D":
-                boton39.setEnabled(true);
-                boton39.setOpaque(true);
-                boton39.setBackground(Color.green);
-                boton73.setEnabled(true);
-                boton73.setOpaque(true);
-                boton73.setBackground(Color.green);
-                break;
-            case "3C":
-                boton65.setEnabled(true);
-                boton65.setOpaque(true);
-                boton65.setBackground(Color.green);
-                boton83.setEnabled(true);
-                boton83.setOpaque(true);
-                boton83.setBackground(Color.green);
-                break;
-            case "4S":
-                boton14.setEnabled(true);
-                boton14.setOpaque(true);
-                boton14.setBackground(Color.green);
-                boton93.setEnabled(true);
-                boton93.setOpaque(true);
-                boton93.setBackground(Color.green);
-                break;
-            case "10D":
-                boton04.setEnabled(true);
-                boton04.setOpaque(true);
-                boton04.setBackground(Color.green);
-                boton47.setEnabled(true);
-                boton47.setOpaque(true);
-                boton47.setBackground(Color.green);
-                break;
-            case "9H":
-                boton34.setEnabled(true);
-                boton34.setOpaque(true);
-                boton34.setBackground(Color.green);
-                boton78.setEnabled(true);
-                boton78.setOpaque(true);
-                boton78.setBackground(Color.green);
-                break;
-            case "2H":
-                boton17.setEnabled(true);
-                boton17.setOpaque(true);
-                boton17.setBackground(Color.green);
-                boton44.setEnabled(true);
-                boton44.setOpaque(true);
-                boton44.setBackground(Color.green);
-                break;
-            case "5H":
-                boton38.setEnabled(true);
-                boton38.setOpaque(true);
-                boton38.setBackground(Color.green);
-                boton54.setEnabled(true);
-                boton54.setOpaque(true);
-                boton54.setBackground(Color.green);
-                break;
-            case "4D":
-                boton29.setEnabled(true);
-                boton29.setOpaque(true);
-                boton29.setBackground(Color.green);
-                boton74.setEnabled(true);
-                boton74.setOpaque(true);
-                boton74.setBackground(Color.green);
-                break;
-            case "2C":
-                boton66.setEnabled(true);
-                boton66.setOpaque(true);
-                boton66.setBackground(Color.green);
-                boton84.setEnabled(true);
-                boton84.setOpaque(true);
-                boton84.setBackground(Color.green);
-                break;
-            case "9D":
-                boton05.setEnabled(true);
-                boton05.setOpaque(true);
-                boton05.setBackground(Color.green);
-                boton57.setEnabled(true);
-                boton57.setOpaque(true);
-                boton57.setBackground(Color.green);
-                break;
-            case "10H":
-                boton35.setEnabled(true);
-                boton35.setOpaque(true);
-                boton35.setBackground(Color.green);
-                boton88.setEnabled(true);
-                boton88.setOpaque(true);
-                boton88.setBackground(Color.green);
-                break;
-            case "3H": 
-                boton18.setEnabled(true);
-                boton18.setOpaque(true);
-                boton18.setBackground(Color.green);
-                boton45.setEnabled(true);
-                boton45.setOpaque(true);
-                boton45.setBackground(Color.green);
-                break;
-            case "4H":
-                boton28.setEnabled(true);
-                boton28.setOpaque(true);
-                boton28.setBackground(Color.green);
-                boton55.setEnabled(true);
-                boton55.setOpaque(true);
-                boton55.setBackground(Color.green);
-                break;
-            case "5D":
-                boton19.setEnabled(true);
-                boton19.setOpaque(true);
-                boton19.setBackground(Color.green);
-                boton75.setEnabled(true);
-                boton75.setOpaque(true);
-                boton75.setBackground(Color.green);
-                break;
-            case "AH":
-                boton56.setEnabled(true);
-                boton56.setOpaque(true);
-                boton56.setBackground(Color.green);
-                boton85.setEnabled(true);
-                boton85.setOpaque(true);
-                boton85.setBackground(Color.green);
-                break;
-            case "8D":
-                boton06.setEnabled(true);
-                boton06.setOpaque(true);
-                boton06.setBackground(Color.green);
-                boton67.setEnabled(true);
-                boton67.setOpaque(true);
-                boton67.setBackground(Color.green);
-                break;
-            case "QH":
-                boton36.setEnabled(true);
-                boton36.setOpaque(true);
-                boton36.setBackground(Color.green);
-                boton87.setEnabled(true);
-                boton87.setOpaque(true);
-                boton87.setBackground(Color.green);
-                break;
-            case "KH":
-                boton46.setEnabled(true);
-                boton46.setOpaque(true);
-                boton46.setBackground(Color.green);
-                boton86.setEnabled(true);
-                boton86.setOpaque(true);
-                boton86.setBackground(Color.green);
-                break;
-            case "6D":
-                boton08.setEnabled(true);
-                boton08.setOpaque(true);
-                boton08.setBackground(Color.green);
-                boton76.setEnabled(true);
-                boton76.setOpaque(true);
-                boton76.setBackground(Color.green);
-                break;
-            case "7D":
-                boton07.setEnabled(true);
-                boton07.setOpaque(true);
-                boton07.setBackground(Color.green);
-                boton77.setEnabled(true);
-                boton77.setOpaque(true);
-                boton77.setBackground(Color.green);
-                break;
-            case "JD":
-                //carta especial
-                break;
-            case "JC":
-                //carta especial
-                break;
-            default:
-                System.out.println("No se reconocio la carta");
-        }      
-    }
-    //borrar resaltado de movimientos validos
-    public void EraseHighlight() {
-        for (int i = 0; i < 100; i++) {
-            botones[i].setOpaque(false);
-        }
-    }
-    //desactivar los botones que no tengan una ficha puesta (si se desactivan los que tienen una ficha puesta no se muestra el color de la ficha)
-    public void DesactivarBotones() {
-        for (int i = 0; i < 100; i++) {
-            if (botones[i].getIcon() == null)
-                botones[i].setEnabled(false);
-        }
-    }
-    //getter y setter para obtener la posicion del arreglo de botones de la baraja para saber a cual de las posiciones se le cambiara el icon
-    public void setPosicion(int pos) {
-        posicion = pos;
-    }
-    
-    public int getPosicion() {
-        return posicion;
-    }
-    
-    
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -1556,20 +867,23 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TABLERO.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ATABLEROCOLE.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TABLERO.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ATABLEROCOLE.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TABLERO.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ATABLEROCOLE.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TABLERO.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ATABLEROCOLE.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TABLERO(numjugadores).setVisible(true);
+                new ATABLEROCOLE(numjugadores).setVisible(true);
             }
         });
     }
@@ -1721,7 +1035,6 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
         ochojugadoresder = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1190, 802));
         setResizable(false);
         setSize(new java.awt.Dimension(1190, 802));
 
@@ -2644,241 +1957,31 @@ public class TABLERO extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_cuatrocartasboton4ActionPerformed
 
     private void sietecartasboton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sietecartasboton1ActionPerformed
-        // TODO add your handling code here:
-        switch (turnoJugador) {
-            case 'a':
-                JOptionPane.showMessageDialog(null, handCardID1[0]); //confirmar que se esta identificando correctamente la carta seleccionada de la baraja
-                EraseHighlight(); //en caso de que se selecciono una carta de la baraja pero luego se quiere usar otra carta se borran los movimientos validos de la carta seleccionada anteriormente
-                DesactivarBotones(); // se desactivan los botones donde no se puede colocar una ficha ya que no corresponde a la carta elegida
-                ActivarBotonesDisponibles(handCardID1[0]); //se usa de parametro el nombre de la carta para activar los botones validos
-                setPosicion(0); //identificar que carta de la baraja se cambiara
-                break;
-            case 'b':
-                JOptionPane.showMessageDialog(null, handCardID2[0]);
-                EraseHighlight();
-                DesactivarBotones();
-                ActivarBotonesDisponibles(handCardID2[0]);
-                setPosicion(0);
-                break;
-            case 'c':
-                JOptionPane.showMessageDialog(null, handCardID3[0]);
-                EraseHighlight();
-                DesactivarBotones();
-                ActivarBotonesDisponibles(handCardID3[0]);
-                setPosicion(0);
-                break;
-            case 'd':
-                JOptionPane.showMessageDialog(null, handCardID4[0]);
-                EraseHighlight();
-                DesactivarBotones();
-                ActivarBotonesDisponibles(handCardID4[0]);
-                setPosicion(0);
-                break;
-        }
+
     }//GEN-LAST:event_sietecartasboton1ActionPerformed
 
     private void sietecartasboton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sietecartasboton2ActionPerformed
-        // TODO add your handling code here:
-        switch (turnoJugador) {
-            case 'a':
-                JOptionPane.showMessageDialog(null, handCardID1[1]);
-                EraseHighlight();
-                DesactivarBotones();
-                ActivarBotonesDisponibles(handCardID1[1]);
-                setPosicion(1);
-                break;
-            case 'b':
-                JOptionPane.showMessageDialog(null, handCardID2[1]);
-                EraseHighlight();
-                DesactivarBotones();
-                ActivarBotonesDisponibles(handCardID2[1]);
-                setPosicion(1);
-                break;
-            case 'c':
-                JOptionPane.showMessageDialog(null, handCardID3[1]);
-                EraseHighlight();
-                DesactivarBotones();
-                ActivarBotonesDisponibles(handCardID3[1]);
-                setPosicion(1);
-                break;
-            case 'd':
-                JOptionPane.showMessageDialog(null, handCardID4[1]);
-                EraseHighlight();
-                DesactivarBotones();
-                ActivarBotonesDisponibles(handCardID4[1]);
-                setPosicion(1);
-                break;
-        }
+
     }//GEN-LAST:event_sietecartasboton2ActionPerformed
 
     private void sietecartasboton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sietecartasboton3ActionPerformed
-        // TODO add your handling code here:
-        switch (turnoJugador) {
-            case 'a':
-                JOptionPane.showMessageDialog(null, handCardID1[2]);
-                EraseHighlight();
-                DesactivarBotones();
-                ActivarBotonesDisponibles(handCardID1[2]);
-                setPosicion(2);
-                break;
-            case 'b':
-                JOptionPane.showMessageDialog(null, handCardID2[2]);
-                EraseHighlight();
-                DesactivarBotones();
-                ActivarBotonesDisponibles(handCardID2[2]);
-                setPosicion(2);
-                break;
-            case 'c':
-                JOptionPane.showMessageDialog(null, handCardID3[2]);
-                EraseHighlight();
-                DesactivarBotones();
-                ActivarBotonesDisponibles(handCardID3[2]);
-                setPosicion(2);
-                break;
-            case 'd':
-                JOptionPane.showMessageDialog(null, handCardID4[2]);
-                EraseHighlight();
-                DesactivarBotones();
-                ActivarBotonesDisponibles(handCardID4[2]);
-                setPosicion(2);
-                break;
-        }
+
     }//GEN-LAST:event_sietecartasboton3ActionPerformed
 
     private void sietecartasboton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sietecartasboton4ActionPerformed
-        // TODO add your handling code here:
-        switch (turnoJugador) {
-            case 'a':
-                JOptionPane.showMessageDialog(null, handCardID1[3]);
-                EraseHighlight();
-                DesactivarBotones();
-                ActivarBotonesDisponibles(handCardID1[3]);
-                setPosicion(3);
-                break;
-            case 'b':
-                JOptionPane.showMessageDialog(null, handCardID2[3]);
-                EraseHighlight();
-                DesactivarBotones();
-                ActivarBotonesDisponibles(handCardID2[3]);
-                setPosicion(3);
-                break;
-            case 'c':
-                JOptionPane.showMessageDialog(null, handCardID3[3]);
-                EraseHighlight();
-                DesactivarBotones();
-                ActivarBotonesDisponibles(handCardID3[3]);
-                setPosicion(3);
-                break;
-            case 'd':
-                JOptionPane.showMessageDialog(null, handCardID4[3]);
-                EraseHighlight();
-                DesactivarBotones();
-                ActivarBotonesDisponibles(handCardID4[3]);
-                setPosicion(3);
-                break;
-        }
+
     }//GEN-LAST:event_sietecartasboton4ActionPerformed
 
     private void sietecartasboton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sietecartasboton5ActionPerformed
-        // TODO add your handling code here:
-        switch (turnoJugador) {
-            case 'a':
-                JOptionPane.showMessageDialog(null, handCardID1[4]);
-                EraseHighlight();
-                DesactivarBotones();
-                ActivarBotonesDisponibles(handCardID1[4]);
-                setPosicion(4);
-                break;
-            case 'b':
-                JOptionPane.showMessageDialog(null, handCardID2[4]);
-                EraseHighlight();
-                DesactivarBotones();
-                ActivarBotonesDisponibles(handCardID2[4]);
-                setPosicion(4);
-                break;
-            case 'c':
-                JOptionPane.showMessageDialog(null, handCardID3[4]);
-                EraseHighlight();
-                DesactivarBotones();
-                ActivarBotonesDisponibles(handCardID3[4]);
-                setPosicion(4);
-                break;
-            case 'd':
-                JOptionPane.showMessageDialog(null, handCardID4[4]);
-                EraseHighlight();
-                DesactivarBotones();
-                ActivarBotonesDisponibles(handCardID4[4]);
-                setPosicion(4);
-                break;
-        }
+
     }//GEN-LAST:event_sietecartasboton5ActionPerformed
 
     private void sietecartasboton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sietecartasboton6ActionPerformed
-        // TODO add your handling code here:
-        switch (turnoJugador) {
-            case 'a':
-                JOptionPane.showMessageDialog(null, handCardID1[5]);
-                EraseHighlight();
-                DesactivarBotones();
-                ActivarBotonesDisponibles(handCardID1[5]);
-                setPosicion(5);
-                break;
-            case 'b':
-                JOptionPane.showMessageDialog(null, handCardID2[5]);
-                EraseHighlight();
-                DesactivarBotones();
-                ActivarBotonesDisponibles(handCardID2[5]);
-                setPosicion(5);
-                break;
-            case 'c':
-                JOptionPane.showMessageDialog(null, handCardID3[5]);
-                EraseHighlight();
-                DesactivarBotones();
-                ActivarBotonesDisponibles(handCardID3[5]);
-                setPosicion(5);
-                break;
-            case 'd':
-                JOptionPane.showMessageDialog(null, handCardID4[5]);
-                EraseHighlight();
-                DesactivarBotones();
-                ActivarBotonesDisponibles(handCardID4[5]);
-                setPosicion(5);
-                break;
-        }
+
     }//GEN-LAST:event_sietecartasboton6ActionPerformed
 
     private void sietecartasboton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sietecartasboton7ActionPerformed
-        // TODO add your handling code here:
-        switch (turnoJugador) {
-            case 'a':
-                JOptionPane.showMessageDialog(null, handCardID1[6]);
-                EraseHighlight();
-                DesactivarBotones();
-                ActivarBotonesDisponibles(handCardID1[6]);
-                setPosicion(6);
-                break;
-            case 'b':
-                JOptionPane.showMessageDialog(null, handCardID2[6]);
-                EraseHighlight();
-                DesactivarBotones();
-                ActivarBotonesDisponibles(handCardID2[6]);
-                setPosicion(6);
-                break;
-            case 'c':
-                JOptionPane.showMessageDialog(null, handCardID3[6]);
-                EraseHighlight();
-                DesactivarBotones();
-                ActivarBotonesDisponibles(handCardID3[6]);
-                setPosicion(6);
-                break;
-            case 'd':
-                JOptionPane.showMessageDialog(null, handCardID4[6]);
-                EraseHighlight();
-                DesactivarBotones();
-                ActivarBotonesDisponibles(handCardID4[6]);
-                setPosicion(6);
-                break;
-        }
+
     }//GEN-LAST:event_sietecartasboton7ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

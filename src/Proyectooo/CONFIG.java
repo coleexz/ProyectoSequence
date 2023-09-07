@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Nuestro;
+package Proyectooo;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -61,7 +61,6 @@ public class CONFIG extends javax.swing.JFrame implements ActionListener{
         VOLVER = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 800));
 
         jLabel1.setText("BIENVENIDO AL MENU DE REPORTES");
 

@@ -1,4 +1,4 @@
-package Nuestro;
+package Proyectooo;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,6 +7,7 @@ import java.util.Date;
 public class Player extends Userr {
     
     public static ArrayList<Player> users = new ArrayList();
+   String acum;
     public static String UsuarioLogeado;
     String[] fechas;
     
@@ -102,6 +103,7 @@ public class Player extends Userr {
                 String pass = LOGIN.raf.readUTF();
                 char color = LOGIN.raf.readChar();
                 addUser(user, pass, color);
+                
             }
         } catch (IOException e) {
             System.out.println("Error. No se pudieron cargar los usuarios");

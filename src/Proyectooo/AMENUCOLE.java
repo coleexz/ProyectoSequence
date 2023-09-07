@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Nuestro;
+package Proyectooo;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -17,7 +17,7 @@ import javax.swing.JPanel;
  *
  * @author AdminColeexz
  */
-public class MENUPRINCIPAL extends JFrame implements ActionListener {
+public class AMENUCOLE extends JFrame implements ActionListener {
     JPanel panelMenu = new JPanel();
     JButton botonConfiguracion = new JButton();
     JButton botonJugar = new JButton();
@@ -25,7 +25,7 @@ public class MENUPRINCIPAL extends JFrame implements ActionListener {
     JButton botonLogout = new JButton();
     JLabel lblMenu = new JLabel();
 
-    public MENUPRINCIPAL(){
+    public AMENUCOLE(){
         setSize(500,500);
         setLocationRelativeTo(null);
         setResizable(false);
