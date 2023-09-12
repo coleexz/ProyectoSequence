@@ -5,15 +5,13 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Player extends Userr {
-    
+
     public static ArrayList<Player> users = new ArrayList();
-   String acum;
     public static String UsuarioLogeado;
     String[] fechas;
-    
-    
-    public Player(String _user, String _pass, int _puntos,char color) {
-        super(_user, _pass, _puntos,color);
+
+    public Player(String _user, String _pass, int _puntos, String color) {
+        super(_user, _pass, _puntos, color);
     }
 
     public String getUser() {
@@ -35,16 +33,19 @@ public class Player extends Userr {
     public int getPuntos() {
         return puntos;
     }
-    
-     public char getColor(){
+
+    public String getColor() {
         return color;
     }
-  
-    public void setColor(char color){
+
+    public void setColor(String color) {
         this.color = color;
     }
 
-    
+    public ArrayList<Player> getUsers() {
+        return users;
+    }
+
     public static Player buscarUser(String _user) {
         for (Player player : users) {
             if (player.getUser().equals(_user)) {
@@ -65,23 +66,26 @@ public class Player extends Userr {
         }
     }
 
-    public static void addUser(String _user, String _pass,char color) {
+    public static void addUser(String _user, String _pass, String color) {
         if (buscarUser(_user) == null) {
-            users.add(new Player(_user, _pass, 0,color));
+            users.add(new Player(_user, _pass, 0, color));
         }
     }
+
     //obtener fecha de creacion del user
-    public Date getfECHA(){
-        Date fecha=new Date();
+    public Date getfECHA() {
+        Date fecha = new Date();
         return fecha;
     }
+
     //mostrar los logs
-    public void Logs (String fecha, String jugador1, String jugador2, String resultado) {
+    public void Logs(String fecha, String jugador1, String jugador2, String resultado) {
         String[] nuevoArreglo = new String[fechas.length + 1];
         System.arraycopy(fechas, 0, nuevoArreglo, 0, fechas.length);
-        nuevoArreglo[fechas.length] = (fechas.length)+" "+fecha+"  Jugador1: "+jugador1+"  Jugador2: "+jugador2+"  Resultado: "+resultado;
+        nuevoArreglo[fechas.length] = (fechas.length) + " " + fecha + "  Jugador1: " + jugador1 + "  Jugador2: " + jugador2 + "  Resultado: " + resultado;
         fechas = nuevoArreglo;
     }
+
     //guarda el usuario en el archivo que se creo
     public static void saveUsersToFile(String filename) {
         try {
@@ -89,25 +93,26 @@ public class Player extends Userr {
             for (Player player : users) {
                 LOGIN.raf.writeUTF(player.getUser());
                 LOGIN.raf.writeUTF(player.getPass());
-                LOGIN.raf.writeChar(player.getColor());
+                LOGIN.raf.writeUTF(player.getColor());
             }
         } catch (IOException e) {
             System.out.println("Error. No se pudo guardar el usuario");
         }
     }
+
     //carga los usuarios creados y guardados en el archivo
-    public static void loadUsersFromFile(String filename) {
+    public static void loadUsersFromFile(String filename) throws IOException {
+        System.out.println(LOGIN.raf.getFilePointer());
         try {
             while (LOGIN.raf.getFilePointer() < LOGIN.raf.length()) {
                 String user = LOGIN.raf.readUTF();
                 String pass = LOGIN.raf.readUTF();
-                char color = LOGIN.raf.readChar();
+                String color = LOGIN.raf.readUTF();
                 addUser(user, pass, color);
-                
+
             }
         } catch (IOException e) {
             System.out.println("Error. No se pudieron cargar los usuarios");
         }
     }
 }
-

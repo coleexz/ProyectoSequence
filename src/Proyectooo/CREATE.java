@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -137,8 +139,14 @@ public class CREATE extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == botonRegresar) {
-            LOGIN login = new LOGIN();
-            login.setVisible(true);
+            LOGIN login;
+            try {
+                login = new LOGIN();
+                login.setVisible(true);
+            } catch (IOException ex) {
+                Logger.getLogger(CREATE.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             this.dispose();
         }
         
@@ -152,22 +160,21 @@ public class CREATE extends JFrame implements ActionListener{
                 String username=userfield.getText();
                 String password=passwordfield.getText();
                 String confirmarpassword = confirmarpasswordfield.getText();
-                char cha = 'k';
+                String color = "";
+                
 
                 if(Player.buscarUser(username) == null){
                     if (password.equals(confirmarpassword)){
-                        Player.addUser(username, password, cha);
+                        Player.addUser(username, password, color);
                         Player.UsuarioLogeado = username;
                         
                         Player.saveUsersToFile("Users/users.usr");
                         
                         JOptionPane.showMessageDialog(null, "Se ha registrado el usuario");
-
-                        MENUPRINCIPAL menu=new MENUPRINCIPAL();
-                        menu.setVisible(true);
+                        JOptionPane.showMessageDialog(this,"vuelva al menu de login para ingresar con su nuevo usuario");
                         userfield.setText("");
                         passwordfield.setText("");
-                        this.dispose();
+                        
                     } else {
                         lblEscondidaPassword.setText("No coincide con la contrasena");
                         confirmarpasswordfield.setText("");

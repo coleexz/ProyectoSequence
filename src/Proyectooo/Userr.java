@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public abstract class Userr implements IUser {
     protected String user,pass;
-    protected char color;
+    protected String color;
     protected int puntos;
     protected static ArrayList<String> juegos;
 
-    public Userr(String _user, String _pass, int _puntos,char color) {
+    public Userr(String _user, String _pass, int _puntos,String color) {
         this.user = _user;
         this.pass = _pass;
         this.puntos = _puntos;
@@ -44,12 +44,16 @@ public abstract class Userr implements IUser {
         this.puntos += 3;
     }
     
-    public char getColor(){
+    public String getColor(){
         return color;
     }
   
-    public void setColor(char color){
+    public void setColor(String color){
         this.color = color;
+    }
+    
+    public String toString(){
+       return "user: "+user +" pass: "+pass+" color : "+color+" puntos: "+puntos;
     }
      
 }

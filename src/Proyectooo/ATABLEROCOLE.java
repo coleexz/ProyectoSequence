@@ -4,12 +4,14 @@
  */
 package Proyectooo;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.concurrent.ScheduledExecutorService;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -21,53 +23,64 @@ import javax.swing.JOptionPane;
 public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
     private String tableroIconos[][] = new String[10][10]; //tablero para verificar que si los iconos son del compañero o no
-    private String tableroCartas[][] = new String[10][10]; //tablero para conseguir las cartas y verificar si son cartas especiales
     private ArrayList<ImageIcon> imagenes = new ArrayList();
 
-    char turnoJugador = 'a';
+    boolean victoria = false;
+    static char turnoJugador = 'a';
     String posColocar = "";
-    public static int numjugadores = 4;
-    private Player jugadores[];
+    public static int numjugadores;
+
+    public static ArrayList<Player> players = new ArrayList();
+    public static ArrayList<SequencePlayer> seqplayers = new ArrayList();
 
     ImageIcon redToken = new javax.swing.ImageIcon(getClass().getResource("/tokens/redToken.png"));
     ImageIcon blueToken = new javax.swing.ImageIcon(getClass().getResource("/tokens/blueToken.png"));
     ImageIcon yellowToken = new javax.swing.ImageIcon(getClass().getResource("/tokens/yellowToken.png"));
     ImageIcon greenToken = new javax.swing.ImageIcon(getClass().getResource("/tokens/greenToken.png"));
 
-   
-    //array para cargar las imagenes de la baraja
-    private ImageIcon[][] handCardImages = {
-        {new javax.swing.ImageIcon(getClass().getResource("/handCards/JS.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/AC.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/KC.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/QC.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/10C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/9C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/8C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/7C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/6C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/JH.png"))},
-        {new javax.swing.ImageIcon(getClass().getResource("/handCards/AD.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/7S.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/8S.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/9S.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/10S.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/QS.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/KS.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/AS.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/5C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/2S.png"))},
-        {new javax.swing.ImageIcon(getClass().getResource("/handCards/KD.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/6S.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/10C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/9C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/8C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/7C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/6C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/2D.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/4C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/3S.png"))},
-        {new javax.swing.ImageIcon(getClass().getResource("/handCards/QD.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/5S.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/QC.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/8H.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/7H.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/6H.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/5C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/3D.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/3C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/4S.png"))},
-        {new javax.swing.ImageIcon(getClass().getResource("/handCards/10D.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/4S.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/KC.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/9H.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/2H.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/5H.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/4C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/4D.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/2C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/5S.png"))},
-        {new javax.swing.ImageIcon(getClass().getResource("/handCards/9D.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/3S.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/AC.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/10H.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/3H.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/4H.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/3C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/5D.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/AH.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/6S.png"))},
-        {new javax.swing.ImageIcon(getClass().getResource("/handCards/8D.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/2S.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/AD.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/QH.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/KH.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/AH.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/2C.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/6D.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/KH.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/7S.png"))},
-        {new javax.swing.ImageIcon(getClass().getResource("/handCards/7D.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/2H.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/KD.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/QD.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/10D.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/9D.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/8D.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/7D.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/QH.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/8S.png"))},
-        {new javax.swing.ImageIcon(getClass().getResource("/handCards/6D.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/3H.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/4H.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/5H.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/6H.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/7H.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/8H.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/9H.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/10H.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/9S.png"))},
-        {new javax.swing.ImageIcon(getClass().getResource("/handCards/JD.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/5D.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/4D.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/3D.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/2D.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/AS.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/KS.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/QS.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/10S.png")), new javax.swing.ImageIcon(getClass().getResource("/handCards/JC.png"))}
-    };
-    //arreglo de los nombres de las cartas en el mismo orden del arreglo de las imagenes para luego identificar que carta se selecciono de la baraja
-    private String[][] handCardNames = {
-        {"JS", "AC", "KC", "QC", "10C", "9C", "8C", "7C", "6C", "JH"},
-        {"AD", "7S", "8S", "9S", "10S", "QS", "KS", "AS", "5C", "2S"},
-        {"KD", "6S", "10C", "9C", "8C", "7C", "6C", "2D", "4C", "3S"},
-        {"QD", "5S", "QC", "8H", "7H", "6H", "5C", "3D", "3C", "4S"},
-        {"10D", "4S", "KC", "9H", "2H", "5H", "4C", "4D", "2C", "5S"},
-        {"9D", "3S", "AC", "10H", "3H", "4H", "3C", "5D", "AH", "6S"},
-        {"8D", "2S", "AD", "QH", "KH", "AH", "2C", "6D", "KH", "7S"},
-        {"7D", "2H", "KD", "QD", "10D", "9D", "8D", "7D", "QH", "8S"},
-        {"6D", "3H", "4H", "5H", "6H", "7H", "8H", "9H", "10H", "9S"},
-        {"JD", "5D", "4D", "3D", "2D", "AS", "KS", "QS", "10S", "JC"}
-    };
+    Random rand = new Random();
 
-   
+    /*
+    
+    POR HACER
+    
+    PODER VALIDAR CON QUIEN ME VOY A IR
+    
+    HACER BOTON PARA SALIR DEL TABLERO
+    
+    HACER MAS COLORES
+    
+    CAMBIAR LO DE LA CANTIDAD DE JUGADORES DEL COMBO BOX
+    
+    HACER TIMER
+    
+     */
+    //array para cargar las imagenes de la baraja
+    private ArrayList<ImageIcon> cartas = new ArrayList();
+
+    private String[][] handCardNames = {
+        {"null", "2S", "3S", "4S", "5S", "6S", "7S", "8S", "9S", "null"},
+        {"6C", "5C", "4C", "3C", "2C", "AH", "KH", "QH", "10H", "10S"},
+        {"7C", "AS", "2D", "3D", "4D", "5D", "6D", "7D", "9H", "QS"},
+        {"8C", "KS", "6C", "5C", "4C", "3C", "2C", "8D", "8H", "KS"},
+        {"9C", "QS", "7C", "6H", "5H", "4H", "AH", "9D", "7H", "AS"},
+        {"10C", "10S", "8C", "7H", "2H", "3H", "KH", "10D", "6H", "2D"},
+        {"QC", "9S", "9C", "8H", "9H", "10H", "QH", "QD", "5H", "3D"},
+        {"KC", "8S", "10C", "QC", "KC", "AC", "AD", "KD", "4H", "4D"},
+        {"AC", "7S", "6S", "5S", "4S", "3S", "2S", "2H", "3H", "5D"},
+        {"null", "AD", "KD", "QD", "10D", "9D", "8D", "7D", "6D", "null"},};
+
     public ATABLEROCOLE(int numjugadores) {
+        cambiarBarajas();
+        cambiarNombreLabels();
+        agregarImagenes();
+
         initComponents();
         pack();
         setLocationRelativeTo(null);
         setResizable(false);
+
+        this.numjugadores = numjugadores;
 
         cuatrocartas.setVisible(false);
         cincocartas.setVisible(false);
@@ -78,7 +91,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         tresjugadoresizq.setVisible(false);
         cuatrojugadoresizq.setVisible(false);
         seisjugadoresizq.setVisible(false);
-        ochojugadoresizq.setVisible(false);
+        dosjugadoresizq.setVisible(false);
 
         dosjugadoresder.setVisible(false);
         tresjugadoresder.setVisible(false);
@@ -86,9 +99,357 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         seisjugadoresder.setVisible(false);
         ochojugadoresder.setVisible(false);
 
-        agregarAcciones();
+        //vacia el array
+        resizeImages();
         vaciarTablero();
+        generarJugadores();
         habilitarPaneles();
+        agregarAcciones();
+        cambiarBarajas();
+        JOptionPane.showMessageDialog(this, "Turno de : " + seqplayers.get(0).getName());
+
+        cambiarBarajas();
+        cambiarNombreLabels();
+    }
+
+    public void agregarImagenes() {
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/10D.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/10D.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/10C.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/10C.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/10H.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/10H.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/10S.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/10S.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/2C.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/2C.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/2D.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/2D.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/2H.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/2H.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/2S.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/2S.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/3C.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/3C.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/3H.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/3H.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/3S.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/3S.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/3D.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/3D.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/4C.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/4C.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/4D.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/4D.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/4H.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/4H.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/4S.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/4S.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/5C.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/5C.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/5D.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/5D.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/5H.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/5H.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/5S.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/5S.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/6C.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/6C.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/6D.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/6D.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/6H.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/6H.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/6S.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/6S.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/7C.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/7C.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/7D.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/7D.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/7H.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/7H.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/7S.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/7S.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/8C.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/8C.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/8D.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/8D.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/8H.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/8H.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/8S.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/8S.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/9C.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/9C.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/9D.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/9D.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/9H.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/9H.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/9S.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/9S.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/AC.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/AC.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/AD.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/AD.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/AH.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/AH.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/AS.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/AS.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/JC.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/JC.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/JD.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/JD.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/JH.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/JH.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/JS.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/JS.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/KC.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/KC.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/KD.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/KD.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/KH.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/KH.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/KS.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/KS.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/QC.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/QC.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/QD.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/QD.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/QH.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/QH.png")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/QS.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/QS.png")));
+
+        System.out.println(cartas.size());
+    }
+
+    public void cambiarBarajas() {
+        switch (numjugadores) {
+            case 2:
+                if (turnoJugador == 'a') {
+                    sietecartasboton1.setIcon(seqplayers.get(0).cartas.get(0));
+                    sietecartasboton2.setIcon(seqplayers.get(0).cartas.get(1));
+                    sietecartasboton3.setIcon(seqplayers.get(0).cartas.get(2));
+                    sietecartasboton4.setIcon(seqplayers.get(0).cartas.get(3));
+                    sietecartasboton5.setIcon(seqplayers.get(0).cartas.get(4));
+                    sietecartasboton6.setIcon(seqplayers.get(0).cartas.get(5));
+                    sietecartasboton7.setIcon(seqplayers.get(0).cartas.get(6));
+                } else if (turnoJugador == 'b') {
+                    sietecartasboton1.setIcon(seqplayers.get(1).cartas.get(0));
+                    sietecartasboton2.setIcon(seqplayers.get(1).cartas.get(1));
+                    sietecartasboton3.setIcon(seqplayers.get(1).cartas.get(2));
+                    sietecartasboton4.setIcon(seqplayers.get(1).cartas.get(3));
+                    sietecartasboton5.setIcon(seqplayers.get(1).cartas.get(4));
+                    sietecartasboton6.setIcon(seqplayers.get(1).cartas.get(5));
+                    sietecartasboton7.setIcon(seqplayers.get(1).cartas.get(6));
+                }
+                break;
+
+            case 3:
+                if (turnoJugador == 'a') {
+                    seiscartasboton1.setIcon(seqplayers.get(0).cartas.get(0));
+                    seiscartasboton2.setIcon(seqplayers.get(0).cartas.get(1));
+                    seiscartasboton3.setIcon(seqplayers.get(0).cartas.get(2));
+                    seiscartasboton4.setIcon(seqplayers.get(0).cartas.get(3));
+                    seiscartasboton5.setIcon(seqplayers.get(0).cartas.get(4));
+                    seiscartasboton6.setIcon(seqplayers.get(0).cartas.get(5));
+                } else if (turnoJugador == 'b') {
+                    seiscartasboton1.setIcon(seqplayers.get(1).cartas.get(0));
+                    seiscartasboton2.setIcon(seqplayers.get(1).cartas.get(1));
+                    seiscartasboton3.setIcon(seqplayers.get(1).cartas.get(2));
+                    seiscartasboton4.setIcon(seqplayers.get(1).cartas.get(3));
+                    seiscartasboton5.setIcon(seqplayers.get(1).cartas.get(4));
+                    seiscartasboton6.setIcon(seqplayers.get(1).cartas.get(5));
+                } else if (turnoJugador == 'c') {
+                    seiscartasboton1.setIcon(seqplayers.get(2).cartas.get(0));
+                    seiscartasboton2.setIcon(seqplayers.get(2).cartas.get(1));
+                    seiscartasboton3.setIcon(seqplayers.get(2).cartas.get(2));
+                    seiscartasboton4.setIcon(seqplayers.get(2).cartas.get(3));
+                    seiscartasboton5.setIcon(seqplayers.get(2).cartas.get(4));
+                    seiscartasboton6.setIcon(seqplayers.get(2).cartas.get(5));
+                }
+                break;
+
+            case 4:
+                if (turnoJugador == 'a') {
+                    sietecartasboton1.setIcon(seqplayers.get(0).cartas.get(0));
+                    sietecartasboton2.setIcon(seqplayers.get(0).cartas.get(1));
+                    sietecartasboton3.setIcon(seqplayers.get(0).cartas.get(2));
+                    sietecartasboton4.setIcon(seqplayers.get(0).cartas.get(3));
+                    sietecartasboton5.setIcon(seqplayers.get(0).cartas.get(4));
+                    sietecartasboton6.setIcon(seqplayers.get(0).cartas.get(5));
+                    sietecartasboton7.setIcon(seqplayers.get(0).cartas.get(6));
+                } else if (turnoJugador == 'b') {
+                    sietecartasboton1.setIcon(seqplayers.get(1).cartas.get(0));
+                    sietecartasboton2.setIcon(seqplayers.get(1).cartas.get(1));
+                    sietecartasboton3.setIcon(seqplayers.get(1).cartas.get(2));
+                    sietecartasboton4.setIcon(seqplayers.get(1).cartas.get(3));
+                    sietecartasboton5.setIcon(seqplayers.get(1).cartas.get(4));
+                    sietecartasboton6.setIcon(seqplayers.get(1).cartas.get(5));
+                    sietecartasboton7.setIcon(seqplayers.get(1).cartas.get(6));
+                } else if (turnoJugador == 'c') {
+                    sietecartasboton1.setIcon(seqplayers.get(2).cartas.get(0));
+                    sietecartasboton2.setIcon(seqplayers.get(2).cartas.get(1));
+                    sietecartasboton3.setIcon(seqplayers.get(2).cartas.get(2));
+                    sietecartasboton4.setIcon(seqplayers.get(2).cartas.get(3));
+                    sietecartasboton5.setIcon(seqplayers.get(2).cartas.get(4));
+                    sietecartasboton6.setIcon(seqplayers.get(2).cartas.get(5));
+                    sietecartasboton7.setIcon(seqplayers.get(2).cartas.get(6));
+                } else if (turnoJugador == 'd') {
+                    sietecartasboton1.setIcon(seqplayers.get(3).cartas.get(0));
+                    sietecartasboton2.setIcon(seqplayers.get(3).cartas.get(1));
+                    sietecartasboton3.setIcon(seqplayers.get(3).cartas.get(2));
+                    sietecartasboton4.setIcon(seqplayers.get(3).cartas.get(3));
+                    sietecartasboton5.setIcon(seqplayers.get(3).cartas.get(4));
+                    sietecartasboton6.setIcon(seqplayers.get(3).cartas.get(5));
+                    sietecartasboton7.setIcon(seqplayers.get(3).cartas.get(6));
+                }
+                break;
+
+            case 6:
+                if (turnoJugador == 'a') {
+                    cincocartasboton1.setIcon(seqplayers.get(0).cartas.get(0));
+                    cincocartasboton2.setIcon(seqplayers.get(0).cartas.get(1));
+                    cincocartasboton3.setIcon(seqplayers.get(0).cartas.get(2));
+                    cincocartasboton4.setIcon(seqplayers.get(0).cartas.get(3));
+                    cincocartasboton5.setIcon(seqplayers.get(0).cartas.get(4));
+                } else if (turnoJugador == 'b') {
+                    cincocartasboton1.setIcon(seqplayers.get(1).cartas.get(0));
+                    cincocartasboton2.setIcon(seqplayers.get(1).cartas.get(1));
+                    cincocartasboton3.setIcon(seqplayers.get(1).cartas.get(2));
+                    cincocartasboton4.setIcon(seqplayers.get(1).cartas.get(3));
+                    cincocartasboton5.setIcon(seqplayers.get(1).cartas.get(4));
+                } else if (turnoJugador == 'c') {
+                    cincocartasboton1.setIcon(seqplayers.get(2).cartas.get(0));
+                    cincocartasboton2.setIcon(seqplayers.get(2).cartas.get(1));
+                    cincocartasboton3.setIcon(seqplayers.get(2).cartas.get(2));
+                    cincocartasboton4.setIcon(seqplayers.get(2).cartas.get(3));
+                    cincocartasboton5.setIcon(seqplayers.get(2).cartas.get(4));
+                } else if (turnoJugador == 'd') {
+                    cincocartasboton1.setIcon(seqplayers.get(3).cartas.get(0));
+                    cincocartasboton2.setIcon(seqplayers.get(3).cartas.get(1));
+                    cincocartasboton3.setIcon(seqplayers.get(3).cartas.get(2));
+                    cincocartasboton4.setIcon(seqplayers.get(3).cartas.get(3));
+                    cincocartasboton5.setIcon(seqplayers.get(3).cartas.get(4));
+                } else if (turnoJugador == 'e') {
+                    cincocartasboton1.setIcon(seqplayers.get(4).cartas.get(0));
+                    cincocartasboton2.setIcon(seqplayers.get(4).cartas.get(1));
+                    cincocartasboton3.setIcon(seqplayers.get(4).cartas.get(2));
+                    cincocartasboton4.setIcon(seqplayers.get(4).cartas.get(3));
+                    cincocartasboton5.setIcon(seqplayers.get(4).cartas.get(4));
+                } else if (turnoJugador == 'f') {
+                    cincocartasboton1.setIcon(seqplayers.get(5).cartas.get(0));
+                    cincocartasboton2.setIcon(seqplayers.get(5).cartas.get(1));
+                    cincocartasboton3.setIcon(seqplayers.get(5).cartas.get(2));
+                    cincocartasboton4.setIcon(seqplayers.get(5).cartas.get(3));
+                    cincocartasboton5.setIcon(seqplayers.get(5).cartas.get(4));
+                }
+                break;
+
+            case 8:
+                if (turnoJugador == 'a') {
+                    cuatrocartasboton1.setIcon(seqplayers.get(0).cartas.get(0));
+                    cuatrocartasboton2.setIcon(seqplayers.get(0).cartas.get(1));
+                    cuatrocartasboton3.setIcon(seqplayers.get(0).cartas.get(2));
+                    cuatrocartasboton4.setIcon(seqplayers.get(0).cartas.get(3));
+                } else if (turnoJugador == 'b') {
+                    cuatrocartasboton1.setIcon(seqplayers.get(1).cartas.get(0));
+                    cuatrocartasboton2.setIcon(seqplayers.get(1).cartas.get(1));
+                    cuatrocartasboton3.setIcon(seqplayers.get(1).cartas.get(2));
+                    cuatrocartasboton4.setIcon(seqplayers.get(1).cartas.get(3));
+                } else if (turnoJugador == 'c') {
+                    cuatrocartasboton1.setIcon(seqplayers.get(2).cartas.get(0));
+                    cuatrocartasboton2.setIcon(seqplayers.get(2).cartas.get(1));
+                    cuatrocartasboton3.setIcon(seqplayers.get(2).cartas.get(2));
+                    cuatrocartasboton4.setIcon(seqplayers.get(2).cartas.get(3));
+                } else if (turnoJugador == 'd') {
+                    cuatrocartasboton1.setIcon(seqplayers.get(3).cartas.get(0));
+                    cuatrocartasboton2.setIcon(seqplayers.get(3).cartas.get(1));
+                    cuatrocartasboton3.setIcon(seqplayers.get(3).cartas.get(2));
+                    cuatrocartasboton4.setIcon(seqplayers.get(3).cartas.get(3));
+                } else if (turnoJugador == 'e') {
+                    cuatrocartasboton1.setIcon(seqplayers.get(4).cartas.get(0));
+                    cuatrocartasboton2.setIcon(seqplayers.get(4).cartas.get(1));
+                    cuatrocartasboton3.setIcon(seqplayers.get(4).cartas.get(2));
+                    cuatrocartasboton4.setIcon(seqplayers.get(4).cartas.get(3));
+                } else if (turnoJugador == 'f') {
+                    cuatrocartasboton1.setIcon(seqplayers.get(5).cartas.get(0));
+                    cuatrocartasboton2.setIcon(seqplayers.get(5).cartas.get(1));
+                    cuatrocartasboton3.setIcon(seqplayers.get(5).cartas.get(2));
+                    cuatrocartasboton4.setIcon(seqplayers.get(5).cartas.get(3));
+                } else if (turnoJugador == 'g') {
+                    cuatrocartasboton1.setIcon(seqplayers.get(6).cartas.get(0));
+                    cuatrocartasboton2.setIcon(seqplayers.get(6).cartas.get(1));
+                    cuatrocartasboton3.setIcon(seqplayers.get(6).cartas.get(2));
+                    cuatrocartasboton4.setIcon(seqplayers.get(6).cartas.get(3));
+                } else if (turnoJugador == 'h') {
+                    cuatrocartasboton1.setIcon(seqplayers.get(7).cartas.get(0));
+                    cuatrocartasboton2.setIcon(seqplayers.get(7).cartas.get(1));
+                    cuatrocartasboton3.setIcon(seqplayers.get(7).cartas.get(2));
+                    cuatrocartasboton4.setIcon(seqplayers.get(7).cartas.get(3));
+                }
+                break;
+        }
+    }
+
+    public void resizeImages() {
+        int width = 85; // Ancho deseado
+        int height = 118; // Alto deseado
+
+        for (int i = 0; i < cartas.size(); i++) {
+            Image img = cartas.get(i).getImage();
+            Image newImg = img.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
+            cartas.set(i, new ImageIcon(newImg));
+        }
 
         Image Rimg = redToken.getImage();
         Image RnewImg = Rimg.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
@@ -106,9 +467,351 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         Image GnewImg = Gimg.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
         greenToken = new ImageIcon(GnewImg);
 
-        JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
     }
-    //resize las imagenes de las cartas de las barajas
+
+    public static boolean buscarUsuario(String nombre) {
+        for (Player p : players) {
+            if (p.getUser().equals(nombre)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void cambiarNombreLabels() {
+        int c = 0;
+        switch (numjugadores) {
+            case 2:
+                switch (turnoJugador) {
+                    case 'a':
+                        nombrejugadoractual.setText(seqplayers.get(0).getName());
+                        dosnombrejugador2.setText(seqplayers.get(1).getName());
+                        break;
+
+                    case 'b':
+                        nombrejugadoractual.setText(seqplayers.get(1).getName());
+                        dosnombrejugador2.setText(seqplayers.get(0).getName());
+                        break;
+                }
+                break;
+
+            case 3:
+                switch (turnoJugador) {
+                    case 'a':
+                        nombrejugadoractual.setText(seqplayers.get(0).getName());
+                        tresnombrejugador2.setText(seqplayers.get(1).getName());
+                        tresnombrejugador3.setText(seqplayers.get(2).getName());
+                        break;
+
+                    case 'b':
+                        nombrejugadoractual.setText(seqplayers.get(1).getName());
+                        tresnombrejugador2.setText(seqplayers.get(2).getName());
+                        tresnombrejugador3.setText(seqplayers.get(0).getName());
+                        break;
+
+                    case 'c':
+                        nombrejugadoractual.setText(seqplayers.get(2).getName());
+                        tresnombrejugador2.setText(seqplayers.get(0).getName());
+                        tresnombrejugador3.setText(seqplayers.get(1).getName());
+                        break;
+                }
+                break;
+
+            case 4:
+                switch (turnoJugador) {
+                    case 'a':
+                        nombrejugadoractual.setText(seqplayers.get(0).getName());
+                        cuatronombrejugador2.setText(seqplayers.get(1).getName());
+                        cuatronombrejugador3.setText(seqplayers.get(2).getName());
+                        cuatronombrejugador4.setText(seqplayers.get(3).getName());
+                        break;
+
+                    case 'b':
+                        nombrejugadoractual.setText(seqplayers.get(1).getName());
+                        cuatronombrejugador2.setText(seqplayers.get(2).getName());
+                        cuatronombrejugador3.setText(seqplayers.get(3).getName());
+                        cuatronombrejugador4.setText(seqplayers.get(0).getName());
+                        break;
+
+                    case 'c':
+                        nombrejugadoractual.setText(seqplayers.get(2).getName());
+                        cuatronombrejugador2.setText(seqplayers.get(3).getName());
+                        cuatronombrejugador3.setText(seqplayers.get(0).getName());
+                        cuatronombrejugador4.setText(seqplayers.get(1).getName());
+                        break;
+
+                    case 'd':
+                        nombrejugadoractual.setText(seqplayers.get(3).getName());
+                        cuatronombrejugador2.setText(seqplayers.get(0).getName());
+                        cuatronombrejugador3.setText(seqplayers.get(1).getName());
+                        cuatronombrejugador4.setText(seqplayers.get(2).getName());
+                        break;
+                }
+                break;
+
+            case 6:
+                switch (turnoJugador) {
+                    case 'a':
+                        nombrejugadoractual.setText(seqplayers.get(0).getName());
+                        seisnombrejugador2.setText(seqplayers.get(1).getName());
+                        seisnombrejugador3.setText(seqplayers.get(2).getName());
+                        seisnombrejugador4.setText(seqplayers.get(3).getName());
+                        seisnombrejugador5.setText(seqplayers.get(4).getName());
+                        seisnombrejugador6.setText(seqplayers.get(5).getName());
+                        break;
+
+                    case 'b':
+                        nombrejugadoractual.setText(seqplayers.get(1).getName());
+                        seisnombrejugador2.setText(seqplayers.get(2).getName());
+                        seisnombrejugador3.setText(seqplayers.get(3).getName());
+                        seisnombrejugador4.setText(seqplayers.get(4).getName());
+                        seisnombrejugador5.setText(seqplayers.get(5).getName());
+                        seisnombrejugador6.setText(seqplayers.get(0).getName());
+                        break;
+
+                    case 'c':
+                        nombrejugadoractual.setText(seqplayers.get(2).getName());
+                        seisnombrejugador2.setText(seqplayers.get(3).getName());
+                        seisnombrejugador3.setText(seqplayers.get(4).getName());
+                        seisnombrejugador4.setText(seqplayers.get(5).getName());
+                        seisnombrejugador5.setText(seqplayers.get(0).getName());
+                        seisnombrejugador6.setText(seqplayers.get(1).getName());
+                        break;
+
+                    case 'd':
+                        nombrejugadoractual.setText(seqplayers.get(3).getName());
+                        seisnombrejugador2.setText(seqplayers.get(4).getName());
+                        seisnombrejugador3.setText(seqplayers.get(5).getName());
+                        seisnombrejugador4.setText(seqplayers.get(0).getName());
+                        seisnombrejugador5.setText(seqplayers.get(1).getName());
+                        seisnombrejugador6.setText(seqplayers.get(2).getName());
+                        break;
+
+                    case 'e':
+                        nombrejugadoractual.setText(seqplayers.get(4).getName());
+                        seisnombrejugador2.setText(seqplayers.get(5).getName());
+                        seisnombrejugador3.setText(seqplayers.get(0).getName());
+                        seisnombrejugador4.setText(seqplayers.get(1).getName());
+                        seisnombrejugador5.setText(seqplayers.get(2).getName());
+                        seisnombrejugador6.setText(seqplayers.get(3).getName());
+                        break;
+
+                    case 'f':
+                        nombrejugadoractual.setText(seqplayers.get(5).getName());
+                        seisnombrejugador2.setText(seqplayers.get(0).getName());
+                        seisnombrejugador3.setText(seqplayers.get(1).getName());
+                        seisnombrejugador4.setText(seqplayers.get(2).getName());
+                        seisnombrejugador5.setText(seqplayers.get(3).getName());
+                        seisnombrejugador6.setText(seqplayers.get(4).getName());
+                        break;
+                }
+                break;
+
+            case 8:
+                switch (turnoJugador) {
+                    case 'a':
+                        nombrejugadoractual.setText(seqplayers.get(0).getName());
+                        ochonombrejugador2.setText(seqplayers.get(1).getName());
+                        ochonombrejugador3.setText(seqplayers.get(2).getName());
+                        ochonombrejugador4.setText(seqplayers.get(3).getName());
+                        ochonombrejugador5.setText(seqplayers.get(4).getName());
+                        ochonombrejugador6.setText(seqplayers.get(5).getName());
+                        ochonombrejugador7.setText(seqplayers.get(6).getName());
+                        ochonombrejugador8.setText(seqplayers.get(7).getName());
+                        break;
+
+                    case 'b':
+                        nombrejugadoractual.setText(seqplayers.get(1).getName());
+                        ochonombrejugador2.setText(seqplayers.get(2).getName());
+                        ochonombrejugador3.setText(seqplayers.get(3).getName());
+                        ochonombrejugador4.setText(seqplayers.get(4).getName());
+                        ochonombrejugador5.setText(seqplayers.get(5).getName());
+                        ochonombrejugador6.setText(seqplayers.get(6).getName());
+                        ochonombrejugador7.setText(seqplayers.get(7).getName());
+                        ochonombrejugador8.setText(seqplayers.get(0).getName());
+                        break;
+
+                    case 'c':
+                        nombrejugadoractual.setText(seqplayers.get(2).getName());
+                        ochonombrejugador2.setText(seqplayers.get(3).getName());
+                        ochonombrejugador3.setText(seqplayers.get(4).getName());
+                        ochonombrejugador4.setText(seqplayers.get(5).getName());
+                        ochonombrejugador5.setText(seqplayers.get(6).getName());
+                        ochonombrejugador6.setText(seqplayers.get(7).getName());
+                        ochonombrejugador7.setText(seqplayers.get(0).getName());
+                        ochonombrejugador8.setText(seqplayers.get(1).getName());
+                        break;
+
+                    case 'd':
+                        nombrejugadoractual.setText(seqplayers.get(3).getName());
+                        ochonombrejugador2.setText(seqplayers.get(4).getName());
+                        ochonombrejugador3.setText(seqplayers.get(5).getName());
+                        ochonombrejugador4.setText(seqplayers.get(6).getName());
+                        ochonombrejugador5.setText(seqplayers.get(7).getName());
+                        ochonombrejugador6.setText(seqplayers.get(0).getName());
+                        ochonombrejugador7.setText(seqplayers.get(1).getName());
+                        ochonombrejugador8.setText(seqplayers.get(2).getName());
+                        break;
+
+                    case 'e':
+                        nombrejugadoractual.setText(seqplayers.get(4).getName());
+                        ochonombrejugador2.setText(seqplayers.get(5).getName());
+                        ochonombrejugador3.setText(seqplayers.get(6).getName());
+                        ochonombrejugador4.setText(seqplayers.get(7).getName());
+                        ochonombrejugador5.setText(seqplayers.get(0).getName());
+                        ochonombrejugador6.setText(seqplayers.get(1).getName());
+                        ochonombrejugador7.setText(seqplayers.get(2).getName());
+                        ochonombrejugador8.setText(seqplayers.get(3).getName());
+                        break;
+
+                    case 'f':
+                        nombrejugadoractual.setText(seqplayers.get(5).getName());
+                        ochonombrejugador2.setText(seqplayers.get(6).getName());
+                        ochonombrejugador3.setText(seqplayers.get(7).getName());
+                        ochonombrejugador4.setText(seqplayers.get(0).getName());
+                        ochonombrejugador5.setText(seqplayers.get(1).getName());
+                        ochonombrejugador6.setText(seqplayers.get(2).getName());
+                        ochonombrejugador7.setText(seqplayers.get(3).getName());
+                        ochonombrejugador8.setText(seqplayers.get(4).getName());
+                        break;
+
+                    case 'g':
+                        nombrejugadoractual.setText(seqplayers.get(6).getName());
+                        ochonombrejugador2.setText(seqplayers.get(7).getName());
+                        ochonombrejugador3.setText(seqplayers.get(0).getName());
+                        ochonombrejugador4.setText(seqplayers.get(1).getName());
+                        ochonombrejugador5.setText(seqplayers.get(2).getName());
+                        ochonombrejugador6.setText(seqplayers.get(3).getName());
+                        ochonombrejugador7.setText(seqplayers.get(4).getName());
+                        ochonombrejugador8.setText(seqplayers.get(5).getName());
+                        break;
+
+                    case 'h':
+                        nombrejugadoractual.setText(seqplayers.get(7).getName());
+                        ochonombrejugador2.setText(seqplayers.get(0).getName());
+                        ochonombrejugador3.setText(seqplayers.get(1).getName());
+                        ochonombrejugador4.setText(seqplayers.get(2).getName());
+                        ochonombrejugador5.setText(seqplayers.get(3).getName());
+                        ochonombrejugador6.setText(seqplayers.get(4).getName());
+                        ochonombrejugador7.setText(seqplayers.get(5).getName());
+                        ochonombrejugador8.setText(seqplayers.get(6).getName());
+                        break;
+                }
+                break;
+        }
+    }
+
+    public void generarJugadores() {
+        int c = 0;
+        for (Player p : players) {
+            if (numjugadores == 2) {
+                if (c == 0) {
+                    // Agregar al jugador actual al equipo correspondiente
+                    SequencePlayer pl = new EquipoPropio(LOGIN.JUGADORACTUAL.getUser(), getFicha(LOGIN.JUGADORACTUAL.getColor()), generarBarajas(7), "0", LOGIN.JUGADORACTUAL.getPuntos());
+                    seqplayers.add(pl);
+                    c++;
+                } else {
+                    SequencePlayer pl = new Equipo2(p.getUser(), getFicha("rojo"), generarBarajas(7), "1", p.getPuntos());
+                    seqplayers.add(pl);
+                    c++;
+                }
+            } else if (numjugadores == 3) {
+                if (c == 0) {
+                    // Agregar al jugador actual al equipo correspondiente
+                    SequencePlayer pl = new EquipoPropio(LOGIN.JUGADORACTUAL.getUser(), getFicha(LOGIN.JUGADORACTUAL.getColor()), generarBarajas(6), "0", LOGIN.JUGADORACTUAL.getPuntos());
+                    seqplayers.add(pl);
+                    c++;
+                } else if (c == 1) {
+                    SequencePlayer pl = new Equipo2(p.getUser(), getFicha("rojo"), generarBarajas(6), "1", p.getPuntos());
+                    seqplayers.add(pl);
+                    c++;
+                } else if (c == 2) {
+                    SequencePlayer pl = new Equipo3(p.getUser(), getFicha("amarillo"), generarBarajas(6), "2", p.getPuntos());
+                    seqplayers.add(pl);
+                    c++;
+                }
+            } else if (numjugadores == 4) {
+                if (c == 0) {
+                    // Agregar al jugador actual al equipo correspondiente
+                    SequencePlayer pl = new EquipoPropio(LOGIN.JUGADORACTUAL.getUser(), getFicha(LOGIN.JUGADORACTUAL.getColor()), generarBarajas(7), "0", LOGIN.JUGADORACTUAL.getPuntos());
+                    seqplayers.add(pl);
+                    c++;
+                } else if (c == 1) {
+                    SequencePlayer pl = new EquipoPropio(p.getUser(), getFicha(MENUSWING.colorequipopropio), generarBarajas(7), "0", p.getPuntos());
+                    seqplayers.add(pl);
+                    c++;
+                } else if (c == 2 || c == 3) {
+                    SequencePlayer pl = new Equipo2(p.getUser(), getFicha("rojo"), generarBarajas(7), "1", p.getPuntos());
+                    seqplayers.add(pl);
+                    c++;
+                }
+            } else if (numjugadores == 6) {
+                if (c == 0) {
+                    // Agregar al jugador actual al equipo correspondiente
+                    SequencePlayer pl = new EquipoPropio(LOGIN.JUGADORACTUAL.getUser(), getFicha(LOGIN.JUGADORACTUAL.getColor()), generarBarajas(5), "0", LOGIN.JUGADORACTUAL.getPuntos());
+                    seqplayers.add(pl);
+                    c++;
+                } else if (c == 1) {
+                    // Agregar al jugador actual al equipo correspondiente
+                    SequencePlayer pl = new EquipoPropio(p.getUser(), getFicha(MENUSWING.colorequipopropio), generarBarajas(5), "0", p.getPuntos());
+                    seqplayers.add(pl);
+                    c++;
+                } else if (c == 2 || c == 3) {
+                    SequencePlayer pl = new Equipo2(p.getUser(), getFicha("rojo"), generarBarajas(5), "1", p.getPuntos());
+                    seqplayers.add(pl);
+                    c++;
+                } else if (c == 4 || c == 5) {
+                    SequencePlayer pl = new Equipo3(p.getUser(), getFicha("amarillo"), generarBarajas(5), "2", p.getPuntos());
+                    seqplayers.add(pl);
+                    c++;
+                }
+            } else if (numjugadores == 8) {
+                if (c == 0) {
+                    // Agregar al jugador actual al equipo correspondiente
+                    SequencePlayer pl = new EquipoPropio(LOGIN.JUGADORACTUAL.getUser(), getFicha(LOGIN.JUGADORACTUAL.getColor()), generarBarajas(4), "0", LOGIN.JUGADORACTUAL.getPuntos());
+                    seqplayers.add(pl);
+                    c++;
+                } else if (c == 1 || c == 2 || c == 3) {
+                    // Agregar al jugador actual al equipo correspondiente
+                    SequencePlayer pl = new EquipoPropio(p.getUser(), getFicha(MENUSWING.colorequipopropio), generarBarajas(4), "0", p.getPuntos());
+                    seqplayers.add(pl);
+                    c++;
+                } else if (c == 4 || c == 5 || c == 6 || c == 7) {
+                    SequencePlayer pl = new Equipo2(p.getUser(), getFicha("rojo"), generarBarajas(4), "1", p.getPuntos());
+                    seqplayers.add(pl);
+                    c++;
+                }
+            }
+
+        }
+    }
+
+    public ArrayList<ImageIcon> generarBarajas(int num) {
+        ArrayList<ImageIcon> baraja = new ArrayList();
+        int c = 0;
+        while (c < num) {
+            int i = rand.nextInt(cartas.size());
+            baraja.add(cartas.get(i));
+            c++;
+        }
+
+        return baraja;
+    }
+
+    public ImageIcon getFicha(String color) {
+        switch (color) {
+            case "rojo":
+                return redToken;
+            case "azul":
+                return blueToken;
+            case "verde":
+                return greenToken;
+            case "amarillo":
+                return yellowToken;
+            default:
+                return null;
+        }
+    }
 
     public void vaciarTablero() {
         for (int i = 0; i < 10; i++) {
@@ -145,7 +848,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
                 cincocartas.setVisible(true);
                 break;
             case 8:
-                ochojugadoresizq.setVisible(true);
+                dosjugadoresizq.setVisible(true);
                 ochojugadoresder.setVisible(true);
                 cuatrocartas.setVisible(true);
 
@@ -155,9 +858,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
     public boolean chequearIconoVacio(String pos) {
         int x = Integer.parseInt(Character.toString(pos.charAt(0)));
         int y = Integer.parseInt(Character.toString(pos.charAt(1)));
-
         return tableroIconos[x][y].equals("");
-
     }
 
     public boolean chequearCartaEspecial(String pos) {
@@ -191,7 +892,6 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
                 }
             }
         }
-
         return false;
     }
 
@@ -206,134 +906,341 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
             x += dx;
             y += dy;
         }
-
         return false;
+    }
+
+    public boolean validarBotonBaraja(ActionEvent e) {
+        if (e.getSource() == cuatrocartasboton1 || e.getSource() == cuatrocartasboton2 || e.getSource() == cuatrocartasboton3 || e.getSource() == cuatrocartasboton4
+                || e.getSource() == cincocartasboton1 || e.getSource() == cincocartasboton2 || e.getSource() == cincocartasboton3 || e.getSource() == cincocartasboton4 || e.getSource() == cincocartasboton5
+                || e.getSource() == seiscartasboton1 || e.getSource() == seiscartasboton2 || e.getSource() == seiscartasboton3 || e.getSource() == seiscartasboton4 || e.getSource() == seiscartasboton5 || e.getSource() == seiscartasboton6
+                || e.getSource() == sietecartasboton1 || e.getSource() == sietecartasboton2 || e.getSource() == sietecartasboton3 || e.getSource() == sietecartasboton4 || e.getSource() == sietecartasboton5 || e.getSource() == sietecartasboton6 || e.getSource() == sietecartasboton7) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean botonBaraja(ActionEvent e) {
+        if (validarBotonBaraja(e)) {
+            for (int i = 0; i < 10; i++) {
+                for (int j = 0; j < 10; j++) {
+                    deshabilitarBotones(getCords(i + "" + j));
+                }
+            }
+            if (getCords(e) == getCordsBaraja(e)) {
+                int x = Integer.valueOf(Character.toString(getCords(e.getSource()).charAt(0)));
+                int y = Integer.valueOf(Character.toString(getCords(e.getSource()).charAt(1)));
+                String boton = x + "" + y;
+
+                deshabilitarBotones(getBoton(boton).getText());
+                System.out.println(getCordsBaraja(e.getSource()));
+
+                System.out.println("coordenada buena");
+                return true;
+            } else {
+                System.out.println("coordenada mala");
+                return false;
+            }
+
+        } else {
+            System.out.println("validar incorrecto");
+            return false;
+        }
+
+    }
+
+    public String obtenerNombreCartaSeleccionada(ActionEvent e) {
+        int x = Integer.parseInt(Character.toString(getCordsBaraja(e.getSource()).charAt(0)));
+        int y = Integer.parseInt(Character.toString(getCordsBaraja(e.getSource()).charAt(1)));
+
+        // Obtén el botón de la baraja seleccionado
+        JButton botonBaraja = getBotonBaraja(x + "" + y);
+
+        // Obtén el icono del botón de la baraja
+        Icon icono = botonBaraja.getIcon();
+
+        if (icono instanceof ImageIcon) {
+            ImageIcon imageIcon = (ImageIcon) icono;
+
+            // Obtén la URL de la imagen directamente del recurso de la imagen
+            URL imageUrl = imageIcon.getClass().getResource(imageIcon.getDescription());
+
+            if (imageUrl != null) {
+                // Ahora, extrae el nombre del archivo de la URL
+                String nombreImagen = imageUrl.getPath(); // Esto incluirá la ruta completa del archivo
+
+                // Para obtener solo el nombre del archivo, puedes hacer lo siguiente:
+                int index = nombreImagen.lastIndexOf("/");
+                if (index >= 0) {
+                    nombreImagen = nombreImagen.substring(index + 1);
+                }
+
+                return nombreImagen;
+            } else {
+                System.err.println("URL de imagen nula");
+            }
+        } else {
+            System.err.println("El icono no es una instancia de ImageIcon");
+        }
+
+        return "No se pudo obtener el nombre de la imagen";
+    }
+
+    public void deshabilitarBotones(String carta) {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                JButton boton = getBoton(i + "" + j);
+                if (!boton.getText().equals(carta)) {
+                    boton.setEnabled(false);
+                } else {
+                    boton.setEnabled(true); // Habilita el botón correspondiente a la carta
+                    boton.setBackground(Color.GREEN);
+                    boton.setContentAreaFilled(true);
+                }
+            }
+        }
+    }
+
+    public void volverBotonesNormales() {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                getBoton(i + "" + j).setBackground(null);
+                getBoton(i + "" + j).setContentAreaFilled(false);
+            }
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int x = Integer.valueOf(Character.toString(getCords(e.getSource()).charAt(0)));
-        int y = Integer.valueOf(Character.toString(getCords(e.getSource()).charAt(1)));
-        posColocar = x + "" + y;
+        if (validarBotonBaraja(e)) {
+            obtenerNombreCartaSeleccionada(e);
+            // Obtén la carta seleccionada desde el botón de la baraja
 
-        switch (numjugadores) {
-            case 2:
+            // Deshabilita los botones del tablero que no coinciden con la carta seleccionada
+        } else {
+            int x = Integer.parseInt(Character.toString(getCords(e.getSource()).charAt(0)));
+            int y = Integer.parseInt(Character.toString(getCords(e.getSource()).charAt(1)));
+            posColocar = x + "" + y;
 
-            case 3:
+            cambiarBarajas();
 
-                break;
+            switch (numjugadores) {
+                case 2:
 
-            case 4:
+                case 3:
 
-                System.out.println(turnoJugador);
+                    break;
 
-                switch (turnoJugador) {
-                    case 'a':
-                        if (chequearIconoVacio(x + "" + y)) {
-                            getBoton(posColocar).setIcon(redToken);
-                            tableroIconos[x][y] = "r";
+                case 4:
+                    System.out.println(turnoJugador);
 
-                            turnoJugador = 'b';
-                            if (chequearGane("r") || chequearGane("b") || chequearGane("g") || chequearGane("y")) {
+                    switch (turnoJugador) {
+                        case 'a':
+                            cambiarBarajas();
+                            if (botonBaraja(e)) {
+                                System.out.println("ENTRO");
+                                if (chequearIconoVacio(x + "" + y)) {
+                                    getBoton(posColocar).setIcon(seqplayers.get(0).color);
+                                    tableroIconos[x][y] = "r";
 
-                                JOptionPane.showMessageDialog(this, "¡Terminó el juego!");
-                                System.exit(0);
+                                    turnoJugador = 'b';
+                                    cambiarNombreLabels();
+                                    JOptionPane.showMessageDialog(this, "Turno de : " + seqplayers.get(1).getName());
+                                    if (chequearGane("0") || chequearGane("1")) {
+
+                                        vaciarArray();
+                                        JOptionPane.showMessageDialog(this, "¡Terminó el juego!");
+                                        System.exit(0);
+                                    }
+
+                                } else {
+                                    JOptionPane.showMessageDialog(this, "Ya hay una fcha puesta");
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(this, "No es un botón de la baraja");
                             }
-                            //si se coloca una ficha se elimina la carta que se uso de la baraja y se coloca una nueva aleatoriamente
-                          
-                            //se borran las casillas disponibles y se desactivan todos los botones excepto los que ya tienen una ficha, ya hay un metodo que verifica que no se coloque otra ficha donde ya hay una asi que no afecta que quede el boton activo
+                            break;
 
-                            //se desaparece la baraja por un momento mientras el siguiente jugador comienza su turno para que nadie le vea sus cartas
-                            layeredpanecartas.setVisible(false);
-                            JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
-                           //se coloco una ficha, no se vuelve a llamar a set timer de nuevo dentro de si misma, solamente se desactivara para luego volverlo a activar
-                            ; //iniciar timer
-                            layeredpanecartas.setVisible(true); //se muestra la baraja de nuevo una vez que el siguiente jugador esta listo
-                        } else {
-                            JOptionPane.showMessageDialog(this, "Ya hay una fcha puesta");
-                        }
+                        case 'b':
+                            cambiarBarajas();
+                            if (chequearIconoVacio(x + "" + y)) {
+                                getBoton(posColocar).setIcon(seqplayers.get(1).color);
+                                tableroIconos[x][y] = "b";
 
-                        break;
+                                turnoJugador = 'c';
+                                cambiarNombreLabels();
+                                JOptionPane.showMessageDialog(this, "Turno de : " + seqplayers.get(2).getName());
+                                if (chequearGane("0") || chequearGane("1")) {
 
-                    case 'b':
-                        if (chequearIconoVacio(x + "" + y)) {
-                            getBoton(posColocar).setIcon(blueToken);
-                            tableroIconos[x][y] = "b";
+                                    vaciarArray();
+                                    JOptionPane.showMessageDialog(this, "¡Terminó el juego!");
+                                    System.exit(0);
+                                }
 
-                            turnoJugador = 'c';
-                            if (chequearGane("r") || chequearGane("b") || chequearGane("g") || chequearGane("y")) {
-
-                                JOptionPane.showMessageDialog(this, "¡Terminó el juego!");
-                                System.exit(0);
+                            } else {
+                                JOptionPane.showMessageDialog(this, "Ya hay una fcha puesta");
                             }
-                           
+                            break;
 
-                            layeredpanecartas.setVisible(false);
-                            JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
-                           
+                        case 'c':
+                            cambiarBarajas();
+                            if (chequearIconoVacio(x + "" + y)) {
+                                getBoton(posColocar).setIcon(seqplayers.get(2).color);
+                                tableroIconos[x][y] = "g";
 
-                            layeredpanecartas.setVisible(true);
-                        } else {
-                            JOptionPane.showMessageDialog(this, "Ya hay una fcha puesta");
-                        }
-                        break;
+                                turnoJugador = 'd';
+                                cambiarNombreLabels();
+                                JOptionPane.showMessageDialog(this, "Turno de : " + seqplayers.get(3).getName());
+                                if (chequearGane("r") || chequearGane("b")) {
 
-                    case 'c':
-                        if (chequearIconoVacio(x + "" + y)) {
-                            getBoton(posColocar).setIcon(greenToken);
-                            tableroIconos[x][y] = "g";
+                                    vaciarArray();
+                                    JOptionPane.showMessageDialog(this, "¡Terminó el juego!");
+                                    System.exit(0);
+                                }
 
-                            turnoJugador = 'd';
-                            if (chequearGane("r") || chequearGane("b") || chequearGane("g") || chequearGane("y")) {
-
-                                JOptionPane.showMessageDialog(this, "¡Terminó el juego!");
-                                System.exit(0);
+                            } else {
+                                JOptionPane.showMessageDialog(this, "Ya hay una fcha puesta");
                             }
-                           
+                            break;
 
-                            layeredpanecartas.setVisible(false);
-                            JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
-                          
-
-                            layeredpanecartas.setVisible(true);
-                        } else {
-                            JOptionPane.showMessageDialog(this, "Ya hay una fcha puesta");
-                        }
-                        break;
-
-                    case 'd':
-                        if (chequearIconoVacio(x + "" + y)) {
-                            getBoton(posColocar).setIcon(yellowToken);
-                            tableroIconos[x][y] = "y";
-
-                            turnoJugador = 'a';
-                            if (chequearGane("r") || chequearGane("b") || chequearGane("g") || chequearGane("y")) {
-
-                                JOptionPane.showMessageDialog(this, "¡Terminó el juego!");
-                                System.exit(0);
+                        case 'd':
+                            cambiarBarajas();
+                            if (seqplayers.size() >= 4) { // Verifica que haya al menos cuatro jugadores
+                                if (chequearIconoVacio(x + "" + y)) {
+                                    getBoton(posColocar).setIcon(seqplayers.get(3).color); // Accede al cuarto jugador
+                                    tableroIconos[x][y] = "y";
+                                    turnoJugador = 'a';
+                                    cambiarNombreLabels();
+                                    JOptionPane.showMessageDialog(this, "Turno de : " + seqplayers.get(0).getName());
+                                    if (chequearGane("r") || chequearGane("b")) {
+                                        vaciarArray();
+                                        JOptionPane.showMessageDialog(this, "¡Terminó el juego!");
+                                        System.exit(0);
+                                    }
+                                } else {
+                                    JOptionPane.showMessageDialog(this, "Ya hay una ficha puesta");
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(this, "No hay suficientes jugadores para el turno 'd'");
                             }
-                           
-                            layeredpanecartas.setVisible(false);
-                            JOptionPane.showMessageDialog(null, "Turno de: " + turnoJugador);
-                          
-                            layeredpanecartas.setVisible(true);
-                        } else {
-                            JOptionPane.showMessageDialog(this, "Ya hay una fcha puesta");
-                        }
-                        break;
+                            break;
+                    }
+                    break;
 
-                }
-                break;
+                case 6:
 
-            case 6:
+                    break;
 
-                break;
+                case 8:
 
-            case 8:
-
-                break;
+                    break;
+            }
         }
+    }
 
+    public void vaciarArray() {
+        players.clear();
+        seqplayers.clear();
+    }
+
+    public JButton getBotonBaraja(String posicion) {
+        switch (posicion) {
+            case "41":
+                return cuatrocartasboton1;
+            case "42":
+                return cuatrocartasboton2;
+            case "43":
+                return cuatrocartasboton3;
+            case "44":
+                return cuatrocartasboton4;
+            case "51":
+                return cincocartasboton1;
+            case "52":
+                return cincocartasboton2;
+            case "53":
+                return cincocartasboton3;
+            case "54":
+                return cincocartasboton4;
+            case "55":
+                return cincocartasboton5;
+            case "61":
+                return seiscartasboton1;
+            case "62":
+                return seiscartasboton2;
+            case "63":
+                return seiscartasboton3;
+            case "64":
+                return seiscartasboton4;
+            case "65":
+                return seiscartasboton5;
+            case "66":
+                return seiscartasboton6;
+            case "71":
+                return sietecartasboton1;
+            case "72":
+                return sietecartasboton2;
+            case "73":
+                return sietecartasboton3;
+            case "74":
+                return sietecartasboton4;
+            case "75":
+                return sietecartasboton5;
+            case "76":
+                return sietecartasboton6;
+            case "77":
+                return sietecartasboton7;
+            default:
+                return null;
+        }
+    }
+
+    public String getCordsBaraja(Object boton) {
+        if (boton == cuatrocartasboton1) {
+            return "41";
+        } else if (boton == cuatrocartasboton2) {
+            return "42";
+        } else if (boton == cuatrocartasboton3) {
+            return "43";
+        } else if (boton == cuatrocartasboton4) {
+            return "44";
+        } else if (boton == cincocartasboton1) {
+            return "51";
+        } else if (boton == cincocartasboton2) {
+            return "52";
+        } else if (boton == cincocartasboton3) {
+            return "53";
+        } else if (boton == cincocartasboton4) {
+            return "54";
+        } else if (boton == cincocartasboton5) {
+            return "55";
+        } else if (boton == seiscartasboton1) {
+            return "61";
+        } else if (boton == seiscartasboton2) {
+            return "62";
+        } else if (boton == seiscartasboton3) {
+            return "63";
+        } else if (boton == seiscartasboton4) {
+            return "64";
+        } else if (boton == seiscartasboton5) {
+            return "65";
+        } else if (boton == seiscartasboton6) {
+            return "66";
+        } else if (boton == sietecartasboton1) {
+            return "71";
+        } else if (boton == sietecartasboton2) {
+            return "72";
+        } else if (boton == sietecartasboton3) {
+            return "73";
+        } else if (boton == sietecartasboton4) {
+            return "74";
+        } else if (boton == sietecartasboton5) {
+            return "75";
+        } else if (boton == sietecartasboton6) {
+            return "76";
+        } else if (boton == sietecartasboton7) {
+            return "77";
+        } else {
+            return "";
+        }
     }
 
     //para conseguir las coordenadas de los botones despues de presionarlos y usarlas en el array
@@ -538,8 +1445,9 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
             return "98";
         } else if (boton == boton99) {
             return "99";
+        } else {
+            return "";
         }
-        return "";
     }
 
     //para conseguir el boton dependiendo de la poscion donde estoy, se utiliza para darle un icono al boton   
@@ -745,6 +1653,8 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
                 return boton98;
             case "99":
                 return boton99;
+            case "cuatro1":
+                return cuatrocartasboton1;
             default:
                 return null;
         }
@@ -851,6 +1761,32 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         boton97.addActionListener(this);
         boton98.addActionListener(this);
         boton99.addActionListener(this);
+
+        cuatrocartasboton1.addActionListener(this);
+        cuatrocartasboton2.addActionListener(this);
+        cuatrocartasboton3.addActionListener(this);
+        cuatrocartasboton4.addActionListener(this);
+
+        cincocartasboton1.addActionListener(this);
+        cincocartasboton2.addActionListener(this);
+        cincocartasboton3.addActionListener(this);
+        cincocartasboton4.addActionListener(this);
+        cincocartasboton5.addActionListener(this);
+
+        seiscartasboton1.addActionListener(this);
+        seiscartasboton2.addActionListener(this);
+        seiscartasboton3.addActionListener(this);
+        seiscartasboton4.addActionListener(this);
+        seiscartasboton5.addActionListener(this);
+        seiscartasboton6.addActionListener(this);
+
+        sietecartasboton1.addActionListener(this);
+        sietecartasboton2.addActionListener(this);
+        sietecartasboton3.addActionListener(this);
+        sietecartasboton4.addActionListener(this);
+        sietecartasboton5.addActionListener(this);
+        sietecartasboton6.addActionListener(this);
+        sietecartasboton7.addActionListener(this);
     }
 
     public static void main(String args[]) {
@@ -919,6 +1855,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         seiscartasboton4 = new javax.swing.JButton();
         seiscartasboton5 = new javax.swing.JButton();
         seiscartasboton6 = new javax.swing.JButton();
+        nombrejugadoractual = new javax.swing.JLabel();
         TABLERO = new javax.swing.JLayeredPane();
         boton00 = new javax.swing.JButton();
         boton01 = new javax.swing.JButton();
@@ -1023,16 +1960,62 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         jLabel1 = new javax.swing.JLabel();
         layeredpaneizq = new javax.swing.JLayeredPane();
         dosjugadoresizq = new javax.swing.JPanel();
+        dosnombrejugador2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         tresjugadoresizq = new javax.swing.JPanel();
+        tresnombrejugador3 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
         cuatrojugadoresizq = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        cuatronombrejugador3 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        cuatronombrejugador4 = new javax.swing.JLabel();
         seisjugadoresizq = new javax.swing.JPanel();
+        seisnombrejugador4 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        seisnombrejugador5 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        seisnombrejugador6 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
         ochojugadoresizq = new javax.swing.JPanel();
+        jLabel31 = new javax.swing.JLabel();
+        ochonombrejugador6 = new javax.swing.JLabel();
+        ochonombrejugador8 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        ochonombrejugador5 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        ochonombrejugador7 = new javax.swing.JLabel();
         layeredpaneder = new javax.swing.JLayeredPane();
         dosjugadoresder = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         tresjugadoresder = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        tresnombrejugador2 = new javax.swing.JLabel();
         cuatrojugadoresder = new javax.swing.JPanel();
-        seisjugadoresder = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        cuatronombrejugador2 = new javax.swing.JLabel();
         ochojugadoresder = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        ochonombrejugador2 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        ochonombrejugador3 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        ochonombrejugador4 = new javax.swing.JLabel();
+        seisjugadoresder = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        seisnombrejugador2 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        seisnombrejugador3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -1040,7 +2023,18 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         layeredpanecartas.setPreferredSize(new java.awt.Dimension(700, 202));
 
-        cincocartas.setBackground(new java.awt.Color(0, 0, 0));
+        cincocartas.setBackground(new java.awt.Color(255, 255, 255));
+        cincocartas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        cincocartasboton1.setContentAreaFilled(false);
+
+        cincocartasboton2.setContentAreaFilled(false);
+
+        cincocartasboton3.setContentAreaFilled(false);
+
+        cincocartasboton4.setContentAreaFilled(false);
+
+        cincocartasboton5.setContentAreaFilled(false);
 
         javax.swing.GroupLayout cincocartasLayout = new javax.swing.GroupLayout(cincocartas);
         cincocartas.setLayout(cincocartasLayout);
@@ -1069,11 +2063,19 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
                     .addComponent(cincocartasboton3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cincocartasboton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cincocartasboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        cuatrocartas.setBackground(new java.awt.Color(0, 0, 0));
+        cuatrocartas.setBackground(new java.awt.Color(255, 255, 255));
+        cuatrocartas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
+        cuatrocartasboton1.setContentAreaFilled(false);
+
+        cuatrocartasboton2.setContentAreaFilled(false);
+
+        cuatrocartasboton3.setContentAreaFilled(false);
+
+        cuatrocartasboton4.setContentAreaFilled(false);
         cuatrocartasboton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cuatrocartasboton4ActionPerformed(evt);
@@ -1104,47 +2106,55 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
                     .addComponent(cuatrocartasboton4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cuatrocartasboton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cuatrocartasboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        sietecartas.setBackground(new java.awt.Color(0, 0, 0));
+        sietecartas.setBackground(new java.awt.Color(255, 255, 255));
+        sietecartas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
+        sietecartasboton1.setContentAreaFilled(false);
         sietecartasboton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sietecartasboton1ActionPerformed(evt);
             }
         });
 
+        sietecartasboton2.setContentAreaFilled(false);
         sietecartasboton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sietecartasboton2ActionPerformed(evt);
             }
         });
 
+        sietecartasboton3.setContentAreaFilled(false);
         sietecartasboton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sietecartasboton3ActionPerformed(evt);
             }
         });
 
+        sietecartasboton4.setContentAreaFilled(false);
         sietecartasboton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sietecartasboton4ActionPerformed(evt);
             }
         });
 
+        sietecartasboton5.setContentAreaFilled(false);
         sietecartasboton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sietecartasboton5ActionPerformed(evt);
             }
         });
 
+        sietecartasboton6.setContentAreaFilled(false);
         sietecartasboton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sietecartasboton6ActionPerformed(evt);
             }
         });
 
+        sietecartasboton7.setContentAreaFilled(false);
         sietecartasboton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sietecartasboton7ActionPerformed(evt);
@@ -1184,10 +2194,29 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
                     .addComponent(sietecartasboton3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sietecartasboton2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sietecartasboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        seiscartas.setBackground(new java.awt.Color(0, 0, 0));
+        seiscartas.setBackground(new java.awt.Color(255, 255, 255));
+        seiscartas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        seiscartasboton1.setBorderPainted(false);
+        seiscartasboton1.setContentAreaFilled(false);
+
+        seiscartasboton2.setContentAreaFilled(false);
+        seiscartasboton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                seiscartasboton2ActionPerformed(evt);
+            }
+        });
+
+        seiscartasboton3.setContentAreaFilled(false);
+
+        seiscartasboton4.setContentAreaFilled(false);
+
+        seiscartasboton5.setContentAreaFilled(false);
+
+        seiscartasboton6.setContentAreaFilled(false);
 
         javax.swing.GroupLayout seiscartasLayout = new javax.swing.GroupLayout(seiscartas);
         seiscartas.setLayout(seiscartasLayout);
@@ -1219,25 +2248,33 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
                     .addComponent(seiscartasboton3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(seiscartasboton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(seiscartasboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        nombrejugadoractual.setText("jLabel15");
 
         layeredpanecartas.setLayer(cincocartas, javax.swing.JLayeredPane.DEFAULT_LAYER);
         layeredpanecartas.setLayer(cuatrocartas, javax.swing.JLayeredPane.DEFAULT_LAYER);
         layeredpanecartas.setLayer(sietecartas, javax.swing.JLayeredPane.DEFAULT_LAYER);
         layeredpanecartas.setLayer(seiscartas, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        layeredpanecartas.setLayer(nombrejugadoractual, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layeredpanecartasLayout = new javax.swing.GroupLayout(layeredpanecartas);
         layeredpanecartas.setLayout(layeredpanecartasLayout);
         layeredpanecartasLayout.setHorizontalGroup(
             layeredpanecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layeredpanecartasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(cuatrocartas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layeredpanecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layeredpanecartasLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(cuatrocartas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layeredpanecartasLayout.createSequentialGroup()
+                        .addGap(287, 287, 287)
+                        .addComponent(nombrejugadoractual, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layeredpanecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layeredpanecartasLayout.createSequentialGroup()
-                    .addContainerGap(16, Short.MAX_VALUE)
+                    .addContainerGap(13, Short.MAX_VALUE)
                     .addComponent(cincocartas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()))
             .addGroup(layeredpanecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1247,531 +2284,837 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addGroup(layeredpanecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layeredpanecartasLayout.createSequentialGroup()
-                    .addContainerGap(16, Short.MAX_VALUE)
+                    .addContainerGap(25, Short.MAX_VALUE)
                     .addComponent(sietecartas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()))
         );
         layeredpanecartasLayout.setVerticalGroup(
             layeredpanecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cuatrocartas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layeredpanecartasLayout.createSequentialGroup()
+                .addComponent(cuatrocartas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(nombrejugadoractual)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layeredpanecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layeredpanecartasLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(cincocartas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+                    .addComponent(cincocartas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(28, Short.MAX_VALUE)))
             .addGroup(layeredpanecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layeredpanecartasLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(seiscartas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+                    .addComponent(seiscartas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(28, Short.MAX_VALUE)))
             .addGroup(layeredpanecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layeredpanecartasLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(sietecartas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+                    .addComponent(sietecartas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(26, Short.MAX_VALUE)))
         );
 
         TABLERO.setMinimumSize(new java.awt.Dimension(700, 600));
         TABLERO.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        boton00.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton00.setForeground(new java.awt.Color(255, 255, 255));
+        boton00.setText("null");
         boton00.setBorder(null);
         boton00.setBorderPainted(false);
         boton00.setContentAreaFilled(false);
         boton00.setEnabled(false);
         TABLERO.add(boton00, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 542, 51, 53));
 
+        boton01.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton01.setForeground(new java.awt.Color(255, 255, 255));
+        boton01.setText("AD");
         boton01.setBorder(null);
         boton01.setBorderPainted(false);
         boton01.setContentAreaFilled(false);
         TABLERO.add(boton01, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 542, 51, 53));
 
+        boton02.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton02.setForeground(new java.awt.Color(255, 255, 255));
+        boton02.setText("KD");
         boton02.setBorder(null);
         boton02.setBorderPainted(false);
         boton02.setContentAreaFilled(false);
         TABLERO.add(boton02, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 542, 51, 53));
 
+        boton04.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton04.setForeground(new java.awt.Color(255, 255, 255));
+        boton04.setText("10D");
         boton04.setBorder(null);
         boton04.setBorderPainted(false);
         boton04.setContentAreaFilled(false);
-        TABLERO.add(boton04, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 542, 51, 53));
+        TABLERO.add(boton04, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 540, 51, 53));
 
+        boton03.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton03.setForeground(new java.awt.Color(255, 255, 255));
+        boton03.setText("QD");
         boton03.setBorder(null);
         boton03.setBorderPainted(false);
         boton03.setContentAreaFilled(false);
         TABLERO.add(boton03, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 542, 51, 53));
 
+        boton05.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton05.setForeground(new java.awt.Color(255, 255, 255));
+        boton05.setText("9D");
         boton05.setBorder(null);
         boton05.setBorderPainted(false);
         boton05.setContentAreaFilled(false);
         TABLERO.add(boton05, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 542, 51, 53));
 
+        boton06.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton06.setForeground(new java.awt.Color(255, 255, 255));
+        boton06.setText("8D");
         boton06.setBorder(null);
         boton06.setBorderPainted(false);
         boton06.setContentAreaFilled(false);
         TABLERO.add(boton06, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 542, 51, 53));
 
+        boton07.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton07.setForeground(new java.awt.Color(255, 255, 255));
+        boton07.setText("7D");
         boton07.setBorder(null);
         boton07.setBorderPainted(false);
         boton07.setContentAreaFilled(false);
         TABLERO.add(boton07, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 542, 51, 53));
 
+        boton08.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton08.setForeground(new java.awt.Color(255, 255, 255));
+        boton08.setText("6D");
         boton08.setBorder(null);
         boton08.setBorderPainted(false);
         boton08.setContentAreaFilled(false);
         TABLERO.add(boton08, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 542, 51, 53));
 
+        boton09.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton09.setForeground(new java.awt.Color(255, 255, 255));
+        boton09.setText("null");
         boton09.setBorder(null);
         boton09.setBorderPainted(false);
         boton09.setContentAreaFilled(false);
         boton09.setEnabled(false);
         TABLERO.add(boton09, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 542, 51, 53));
 
+        boton10.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton10.setForeground(new java.awt.Color(255, 255, 255));
+        boton10.setText("AC");
         boton10.setBorder(null);
         boton10.setBorderPainted(false);
         boton10.setContentAreaFilled(false);
         TABLERO.add(boton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 483, 51, 53));
 
+        boton11.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton11.setForeground(new java.awt.Color(255, 255, 255));
+        boton11.setText("7S");
         boton11.setBorder(null);
         boton11.setBorderPainted(false);
         boton11.setContentAreaFilled(false);
         TABLERO.add(boton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 483, 51, 53));
 
+        boton12.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton12.setForeground(new java.awt.Color(255, 255, 255));
+        boton12.setText("6S");
         boton12.setBorder(null);
         boton12.setBorderPainted(false);
         boton12.setContentAreaFilled(false);
         TABLERO.add(boton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 483, 51, 53));
 
+        boton13.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton13.setForeground(new java.awt.Color(255, 255, 255));
+        boton13.setText("5S");
         boton13.setBorder(null);
         boton13.setBorderPainted(false);
         boton13.setContentAreaFilled(false);
         TABLERO.add(boton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 483, 51, 53));
 
+        boton14.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton14.setForeground(new java.awt.Color(255, 255, 255));
+        boton14.setText("4S");
         boton14.setBorder(null);
         boton14.setBorderPainted(false);
         boton14.setContentAreaFilled(false);
         TABLERO.add(boton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 483, 51, 53));
 
+        boton15.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton15.setForeground(new java.awt.Color(255, 255, 255));
+        boton15.setText("3S");
         boton15.setBorder(null);
         boton15.setBorderPainted(false);
         boton15.setContentAreaFilled(false);
         TABLERO.add(boton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 483, 51, 53));
 
+        boton16.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton16.setForeground(new java.awt.Color(255, 255, 255));
+        boton16.setText("2S");
         boton16.setBorder(null);
         boton16.setBorderPainted(false);
         boton16.setContentAreaFilled(false);
         TABLERO.add(boton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 483, 51, 53));
 
+        boton17.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton17.setForeground(new java.awt.Color(255, 255, 255));
+        boton17.setText("2H");
         boton17.setBorder(null);
         boton17.setBorderPainted(false);
         boton17.setContentAreaFilled(false);
         TABLERO.add(boton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 483, 51, 53));
 
+        boton18.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton18.setForeground(new java.awt.Color(255, 255, 255));
+        boton18.setText("3H");
         boton18.setBorder(null);
         boton18.setBorderPainted(false);
         boton18.setContentAreaFilled(false);
         TABLERO.add(boton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 483, 51, 53));
 
+        boton19.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton19.setForeground(new java.awt.Color(255, 255, 255));
+        boton19.setText("5D");
         boton19.setBorder(null);
         boton19.setBorderPainted(false);
         boton19.setContentAreaFilled(false);
         TABLERO.add(boton19, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 483, 51, 53));
 
+        boton20.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton20.setForeground(new java.awt.Color(255, 255, 255));
+        boton20.setText("KC");
         boton20.setBorder(null);
         boton20.setBorderPainted(false);
         boton20.setContentAreaFilled(false);
         TABLERO.add(boton20, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 423, 51, 53));
 
+        boton21.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton21.setForeground(new java.awt.Color(255, 255, 255));
+        boton21.setText("8S");
         boton21.setBorder(null);
         boton21.setBorderPainted(false);
         boton21.setContentAreaFilled(false);
         TABLERO.add(boton21, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 423, 51, 53));
 
+        boton22.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton22.setForeground(new java.awt.Color(255, 255, 255));
+        boton22.setText("10C");
         boton22.setBorder(null);
         boton22.setBorderPainted(false);
         boton22.setContentAreaFilled(false);
         TABLERO.add(boton22, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 423, 51, 53));
 
+        boton23.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton23.setForeground(new java.awt.Color(255, 255, 255));
+        boton23.setText("QC");
         boton23.setBorder(null);
         boton23.setBorderPainted(false);
         boton23.setContentAreaFilled(false);
         TABLERO.add(boton23, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 423, 51, 53));
 
+        boton24.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton24.setForeground(new java.awt.Color(255, 255, 255));
+        boton24.setText("KC");
         boton24.setBorder(null);
         boton24.setBorderPainted(false);
         boton24.setContentAreaFilled(false);
         TABLERO.add(boton24, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 423, 51, 53));
 
+        boton25.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton25.setForeground(new java.awt.Color(255, 255, 255));
+        boton25.setText("AC");
         boton25.setBorder(null);
         boton25.setBorderPainted(false);
         boton25.setContentAreaFilled(false);
         TABLERO.add(boton25, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 423, 51, 53));
 
+        boton26.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton26.setForeground(new java.awt.Color(255, 255, 255));
+        boton26.setText("AD");
         boton26.setBorder(null);
         boton26.setBorderPainted(false);
         boton26.setContentAreaFilled(false);
         TABLERO.add(boton26, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 423, 51, 53));
 
+        boton27.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton27.setForeground(new java.awt.Color(255, 255, 255));
+        boton27.setText("KD");
         boton27.setBorder(null);
         boton27.setBorderPainted(false);
         boton27.setContentAreaFilled(false);
         TABLERO.add(boton27, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 423, 51, 53));
 
+        boton28.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton28.setForeground(new java.awt.Color(255, 255, 255));
+        boton28.setText("4H");
         boton28.setBorder(null);
         boton28.setBorderPainted(false);
         boton28.setContentAreaFilled(false);
         TABLERO.add(boton28, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 423, 51, 53));
 
+        boton29.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton29.setForeground(new java.awt.Color(255, 255, 255));
+        boton29.setText("4D");
         boton29.setBorder(null);
         boton29.setBorderPainted(false);
         boton29.setContentAreaFilled(false);
         TABLERO.add(boton29, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 423, 51, 53));
 
+        boton30.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton30.setForeground(new java.awt.Color(255, 255, 255));
+        boton30.setText("QC");
         boton30.setBorder(null);
         boton30.setBorderPainted(false);
         boton30.setContentAreaFilled(false);
         TABLERO.add(boton30, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 364, 51, 53));
 
+        boton31.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton31.setForeground(new java.awt.Color(255, 255, 255));
+        boton31.setText("9S");
         boton31.setBorder(null);
         boton31.setBorderPainted(false);
         boton31.setContentAreaFilled(false);
         TABLERO.add(boton31, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 364, 51, 53));
 
+        boton32.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton32.setForeground(new java.awt.Color(255, 255, 255));
+        boton32.setText("9C");
         boton32.setBorder(null);
         boton32.setBorderPainted(false);
         boton32.setContentAreaFilled(false);
         TABLERO.add(boton32, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 364, 51, 53));
 
+        boton33.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton33.setForeground(new java.awt.Color(255, 255, 255));
+        boton33.setText("8H");
         boton33.setBorder(null);
         boton33.setBorderPainted(false);
         boton33.setContentAreaFilled(false);
         TABLERO.add(boton33, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 364, 51, 53));
 
+        boton34.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton34.setForeground(new java.awt.Color(255, 255, 255));
+        boton34.setText("9H");
         boton34.setBorder(null);
         boton34.setBorderPainted(false);
         boton34.setContentAreaFilled(false);
         TABLERO.add(boton34, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 364, 51, 53));
 
+        boton35.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton35.setForeground(new java.awt.Color(255, 255, 255));
+        boton35.setText("10H");
         boton35.setBorder(null);
         boton35.setBorderPainted(false);
         boton35.setContentAreaFilled(false);
         TABLERO.add(boton35, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 364, 51, 53));
 
+        boton36.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton36.setForeground(new java.awt.Color(255, 255, 255));
+        boton36.setText("QH");
         boton36.setBorder(null);
         boton36.setBorderPainted(false);
         boton36.setContentAreaFilled(false);
         TABLERO.add(boton36, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 364, 51, 53));
 
+        boton37.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton37.setForeground(new java.awt.Color(255, 255, 255));
+        boton37.setText("QD");
         boton37.setBorder(null);
         boton37.setBorderPainted(false);
         boton37.setContentAreaFilled(false);
         TABLERO.add(boton37, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 364, 51, 53));
 
+        boton38.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton38.setForeground(new java.awt.Color(255, 255, 255));
+        boton38.setText("5H");
         boton38.setBorder(null);
         boton38.setBorderPainted(false);
         boton38.setContentAreaFilled(false);
         TABLERO.add(boton38, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 364, 51, 53));
 
+        boton39.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton39.setForeground(new java.awt.Color(255, 255, 255));
+        boton39.setText("3D");
         boton39.setBorder(null);
         boton39.setBorderPainted(false);
         boton39.setContentAreaFilled(false);
         TABLERO.add(boton39, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 364, 51, 53));
 
+        boton40.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton40.setForeground(new java.awt.Color(255, 255, 255));
+        boton40.setText("10C");
         boton40.setBorder(null);
         boton40.setBorderPainted(false);
         boton40.setContentAreaFilled(false);
         TABLERO.add(boton40, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 305, 51, 53));
 
+        boton41.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton41.setForeground(new java.awt.Color(255, 255, 255));
+        boton41.setText("10S");
         boton41.setBorder(null);
         boton41.setBorderPainted(false);
         boton41.setContentAreaFilled(false);
         TABLERO.add(boton41, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 305, 51, 53));
 
+        boton42.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton42.setForeground(new java.awt.Color(255, 255, 255));
+        boton42.setText("8C");
         boton42.setBorder(null);
         boton42.setBorderPainted(false);
         boton42.setContentAreaFilled(false);
         TABLERO.add(boton42, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 305, 51, 53));
 
+        boton43.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton43.setForeground(new java.awt.Color(255, 255, 255));
+        boton43.setText("7H");
         boton43.setBorder(null);
         boton43.setBorderPainted(false);
         boton43.setContentAreaFilled(false);
         TABLERO.add(boton43, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 305, 51, 53));
 
+        boton44.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton44.setForeground(new java.awt.Color(255, 255, 255));
+        boton44.setText("2H");
         boton44.setBorder(null);
         boton44.setBorderPainted(false);
         boton44.setContentAreaFilled(false);
         TABLERO.add(boton44, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 305, 51, 53));
 
+        boton45.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton45.setForeground(new java.awt.Color(255, 255, 255));
+        boton45.setText("3H");
         boton45.setBorder(null);
         boton45.setBorderPainted(false);
         boton45.setContentAreaFilled(false);
         TABLERO.add(boton45, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 305, 51, 53));
 
+        boton46.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton46.setForeground(new java.awt.Color(255, 255, 255));
+        boton46.setText("KH");
         boton46.setBorder(null);
         boton46.setBorderPainted(false);
         boton46.setContentAreaFilled(false);
         TABLERO.add(boton46, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 305, 51, 53));
 
+        boton47.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton47.setForeground(new java.awt.Color(255, 255, 255));
+        boton47.setText("10D");
         boton47.setBorder(null);
         boton47.setBorderPainted(false);
         boton47.setContentAreaFilled(false);
         TABLERO.add(boton47, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 305, 51, 53));
 
+        boton48.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton48.setForeground(new java.awt.Color(255, 255, 255));
+        boton48.setText("6H");
         boton48.setBorder(null);
         boton48.setBorderPainted(false);
         boton48.setContentAreaFilled(false);
         TABLERO.add(boton48, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 305, 51, 53));
 
+        boton49.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton49.setForeground(new java.awt.Color(255, 255, 255));
+        boton49.setText("2D");
         boton49.setBorder(null);
         boton49.setBorderPainted(false);
         boton49.setContentAreaFilled(false);
         TABLERO.add(boton49, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 305, 51, 53));
 
+        boton50.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton50.setForeground(new java.awt.Color(255, 255, 255));
+        boton50.setText("9C");
         boton50.setBorder(null);
         boton50.setBorderPainted(false);
         boton50.setContentAreaFilled(false);
         TABLERO.add(boton50, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 245, 51, 53));
 
+        boton51.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton51.setForeground(new java.awt.Color(255, 255, 255));
+        boton51.setText("QS");
         boton51.setBorder(null);
         boton51.setBorderPainted(false);
         boton51.setContentAreaFilled(false);
         TABLERO.add(boton51, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 245, 51, 53));
 
+        boton52.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton52.setForeground(new java.awt.Color(255, 255, 255));
+        boton52.setText("7C");
         boton52.setBorder(null);
         boton52.setBorderPainted(false);
         boton52.setContentAreaFilled(false);
         TABLERO.add(boton52, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 245, 51, 53));
 
+        boton53.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton53.setForeground(new java.awt.Color(255, 255, 255));
+        boton53.setText("6H");
         boton53.setBorder(null);
         boton53.setBorderPainted(false);
         boton53.setContentAreaFilled(false);
         TABLERO.add(boton53, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 245, 51, 53));
 
+        boton54.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton54.setForeground(new java.awt.Color(255, 255, 255));
+        boton54.setText("5H");
         boton54.setBorder(null);
         boton54.setBorderPainted(false);
         boton54.setContentAreaFilled(false);
         TABLERO.add(boton54, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 245, 51, 53));
 
+        boton55.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton55.setForeground(new java.awt.Color(255, 255, 255));
+        boton55.setText("4H");
         boton55.setBorder(null);
         boton55.setBorderPainted(false);
         boton55.setContentAreaFilled(false);
         TABLERO.add(boton55, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 245, 51, 53));
 
+        boton56.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton56.setForeground(new java.awt.Color(255, 255, 255));
+        boton56.setText("AH");
         boton56.setBorder(null);
         boton56.setBorderPainted(false);
         boton56.setContentAreaFilled(false);
         TABLERO.add(boton56, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 245, 51, 53));
 
+        boton57.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton57.setForeground(new java.awt.Color(255, 255, 255));
+        boton57.setText("9D");
         boton57.setBorder(null);
         boton57.setBorderPainted(false);
         boton57.setContentAreaFilled(false);
         TABLERO.add(boton57, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 245, 51, 53));
 
+        boton58.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton58.setForeground(new java.awt.Color(255, 255, 255));
+        boton58.setText("7H");
+        boton58.setToolTipText("");
         boton58.setBorder(null);
         boton58.setBorderPainted(false);
         boton58.setContentAreaFilled(false);
         TABLERO.add(boton58, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 245, 51, 53));
 
+        boton59.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton59.setForeground(new java.awt.Color(255, 255, 255));
+        boton59.setText("AS");
         boton59.setBorder(null);
         boton59.setBorderPainted(false);
         boton59.setContentAreaFilled(false);
         TABLERO.add(boton59, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 245, 51, 53));
 
+        boton60.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton60.setForeground(new java.awt.Color(255, 255, 255));
+        boton60.setText("8C");
         boton60.setBorder(null);
         boton60.setBorderPainted(false);
         boton60.setContentAreaFilled(false);
         TABLERO.add(boton60, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 185, 51, 53));
 
+        boton61.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton61.setForeground(new java.awt.Color(255, 255, 255));
+        boton61.setText("KS");
         boton61.setBorder(null);
         boton61.setBorderPainted(false);
         boton61.setContentAreaFilled(false);
         TABLERO.add(boton61, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 185, 51, 53));
 
+        boton62.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton62.setForeground(new java.awt.Color(255, 255, 255));
+        boton62.setText("6C");
         boton62.setBorder(null);
         boton62.setBorderPainted(false);
         boton62.setContentAreaFilled(false);
         TABLERO.add(boton62, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 185, 51, 53));
 
+        boton63.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton63.setForeground(new java.awt.Color(255, 255, 255));
+        boton63.setText("5C");
         boton63.setBorder(null);
         boton63.setBorderPainted(false);
         boton63.setContentAreaFilled(false);
         TABLERO.add(boton63, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 185, 51, 53));
 
+        boton64.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton64.setForeground(new java.awt.Color(255, 255, 255));
+        boton64.setText("4C");
         boton64.setBorder(null);
         boton64.setBorderPainted(false);
         boton64.setContentAreaFilled(false);
         TABLERO.add(boton64, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 185, 51, 53));
 
+        boton65.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton65.setForeground(new java.awt.Color(255, 255, 255));
+        boton65.setText("3C");
         boton65.setBorder(null);
         boton65.setBorderPainted(false);
         boton65.setContentAreaFilled(false);
         TABLERO.add(boton65, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 185, 51, 53));
 
+        boton66.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton66.setForeground(new java.awt.Color(255, 255, 255));
+        boton66.setText("2C");
         boton66.setBorder(null);
         boton66.setBorderPainted(false);
         boton66.setContentAreaFilled(false);
         TABLERO.add(boton66, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 185, 51, 53));
 
+        boton67.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton67.setForeground(new java.awt.Color(255, 255, 255));
+        boton67.setText("8D");
         boton67.setBorder(null);
         boton67.setBorderPainted(false);
         boton67.setContentAreaFilled(false);
         TABLERO.add(boton67, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 185, 51, 53));
 
+        boton68.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton68.setForeground(new java.awt.Color(255, 255, 255));
+        boton68.setText("8H");
         boton68.setBorder(null);
         boton68.setBorderPainted(false);
         boton68.setContentAreaFilled(false);
         TABLERO.add(boton68, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 185, 51, 53));
 
+        boton69.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton69.setForeground(new java.awt.Color(255, 255, 255));
+        boton69.setText("KS");
         boton69.setBorder(null);
         boton69.setBorderPainted(false);
         boton69.setContentAreaFilled(false);
         TABLERO.add(boton69, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 185, 51, 53));
 
+        boton70.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton70.setForeground(new java.awt.Color(255, 255, 255));
+        boton70.setText("7C");
         boton70.setBorder(null);
         boton70.setBorderPainted(false);
         boton70.setContentAreaFilled(false);
         TABLERO.add(boton70, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 125, 51, 53));
 
+        boton71.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton71.setForeground(new java.awt.Color(255, 255, 255));
+        boton71.setText("AS");
         boton71.setBorder(null);
         boton71.setBorderPainted(false);
         boton71.setContentAreaFilled(false);
         TABLERO.add(boton71, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 125, 51, 53));
 
+        boton72.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton72.setForeground(new java.awt.Color(255, 255, 255));
+        boton72.setText("2D");
         boton72.setBorder(null);
         boton72.setBorderPainted(false);
         boton72.setContentAreaFilled(false);
         TABLERO.add(boton72, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 125, 51, 53));
 
+        boton73.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton73.setForeground(new java.awt.Color(255, 255, 255));
+        boton73.setText("3D");
         boton73.setBorder(null);
         boton73.setBorderPainted(false);
         boton73.setContentAreaFilled(false);
         TABLERO.add(boton73, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 125, 51, 53));
 
+        boton74.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton74.setForeground(new java.awt.Color(255, 255, 255));
+        boton74.setText("4D");
         boton74.setBorder(null);
         boton74.setBorderPainted(false);
         boton74.setContentAreaFilled(false);
         TABLERO.add(boton74, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 125, 51, 53));
 
+        boton75.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton75.setForeground(new java.awt.Color(255, 255, 255));
+        boton75.setText("5D");
         boton75.setBorder(null);
         boton75.setBorderPainted(false);
         boton75.setContentAreaFilled(false);
         TABLERO.add(boton75, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 125, 51, 53));
 
+        boton76.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton76.setForeground(new java.awt.Color(255, 255, 255));
+        boton76.setText("6D");
         boton76.setBorder(null);
         boton76.setBorderPainted(false);
         boton76.setContentAreaFilled(false);
         TABLERO.add(boton76, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 125, 51, 53));
 
+        boton77.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton77.setForeground(new java.awt.Color(255, 255, 255));
+        boton77.setText("7D");
         boton77.setBorder(null);
         boton77.setBorderPainted(false);
         boton77.setContentAreaFilled(false);
         TABLERO.add(boton77, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 125, 51, 53));
 
+        boton78.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton78.setForeground(new java.awt.Color(255, 255, 255));
+        boton78.setText("9H");
         boton78.setBorder(null);
         boton78.setBorderPainted(false);
         boton78.setContentAreaFilled(false);
         TABLERO.add(boton78, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 125, 51, 53));
 
+        boton79.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton79.setForeground(new java.awt.Color(255, 255, 255));
+        boton79.setText("QS");
         boton79.setBorder(null);
         boton79.setBorderPainted(false);
         boton79.setContentAreaFilled(false);
         TABLERO.add(boton79, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 125, 51, 53));
 
+        boton80.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton80.setForeground(new java.awt.Color(255, 255, 255));
+        boton80.setText("6C");
         boton80.setBorder(null);
         boton80.setBorderPainted(false);
         boton80.setContentAreaFilled(false);
         TABLERO.add(boton80, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 65, 51, 53));
 
+        boton81.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton81.setForeground(new java.awt.Color(255, 255, 255));
+        boton81.setText("5C");
         boton81.setBorder(null);
         boton81.setBorderPainted(false);
         boton81.setContentAreaFilled(false);
         TABLERO.add(boton81, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 65, 51, 53));
 
+        boton82.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton82.setForeground(new java.awt.Color(255, 255, 255));
+        boton82.setText("4C");
         boton82.setBorder(null);
         boton82.setBorderPainted(false);
         boton82.setContentAreaFilled(false);
         TABLERO.add(boton82, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 65, 51, 53));
 
+        boton83.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton83.setForeground(new java.awt.Color(255, 255, 255));
+        boton83.setText("3C");
         boton83.setBorder(null);
         boton83.setBorderPainted(false);
         boton83.setContentAreaFilled(false);
         TABLERO.add(boton83, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 65, 51, 53));
 
+        boton84.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton84.setForeground(new java.awt.Color(255, 255, 255));
+        boton84.setText("2C");
         boton84.setBorder(null);
         boton84.setBorderPainted(false);
         boton84.setContentAreaFilled(false);
         TABLERO.add(boton84, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 65, 51, 53));
 
+        boton85.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton85.setForeground(new java.awt.Color(255, 255, 255));
+        boton85.setText("AH");
         boton85.setBorder(null);
         boton85.setBorderPainted(false);
         boton85.setContentAreaFilled(false);
         TABLERO.add(boton85, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 65, 51, 53));
 
+        boton86.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton86.setForeground(new java.awt.Color(255, 255, 255));
+        boton86.setText("KH");
         boton86.setBorder(null);
         boton86.setBorderPainted(false);
         boton86.setContentAreaFilled(false);
         TABLERO.add(boton86, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 65, 51, 53));
 
+        boton87.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton87.setForeground(new java.awt.Color(255, 255, 255));
+        boton87.setText("QH");
         boton87.setBorder(null);
         boton87.setBorderPainted(false);
         boton87.setContentAreaFilled(false);
         TABLERO.add(boton87, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 65, 51, 53));
 
+        boton88.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton88.setForeground(new java.awt.Color(255, 255, 255));
+        boton88.setText("10H");
         boton88.setBorder(null);
         boton88.setBorderPainted(false);
         boton88.setContentAreaFilled(false);
         TABLERO.add(boton88, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 65, 51, 53));
 
+        boton89.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton89.setForeground(new java.awt.Color(255, 255, 255));
+        boton89.setText("10S");
         boton89.setBorder(null);
         boton89.setBorderPainted(false);
         boton89.setContentAreaFilled(false);
         TABLERO.add(boton89, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 65, 51, 53));
 
+        boton90.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton90.setForeground(new java.awt.Color(255, 255, 255));
+        boton90.setText("null");
         boton90.setBorder(null);
         boton90.setBorderPainted(false);
         boton90.setContentAreaFilled(false);
         boton90.setEnabled(false);
         TABLERO.add(boton90, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 7, 51, 53));
 
+        boton91.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton91.setForeground(new java.awt.Color(255, 255, 255));
+        boton91.setText("2S");
         boton91.setBorder(null);
         boton91.setBorderPainted(false);
         boton91.setContentAreaFilled(false);
         TABLERO.add(boton91, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 7, 51, 53));
 
+        boton92.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton92.setForeground(new java.awt.Color(255, 255, 255));
+        boton92.setText("3S");
         boton92.setBorder(null);
         boton92.setBorderPainted(false);
         boton92.setContentAreaFilled(false);
         TABLERO.add(boton92, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 7, 51, 53));
 
+        boton93.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton93.setForeground(new java.awt.Color(255, 255, 255));
+        boton93.setText("4S");
         boton93.setBorder(null);
         boton93.setBorderPainted(false);
         boton93.setContentAreaFilled(false);
         TABLERO.add(boton93, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 7, 51, 53));
 
+        boton94.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton94.setForeground(new java.awt.Color(255, 255, 255));
+        boton94.setText("5S");
         boton94.setBorder(null);
         boton94.setBorderPainted(false);
         boton94.setContentAreaFilled(false);
         TABLERO.add(boton94, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 7, 51, 53));
 
+        boton95.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton95.setForeground(new java.awt.Color(255, 255, 255));
+        boton95.setText("6S");
         boton95.setBorder(null);
         boton95.setBorderPainted(false);
         boton95.setContentAreaFilled(false);
         TABLERO.add(boton95, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 7, 51, 53));
 
+        boton96.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton96.setForeground(new java.awt.Color(255, 255, 255));
+        boton96.setText("7S");
         boton96.setBorder(null);
         boton96.setBorderPainted(false);
         boton96.setContentAreaFilled(false);
         TABLERO.add(boton96, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 7, 51, 53));
 
+        boton97.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton97.setForeground(new java.awt.Color(255, 255, 255));
+        boton97.setText("8S");
+        boton97.setToolTipText("");
         boton97.setBorder(null);
         boton97.setBorderPainted(false);
         boton97.setContentAreaFilled(false);
         TABLERO.add(boton97, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 7, 51, 53));
 
+        boton98.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton98.setForeground(new java.awt.Color(255, 255, 255));
+        boton98.setText("9S");
         boton98.setBorder(null);
         boton98.setBorderPainted(false);
         boton98.setContentAreaFilled(false);
         TABLERO.add(boton98, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 7, 51, 53));
 
+        boton99.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton99.setForeground(new java.awt.Color(255, 255, 255));
+        boton99.setText("null");
         boton99.setBorder(null);
         boton99.setBorderPainted(false);
         boton99.setContentAreaFilled(false);
@@ -1785,138 +3128,439 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         layeredpaneizq.setPreferredSize(new java.awt.Dimension(250, 802));
         layeredpaneizq.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        dosjugadoresizq.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
+
         javax.swing.GroupLayout dosjugadoresizqLayout = new javax.swing.GroupLayout(dosjugadoresizq);
         dosjugadoresizq.setLayout(dosjugadoresizqLayout);
         dosjugadoresizqLayout.setHorizontalGroup(
             dosjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 250, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dosjugadoresizqLayout.createSequentialGroup()
+                .addContainerGap(91, Short.MAX_VALUE)
+                .addGroup(dosjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dosnombrejugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(78, 78, 78))
         );
         dosjugadoresizqLayout.setVerticalGroup(
             dosjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1090, Short.MAX_VALUE)
+            .addGroup(dosjugadoresizqLayout.createSequentialGroup()
+                .addGap(286, 286, 286)
+                .addComponent(dosnombrejugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addContainerGap(367, Short.MAX_VALUE))
         );
 
-        layeredpaneizq.add(dosjugadoresizq, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 1090));
+        layeredpaneizq.add(dosjugadoresizq, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 270, 820));
+
+        tresjugadoresizq.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
 
         javax.swing.GroupLayout tresjugadoresizqLayout = new javax.swing.GroupLayout(tresjugadoresizq);
         tresjugadoresizq.setLayout(tresjugadoresizqLayout);
         tresjugadoresizqLayout.setHorizontalGroup(
             tresjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 250, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tresjugadoresizqLayout.createSequentialGroup()
+                .addContainerGap(91, Short.MAX_VALUE)
+                .addGroup(tresjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tresnombrejugador3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
+                .addGap(78, 78, 78))
         );
         tresjugadoresizqLayout.setVerticalGroup(
             tresjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1090, Short.MAX_VALUE)
+            .addGroup(tresjugadoresizqLayout.createSequentialGroup()
+                .addGap(286, 286, 286)
+                .addComponent(tresnombrejugador3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel14)
+                .addContainerGap(367, Short.MAX_VALUE))
         );
 
-        layeredpaneizq.add(tresjugadoresizq, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 1090));
+        layeredpaneizq.add(tresjugadoresizq, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 270, 820));
+
+        cuatrojugadoresizq.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
+
+        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
 
         javax.swing.GroupLayout cuatrojugadoresizqLayout = new javax.swing.GroupLayout(cuatrojugadoresizq);
         cuatrojugadoresizq.setLayout(cuatrojugadoresizqLayout);
         cuatrojugadoresizqLayout.setHorizontalGroup(
             cuatrojugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 250, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cuatrojugadoresizqLayout.createSequentialGroup()
+                .addContainerGap(89, Short.MAX_VALUE)
+                .addGroup(cuatrojugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cuatronombrejugador4, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21)
+                    .addComponent(cuatronombrejugador3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20))
+                .addGap(80, 80, 80))
         );
         cuatrojugadoresizqLayout.setVerticalGroup(
             cuatrojugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1090, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cuatrojugadoresizqLayout.createSequentialGroup()
+                .addContainerGap(216, Short.MAX_VALUE)
+                .addComponent(cuatronombrejugador3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel20)
+                .addGap(64, 64, 64)
+                .addComponent(cuatronombrejugador4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel21)
+                .addGap(206, 206, 206))
         );
 
-        layeredpaneizq.add(cuatrojugadoresizq, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 1090));
+        layeredpaneizq.add(cuatrojugadoresizq, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 270, 820));
+
+        seisjugadoresizq.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
+
+        jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
+
+        jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
 
         javax.swing.GroupLayout seisjugadoresizqLayout = new javax.swing.GroupLayout(seisjugadoresizq);
         seisjugadoresizq.setLayout(seisjugadoresizqLayout);
         seisjugadoresizqLayout.setHorizontalGroup(
             seisjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 250, Short.MAX_VALUE)
+            .addGroup(seisjugadoresizqLayout.createSequentialGroup()
+                .addGap(73, 73, 73)
+                .addGroup(seisjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(seisnombrejugador4, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel24)
+                    .addComponent(seisnombrejugador5, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel25)
+                    .addGroup(seisjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(seisnombrejugador6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel26, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
         seisjugadoresizqLayout.setVerticalGroup(
             seisjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1090, Short.MAX_VALUE)
+            .addGroup(seisjugadoresizqLayout.createSequentialGroup()
+                .addContainerGap(180, Short.MAX_VALUE)
+                .addComponent(seisnombrejugador4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel24)
+                .addGap(46, 46, 46)
+                .addComponent(seisnombrejugador5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel25)
+                .addGap(37, 37, 37)
+                .addComponent(seisnombrejugador6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel26)
+                .addGap(63, 63, 63))
         );
 
-        layeredpaneizq.add(seisjugadoresizq, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 1090));
+        layeredpaneizq.add(seisjugadoresizq, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 270, 820));
+
+        ochojugadoresizq.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
+
+        jLabel33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
+
+        jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
+
+        jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
 
         javax.swing.GroupLayout ochojugadoresizqLayout = new javax.swing.GroupLayout(ochojugadoresizq);
         ochojugadoresizq.setLayout(ochojugadoresizqLayout);
         ochojugadoresizqLayout.setHorizontalGroup(
             ochojugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 250, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ochojugadoresizqLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(ochojugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel33)
+                    .addComponent(jLabel32))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(ochojugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ochonombrejugador7, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ochonombrejugador8, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12))
+            .addGroup(ochojugadoresizqLayout.createSequentialGroup()
+                .addGap(82, 82, 82)
+                .addGroup(ochojugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ochojugadoresizqLayout.createSequentialGroup()
+                        .addComponent(jLabel30)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ochonombrejugador5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ochojugadoresizqLayout.createSequentialGroup()
+                        .addComponent(jLabel31)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ochonombrejugador6, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         ochojugadoresizqLayout.setVerticalGroup(
             ochojugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1090, Short.MAX_VALUE)
+            .addGroup(ochojugadoresizqLayout.createSequentialGroup()
+                .addGroup(ochojugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ochojugadoresizqLayout.createSequentialGroup()
+                        .addGap(145, 145, 145)
+                        .addComponent(ochonombrejugador5, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(124, 124, 124)
+                        .addComponent(ochonombrejugador6, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(165, 165, 165)
+                        .addComponent(ochonombrejugador7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(159, 159, 159)
+                        .addComponent(ochonombrejugador8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ochojugadoresizqLayout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(jLabel30)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel31)
+                        .addGap(51, 51, 51)
+                        .addComponent(jLabel32)
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabel33)))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
-        layeredpaneizq.add(ochojugadoresizq, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 1090));
+        layeredpaneizq.add(ochojugadoresizq, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 270, 820));
 
-        layeredpaneder.setPreferredSize(new java.awt.Dimension(240, 802));
+        layeredpaneder.setPreferredSize(new java.awt.Dimension(250, 802));
         layeredpaneder.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        dosjugadoresder.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel2.setText("BARAJA");
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
+        jLabel4.setText("jLabel3");
 
         javax.swing.GroupLayout dosjugadoresderLayout = new javax.swing.GroupLayout(dosjugadoresder);
         dosjugadoresder.setLayout(dosjugadoresderLayout);
         dosjugadoresderLayout.setHorizontalGroup(
             dosjugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 240, Short.MAX_VALUE)
+            .addGroup(dosjugadoresderLayout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addGroup(dosjugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dosjugadoresderLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
         dosjugadoresderLayout.setVerticalGroup(
             dosjugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1090, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dosjugadoresderLayout.createSequentialGroup()
+                .addContainerGap(353, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(333, 333, 333))
         );
 
-        layeredpaneder.add(dosjugadoresder, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 1090));
+        layeredpaneder.add(dosjugadoresder, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 270, 820));
+
+        tresjugadoresder.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel5.setText("BARAJA");
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
+        jLabel6.setText("jLabel3");
+
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
 
         javax.swing.GroupLayout tresjugadoresderLayout = new javax.swing.GroupLayout(tresjugadoresder);
         tresjugadoresder.setLayout(tresjugadoresderLayout);
         tresjugadoresderLayout.setHorizontalGroup(
             tresjugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 240, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tresjugadoresderLayout.createSequentialGroup()
+                .addGap(0, 86, Short.MAX_VALUE)
+                .addGroup(tresjugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(tresjugadoresderLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tresnombrejugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18))
+                .addGap(83, 83, 83))
         );
         tresjugadoresderLayout.setVerticalGroup(
             tresjugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1090, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tresjugadoresderLayout.createSequentialGroup()
+                .addContainerGap(287, Short.MAX_VALUE)
+                .addComponent(tresnombrejugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel18)
+                .addGap(141, 141, 141)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(91, 91, 91))
         );
 
-        layeredpaneder.add(tresjugadoresder, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 1090));
+        layeredpaneder.add(tresjugadoresder, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 270, 820));
+
+        cuatrojugadoresder.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel7.setText("BARAJA");
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
+        jLabel8.setText("jLabel3");
+
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
 
         javax.swing.GroupLayout cuatrojugadoresderLayout = new javax.swing.GroupLayout(cuatrojugadoresder);
         cuatrojugadoresder.setLayout(cuatrojugadoresderLayout);
         cuatrojugadoresderLayout.setHorizontalGroup(
             cuatrojugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 240, Short.MAX_VALUE)
+            .addGroup(cuatrojugadoresderLayout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addGroup(cuatrojugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cuatronombrejugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(cuatrojugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(cuatrojugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(cuatrojugadoresderLayout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel19)))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
         cuatrojugadoresderLayout.setVerticalGroup(
             cuatrojugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1090, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cuatrojugadoresderLayout.createSequentialGroup()
+                .addContainerGap(244, Short.MAX_VALUE)
+                .addComponent(cuatronombrejugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel19)
+                .addGap(177, 177, 177)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(98, 98, 98))
         );
 
-        layeredpaneder.add(cuatrojugadoresder, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 1090));
+        layeredpaneder.add(cuatrojugadoresder, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 270, 820));
 
-        javax.swing.GroupLayout seisjugadoresderLayout = new javax.swing.GroupLayout(seisjugadoresder);
-        seisjugadoresder.setLayout(seisjugadoresderLayout);
-        seisjugadoresderLayout.setHorizontalGroup(
-            seisjugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 240, Short.MAX_VALUE)
-        );
-        seisjugadoresderLayout.setVerticalGroup(
-            seisjugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1090, Short.MAX_VALUE)
-        );
+        ochojugadoresder.setBackground(new java.awt.Color(255, 255, 255));
 
-        layeredpaneder.add(seisjugadoresder, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 1090));
+        jLabel11.setText("BARAJA");
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
+        jLabel12.setText("jLabel3");
+
+        jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
+
+        jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
+
+        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
 
         javax.swing.GroupLayout ochojugadoresderLayout = new javax.swing.GroupLayout(ochojugadoresder);
         ochojugadoresder.setLayout(ochojugadoresderLayout);
         ochojugadoresderLayout.setHorizontalGroup(
             ochojugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 240, Short.MAX_VALUE)
+            .addGroup(ochojugadoresderLayout.createSequentialGroup()
+                .addGroup(ochojugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ochojugadoresderLayout.createSequentialGroup()
+                        .addGap(102, 102, 102)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ochojugadoresderLayout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addGroup(ochojugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ochojugadoresderLayout.createSequentialGroup()
+                                .addComponent(jLabel27)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(ochonombrejugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(ochojugadoresderLayout.createSequentialGroup()
+                                .addComponent(jLabel28)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(ochonombrejugador3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(ochojugadoresderLayout.createSequentialGroup()
+                                .addComponent(jLabel29)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(ochonombrejugador4, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         ochojugadoresderLayout.setVerticalGroup(
             ochojugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1090, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ochojugadoresderLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(ochojugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel29, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ochojugadoresderLayout.createSequentialGroup()
+                        .addComponent(ochonombrejugador4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53)))
+                .addGap(44, 44, 44)
+                .addGroup(ochojugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel28, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ochojugadoresderLayout.createSequentialGroup()
+                        .addComponent(ochonombrejugador3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53)))
+                .addGap(53, 53, 53)
+                .addGroup(ochojugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel27, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ochojugadoresderLayout.createSequentialGroup()
+                        .addComponent(ochonombrejugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53)))
+                .addGap(26, 26, 26)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(130, Short.MAX_VALUE))
         );
 
-        layeredpaneder.add(ochojugadoresder, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 1090));
+        layeredpaneder.add(ochojugadoresder, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 270, 820));
+
+        seisjugadoresder.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel9.setText("BARAJA");
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
+        jLabel10.setText("jLabel3");
+
+        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
+
+        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
+
+        javax.swing.GroupLayout seisjugadoresderLayout = new javax.swing.GroupLayout(seisjugadoresder);
+        seisjugadoresder.setLayout(seisjugadoresderLayout);
+        seisjugadoresderLayout.setHorizontalGroup(
+            seisjugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(seisjugadoresderLayout.createSequentialGroup()
+                .addGroup(seisjugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(seisjugadoresderLayout.createSequentialGroup()
+                        .addGap(102, 102, 102)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(seisjugadoresderLayout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addGroup(seisjugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(seisnombrejugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel22)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(seisnombrejugador3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel23))))
+                .addContainerGap(93, Short.MAX_VALUE))
+        );
+        seisjugadoresderLayout.setVerticalGroup(
+            seisjugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, seisjugadoresderLayout.createSequentialGroup()
+                .addContainerGap(121, Short.MAX_VALUE)
+                .addComponent(seisnombrejugador3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel23)
+                .addGap(56, 56, 56)
+                .addComponent(seisnombrejugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel22)
+                .addGap(85, 85, 85)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(90, 90, 90))
+        );
+
+        layeredpaneder.add(seisjugadoresder, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 270, 820));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1931,7 +3575,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
                     .addComponent(TABLERO, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(layeredpaneder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1940,12 +3584,12 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(TABLERO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(layeredpanecartas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(layeredpanecartas, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(layeredpaneizq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(layeredpaneder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(layeredpaneder, javax.swing.GroupLayout.PREFERRED_SIZE, 746, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(layeredpaneizq, javax.swing.GroupLayout.PREFERRED_SIZE, 771, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1983,6 +3627,10 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
     private void sietecartasboton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sietecartasboton7ActionPerformed
 
     }//GEN-LAST:event_sietecartasboton7ActionPerformed
+
+    private void seiscartasboton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seiscartasboton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_seiscartasboton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane TABLERO;
@@ -2099,14 +3747,54 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton cuatrocartasboton4;
     private javax.swing.JPanel cuatrojugadoresder;
     private javax.swing.JPanel cuatrojugadoresizq;
+    private javax.swing.JLabel cuatronombrejugador2;
+    private javax.swing.JLabel cuatronombrejugador3;
+    private javax.swing.JLabel cuatronombrejugador4;
     private javax.swing.JPanel dosjugadoresder;
     private javax.swing.JPanel dosjugadoresizq;
+    private javax.swing.JLabel dosnombrejugador2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane layeredpanecartas;
     private javax.swing.JLayeredPane layeredpaneder;
     private javax.swing.JLayeredPane layeredpaneizq;
+    private javax.swing.JLabel nombrejugadoractual;
     private javax.swing.JPanel ochojugadoresder;
     private javax.swing.JPanel ochojugadoresizq;
+    private javax.swing.JLabel ochonombrejugador2;
+    private javax.swing.JLabel ochonombrejugador3;
+    private javax.swing.JLabel ochonombrejugador4;
+    private javax.swing.JLabel ochonombrejugador5;
+    private javax.swing.JLabel ochonombrejugador6;
+    private javax.swing.JLabel ochonombrejugador7;
+    private javax.swing.JLabel ochonombrejugador8;
     private javax.swing.JPanel seiscartas;
     private javax.swing.JButton seiscartasboton1;
     private javax.swing.JButton seiscartasboton2;
@@ -2116,6 +3804,11 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton seiscartasboton6;
     private javax.swing.JPanel seisjugadoresder;
     private javax.swing.JPanel seisjugadoresizq;
+    private javax.swing.JLabel seisnombrejugador2;
+    private javax.swing.JLabel seisnombrejugador3;
+    private javax.swing.JLabel seisnombrejugador4;
+    private javax.swing.JLabel seisnombrejugador5;
+    private javax.swing.JLabel seisnombrejugador6;
     private javax.swing.JPanel sietecartas;
     private javax.swing.JButton sietecartasboton1;
     private javax.swing.JButton sietecartasboton2;
@@ -2126,6 +3819,8 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton sietecartasboton7;
     private javax.swing.JPanel tresjugadoresder;
     private javax.swing.JPanel tresjugadoresizq;
+    private javax.swing.JLabel tresnombrejugador2;
+    private javax.swing.JLabel tresnombrejugador3;
     // End of variables declaration//GEN-END:variables
 
 }

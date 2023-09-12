@@ -4,12 +4,14 @@
  */
 package Proyectooo;
 
+import java.io.IOException;
+
 /**
  *
  * @author AdminColeexz
  */
 public class MAINX {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         LOGIN login = new LOGIN();
         login.setVisible(true);
         

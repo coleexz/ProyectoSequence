@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.Set;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -33,8 +34,9 @@ public class LOGIN extends JFrame implements ActionListener {
     JLabel lblUsuario = new JLabel();
     JLabel lblPassword = new JLabel();
     static RandomAccessFile raf;
+    public static Player JUGADORACTUAL = new Player("", "password", 0, "verde");
     
-    public LOGIN(){
+    public LOGIN() throws IOException{
         setSize(500, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,8 +45,7 @@ public class LOGIN extends JFrame implements ActionListener {
         add(panellogin);
         panellogin.setLayout(null);
         panellogin.setSize(500,500);
-      
-       
+     
         bienvenido.setBounds(170,10,200,100);
         panellogin.add(bienvenido);
         
@@ -56,7 +57,6 @@ public class LOGIN extends JFrame implements ActionListener {
         passwordfield.setText("");
         panellogin.add(passwordfield);
         
-      
         botonlogin.setText("Iniciar sesion");
         botonlogin.setBounds(100, 320, 120, 50);
         botonlogin.addActionListener(this);
@@ -109,10 +109,12 @@ public class LOGIN extends JFrame implements ActionListener {
             if(!user.isEmpty() && !pass.isEmpty()){
                 if(Player.buscarUser(user)!=null){
                     if (Player.buscarUser(user).getPass().equals(pass)) {
+                        Player actualuser = new Player(user,pass,0,"");
+                        JUGADORACTUAL = actualuser;
                         JOptionPane.showMessageDialog(this, "inicio de sesion terminado exitosamente\nprocedera al menu principal!");
                         usernamefield.setText("");
                         passwordfield.setText("");
-                        MENUPRINCIPAL menu = new MENUPRINCIPAL();
+                        MENUSWING menu = new MENUSWING();
                         menu.setVisible(true);
                         this.dispose();
                     } else {
