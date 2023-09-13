@@ -8,12 +8,11 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -112,6 +111,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         cambiarNombreLabels();
     }
 
+    //me agrega todas las imagenes al array de cartas
     public void agregarImagenes() {
         cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/10D.png")));
         cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/10D.png")));
@@ -139,15 +139,15 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/3C.png")));
         cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/3C.png")));
-
+        
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/3D.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/3D.png")));
+        
         cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/3H.png")));
         cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/3H.png")));
 
         cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/3S.png")));
         cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/3S.png")));
-
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/3D.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/3D.png")));
 
         cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/4C.png")));
         cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/4C.png")));
@@ -235,7 +235,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/JC.png")));
         cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/JC.png")));
-
+        
         cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/JD.png")));
         cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/JD.png")));
 
@@ -272,6 +272,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         System.out.println(cartas.size());
     }
 
+    //es igual a la funcion de cambair labels
     public void cambiarBarajas() {
         switch (numjugadores) {
             case 2:
@@ -441,6 +442,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         }
     }
 
+    //redimensiona los inconos y las cartas que uso
     public void resizeImages() {
         int width = 85; // Ancho deseado
         int height = 118; // Alto deseado
@@ -469,6 +471,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
     }
 
+    //esto me sirve simplemente para la clase de SELECCIONARJUGADORES para verificar si el array de players ya tiene un usuario con es enombre
     public static boolean buscarUsuario(String nombre) {
         for (Player p : players) {
             if (p.getUser().equals(nombre)) {
@@ -478,6 +481,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         return false;
     }
 
+    //me cambia los labels cada vez que se pasa de jugador, esta en sentiod antihorario, y esto tiene que ser horario entonces despues se cmabia
     public void cambiarNombreLabels() {
         int c = 0;
         switch (numjugadores) {
@@ -701,6 +705,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         }
     }
 
+    //me genera los jugadores con sus usarios, colroes, cantidad de barajas, el simbolo que se va a utilizar en el array de tableroIconos,  y los puntos de cada jugador
     public void generarJugadores() {
         int c = 0;
         for (Player p : players) {
@@ -786,6 +791,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         }
     }
 
+    //me genera las barajas para cuada uno de los jugadores,las barajas son atributos de cada uno de los objetos de sequence players
     public ArrayList<ImageIcon> generarBarajas(int num) {
         ArrayList<ImageIcon> baraja = new ArrayList();
         int c = 0;
@@ -798,6 +804,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         return baraja;
     }
 
+    //retorna el color de la ficha, esto me sirve para comparar lo que es el atributo del objeto con el color que se escogio, y me devuelve el icono
     public ImageIcon getFicha(String color) {
         switch (color) {
             case "rojo":
@@ -813,6 +820,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         }
     }
 
+    //vacia el tablero que contiene la informacion en strings de cada uno de las fichas de los jugadores cuando termina el juego
     public void vaciarTablero() {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -855,16 +863,19 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         }
     }
 
+    //chequea si el icono es vacio
     public boolean chequearIconoVacio(String pos) {
         int x = Integer.parseInt(Character.toString(pos.charAt(0)));
         int y = Integer.parseInt(Character.toString(pos.charAt(1)));
         return tableroIconos[x][y].equals("");
     }
 
+    //funcion incompleta
     public boolean chequearCartaEspecial(String pos) {
         return true;
     }
 
+    //funcion gane
     public boolean chequearGane(String currentColor) {
         int rowCount = 0;
         int diagCount = 0;
@@ -895,6 +906,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         return false;
     }
 
+    //funcion gane
     private boolean checkConsecutive(String[][] board, int x, int y, int dx, int dy, String targetColor, int targetCount) {
         int count = 1;
 
@@ -909,6 +921,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         return false;
     }
 
+    //verifica si el boton que se presiono es cualqueira de los bootnes de la barjaa o no
     public boolean validarBotonBaraja(ActionEvent e) {
         if (e.getSource() == cuatrocartasboton1 || e.getSource() == cuatrocartasboton2 || e.getSource() == cuatrocartasboton3 || e.getSource() == cuatrocartasboton4
                 || e.getSource() == cincocartasboton1 || e.getSource() == cincocartasboton2 || e.getSource() == cincocartasboton3 || e.getSource() == cincocartasboton4 || e.getSource() == cincocartasboton5
@@ -919,21 +932,15 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         return false;
     }
 
+    //lo que hace esta funcion es simplemente deshabilitar los botones, pero la verdad no funciona bien
     public boolean botonBaraja(ActionEvent e) {
-        if (validarBotonBaraja(e)) {
-            for (int i = 0; i < 10; i++) {
-                for (int j = 0; j < 10; j++) {
-                    deshabilitarBotones(getCords(i + "" + j));
-                }
-            }
+        if (!validarBotonBaraja(e)) {
             if (getCords(e) == getCordsBaraja(e)) {
+                System.out.println(getCordsBaraja(e.getSource()));
                 int x = Integer.valueOf(Character.toString(getCords(e.getSource()).charAt(0)));
                 int y = Integer.valueOf(Character.toString(getCords(e.getSource()).charAt(1)));
                 String boton = x + "" + y;
-
                 deshabilitarBotones(getBoton(boton).getText());
-                System.out.println(getCordsBaraja(e.getSource()));
-
                 System.out.println("coordenada buena");
                 return true;
             } else {
@@ -948,63 +955,24 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
     }
 
-    public String obtenerNombreCartaSeleccionada(ActionEvent e) {
-        int x = Integer.parseInt(Character.toString(getCordsBaraja(e.getSource()).charAt(0)));
-        int y = Integer.parseInt(Character.toString(getCordsBaraja(e.getSource()).charAt(1)));
-
-        // Obtén el botón de la baraja seleccionado
-        JButton botonBaraja = getBotonBaraja(x + "" + y);
-
-        // Obtén el icono del botón de la baraja
-        Icon icono = botonBaraja.getIcon();
-
-        if (icono instanceof ImageIcon) {
-            ImageIcon imageIcon = (ImageIcon) icono;
-
-            // Obtén la URL de la imagen directamente del recurso de la imagen
-            URL imageUrl = imageIcon.getClass().getResource(imageIcon.getDescription());
-
-            if (imageUrl != null) {
-                // Ahora, extrae el nombre del archivo de la URL
-                String nombreImagen = imageUrl.getPath(); // Esto incluirá la ruta completa del archivo
-
-                // Para obtener solo el nombre del archivo, puedes hacer lo siguiente:
-                int index = nombreImagen.lastIndexOf("/");
-                if (index >= 0) {
-                    nombreImagen = nombreImagen.substring(index + 1);
-                }
-
-                return nombreImagen;
-            } else {
-                System.err.println("URL de imagen nula");
-            }
-        } else {
-            System.err.println("El icono no es una instancia de ImageIcon");
-        }
-
-        return "No se pudo obtener el nombre de la imagen";
-    }
-
+    //esta funcion todavia no funciona bien, pero consigue los botones con las coordenadas, y compara si la carta coincide con el string que tiene cada boton como texot
+    //como te dije, esta funcion no funciona ya que era como tenia antes el proyecto, ahora la voy a cambiar para que no compare cartas si no iconos.
     public void deshabilitarBotones(String carta) {
         for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                JButton boton = getBoton(i + "" + j);
-                if (!boton.getText().equals(carta)) {
-                    boton.setEnabled(false);
-                } else {
-                    boton.setEnabled(true); // Habilita el botón correspondiente a la carta
-                    boton.setBackground(Color.GREEN);
-                    boton.setContentAreaFilled(true);
-                }
+            for (int j = 0; i < 10; i++) {
+                getBoton(i + "" + j).setContentAreaFilled(false);
+                getBoton(i + "" + j).setEnabled(true);
             }
         }
-    }
-
-    public void volverBotonesNormales() {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                getBoton(i + "" + j).setBackground(null);
-                getBoton(i + "" + j).setContentAreaFilled(false);
+                if (!getBoton(i + "" + j).getText().equals(carta)) {
+                    getBoton(i + "" + j).setEnabled(false);
+                }
+                if (getBoton(i + "" + j).getText().equals(carta)) {
+                    getBoton(i + "" + j).setContentAreaFilled(true);
+                    getBoton(i + "" + j).setBackground(Color.GREEN);
+                }
             }
         }
     }
@@ -1012,11 +980,9 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (validarBotonBaraja(e)) {
-            obtenerNombreCartaSeleccionada(e);
-            // Obtén la carta seleccionada desde el botón de la baraja
+            JButton botonBarajaPresionado = (JButton) e.getSource();
 
-            // Deshabilita los botones del tablero que no coinciden con la carta seleccionada
-        } else {
+        } else if (!validarBotonBaraja(e)) {
             int x = Integer.parseInt(Character.toString(getCords(e.getSource()).charAt(0)));
             int y = Integer.parseInt(Character.toString(getCords(e.getSource()).charAt(1)));
             posColocar = x + "" + y;
@@ -1031,6 +997,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
                     break;
 
                 case 4:
+
                     System.out.println(turnoJugador);
 
                     switch (turnoJugador) {
@@ -1055,33 +1022,44 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
                                 } else {
                                     JOptionPane.showMessageDialog(this, "Ya hay una fcha puesta");
                                 }
+
                             } else {
-                                JOptionPane.showMessageDialog(this, "No es un botón de la baraja");
+                                JOptionPane.showMessageDialog(this, "es boton de la baraja");
                             }
+
                             break;
 
                         case 'b':
+
                             cambiarBarajas();
-                            if (chequearIconoVacio(x + "" + y)) {
-                                getBoton(posColocar).setIcon(seqplayers.get(1).color);
-                                tableroIconos[x][y] = "b";
+                            if (botonBaraja(e)) {
+                                System.out.println("ENTRO");
+                                if (chequearIconoVacio(x + "" + y)) {
+                                    getBoton(posColocar).setIcon(seqplayers.get(0).color);
+                                    tableroIconos[x][y] = "r";
 
-                                turnoJugador = 'c';
-                                cambiarNombreLabels();
-                                JOptionPane.showMessageDialog(this, "Turno de : " + seqplayers.get(2).getName());
-                                if (chequearGane("0") || chequearGane("1")) {
+                                    turnoJugador = 'c';
+                                    cambiarNombreLabels();
+                                    JOptionPane.showMessageDialog(this, "Turno de : " + seqplayers.get(2).getName());
+                                    if (chequearGane("0") || chequearGane("1")) {
 
-                                    vaciarArray();
-                                    JOptionPane.showMessageDialog(this, "¡Terminó el juego!");
-                                    System.exit(0);
+                                        vaciarArray();
+                                        JOptionPane.showMessageDialog(this, "¡Terminó el juego!");
+                                        System.exit(0);
+                                    }
+
+                                } else {
+                                    JOptionPane.showMessageDialog(this, "Ya hay una fcha puesta");
                                 }
 
                             } else {
-                                JOptionPane.showMessageDialog(this, "Ya hay una fcha puesta");
+                                JOptionPane.showMessageDialog(this, "es boton de la baraja");
                             }
+
                             break;
 
                         case 'c':
+
                             cambiarBarajas();
                             if (chequearIconoVacio(x + "" + y)) {
                                 getBoton(posColocar).setIcon(seqplayers.get(2).color);
@@ -1123,6 +1101,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
                                 JOptionPane.showMessageDialog(this, "No hay suficientes jugadores para el turno 'd'");
                             }
                             break;
+
                     }
                     break;
 
@@ -1135,13 +1114,16 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
                     break;
             }
         }
+
     }
 
+    //vacia los arrays ya que los arrays que estan siendo utilziados en esta clase son propios de esta calse, y se generan despues de entrar a la clase de SELECCIONARJUGADORES
     public void vaciarArray() {
         players.clear();
         seqplayers.clear();
     }
 
+    //lo que hace esta funcion es que te consigue el boton de la baraja presionado, esto lo utilizo para agarrar el icono de la carta seleccionado
     public JButton getBotonBaraja(String posicion) {
         switch (posicion) {
             case "41":
@@ -1653,8 +1635,214 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
                 return boton98;
             case "99":
                 return boton99;
-            case "cuatro1":
-                return cuatrocartasboton1;
+            default:
+                return null;
+        }
+    }
+
+    //Esta funcion es para conseguir el label atraves de la posicion con los ints (x y) para despues a traves de esta funcion ponerle los iconos de los tokens
+    public JLabel getLabel(String posicion) {
+        switch (posicion) {
+            case "00":
+                return label00;
+            case "01":
+                return label01;
+            case "02":
+                return label02;
+            case "03":
+                return label03;
+            case "04":
+                return label04;
+            case "05":
+                return label05;
+            case "06":
+                return label06;
+            case "07":
+                return label07;
+            case "08":
+                return label08;
+            case "09":
+                return label09;
+            case "10":
+                return label10;
+            case "11":
+                return label11;
+            case "12":
+                return label12;
+            case "13":
+                return label13;
+            case "14":
+                return label14;
+            case "15":
+                return label15;
+            case "16":
+                return label16;
+            case "17":
+                return label17;
+            case "18":
+                return label18;
+            case "19":
+                return label19;
+            case "20":
+                return label20;
+            case "21":
+                return label21;
+            case "22":
+                return label22;
+            case "23":
+                return label23;
+            case "24":
+                return label24;
+            case "25":
+                return label25;
+            case "26":
+                return label26;
+            case "27":
+                return label27;
+            case "28":
+                return label28;
+            case "29":
+                return label29;
+            case "30":
+                return label30;
+            case "31":
+                return label31;
+            case "32":
+                return label32;
+            case "33":
+                return label33;
+            case "34":
+                return label34;
+            case "35":
+                return label35;
+            case "36":
+                return label36;
+            case "37":
+                return label37;
+            case "38":
+                return label38;
+            case "39":
+                return label39;
+            case "40":
+                return label40;
+            case "41":
+                return label41;
+            case "42":
+                return label42;
+            case "43":
+                return label43;
+            case "44":
+                return label44;
+            case "45":
+                return label45;
+            case "46":
+                return label46;
+            case "47":
+                return label47;
+            case "48":
+                return label48;
+            case "49":
+                return label49;
+            case "50":
+                return label50;
+            case "51":
+                return label51;
+            case "52":
+                return label52;
+            case "53":
+                return label53;
+            case "54":
+                return label54;
+            case "55":
+                return label55;
+            case "56":
+                return label56;
+            case "57":
+                return label57;
+            case "58":
+                return label58;
+            case "59":
+                return label59;
+            case "60":
+                return label60;
+            case "61":
+                return label61;
+            case "62":
+                return label62;
+            case "63":
+                return label63;
+            case "64":
+                return label64;
+            case "65":
+                return label65;
+            case "66":
+                return label66;
+            case "67":
+                return label67;
+            case "68":
+                return label68;
+            case "69":
+                return label69;
+            case "70":
+                return label70;
+            case "71":
+                return label71;
+            case "72":
+                return label72;
+            case "73":
+                return label73;
+            case "74":
+                return label74;
+            case "75":
+                return label75;
+            case "76":
+                return label76;
+            case "77":
+                return label77;
+            case "78":
+                return label78;
+            case "79":
+                return label79;
+            case "80":
+                return label80;
+            case "81":
+                return label81;
+            case "82":
+                return label82;
+            case "83":
+                return label83;
+            case "84":
+                return label84;
+            case "85":
+                return label85;
+            case "86":
+                return label86;
+            case "87":
+                return label87;
+            case "88":
+                return label88;
+            case "89":
+                return label89;
+            case "90":
+                return label90;
+            case "91":
+                return label91;
+            case "92":
+                return label92;
+            case "93":
+                return label93;
+            case "94":
+                return label94;
+            case "95":
+                return label95;
+            case "96":
+                return label96;
+            case "97":
+                return label97;
+            case "98":
+                return label98;
+            case "99":
+                return label99;
             default:
                 return null;
         }
@@ -1957,7 +2145,107 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         boton97 = new javax.swing.JButton();
         boton98 = new javax.swing.JButton();
         boton99 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        TABLEROLABEL = new javax.swing.JLabel();
+        label00 = new javax.swing.JLabel();
+        label01 = new javax.swing.JLabel();
+        label02 = new javax.swing.JLabel();
+        label03 = new javax.swing.JLabel();
+        label04 = new javax.swing.JLabel();
+        label05 = new javax.swing.JLabel();
+        label06 = new javax.swing.JLabel();
+        label07 = new javax.swing.JLabel();
+        label08 = new javax.swing.JLabel();
+        label09 = new javax.swing.JLabel();
+        label10 = new javax.swing.JLabel();
+        label11 = new javax.swing.JLabel();
+        label12 = new javax.swing.JLabel();
+        label21 = new javax.swing.JLabel();
+        label22 = new javax.swing.JLabel();
+        label23 = new javax.swing.JLabel();
+        label24 = new javax.swing.JLabel();
+        label25 = new javax.swing.JLabel();
+        label26 = new javax.swing.JLabel();
+        label27 = new javax.swing.JLabel();
+        label28 = new javax.swing.JLabel();
+        label29 = new javax.swing.JLabel();
+        label40 = new javax.swing.JLabel();
+        label41 = new javax.swing.JLabel();
+        label42 = new javax.swing.JLabel();
+        label43 = new javax.swing.JLabel();
+        label44 = new javax.swing.JLabel();
+        label45 = new javax.swing.JLabel();
+        label46 = new javax.swing.JLabel();
+        label47 = new javax.swing.JLabel();
+        label48 = new javax.swing.JLabel();
+        label49 = new javax.swing.JLabel();
+        label50 = new javax.swing.JLabel();
+        label51 = new javax.swing.JLabel();
+        label52 = new javax.swing.JLabel();
+        label53 = new javax.swing.JLabel();
+        label54 = new javax.swing.JLabel();
+        label55 = new javax.swing.JLabel();
+        label56 = new javax.swing.JLabel();
+        label57 = new javax.swing.JLabel();
+        label58 = new javax.swing.JLabel();
+        label59 = new javax.swing.JLabel();
+        label60 = new javax.swing.JLabel();
+        label61 = new javax.swing.JLabel();
+        label62 = new javax.swing.JLabel();
+        label63 = new javax.swing.JLabel();
+        label64 = new javax.swing.JLabel();
+        label65 = new javax.swing.JLabel();
+        label66 = new javax.swing.JLabel();
+        label67 = new javax.swing.JLabel();
+        label68 = new javax.swing.JLabel();
+        label69 = new javax.swing.JLabel();
+        label70 = new javax.swing.JLabel();
+        label71 = new javax.swing.JLabel();
+        label72 = new javax.swing.JLabel();
+        label73 = new javax.swing.JLabel();
+        label74 = new javax.swing.JLabel();
+        label75 = new javax.swing.JLabel();
+        label76 = new javax.swing.JLabel();
+        label77 = new javax.swing.JLabel();
+        label78 = new javax.swing.JLabel();
+        label79 = new javax.swing.JLabel();
+        label80 = new javax.swing.JLabel();
+        label81 = new javax.swing.JLabel();
+        label82 = new javax.swing.JLabel();
+        label83 = new javax.swing.JLabel();
+        label84 = new javax.swing.JLabel();
+        label85 = new javax.swing.JLabel();
+        label86 = new javax.swing.JLabel();
+        label87 = new javax.swing.JLabel();
+        label88 = new javax.swing.JLabel();
+        label89 = new javax.swing.JLabel();
+        label90 = new javax.swing.JLabel();
+        label91 = new javax.swing.JLabel();
+        label92 = new javax.swing.JLabel();
+        label93 = new javax.swing.JLabel();
+        label94 = new javax.swing.JLabel();
+        label95 = new javax.swing.JLabel();
+        label96 = new javax.swing.JLabel();
+        label97 = new javax.swing.JLabel();
+        label98 = new javax.swing.JLabel();
+        label99 = new javax.swing.JLabel();
+        label13 = new javax.swing.JLabel();
+        label14 = new javax.swing.JLabel();
+        label15 = new javax.swing.JLabel();
+        label16 = new javax.swing.JLabel();
+        label17 = new javax.swing.JLabel();
+        label18 = new javax.swing.JLabel();
+        label19 = new javax.swing.JLabel();
+        label20 = new javax.swing.JLabel();
+        label30 = new javax.swing.JLabel();
+        label31 = new javax.swing.JLabel();
+        label32 = new javax.swing.JLabel();
+        label33 = new javax.swing.JLabel();
+        label34 = new javax.swing.JLabel();
+        label35 = new javax.swing.JLabel();
+        label36 = new javax.swing.JLabel();
+        label37 = new javax.swing.JLabel();
+        label38 = new javax.swing.JLabel();
+        label39 = new javax.swing.JLabel();
         layeredpaneizq = new javax.swing.JLayeredPane();
         dosjugadoresizq = new javax.swing.JPanel();
         dosnombrejugador2 = new javax.swing.JLabel();
@@ -2322,18 +2610,24 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         boton00.setBorderPainted(false);
         boton00.setContentAreaFilled(false);
         boton00.setEnabled(false);
-        TABLERO.add(boton00, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 542, 51, 53));
+        boton00.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton00ActionPerformed(evt);
+            }
+        });
+        TABLERO.add(boton00, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 540, 51, 53));
 
         boton01.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton01.setForeground(new java.awt.Color(255, 255, 255));
+        boton01.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/AD.jpg"))); // NOI18N
         boton01.setText("AD");
         boton01.setBorder(null);
         boton01.setBorderPainted(false);
-        boton01.setContentAreaFilled(false);
         TABLERO.add(boton01, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 542, 51, 53));
 
         boton02.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton02.setForeground(new java.awt.Color(255, 255, 255));
+        boton02.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/KD.jpg"))); // NOI18N
         boton02.setText("KD");
         boton02.setBorder(null);
         boton02.setBorderPainted(false);
@@ -2342,6 +2636,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton04.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton04.setForeground(new java.awt.Color(255, 255, 255));
+        boton04.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/10D.jpg"))); // NOI18N
         boton04.setText("10D");
         boton04.setBorder(null);
         boton04.setBorderPainted(false);
@@ -2350,6 +2645,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton03.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton03.setForeground(new java.awt.Color(255, 255, 255));
+        boton03.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/QD.jpg"))); // NOI18N
         boton03.setText("QD");
         boton03.setBorder(null);
         boton03.setBorderPainted(false);
@@ -2358,6 +2654,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton05.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton05.setForeground(new java.awt.Color(255, 255, 255));
+        boton05.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/9D.jpg"))); // NOI18N
         boton05.setText("9D");
         boton05.setBorder(null);
         boton05.setBorderPainted(false);
@@ -2366,6 +2663,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton06.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton06.setForeground(new java.awt.Color(255, 255, 255));
+        boton06.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/8D.jpg"))); // NOI18N
         boton06.setText("8D");
         boton06.setBorder(null);
         boton06.setBorderPainted(false);
@@ -2374,6 +2672,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton07.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton07.setForeground(new java.awt.Color(255, 255, 255));
+        boton07.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/7D.jpg"))); // NOI18N
         boton07.setText("7D");
         boton07.setBorder(null);
         boton07.setBorderPainted(false);
@@ -2382,6 +2681,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton08.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton08.setForeground(new java.awt.Color(255, 255, 255));
+        boton08.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/6D.jpg"))); // NOI18N
         boton08.setText("6D");
         boton08.setBorder(null);
         boton08.setBorderPainted(false);
@@ -2399,14 +2699,16 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton10.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton10.setForeground(new java.awt.Color(255, 255, 255));
+        boton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/AC.jpg"))); // NOI18N
         boton10.setText("AC");
         boton10.setBorder(null);
         boton10.setBorderPainted(false);
         boton10.setContentAreaFilled(false);
-        TABLERO.add(boton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 483, 51, 53));
+        TABLERO.add(boton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, 51, 53));
 
         boton11.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton11.setForeground(new java.awt.Color(255, 255, 255));
+        boton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/7S.jpg"))); // NOI18N
         boton11.setText("7S");
         boton11.setBorder(null);
         boton11.setBorderPainted(false);
@@ -2415,6 +2717,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton12.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton12.setForeground(new java.awt.Color(255, 255, 255));
+        boton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/6S.jpg"))); // NOI18N
         boton12.setText("6S");
         boton12.setBorder(null);
         boton12.setBorderPainted(false);
@@ -2423,6 +2726,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton13.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton13.setForeground(new java.awt.Color(255, 255, 255));
+        boton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/5S.jpg"))); // NOI18N
         boton13.setText("5S");
         boton13.setBorder(null);
         boton13.setBorderPainted(false);
@@ -2431,6 +2735,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton14.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton14.setForeground(new java.awt.Color(255, 255, 255));
+        boton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/4S.jpg"))); // NOI18N
         boton14.setText("4S");
         boton14.setBorder(null);
         boton14.setBorderPainted(false);
@@ -2439,6 +2744,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton15.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton15.setForeground(new java.awt.Color(255, 255, 255));
+        boton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/3S.jpg"))); // NOI18N
         boton15.setText("3S");
         boton15.setBorder(null);
         boton15.setBorderPainted(false);
@@ -2447,6 +2753,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton16.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton16.setForeground(new java.awt.Color(255, 255, 255));
+        boton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/2S.jpg"))); // NOI18N
         boton16.setText("2S");
         boton16.setBorder(null);
         boton16.setBorderPainted(false);
@@ -2455,6 +2762,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton17.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton17.setForeground(new java.awt.Color(255, 255, 255));
+        boton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/2H.jpg"))); // NOI18N
         boton17.setText("2H");
         boton17.setBorder(null);
         boton17.setBorderPainted(false);
@@ -2463,6 +2771,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton18.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton18.setForeground(new java.awt.Color(255, 255, 255));
+        boton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/3H.jpg"))); // NOI18N
         boton18.setText("3H");
         boton18.setBorder(null);
         boton18.setBorderPainted(false);
@@ -2471,6 +2780,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton19.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton19.setForeground(new java.awt.Color(255, 255, 255));
+        boton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/5D.jpg"))); // NOI18N
         boton19.setText("5D");
         boton19.setBorder(null);
         boton19.setBorderPainted(false);
@@ -2479,6 +2789,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton20.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton20.setForeground(new java.awt.Color(255, 255, 255));
+        boton20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/KC.jpg"))); // NOI18N
         boton20.setText("KC");
         boton20.setBorder(null);
         boton20.setBorderPainted(false);
@@ -2487,6 +2798,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton21.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton21.setForeground(new java.awt.Color(255, 255, 255));
+        boton21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/8S.jpg"))); // NOI18N
         boton21.setText("8S");
         boton21.setBorder(null);
         boton21.setBorderPainted(false);
@@ -2495,6 +2807,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton22.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton22.setForeground(new java.awt.Color(255, 255, 255));
+        boton22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/10C.jpg"))); // NOI18N
         boton22.setText("10C");
         boton22.setBorder(null);
         boton22.setBorderPainted(false);
@@ -2503,6 +2816,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton23.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton23.setForeground(new java.awt.Color(255, 255, 255));
+        boton23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/QC.jpg"))); // NOI18N
         boton23.setText("QC");
         boton23.setBorder(null);
         boton23.setBorderPainted(false);
@@ -2511,6 +2825,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton24.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton24.setForeground(new java.awt.Color(255, 255, 255));
+        boton24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/KC.jpg"))); // NOI18N
         boton24.setText("KC");
         boton24.setBorder(null);
         boton24.setBorderPainted(false);
@@ -2519,6 +2834,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton25.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton25.setForeground(new java.awt.Color(255, 255, 255));
+        boton25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/AC.jpg"))); // NOI18N
         boton25.setText("AC");
         boton25.setBorder(null);
         boton25.setBorderPainted(false);
@@ -2527,14 +2843,15 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton26.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton26.setForeground(new java.awt.Color(255, 255, 255));
+        boton26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/AD.jpg"))); // NOI18N
         boton26.setText("AD");
         boton26.setBorder(null);
         boton26.setBorderPainted(false);
-        boton26.setContentAreaFilled(false);
         TABLERO.add(boton26, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 423, 51, 53));
 
         boton27.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton27.setForeground(new java.awt.Color(255, 255, 255));
+        boton27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/KD.jpg"))); // NOI18N
         boton27.setText("KD");
         boton27.setBorder(null);
         boton27.setBorderPainted(false);
@@ -2543,6 +2860,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton28.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton28.setForeground(new java.awt.Color(255, 255, 255));
+        boton28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/4H.jpg"))); // NOI18N
         boton28.setText("4H");
         boton28.setBorder(null);
         boton28.setBorderPainted(false);
@@ -2551,6 +2869,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton29.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton29.setForeground(new java.awt.Color(255, 255, 255));
+        boton29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/4D.jpg"))); // NOI18N
         boton29.setText("4D");
         boton29.setBorder(null);
         boton29.setBorderPainted(false);
@@ -2559,6 +2878,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton30.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton30.setForeground(new java.awt.Color(255, 255, 255));
+        boton30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/QC.jpg"))); // NOI18N
         boton30.setText("QC");
         boton30.setBorder(null);
         boton30.setBorderPainted(false);
@@ -2567,6 +2887,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton31.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton31.setForeground(new java.awt.Color(255, 255, 255));
+        boton31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/9S.jpg"))); // NOI18N
         boton31.setText("9S");
         boton31.setBorder(null);
         boton31.setBorderPainted(false);
@@ -2575,6 +2896,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton32.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton32.setForeground(new java.awt.Color(255, 255, 255));
+        boton32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/9C.jpg"))); // NOI18N
         boton32.setText("9C");
         boton32.setBorder(null);
         boton32.setBorderPainted(false);
@@ -2583,6 +2905,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton33.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton33.setForeground(new java.awt.Color(255, 255, 255));
+        boton33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/8H.jpg"))); // NOI18N
         boton33.setText("8H");
         boton33.setBorder(null);
         boton33.setBorderPainted(false);
@@ -2591,6 +2914,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton34.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton34.setForeground(new java.awt.Color(255, 255, 255));
+        boton34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/9H.jpg"))); // NOI18N
         boton34.setText("9H");
         boton34.setBorder(null);
         boton34.setBorderPainted(false);
@@ -2599,6 +2923,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton35.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton35.setForeground(new java.awt.Color(255, 255, 255));
+        boton35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/10H.jpg"))); // NOI18N
         boton35.setText("10H");
         boton35.setBorder(null);
         boton35.setBorderPainted(false);
@@ -2607,6 +2932,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton36.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton36.setForeground(new java.awt.Color(255, 255, 255));
+        boton36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/QH.jpg"))); // NOI18N
         boton36.setText("QH");
         boton36.setBorder(null);
         boton36.setBorderPainted(false);
@@ -2615,6 +2941,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton37.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton37.setForeground(new java.awt.Color(255, 255, 255));
+        boton37.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/QD.jpg"))); // NOI18N
         boton37.setText("QD");
         boton37.setBorder(null);
         boton37.setBorderPainted(false);
@@ -2623,6 +2950,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton38.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton38.setForeground(new java.awt.Color(255, 255, 255));
+        boton38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/5H.jpg"))); // NOI18N
         boton38.setText("5H");
         boton38.setBorder(null);
         boton38.setBorderPainted(false);
@@ -2631,6 +2959,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton39.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton39.setForeground(new java.awt.Color(255, 255, 255));
+        boton39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/3D.jpg"))); // NOI18N
         boton39.setText("3D");
         boton39.setBorder(null);
         boton39.setBorderPainted(false);
@@ -2639,6 +2968,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton40.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton40.setForeground(new java.awt.Color(255, 255, 255));
+        boton40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/10C.jpg"))); // NOI18N
         boton40.setText("10C");
         boton40.setBorder(null);
         boton40.setBorderPainted(false);
@@ -2647,6 +2977,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton41.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton41.setForeground(new java.awt.Color(255, 255, 255));
+        boton41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/10S.jpg"))); // NOI18N
         boton41.setText("10S");
         boton41.setBorder(null);
         boton41.setBorderPainted(false);
@@ -2655,6 +2986,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton42.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton42.setForeground(new java.awt.Color(255, 255, 255));
+        boton42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/8C.jpg"))); // NOI18N
         boton42.setText("8C");
         boton42.setBorder(null);
         boton42.setBorderPainted(false);
@@ -2663,6 +2995,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton43.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton43.setForeground(new java.awt.Color(255, 255, 255));
+        boton43.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/7H.jpg"))); // NOI18N
         boton43.setText("7H");
         boton43.setBorder(null);
         boton43.setBorderPainted(false);
@@ -2671,6 +3004,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton44.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton44.setForeground(new java.awt.Color(255, 255, 255));
+        boton44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/2H.jpg"))); // NOI18N
         boton44.setText("2H");
         boton44.setBorder(null);
         boton44.setBorderPainted(false);
@@ -2679,6 +3013,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton45.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton45.setForeground(new java.awt.Color(255, 255, 255));
+        boton45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/3H.jpg"))); // NOI18N
         boton45.setText("3H");
         boton45.setBorder(null);
         boton45.setBorderPainted(false);
@@ -2687,6 +3022,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton46.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton46.setForeground(new java.awt.Color(255, 255, 255));
+        boton46.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/KH.jpg"))); // NOI18N
         boton46.setText("KH");
         boton46.setBorder(null);
         boton46.setBorderPainted(false);
@@ -2695,6 +3031,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton47.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton47.setForeground(new java.awt.Color(255, 255, 255));
+        boton47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/10D.jpg"))); // NOI18N
         boton47.setText("10D");
         boton47.setBorder(null);
         boton47.setBorderPainted(false);
@@ -2703,6 +3040,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton48.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton48.setForeground(new java.awt.Color(255, 255, 255));
+        boton48.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/6H.jpg"))); // NOI18N
         boton48.setText("6H");
         boton48.setBorder(null);
         boton48.setBorderPainted(false);
@@ -2711,6 +3049,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton49.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton49.setForeground(new java.awt.Color(255, 255, 255));
+        boton49.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/2D.jpg"))); // NOI18N
         boton49.setText("2D");
         boton49.setBorder(null);
         boton49.setBorderPainted(false);
@@ -2719,6 +3058,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton50.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton50.setForeground(new java.awt.Color(255, 255, 255));
+        boton50.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/9C.jpg"))); // NOI18N
         boton50.setText("9C");
         boton50.setBorder(null);
         boton50.setBorderPainted(false);
@@ -2727,6 +3067,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton51.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton51.setForeground(new java.awt.Color(255, 255, 255));
+        boton51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/QS.jpg"))); // NOI18N
         boton51.setText("QS");
         boton51.setBorder(null);
         boton51.setBorderPainted(false);
@@ -2735,6 +3076,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton52.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton52.setForeground(new java.awt.Color(255, 255, 255));
+        boton52.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/7C.jpg"))); // NOI18N
         boton52.setText("7C");
         boton52.setBorder(null);
         boton52.setBorderPainted(false);
@@ -2743,6 +3085,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton53.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton53.setForeground(new java.awt.Color(255, 255, 255));
+        boton53.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/6H.jpg"))); // NOI18N
         boton53.setText("6H");
         boton53.setBorder(null);
         boton53.setBorderPainted(false);
@@ -2751,6 +3094,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton54.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton54.setForeground(new java.awt.Color(255, 255, 255));
+        boton54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/5H.jpg"))); // NOI18N
         boton54.setText("5H");
         boton54.setBorder(null);
         boton54.setBorderPainted(false);
@@ -2759,6 +3103,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton55.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton55.setForeground(new java.awt.Color(255, 255, 255));
+        boton55.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/4H.jpg"))); // NOI18N
         boton55.setText("4H");
         boton55.setBorder(null);
         boton55.setBorderPainted(false);
@@ -2767,6 +3112,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton56.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton56.setForeground(new java.awt.Color(255, 255, 255));
+        boton56.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/AH.jpg"))); // NOI18N
         boton56.setText("AH");
         boton56.setBorder(null);
         boton56.setBorderPainted(false);
@@ -2775,6 +3121,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton57.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton57.setForeground(new java.awt.Color(255, 255, 255));
+        boton57.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/9D.jpg"))); // NOI18N
         boton57.setText("9D");
         boton57.setBorder(null);
         boton57.setBorderPainted(false);
@@ -2783,6 +3130,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton58.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton58.setForeground(new java.awt.Color(255, 255, 255));
+        boton58.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/7H.jpg"))); // NOI18N
         boton58.setText("7H");
         boton58.setToolTipText("");
         boton58.setBorder(null);
@@ -2792,6 +3140,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton59.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton59.setForeground(new java.awt.Color(255, 255, 255));
+        boton59.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/AS.jpg"))); // NOI18N
         boton59.setText("AS");
         boton59.setBorder(null);
         boton59.setBorderPainted(false);
@@ -2800,6 +3149,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton60.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton60.setForeground(new java.awt.Color(255, 255, 255));
+        boton60.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/8C.jpg"))); // NOI18N
         boton60.setText("8C");
         boton60.setBorder(null);
         boton60.setBorderPainted(false);
@@ -2808,6 +3158,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton61.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton61.setForeground(new java.awt.Color(255, 255, 255));
+        boton61.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/KS.jpg"))); // NOI18N
         boton61.setText("KS");
         boton61.setBorder(null);
         boton61.setBorderPainted(false);
@@ -2816,6 +3167,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton62.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton62.setForeground(new java.awt.Color(255, 255, 255));
+        boton62.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/6C.jpg"))); // NOI18N
         boton62.setText("6C");
         boton62.setBorder(null);
         boton62.setBorderPainted(false);
@@ -2824,6 +3176,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton63.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton63.setForeground(new java.awt.Color(255, 255, 255));
+        boton63.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/5C.jpg"))); // NOI18N
         boton63.setText("5C");
         boton63.setBorder(null);
         boton63.setBorderPainted(false);
@@ -2832,6 +3185,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton64.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton64.setForeground(new java.awt.Color(255, 255, 255));
+        boton64.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/4C.jpg"))); // NOI18N
         boton64.setText("4C");
         boton64.setBorder(null);
         boton64.setBorderPainted(false);
@@ -2840,6 +3194,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton65.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton65.setForeground(new java.awt.Color(255, 255, 255));
+        boton65.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/3C.jpg"))); // NOI18N
         boton65.setText("3C");
         boton65.setBorder(null);
         boton65.setBorderPainted(false);
@@ -2848,6 +3203,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton66.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton66.setForeground(new java.awt.Color(255, 255, 255));
+        boton66.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/2C.jpg"))); // NOI18N
         boton66.setText("2C");
         boton66.setBorder(null);
         boton66.setBorderPainted(false);
@@ -2856,6 +3212,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton67.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton67.setForeground(new java.awt.Color(255, 255, 255));
+        boton67.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/8D.jpg"))); // NOI18N
         boton67.setText("8D");
         boton67.setBorder(null);
         boton67.setBorderPainted(false);
@@ -2864,6 +3221,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton68.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton68.setForeground(new java.awt.Color(255, 255, 255));
+        boton68.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/8H.jpg"))); // NOI18N
         boton68.setText("8H");
         boton68.setBorder(null);
         boton68.setBorderPainted(false);
@@ -2872,6 +3230,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton69.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton69.setForeground(new java.awt.Color(255, 255, 255));
+        boton69.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/KS.jpg"))); // NOI18N
         boton69.setText("KS");
         boton69.setBorder(null);
         boton69.setBorderPainted(false);
@@ -2880,6 +3239,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton70.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton70.setForeground(new java.awt.Color(255, 255, 255));
+        boton70.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/7C.jpg"))); // NOI18N
         boton70.setText("7C");
         boton70.setBorder(null);
         boton70.setBorderPainted(false);
@@ -2888,6 +3248,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton71.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton71.setForeground(new java.awt.Color(255, 255, 255));
+        boton71.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/AS.jpg"))); // NOI18N
         boton71.setText("AS");
         boton71.setBorder(null);
         boton71.setBorderPainted(false);
@@ -2896,6 +3257,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton72.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton72.setForeground(new java.awt.Color(255, 255, 255));
+        boton72.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/2D.jpg"))); // NOI18N
         boton72.setText("2D");
         boton72.setBorder(null);
         boton72.setBorderPainted(false);
@@ -2904,6 +3266,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton73.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton73.setForeground(new java.awt.Color(255, 255, 255));
+        boton73.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/3D.jpg"))); // NOI18N
         boton73.setText("3D");
         boton73.setBorder(null);
         boton73.setBorderPainted(false);
@@ -2912,6 +3275,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton74.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton74.setForeground(new java.awt.Color(255, 255, 255));
+        boton74.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/4D.jpg"))); // NOI18N
         boton74.setText("4D");
         boton74.setBorder(null);
         boton74.setBorderPainted(false);
@@ -2920,6 +3284,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton75.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton75.setForeground(new java.awt.Color(255, 255, 255));
+        boton75.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/5D.jpg"))); // NOI18N
         boton75.setText("5D");
         boton75.setBorder(null);
         boton75.setBorderPainted(false);
@@ -2928,6 +3293,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton76.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton76.setForeground(new java.awt.Color(255, 255, 255));
+        boton76.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/6D.jpg"))); // NOI18N
         boton76.setText("6D");
         boton76.setBorder(null);
         boton76.setBorderPainted(false);
@@ -2936,6 +3302,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton77.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton77.setForeground(new java.awt.Color(255, 255, 255));
+        boton77.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/7D.jpg"))); // NOI18N
         boton77.setText("7D");
         boton77.setBorder(null);
         boton77.setBorderPainted(false);
@@ -2944,6 +3311,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton78.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton78.setForeground(new java.awt.Color(255, 255, 255));
+        boton78.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/9H.jpg"))); // NOI18N
         boton78.setText("9H");
         boton78.setBorder(null);
         boton78.setBorderPainted(false);
@@ -2952,6 +3320,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton79.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton79.setForeground(new java.awt.Color(255, 255, 255));
+        boton79.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/QS.jpg"))); // NOI18N
         boton79.setText("QS");
         boton79.setBorder(null);
         boton79.setBorderPainted(false);
@@ -2960,6 +3329,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton80.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton80.setForeground(new java.awt.Color(255, 255, 255));
+        boton80.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/6C.jpg"))); // NOI18N
         boton80.setText("6C");
         boton80.setBorder(null);
         boton80.setBorderPainted(false);
@@ -2968,6 +3338,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton81.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton81.setForeground(new java.awt.Color(255, 255, 255));
+        boton81.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/5C.jpg"))); // NOI18N
         boton81.setText("5C");
         boton81.setBorder(null);
         boton81.setBorderPainted(false);
@@ -2976,6 +3347,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton82.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton82.setForeground(new java.awt.Color(255, 255, 255));
+        boton82.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/4C.jpg"))); // NOI18N
         boton82.setText("4C");
         boton82.setBorder(null);
         boton82.setBorderPainted(false);
@@ -2984,6 +3356,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton83.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton83.setForeground(new java.awt.Color(255, 255, 255));
+        boton83.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/3C.jpg"))); // NOI18N
         boton83.setText("3C");
         boton83.setBorder(null);
         boton83.setBorderPainted(false);
@@ -2992,6 +3365,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton84.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton84.setForeground(new java.awt.Color(255, 255, 255));
+        boton84.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/2C.jpg"))); // NOI18N
         boton84.setText("2C");
         boton84.setBorder(null);
         boton84.setBorderPainted(false);
@@ -3000,6 +3374,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton85.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton85.setForeground(new java.awt.Color(255, 255, 255));
+        boton85.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/AH.jpg"))); // NOI18N
         boton85.setText("AH");
         boton85.setBorder(null);
         boton85.setBorderPainted(false);
@@ -3008,6 +3383,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton86.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton86.setForeground(new java.awt.Color(255, 255, 255));
+        boton86.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/KH.jpg"))); // NOI18N
         boton86.setText("KH");
         boton86.setBorder(null);
         boton86.setBorderPainted(false);
@@ -3016,6 +3392,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton87.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton87.setForeground(new java.awt.Color(255, 255, 255));
+        boton87.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/QH.jpg"))); // NOI18N
         boton87.setText("QH");
         boton87.setBorder(null);
         boton87.setBorderPainted(false);
@@ -3024,6 +3401,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton88.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton88.setForeground(new java.awt.Color(255, 255, 255));
+        boton88.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/10H.jpg"))); // NOI18N
         boton88.setText("10H");
         boton88.setBorder(null);
         boton88.setBorderPainted(false);
@@ -3032,6 +3410,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton89.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton89.setForeground(new java.awt.Color(255, 255, 255));
+        boton89.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/10S.jpg"))); // NOI18N
         boton89.setText("10S");
         boton89.setBorder(null);
         boton89.setBorderPainted(false);
@@ -3049,6 +3428,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton91.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton91.setForeground(new java.awt.Color(255, 255, 255));
+        boton91.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/2S.jpg"))); // NOI18N
         boton91.setText("2S");
         boton91.setBorder(null);
         boton91.setBorderPainted(false);
@@ -3057,6 +3437,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton92.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton92.setForeground(new java.awt.Color(255, 255, 255));
+        boton92.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/3S.jpg"))); // NOI18N
         boton92.setText("3S");
         boton92.setBorder(null);
         boton92.setBorderPainted(false);
@@ -3065,6 +3446,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton93.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton93.setForeground(new java.awt.Color(255, 255, 255));
+        boton93.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/4S.jpg"))); // NOI18N
         boton93.setText("4S");
         boton93.setBorder(null);
         boton93.setBorderPainted(false);
@@ -3073,6 +3455,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton94.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton94.setForeground(new java.awt.Color(255, 255, 255));
+        boton94.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/5S.jpg"))); // NOI18N
         boton94.setText("5S");
         boton94.setBorder(null);
         boton94.setBorderPainted(false);
@@ -3081,6 +3464,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton95.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton95.setForeground(new java.awt.Color(255, 255, 255));
+        boton95.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/6S.jpg"))); // NOI18N
         boton95.setText("6S");
         boton95.setBorder(null);
         boton95.setBorderPainted(false);
@@ -3089,6 +3473,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton96.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton96.setForeground(new java.awt.Color(255, 255, 255));
+        boton96.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/7S.jpg"))); // NOI18N
         boton96.setText("7S");
         boton96.setBorder(null);
         boton96.setBorderPainted(false);
@@ -3097,6 +3482,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton97.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton97.setForeground(new java.awt.Color(255, 255, 255));
+        boton97.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/8S.jpg"))); // NOI18N
         boton97.setText("8S");
         boton97.setToolTipText("");
         boton97.setBorder(null);
@@ -3106,6 +3492,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         boton98.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
         boton98.setForeground(new java.awt.Color(255, 255, 255));
+        boton98.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/9S.jpg"))); // NOI18N
         boton98.setText("9S");
         boton98.setBorder(null);
         boton98.setBorderPainted(false);
@@ -3121,9 +3508,145 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         boton99.setEnabled(false);
         TABLERO.add(boton99, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 7, 51, 53));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tokens/tableroimg.jpg"))); // NOI18N
-        jLabel1.setToolTipText("");
-        TABLERO.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 600));
+        TABLEROLABEL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tokens/tableroimg.jpg"))); // NOI18N
+        TABLEROLABEL.setToolTipText("");
+        TABLERO.add(TABLEROLABEL, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 600));
+        TABLERO.add(label00, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 540, 50, 60));
+        TABLERO.add(label01, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 540, 50, 60));
+        TABLERO.add(label02, new org.netbeans.lib.awtextra.AbsoluteConstraints(177, 540, 50, 60));
+        TABLERO.add(label03, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 540, 50, 50));
+        TABLERO.add(label04, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 540, 50, 50));
+        TABLERO.add(label05, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 540, 50, 50));
+        TABLERO.add(label06, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 540, 50, 50));
+        TABLERO.add(label07, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 540, 40, 60));
+        TABLERO.add(label08, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 540, 40, 60));
+        TABLERO.add(label09, new org.netbeans.lib.awtextra.AbsoluteConstraints(597, 540, 50, 50));
+        TABLERO.add(label10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, 60, 60));
+        TABLERO.add(label11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 480, 50, 60));
+        TABLERO.add(label12, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 480, 50, 60));
+        TABLERO.add(label21, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 430, 50, 50));
+        TABLERO.add(label22, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 420, 50, 60));
+        TABLERO.add(label23, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 420, 50, 60));
+        TABLERO.add(label24, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 420, 50, 50));
+        TABLERO.add(label25, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 430, 50, 50));
+        TABLERO.add(label26, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 420, 50, 60));
+        TABLERO.add(label27, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 420, 50, 60));
+        TABLERO.add(label28, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 420, 50, 60));
+        TABLERO.add(label29, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 420, 40, 60));
+        TABLERO.add(label40, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, 50, 50));
+        TABLERO.add(label41, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 310, 50, 50));
+        TABLERO.add(label42, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 50, 50));
+        TABLERO.add(label43, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, 50, 50));
+        TABLERO.add(label44, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 310, 50, 50));
+        TABLERO.add(label45, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 310, 50, 50));
+        TABLERO.add(label46, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 310, 50, 50));
+        TABLERO.add(label47, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 310, 50, 50));
+        TABLERO.add(label48, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 310, 50, 50));
+        TABLERO.add(label49, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 310, 50, 50));
+        TABLERO.add(label50, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 50, 60));
+        TABLERO.add(label51, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, 50, 60));
+        TABLERO.add(label52, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 50, 60));
+        TABLERO.add(label53, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, 50, 60));
+        TABLERO.add(label54, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 240, 50, 60));
+        TABLERO.add(label55, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 50, 60));
+        TABLERO.add(label56, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, 50, 60));
+        TABLERO.add(label57, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 240, 50, 60));
+        TABLERO.add(label58, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 240, 50, 60));
+        TABLERO.add(label59, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 240, 50, 60));
+        TABLERO.add(label60, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 180, 50, 60));
+        TABLERO.add(label61, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 180, 50, 60));
+        TABLERO.add(label62, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 50, 60));
+        TABLERO.add(label63, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 50, 50));
+        TABLERO.add(label64, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 186, 50, 50));
+        TABLERO.add(label65, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 50, 60));
+        TABLERO.add(label66, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 50, 60));
+        TABLERO.add(label67, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, 50, 60));
+        TABLERO.add(label68, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 180, 50, 60));
+        TABLERO.add(label69, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 180, 50, 60));
+        TABLERO.add(label70, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 126, 50, 50));
+        TABLERO.add(label71, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 50, 50));
+        TABLERO.add(label72, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 50, 50));
+        TABLERO.add(label73, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, 50, 50));
+        TABLERO.add(label74, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 50, 50));
+        TABLERO.add(label75, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 130, 50, 50));
+        TABLERO.add(label76, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, 50, 50));
+        TABLERO.add(label77, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 120, 50, 60));
+        TABLERO.add(label78, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 130, 50, 50));
+        TABLERO.add(label79, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 130, 50, 50));
+        TABLERO.add(label80, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 70, 50, 50));
+        TABLERO.add(label81, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 50, 50));
+        TABLERO.add(label82, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 50, 50));
+        TABLERO.add(label83, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 50, 50));
+        TABLERO.add(label84, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 50, 50));
+        TABLERO.add(label85, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 50, 50));
+        TABLERO.add(label86, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, 50, 50));
+        TABLERO.add(label87, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, 50, 50));
+        TABLERO.add(label88, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 70, 50, 50));
+        TABLERO.add(label89, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 70, 50, 50));
+        TABLERO.add(label90, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 50, 50));
+        TABLERO.add(label91, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 50, 50));
+        TABLERO.add(label92, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 50, 50));
+        TABLERO.add(label93, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 50, 50));
+        TABLERO.add(label94, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 50, 50));
+        TABLERO.add(label95, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 50, 60));
+        TABLERO.add(label96, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 0, 50, 60));
+        TABLERO.add(label97, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, 50, 50));
+        TABLERO.add(label98, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, 50, 50));
+        TABLERO.add(label99, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, 50, 50));
+
+        label13.setText("jLabel1");
+        TABLERO.add(label13, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 480, 50, 60));
+
+        label14.setText("jLabel13");
+        TABLERO.add(label14, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 480, -1, 60));
+
+        label15.setText("jLabel15");
+        TABLERO.add(label15, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 480, -1, 60));
+
+        label16.setText("jLabel16");
+        TABLERO.add(label16, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 480, -1, 60));
+
+        label17.setText("jLabel17");
+        TABLERO.add(label17, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 480, -1, 60));
+
+        label18.setText("jLabel34");
+        TABLERO.add(label18, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 480, -1, 60));
+
+        label19.setText("jLabel35");
+        TABLERO.add(label19, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 480, -1, 60));
+
+        label20.setText("jLabel1");
+        TABLERO.add(label20, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 430, 50, 50));
+
+        label30.setText("jLabel1");
+        TABLERO.add(label30, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 50, 50));
+
+        label31.setText("jLabel13");
+        TABLERO.add(label31, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 370, 50, 50));
+
+        label32.setText("jLabel15");
+        TABLERO.add(label32, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 366, -1, 50));
+
+        label33.setText("jLabel16");
+        TABLERO.add(label33, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, 50, 50));
+
+        label34.setText("jLabel17");
+        TABLERO.add(label34, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 360, -1, 60));
+
+        label35.setText("jLabel34");
+        TABLERO.add(label35, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 370, -1, 50));
+
+        label36.setText("jLabel35");
+        TABLERO.add(label36, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, -1, 50));
+
+        label37.setText("jLabel36");
+        TABLERO.add(label37, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 370, -1, 50));
+
+        label38.setText("jLabel37");
+        TABLERO.add(label38, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 370, -1, 50));
+
+        label39.setText("jLabel38");
+        TABLERO.add(label39, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 370, -1, 50));
 
         layeredpaneizq.setPreferredSize(new java.awt.Dimension(250, 802));
         layeredpaneizq.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -3632,8 +4155,13 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_seiscartasboton2ActionPerformed
 
+    private void boton00ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton00ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boton00ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane TABLERO;
+    private javax.swing.JLabel TABLEROLABEL;
     private javax.swing.JButton boton00;
     private javax.swing.JButton boton01;
     private javax.swing.JButton boton02;
@@ -3753,7 +4281,6 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel dosjugadoresder;
     private javax.swing.JPanel dosjugadoresizq;
     private javax.swing.JLabel dosnombrejugador2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -3782,6 +4309,106 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel label00;
+    private javax.swing.JLabel label01;
+    private javax.swing.JLabel label02;
+    private javax.swing.JLabel label03;
+    private javax.swing.JLabel label04;
+    private javax.swing.JLabel label05;
+    private javax.swing.JLabel label06;
+    private javax.swing.JLabel label07;
+    private javax.swing.JLabel label08;
+    private javax.swing.JLabel label09;
+    private javax.swing.JLabel label10;
+    private javax.swing.JLabel label11;
+    private javax.swing.JLabel label12;
+    private javax.swing.JLabel label13;
+    private javax.swing.JLabel label14;
+    private javax.swing.JLabel label15;
+    private javax.swing.JLabel label16;
+    private javax.swing.JLabel label17;
+    private javax.swing.JLabel label18;
+    private javax.swing.JLabel label19;
+    private javax.swing.JLabel label20;
+    private javax.swing.JLabel label21;
+    private javax.swing.JLabel label22;
+    private javax.swing.JLabel label23;
+    private javax.swing.JLabel label24;
+    private javax.swing.JLabel label25;
+    private javax.swing.JLabel label26;
+    private javax.swing.JLabel label27;
+    private javax.swing.JLabel label28;
+    private javax.swing.JLabel label29;
+    private javax.swing.JLabel label30;
+    private javax.swing.JLabel label31;
+    private javax.swing.JLabel label32;
+    private javax.swing.JLabel label33;
+    private javax.swing.JLabel label34;
+    private javax.swing.JLabel label35;
+    private javax.swing.JLabel label36;
+    private javax.swing.JLabel label37;
+    private javax.swing.JLabel label38;
+    private javax.swing.JLabel label39;
+    private javax.swing.JLabel label40;
+    private javax.swing.JLabel label41;
+    private javax.swing.JLabel label42;
+    private javax.swing.JLabel label43;
+    private javax.swing.JLabel label44;
+    private javax.swing.JLabel label45;
+    private javax.swing.JLabel label46;
+    private javax.swing.JLabel label47;
+    private javax.swing.JLabel label48;
+    private javax.swing.JLabel label49;
+    private javax.swing.JLabel label50;
+    private javax.swing.JLabel label51;
+    private javax.swing.JLabel label52;
+    private javax.swing.JLabel label53;
+    private javax.swing.JLabel label54;
+    private javax.swing.JLabel label55;
+    private javax.swing.JLabel label56;
+    private javax.swing.JLabel label57;
+    private javax.swing.JLabel label58;
+    private javax.swing.JLabel label59;
+    private javax.swing.JLabel label60;
+    private javax.swing.JLabel label61;
+    private javax.swing.JLabel label62;
+    private javax.swing.JLabel label63;
+    private javax.swing.JLabel label64;
+    private javax.swing.JLabel label65;
+    private javax.swing.JLabel label66;
+    private javax.swing.JLabel label67;
+    private javax.swing.JLabel label68;
+    private javax.swing.JLabel label69;
+    private javax.swing.JLabel label70;
+    private javax.swing.JLabel label71;
+    private javax.swing.JLabel label72;
+    private javax.swing.JLabel label73;
+    private javax.swing.JLabel label74;
+    private javax.swing.JLabel label75;
+    private javax.swing.JLabel label76;
+    private javax.swing.JLabel label77;
+    private javax.swing.JLabel label78;
+    private javax.swing.JLabel label79;
+    private javax.swing.JLabel label80;
+    private javax.swing.JLabel label81;
+    private javax.swing.JLabel label82;
+    private javax.swing.JLabel label83;
+    private javax.swing.JLabel label84;
+    private javax.swing.JLabel label85;
+    private javax.swing.JLabel label86;
+    private javax.swing.JLabel label87;
+    private javax.swing.JLabel label88;
+    private javax.swing.JLabel label89;
+    private javax.swing.JLabel label90;
+    private javax.swing.JLabel label91;
+    private javax.swing.JLabel label92;
+    private javax.swing.JLabel label93;
+    private javax.swing.JLabel label94;
+    private javax.swing.JLabel label95;
+    private javax.swing.JLabel label96;
+    private javax.swing.JLabel label97;
+    private javax.swing.JLabel label98;
+    private javax.swing.JLabel label99;
     private javax.swing.JLayeredPane layeredpanecartas;
     private javax.swing.JLayeredPane layeredpaneder;
     private javax.swing.JLayeredPane layeredpaneizq;

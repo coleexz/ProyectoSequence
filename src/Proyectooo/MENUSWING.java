@@ -360,6 +360,10 @@ public class MENUSWING extends javax.swing.JFrame implements ActionListener {
             colorequipopropio = COLOREQUIPO.getSelectedItem().toString();
             CONFIGPANEL.hide();
             PRINCIPAL.show();
+        } else if (e.getSource()==VOLVERREPORTES){
+            PRINCIPAL.show();
+            this.hide();
+            
         }
     }
 }
