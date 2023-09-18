@@ -7,10 +7,8 @@ package Proyectooo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -50,7 +48,8 @@ public class MENUSWING extends javax.swing.JFrame implements ActionListener {
         CANTIDADJUGADORES.addItem("4");
         CANTIDADJUGADORES.addItem("6");
         CANTIDADJUGADORES.addItem("8");
-
+        CANTIDADJUGADORES.setSelectedIndex(2);
+        
         COLOREQUIPO.addItem("rojo");
         COLOREQUIPO.addItem("azul");
         COLOREQUIPO.addItem("verde");
@@ -84,6 +83,9 @@ public class MENUSWING extends javax.swing.JFrame implements ActionListener {
         COLORPROPIO = new javax.swing.JComboBox<>();
         COLOREQUIPO = new javax.swing.JComboBox<>();
         VOLVERCONFIG = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         PRINCIPAL = new javax.swing.JPanel();
         JUGAR = new javax.swing.JButton();
         TITULO = new javax.swing.JLabel();
@@ -113,7 +115,7 @@ public class MENUSWING extends javax.swing.JFrame implements ActionListener {
                     .addGroup(REPORTESPANELLayout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 32, Short.MAX_VALUE)))
+                        .addGap(0, 6, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, REPORTESPANELLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -123,7 +125,7 @@ public class MENUSWING extends javax.swing.JFrame implements ActionListener {
         REPORTESPANELLayout.setVerticalGroup(
             REPORTESPANELLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, REPORTESPANELLayout.createSequentialGroup()
-                .addContainerGap(9, Short.MAX_VALUE)
+                .addContainerGap(29, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -132,6 +134,7 @@ public class MENUSWING extends javax.swing.JFrame implements ActionListener {
                 .addContainerGap())
         );
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("BIENVENIDO AL MENU DE REPORTES");
 
         CANTIDADJUGADORES.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -142,6 +145,12 @@ public class MENUSWING extends javax.swing.JFrame implements ActionListener {
 
         VOLVERCONFIG.setText("VOLVER");
 
+        jLabel3.setText("Seleccione el color de la ficha de su equipo");
+
+        jLabel4.setText("Seleccione el color de su ficha");
+
+        jLabel5.setText("Seleccione la cantidad de jugadores");
+
         javax.swing.GroupLayout CONFIGPANELLayout = new javax.swing.GroupLayout(CONFIGPANEL);
         CONFIGPANEL.setLayout(CONFIGPANELLayout);
         CONFIGPANELLayout.setHorizontalGroup(
@@ -150,37 +159,56 @@ public class MENUSWING extends javax.swing.JFrame implements ActionListener {
                 .addGroup(CONFIGPANELLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CONFIGPANELLayout.createSequentialGroup()
                         .addGap(93, 93, 93)
-                        .addComponent(jLabel1))
-                    .addGroup(CONFIGPANELLayout.createSequentialGroup()
-                        .addGap(164, 164, 164)
                         .addGroup(CONFIGPANELLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(COLORPROPIO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(COLOREQUIPO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(112, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CONFIGPANELLayout.createSequentialGroup()
+                                .addComponent(VOLVERCONFIG)
+                                .addGap(14, 14, 14))
+                            .addGroup(CONFIGPANELLayout.createSequentialGroup()
+                                .addGroup(CONFIGPANELLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addGroup(CONFIGPANELLayout.createSequentialGroup()
+                                        .addGap(23, 23, 23)
+                                        .addComponent(jLabel4))
+                                    .addGroup(CONFIGPANELLayout.createSequentialGroup()
+                                        .addGap(7, 7, 7)
+                                        .addComponent(jLabel5)))
+                                .addGap(55, 55, 55))))
+                    .addGroup(CONFIGPANELLayout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(jLabel1)))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CONFIGPANELLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(CONFIGPANELLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CONFIGPANELLayout.createSequentialGroup()
-                        .addComponent(VOLVERCONFIG)
-                        .addGap(26, 26, 26))
+                        .addGroup(CONFIGPANELLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(COLOREQUIPO, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(COLORPROPIO, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(141, 141, 141))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CONFIGPANELLayout.createSequentialGroup()
                         .addComponent(CANTIDADJUGADORES, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(156, 156, 156))))
+                        .addGap(150, 150, 150))))
         );
         CONFIGPANELLayout.setVerticalGroup(
             CONFIGPANELLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CONFIGPANELLayout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addComponent(jLabel1)
+                .addGap(33, 33, 33)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(COLORPROPIO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(COLOREQUIPO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CANTIDADJUGADORES, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(COLORPROPIO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(COLOREQUIPO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(VOLVERCONFIG)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         JUGAR.setText("Jugar");
@@ -209,7 +237,7 @@ public class MENUSWING extends javax.swing.JFrame implements ActionListener {
                     .addComponent(SALIR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PRINCIPALLayout.createSequentialGroup()
-                .addContainerGap(83, Short.MAX_VALUE)
+                .addContainerGap(57, Short.MAX_VALUE)
                 .addComponent(TITULO, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51))
         );
@@ -226,14 +254,14 @@ public class MENUSWING extends javax.swing.JFrame implements ActionListener {
                 .addComponent(REPORTES)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(SALIR)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 374, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(REPORTESPANEL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,7 +271,7 @@ public class MENUSWING extends javax.swing.JFrame implements ActionListener {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 320, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(REPORTESPANEL, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,6 +347,9 @@ public class MENUSWING extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton VOLVERREPORTES;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
@@ -362,7 +393,7 @@ public class MENUSWING extends javax.swing.JFrame implements ActionListener {
             PRINCIPAL.show();
         } else if (e.getSource()==VOLVERREPORTES){
             PRINCIPAL.show();
-            this.hide();
+            REPORTESPANEL.hide();
             
         }
     }

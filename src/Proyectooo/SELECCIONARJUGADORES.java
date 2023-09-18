@@ -17,7 +17,8 @@ public class SELECCIONARJUGADORES extends javax.swing.JFrame implements ActionLi
 
     private Player player;
     private int c = 1;
-
+    private static int n = MENUSWING.numerojugadores;
+        
     /**
      * Creates new form SELECCIONARJUGADORES
      */
@@ -31,6 +32,37 @@ public class SELECCIONARJUGADORES extends javax.swing.JFrame implements ActionLi
         this.player = player;
         pasarinfo();
         agregarAcciones();
+        
+        if(n==2){
+                    jLabel1.setText("Seleccione su oponente");
+                } else if (n==3){
+                    if (c==1){
+                        jLabel1.setText("Seleccione un jugador del equipo 2:");
+                    } else{
+                        jLabel1.setText("Seleccione un jugador del equipo 3:");
+                    }
+                }else if(n==4){
+                    if(c==1){
+                        jLabel1.setText("Seleccione un jugador de su equipo:");
+                    } else {
+                        jLabel1.setText("Seleccione un jugador del equipo 2:");
+                    }
+                }else if(n==6){
+                    if(c==1){
+                        jLabel1.setText("Seleccione un jugador de su equipo:");
+                    } else if(c==2|| c==3){
+                        jLabel1.setText("Seleccione un jugador del equipo 2:");
+                    } else if(c==4||c==5){
+                        jLabel1.setText("Seleccione un jugador del equipo 3:");
+                    }
+                }else if(n==8){
+                    if(c==1||c==2||c==3){
+                        jLabel1.setText("Seleccione un jugador de su equipo:");
+                    } else {
+                        jLabel1.setText("Seleccione un jugador del equipo 2:");
+                    }
+                }
+        
     }
 
     public void pasarinfo() {
@@ -65,29 +97,30 @@ public class SELECCIONARJUGADORES extends javax.swing.JFrame implements ActionLi
 
         jLabel1.setText("Selecciona un jugador!");
 
-        jButton1.setText("SLEECCIONAR");
+        jButton1.setText("Agregar Jugador");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(142, 142, 142)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(116, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(93, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(selecombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(139, 139, 139))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addComponent(selecombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(139, 139, 139))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(27, 27, 27)
                 .addComponent(jLabel1)
-                .addGap(59, 59, 59)
+                .addGap(58, 58, 58)
                 .addComponent(selecombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
                 .addComponent(jButton1)
@@ -163,6 +196,38 @@ public class SELECCIONARJUGADORES extends javax.swing.JFrame implements ActionLi
             MENUSWING menus = new MENUSWING();
             int n = menus.numerojugadores;
             if (c < n) {
+                
+                if(n==2){
+                    jLabel1.setText("Seleccione su oponente");
+                } else if (n==3){
+                    if (c==1){
+                        jLabel1.setText("Seleccione un jugador del equipo 2:");
+                    } else{
+                        jLabel1.setText("Seleccione un jugador del equipo 3:");
+                    }
+                }else if(n==4){
+                    if(c==1){
+                        jLabel1.setText("Seleccione un jugador de su equipo:");
+                    } else {
+                        jLabel1.setText("Seleccione un jugador del equipo 2:");
+                    }
+                }else if(n==6){
+                    if(c==1){
+                        jLabel1.setText("Seleccione un jugador de su equipo:");
+                    } else if(c==2|| c==3){
+                        jLabel1.setText("Seleccione un jugador del equipo 2:");
+                    } else if(c==4||c==5){
+                        jLabel1.setText("Seleccione un jugador del equipo 3:");
+                    }
+                }else if(n==8){
+                    if(c==1||c==2||c==3){
+                        jLabel1.setText("Seleccione un jugador de su equipo:");
+                    } else {
+                        jLabel1.setText("Seleccione un jugador del equipo 2:");
+                    }
+                }
+                
+                
                 String selectedUsername = (String) selecombobox.getSelectedItem(); // Obtén el nombre de usuario seleccionado
 
                 // Llama al método buscarUser con el nombre de usuario seleccionado

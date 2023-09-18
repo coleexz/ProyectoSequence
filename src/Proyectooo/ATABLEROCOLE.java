@@ -10,8 +10,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -39,7 +41,10 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
     Random rand = new Random();
 
+    public static Icon IconoBotonTableroSeleccionado = null;
+
     /*
+
     
     POR HACER
     
@@ -70,6 +75,8 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         {"null", "AD", "KD", "QD", "10D", "9D", "8D", "7D", "6D", "null"},};
 
     public ATABLEROCOLE(int numjugadores) {
+
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         cambiarBarajas();
         cambiarNombreLabels();
         agregarImagenes();
@@ -98,7 +105,6 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         seisjugadoresder.setVisible(false);
         ochojugadoresder.setVisible(false);
 
-        //vacia el array
         resizeImages();
         vaciarTablero();
         generarJugadores();
@@ -113,163 +119,167 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
     //me agrega todas las imagenes al array de cartas
     public void agregarImagenes() {
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/10D.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/10D.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/10D.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/10D.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/10C.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/10C.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/10C.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/10C.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/10H.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/10H.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/10H.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/10H.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/10S.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/10S.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/10S.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/10S.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/2C.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/2C.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/2C.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/2C.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/2D.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/2D.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/2D.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/2D.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/2H.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/2H.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/2H.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/2H.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/2S.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/2S.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/2S.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/2S.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/3C.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/3C.png")));
-        
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/3D.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/3D.png")));
-        
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/3H.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/3H.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/3C.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/3C.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/3S.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/3S.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/3D.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/3D.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/4C.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/4C.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/3H.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/3H.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/4D.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/4D.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/3S.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/3S.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/4H.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/4H.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/4C.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/4C.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/4S.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/4S.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/4D.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/4D.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/5C.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/5C.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/4H.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/4H.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/5D.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/5D.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/4S.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/4S.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/5H.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/5H.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/5C.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/5C.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/5S.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/5S.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/5D.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/5D.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/6C.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/6C.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/5H.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/5H.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/6D.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/6D.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/5S.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/5S.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/6H.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/6H.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/6C.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/6C.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/6S.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/6S.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/6D.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/6D.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/7C.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/7C.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/6H.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/6H.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/7D.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/7D.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/6S.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/6S.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/7H.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/7H.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/7C.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/7C.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/7S.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/7S.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/7D.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/7D.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/8C.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/8C.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/7H.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/7H.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/8D.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/8D.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/7S.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/7S.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/8H.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/8H.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/8C.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/8C.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/8S.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/8S.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/8D.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/8D.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/9C.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/9C.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/8H.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/8H.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/9D.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/9D.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/8S.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/8S.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/9H.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/9H.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/9C.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/9C.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/9S.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/9S.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/9D.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/9D.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/AC.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/AC.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/9H.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/9H.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/AD.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/AD.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/9S.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/9S.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/AH.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/AH.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/AC.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/AC.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/AS.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/AS.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/AD.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/AD.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/JC.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/JC.png")));
-        
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/JD.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/JD.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/AH.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/AH.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/JH.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/JH.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/AS.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/AS.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/JS.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/JS.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/JC.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/JC.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/KC.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/KC.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/JD.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/JD.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/KD.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/KD.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/JH.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/JH.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/KH.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/KH.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/JS.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/JS.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/KS.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/KS.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/KC.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/KC.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/QC.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/QC.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/KD.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/KD.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/QD.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/QD.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/KH.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/KH.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/QH.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/QH.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/KS.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/KS.jpg")));
 
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/QS.png")));
-        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/handCards/QS.png")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/QC.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/QC.jpg")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/QD.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/QD.jpg")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/QH.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/QH.jpg")));
+
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/QS.jpg")));
+        cartas.add(new javax.swing.ImageIcon(getClass().getResource("/cartas/QS.jpg")));
 
         System.out.println(cartas.size());
+    }
+
+    public void establecerIconos() {
+
     }
 
     //es igual a la funcion de cambair labels
@@ -446,12 +456,6 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
     public void resizeImages() {
         int width = 85; // Ancho deseado
         int height = 118; // Alto deseado
-
-        for (int i = 0; i < cartas.size(); i++) {
-            Image img = cartas.get(i).getImage();
-            Image newImg = img.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
-            cartas.set(i, new ImageIcon(newImg));
-        }
 
         Image Rimg = redToken.getImage();
         Image RnewImg = Rimg.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
@@ -940,7 +944,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
                 int x = Integer.valueOf(Character.toString(getCords(e.getSource()).charAt(0)));
                 int y = Integer.valueOf(Character.toString(getCords(e.getSource()).charAt(1)));
                 String boton = x + "" + y;
-                deshabilitarBotones(getBoton(boton).getText());
+                deshabilitarBotones(getBoton(boton).getIcon());
                 System.out.println("coordenada buena");
                 return true;
             } else {
@@ -957,30 +961,43 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
     //esta funcion todavia no funciona bien, pero consigue los botones con las coordenadas, y compara si la carta coincide con el string que tiene cada boton como texot
     //como te dije, esta funcion no funciona ya que era como tenia antes el proyecto, ahora la voy a cambiar para que no compare cartas si no iconos.
-    public void deshabilitarBotones(String carta) {
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; i < 10; i++) {
-                getBoton(i + "" + j).setContentAreaFilled(false);
-                getBoton(i + "" + j).setEnabled(true);
-            }
-        }
+    public void deshabilitarBotones(Icon iconoSeleccionado) {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                if (!getBoton(i + "" + j).getText().equals(carta)) {
-                    getBoton(i + "" + j).setEnabled(false);
-                }
-                if (getBoton(i + "" + j).getText().equals(carta)) {
-                    getBoton(i + "" + j).setContentAreaFilled(true);
-                    getBoton(i + "" + j).setBackground(Color.GREEN);
+                JButton botonActual = getBoton(i + "" + j);
+                JLabel labelActual = getLabel(i + "" + j);
+
+                // Verifica si el icono del botón no es nulo antes de compararlo
+                Icon iconoBoton = botonActual.getIcon();
+                if (iconoBoton != null && iconoBoton.equals(iconoSeleccionado)) {
+                    botonActual.setEnabled(false); // Debe ser false para deshabilitar
+                    labelActual.setBackground(Color.GREEN);
+                } else {
+                    botonActual.setEnabled(true); // Debe ser true para habilitar otros botones
+                    labelActual.setBackground(null);
                 }
             }
         }
     }
 
-    @Override
+    public void habilitarBotones() {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                getBoton(i + "" + j).setEnabled(true);
+                getLabel(i + "" + j).setBackground(null);
+            }
+        }
+    }
+
     public void actionPerformed(ActionEvent e) {
-        if (validarBotonBaraja(e)) {
-            JButton botonBarajaPresionado = (JButton) e.getSource();
+        if (e.getSource().equals(SALIRTABLERO)) {
+            MENUSWING menu = new MENUSWING();
+            JOptionPane.showMessageDialog(this, "¡Vuelva pronto!\nVolverá al menú principal.");
+            this.dispose();
+            menu.setVisible(true);
+        } else if (e.getSource().equals(DESCARTAR)) {
+
+        } else if (e.getSource().equals(CAMBIARPOS)) {
 
         } else if (!validarBotonBaraja(e)) {
             int x = Integer.parseInt(Character.toString(getCords(e.getSource()).charAt(0)));
@@ -991,130 +1008,179 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
             switch (numjugadores) {
                 case 2:
+                    // Resto de tu código para 2 jugadores
+                    break;
 
                 case 3:
-
+                    // Resto de tu código para 3 jugadores
                     break;
 
                 case 4:
-
                     System.out.println(turnoJugador);
 
                     switch (turnoJugador) {
                         case 'a':
                             cambiarBarajas();
-                            if (botonBaraja(e)) {
-                                System.out.println("ENTRO");
-                                if (chequearIconoVacio(x + "" + y)) {
-                                    getBoton(posColocar).setIcon(seqplayers.get(0).color);
-                                    tableroIconos[x][y] = "r";
 
+                            if (IconoBotonTableroSeleccionado == null) {
+                                IconoBotonTableroSeleccionado = getBoton(x + "" + y).getIcon();
+                                ultimacarta.setIcon(IconoBotonTableroSeleccionado);
+                                deshabilitarBotones(IconoBotonTableroSeleccionado);
+                            } else {
+                                // Si no es la primera selección, compara iconos
+                                Icon iconoTablero = getBoton(x + "" + y).getIcon();
+                                if (iconoTablero.equals(IconoBotonTableroSeleccionado)) {
+                                    // Las imágenes son iguales, realiza las acciones necesarias
+                                    getBoton(posColocar).setIcon(seqplayers.get(0).color);
+                                    tableroIconos[x][y] = seqplayers.get(0).simbolo;
+
+                                    // Cambia el turno al siguiente jugador
                                     turnoJugador = 'b';
                                     cambiarNombreLabels();
+                                    habilitarBotones();
                                     JOptionPane.showMessageDialog(this, "Turno de : " + seqplayers.get(1).getName());
-                                    if (chequearGane("0") || chequearGane("1")) {
-
+                                    if (chequearGane(seqplayers.get(0).simbolo)) {
                                         vaciarArray();
                                         JOptionPane.showMessageDialog(this, "¡Terminó el juego!");
                                         System.exit(0);
                                     }
 
+                                    // Limpia el icono del botón tablero seleccionado
+                                    IconoBotonTableroSeleccionado = null;
                                 } else {
-                                    JOptionPane.showMessageDialog(this, "Ya hay una fcha puesta");
+                                    JOptionPane.showMessageDialog(this, "Las cartas no coinciden");
+                                    IconoBotonTableroSeleccionado = null;
                                 }
-
-                            } else {
-                                JOptionPane.showMessageDialog(this, "es boton de la baraja");
                             }
 
                             break;
 
                         case 'b':
-
                             cambiarBarajas();
-                            if (botonBaraja(e)) {
-                                System.out.println("ENTRO");
-                                if (chequearIconoVacio(x + "" + y)) {
-                                    getBoton(posColocar).setIcon(seqplayers.get(0).color);
-                                    tableroIconos[x][y] = "r";
 
+                            if (IconoBotonTableroSeleccionado == null) {
+                                // Si es la primera selección, guarda el icono y deshabilita otros botones
+                                IconoBotonTableroSeleccionado = getBoton(x + "" + y).getIcon();
+                                ultimacarta.setIcon(IconoBotonTableroSeleccionado);
+                                deshabilitarBotones(IconoBotonTableroSeleccionado);
+                            } else {
+                                // Si no es la primera selección, compara iconos
+                                Icon iconoTablero = getBoton(x + "" + y).getIcon();
+                                if (iconoTablero.equals(IconoBotonTableroSeleccionado)) {
+                                    // Las imágenes son iguales, realiza las acciones necesarias
+                                    getBoton(posColocar).setIcon(seqplayers.get(1).color);
+                                    tableroIconos[x][y] = seqplayers.get(1).simbolo;
+
+                                    // Cambia el turno al siguiente jugador
                                     turnoJugador = 'c';
                                     cambiarNombreLabels();
+                                    habilitarBotones();
                                     JOptionPane.showMessageDialog(this, "Turno de : " + seqplayers.get(2).getName());
-                                    if (chequearGane("0") || chequearGane("1")) {
-
+                                    if (chequearGane(seqplayers.get(1).simbolo)) {
                                         vaciarArray();
                                         JOptionPane.showMessageDialog(this, "¡Terminó el juego!");
                                         System.exit(0);
                                     }
 
+                                    // Limpia el icono del botón tablero seleccionado
+                                    IconoBotonTableroSeleccionado = null;
                                 } else {
-                                    JOptionPane.showMessageDialog(this, "Ya hay una fcha puesta");
+                                    JOptionPane.showMessageDialog(this, "Las cartas no coinciden");
+                                    IconoBotonTableroSeleccionado = null;
                                 }
-
-                            } else {
-                                JOptionPane.showMessageDialog(this, "es boton de la baraja");
                             }
 
                             break;
 
                         case 'c':
-
                             cambiarBarajas();
-                            if (chequearIconoVacio(x + "" + y)) {
-                                getBoton(posColocar).setIcon(seqplayers.get(2).color);
-                                tableroIconos[x][y] = "g";
 
-                                turnoJugador = 'd';
-                                cambiarNombreLabels();
-                                JOptionPane.showMessageDialog(this, "Turno de : " + seqplayers.get(3).getName());
-                                if (chequearGane("r") || chequearGane("b")) {
-
-                                    vaciarArray();
-                                    JOptionPane.showMessageDialog(this, "¡Terminó el juego!");
-                                    System.exit(0);
-                                }
-
+                            if (IconoBotonTableroSeleccionado == null) {
+                                // Si es la primera selección, guarda el icono y deshabilita otros botones
+                                IconoBotonTableroSeleccionado = getBoton(x + "" + y).getIcon();
+                                ultimacarta.setIcon(IconoBotonTableroSeleccionado);
+                                deshabilitarBotones(IconoBotonTableroSeleccionado);
                             } else {
-                                JOptionPane.showMessageDialog(this, "Ya hay una fcha puesta");
-                            }
-                            break;
+                                // Si no es la primera selección, compara iconos
+                                Icon iconoTablero = getBoton(x + "" + y).getIcon();
+                                if (iconoTablero.equals(IconoBotonTableroSeleccionado)) {
+                                    // Las imágenes son iguales, realiza las acciones necesarias
+                                    getBoton(posColocar).setIcon(seqplayers.get(2).color);
+                                    tableroIconos[x][y] = seqplayers.get(2).simbolo;
 
-                        case 'd':
-                            cambiarBarajas();
-                            if (seqplayers.size() >= 4) { // Verifica que haya al menos cuatro jugadores
-                                if (chequearIconoVacio(x + "" + y)) {
-                                    getBoton(posColocar).setIcon(seqplayers.get(3).color); // Accede al cuarto jugador
-                                    tableroIconos[x][y] = "y";
-                                    turnoJugador = 'a';
+                                    // Cambia el turno al siguiente jugador
+                                    turnoJugador = 'd';
                                     cambiarNombreLabels();
-                                    JOptionPane.showMessageDialog(this, "Turno de : " + seqplayers.get(0).getName());
-                                    if (chequearGane("r") || chequearGane("b")) {
+                                    habilitarBotones();
+                                    JOptionPane.showMessageDialog(this, "Turno de : " + seqplayers.get(3).getName());
+                                    if (chequearGane(seqplayers.get(2).simbolo)) {
                                         vaciarArray();
                                         JOptionPane.showMessageDialog(this, "¡Terminó el juego!");
                                         System.exit(0);
                                     }
+
+                                    // Limpia el icono del botón tablero seleccionado
+                                    IconoBotonTableroSeleccionado = null;
                                 } else {
-                                    JOptionPane.showMessageDialog(this, "Ya hay una ficha puesta");
+                                    JOptionPane.showMessageDialog(this, "Las cartas no coinciden");
+                                    IconoBotonTableroSeleccionado = null;
                                 }
+                            }
+
+                            break;
+
+                        case 'd':
+                            cambiarBarajas();
+
+                            if (IconoBotonTableroSeleccionado == null) {
+                                // Si es la primera selección, guarda el icono y deshabilita otros botones
+                                IconoBotonTableroSeleccionado = getBoton(x + "" + y).getIcon();
+                                ultimacarta.setIcon(IconoBotonTableroSeleccionado);
+                                deshabilitarBotones(IconoBotonTableroSeleccionado);
                             } else {
-                                JOptionPane.showMessageDialog(this, "No hay suficientes jugadores para el turno 'd'");
+                                // Si no es la primera selección, compara iconos
+                                Icon iconoTablero = getBoton(x + "" + y).getIcon();
+                                if (iconoTablero.equals(IconoBotonTableroSeleccionado)) {
+                                    // Las imágenes son iguales, realiza las acciones necesarias
+                                    getBoton(posColocar).setIcon(seqplayers.get(3).color);
+                                    tableroIconos[x][y] = seqplayers.get(3).simbolo;
+
+                                    // Cambia el turno al siguiente jugador
+                                    turnoJugador = 'a'; // Cambia al jugador 'a' en lugar de 'd'
+                                    cambiarNombreLabels();
+                                    habilitarBotones();
+                                    JOptionPane.showMessageDialog(this, "Turno de : " + seqplayers.get(0).getName());
+                                    if (chequearGane(seqplayers.get(3).simbolo)) {
+                                        vaciarArray();
+                                        JOptionPane.showMessageDialog(this, "¡Terminó el juego!");
+                                        System.exit(0);
+                                    }
+
+                                    // Limpia el icono del botón tablero seleccionado
+                                    IconoBotonTableroSeleccionado = null;
+                                } else {
+                                    JOptionPane.showMessageDialog(this, "Las cartas no coinciden");
+                                    IconoBotonTableroSeleccionado = null;
+                                }
                             }
                             break;
 
+                        // Resto de los casos para el jugador 'b', 'c', 'd'
+                        // ...
                     }
                     break;
 
                 case 6:
-
+                    // Resto de tu código para 6 jugadores
                     break;
 
                 case 8:
-
+                    // Resto de tu código para 8 jugadores
                     break;
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "no me funcionan los botones de la baraja :(\ntenga piedad inge");
         }
-
     }
 
     //vacia los arrays ya que los arrays que estan siendo utilziados en esta clase son propios de esta calse, y se generan despues de entrar a la clase de SELECCIONARJUGADORES
@@ -1975,6 +2041,10 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         sietecartasboton5.addActionListener(this);
         sietecartasboton6.addActionListener(this);
         sietecartasboton7.addActionListener(this);
+
+        CAMBIARPOS.addActionListener(this);
+        SALIRTABLERO.addActionListener(this);
+        DESCARTAR.addActionListener(this);
     }
 
     public static void main(String args[]) {
@@ -1988,16 +2058,24 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ATABLEROCOLE.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ATABLEROCOLE.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ATABLEROCOLE.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ATABLEROCOLE.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ATABLEROCOLE.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ATABLEROCOLE.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ATABLEROCOLE.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ATABLEROCOLE.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -2018,11 +2096,6 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         layeredpanecartas = new javax.swing.JLayeredPane();
         cincocartas = new javax.swing.JPanel();
-        cincocartasboton1 = new javax.swing.JButton();
-        cincocartasboton2 = new javax.swing.JButton();
-        cincocartasboton3 = new javax.swing.JButton();
-        cincocartasboton4 = new javax.swing.JButton();
-        cincocartasboton5 = new javax.swing.JButton();
         cuatrocartas = new javax.swing.JPanel();
         cuatrocartasboton1 = new javax.swing.JButton();
         cuatrocartasboton2 = new javax.swing.JButton();
@@ -2043,109 +2116,13 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         seiscartasboton4 = new javax.swing.JButton();
         seiscartasboton5 = new javax.swing.JButton();
         seiscartasboton6 = new javax.swing.JButton();
+        cincocartasboton1 = new javax.swing.JButton();
+        cincocartasboton2 = new javax.swing.JButton();
+        cincocartasboton3 = new javax.swing.JButton();
+        cincocartasboton4 = new javax.swing.JButton();
+        cincocartasboton5 = new javax.swing.JButton();
         nombrejugadoractual = new javax.swing.JLabel();
         TABLERO = new javax.swing.JLayeredPane();
-        boton00 = new javax.swing.JButton();
-        boton01 = new javax.swing.JButton();
-        boton02 = new javax.swing.JButton();
-        boton04 = new javax.swing.JButton();
-        boton03 = new javax.swing.JButton();
-        boton05 = new javax.swing.JButton();
-        boton06 = new javax.swing.JButton();
-        boton07 = new javax.swing.JButton();
-        boton08 = new javax.swing.JButton();
-        boton09 = new javax.swing.JButton();
-        boton10 = new javax.swing.JButton();
-        boton11 = new javax.swing.JButton();
-        boton12 = new javax.swing.JButton();
-        boton13 = new javax.swing.JButton();
-        boton14 = new javax.swing.JButton();
-        boton15 = new javax.swing.JButton();
-        boton16 = new javax.swing.JButton();
-        boton17 = new javax.swing.JButton();
-        boton18 = new javax.swing.JButton();
-        boton19 = new javax.swing.JButton();
-        boton20 = new javax.swing.JButton();
-        boton21 = new javax.swing.JButton();
-        boton22 = new javax.swing.JButton();
-        boton23 = new javax.swing.JButton();
-        boton24 = new javax.swing.JButton();
-        boton25 = new javax.swing.JButton();
-        boton26 = new javax.swing.JButton();
-        boton27 = new javax.swing.JButton();
-        boton28 = new javax.swing.JButton();
-        boton29 = new javax.swing.JButton();
-        boton30 = new javax.swing.JButton();
-        boton31 = new javax.swing.JButton();
-        boton32 = new javax.swing.JButton();
-        boton33 = new javax.swing.JButton();
-        boton34 = new javax.swing.JButton();
-        boton35 = new javax.swing.JButton();
-        boton36 = new javax.swing.JButton();
-        boton37 = new javax.swing.JButton();
-        boton38 = new javax.swing.JButton();
-        boton39 = new javax.swing.JButton();
-        boton40 = new javax.swing.JButton();
-        boton41 = new javax.swing.JButton();
-        boton42 = new javax.swing.JButton();
-        boton43 = new javax.swing.JButton();
-        boton44 = new javax.swing.JButton();
-        boton45 = new javax.swing.JButton();
-        boton46 = new javax.swing.JButton();
-        boton47 = new javax.swing.JButton();
-        boton48 = new javax.swing.JButton();
-        boton49 = new javax.swing.JButton();
-        boton50 = new javax.swing.JButton();
-        boton51 = new javax.swing.JButton();
-        boton52 = new javax.swing.JButton();
-        boton53 = new javax.swing.JButton();
-        boton54 = new javax.swing.JButton();
-        boton55 = new javax.swing.JButton();
-        boton56 = new javax.swing.JButton();
-        boton57 = new javax.swing.JButton();
-        boton58 = new javax.swing.JButton();
-        boton59 = new javax.swing.JButton();
-        boton60 = new javax.swing.JButton();
-        boton61 = new javax.swing.JButton();
-        boton62 = new javax.swing.JButton();
-        boton63 = new javax.swing.JButton();
-        boton64 = new javax.swing.JButton();
-        boton65 = new javax.swing.JButton();
-        boton66 = new javax.swing.JButton();
-        boton67 = new javax.swing.JButton();
-        boton68 = new javax.swing.JButton();
-        boton69 = new javax.swing.JButton();
-        boton70 = new javax.swing.JButton();
-        boton71 = new javax.swing.JButton();
-        boton72 = new javax.swing.JButton();
-        boton73 = new javax.swing.JButton();
-        boton74 = new javax.swing.JButton();
-        boton75 = new javax.swing.JButton();
-        boton76 = new javax.swing.JButton();
-        boton77 = new javax.swing.JButton();
-        boton78 = new javax.swing.JButton();
-        boton79 = new javax.swing.JButton();
-        boton80 = new javax.swing.JButton();
-        boton81 = new javax.swing.JButton();
-        boton82 = new javax.swing.JButton();
-        boton83 = new javax.swing.JButton();
-        boton84 = new javax.swing.JButton();
-        boton85 = new javax.swing.JButton();
-        boton86 = new javax.swing.JButton();
-        boton87 = new javax.swing.JButton();
-        boton88 = new javax.swing.JButton();
-        boton89 = new javax.swing.JButton();
-        boton90 = new javax.swing.JButton();
-        boton91 = new javax.swing.JButton();
-        boton92 = new javax.swing.JButton();
-        boton93 = new javax.swing.JButton();
-        boton94 = new javax.swing.JButton();
-        boton95 = new javax.swing.JButton();
-        boton96 = new javax.swing.JButton();
-        boton97 = new javax.swing.JButton();
-        boton98 = new javax.swing.JButton();
-        boton99 = new javax.swing.JButton();
-        TABLEROLABEL = new javax.swing.JLabel();
         label00 = new javax.swing.JLabel();
         label01 = new javax.swing.JLabel();
         label02 = new javax.swing.JLabel();
@@ -2246,13 +2223,114 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         label37 = new javax.swing.JLabel();
         label38 = new javax.swing.JLabel();
         label39 = new javax.swing.JLabel();
+        boton86 = new javax.swing.JButton();
+        boton76 = new javax.swing.JButton();
+        boton69 = new javax.swing.JButton();
+        boton99 = new javax.swing.JButton();
+        boton77 = new javax.swing.JButton();
+        boton21 = new javax.swing.JButton();
+        boton74 = new javax.swing.JButton();
+        boton18 = new javax.swing.JButton();
+        boton27 = new javax.swing.JButton();
+        boton43 = new javax.swing.JButton();
+        boton19 = new javax.swing.JButton();
+        boton95 = new javax.swing.JButton();
+        boton66 = new javax.swing.JButton();
+        boton39 = new javax.swing.JButton();
+        boton65 = new javax.swing.JButton();
+        boton00 = new javax.swing.JButton();
+        boton57 = new javax.swing.JButton();
+        boton83 = new javax.swing.JButton();
+        boton35 = new javax.swing.JButton();
+        boton41 = new javax.swing.JButton();
+        boton22 = new javax.swing.JButton();
+        boton84 = new javax.swing.JButton();
+        boton05 = new javax.swing.JButton();
+        boton25 = new javax.swing.JButton();
+        boton98 = new javax.swing.JButton();
+        boton32 = new javax.swing.JButton();
+        boton34 = new javax.swing.JButton();
+        boton20 = new javax.swing.JButton();
+        boton80 = new javax.swing.JButton();
+        boton53 = new javax.swing.JButton();
+        boton58 = new javax.swing.JButton();
+        boton52 = new javax.swing.JButton();
+        boton64 = new javax.swing.JButton();
+        boton07 = new javax.swing.JButton();
+        boton28 = new javax.swing.JButton();
+        boton08 = new javax.swing.JButton();
+        boton26 = new javax.swing.JButton();
+        boton50 = new javax.swing.JButton();
+        boton87 = new javax.swing.JButton();
+        boton29 = new javax.swing.JButton();
+        boton89 = new javax.swing.JButton();
+        boton49 = new javax.swing.JButton();
+        boton55 = new javax.swing.JButton();
+        boton62 = new javax.swing.JButton();
+        boton04 = new javax.swing.JButton();
+        boton37 = new javax.swing.JButton();
+        boton13 = new javax.swing.JButton();
+        boton75 = new javax.swing.JButton();
+        boton71 = new javax.swing.JButton();
+        boton81 = new javax.swing.JButton();
+        boton40 = new javax.swing.JButton();
+        boton44 = new javax.swing.JButton();
+        boton23 = new javax.swing.JButton();
+        boton61 = new javax.swing.JButton();
+        boton90 = new javax.swing.JButton();
+        boton72 = new javax.swing.JButton();
+        boton73 = new javax.swing.JButton();
+        boton85 = new javax.swing.JButton();
+        boton31 = new javax.swing.JButton();
+        boton78 = new javax.swing.JButton();
+        boton45 = new javax.swing.JButton();
+        boton15 = new javax.swing.JButton();
+        boton59 = new javax.swing.JButton();
+        boton91 = new javax.swing.JButton();
+        boton60 = new javax.swing.JButton();
+        boton94 = new javax.swing.JButton();
+        boton10 = new javax.swing.JButton();
+        boton97 = new javax.swing.JButton();
+        boton47 = new javax.swing.JButton();
+        boton48 = new javax.swing.JButton();
+        boton24 = new javax.swing.JButton();
+        boton06 = new javax.swing.JButton();
+        boton38 = new javax.swing.JButton();
+        boton70 = new javax.swing.JButton();
+        boton96 = new javax.swing.JButton();
+        boton03 = new javax.swing.JButton();
+        boton33 = new javax.swing.JButton();
+        boton46 = new javax.swing.JButton();
+        boton12 = new javax.swing.JButton();
+        boton68 = new javax.swing.JButton();
+        boton09 = new javax.swing.JButton();
+        boton79 = new javax.swing.JButton();
+        boton36 = new javax.swing.JButton();
+        boton01 = new javax.swing.JButton();
+        boton16 = new javax.swing.JButton();
+        boton67 = new javax.swing.JButton();
+        boton14 = new javax.swing.JButton();
+        boton82 = new javax.swing.JButton();
+        boton93 = new javax.swing.JButton();
+        boton17 = new javax.swing.JButton();
+        boton54 = new javax.swing.JButton();
+        boton51 = new javax.swing.JButton();
+        boton63 = new javax.swing.JButton();
+        boton56 = new javax.swing.JButton();
+        boton88 = new javax.swing.JButton();
+        boton30 = new javax.swing.JButton();
+        boton11 = new javax.swing.JButton();
+        boton42 = new javax.swing.JButton();
+        boton02 = new javax.swing.JButton();
+        boton92 = new javax.swing.JButton();
+        TABLEROLABEL = new javax.swing.JLabel();
         layeredpaneizq = new javax.swing.JLayeredPane();
-        dosjugadoresizq = new javax.swing.JPanel();
-        dosnombrejugador2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         tresjugadoresizq = new javax.swing.JPanel();
         tresnombrejugador3 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        dosjugadoresizq = new javax.swing.JPanel();
+        dosnombrejugador2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         cuatrojugadoresizq = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         cuatronombrejugador3 = new javax.swing.JLabel();
@@ -2278,11 +2356,6 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         dosjugadoresder = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        tresjugadoresder = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        tresnombrejugador2 = new javax.swing.JLabel();
         cuatrojugadoresder = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -2297,6 +2370,11 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         ochonombrejugador3 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         ochonombrejugador4 = new javax.swing.JLabel();
+        tresjugadoresder = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        tresnombrejugador2 = new javax.swing.JLabel();
         seisjugadoresder = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -2304,54 +2382,30 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         seisnombrejugador2 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         seisnombrejugador3 = new javax.swing.JLabel();
+        SALIRTABLERO = new javax.swing.JButton();
+        CAMBIARPOS = new javax.swing.JButton();
+        ultimacarta = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        DESCARTAR = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
-        setSize(new java.awt.Dimension(1190, 802));
+        setSize(new java.awt.Dimension(1920, 1920));
 
         layeredpanecartas.setPreferredSize(new java.awt.Dimension(700, 202));
 
         cincocartas.setBackground(new java.awt.Color(255, 255, 255));
         cincocartas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        cincocartasboton1.setContentAreaFilled(false);
-
-        cincocartasboton2.setContentAreaFilled(false);
-
-        cincocartasboton3.setContentAreaFilled(false);
-
-        cincocartasboton4.setContentAreaFilled(false);
-
-        cincocartasboton5.setContentAreaFilled(false);
-
         javax.swing.GroupLayout cincocartasLayout = new javax.swing.GroupLayout(cincocartas);
         cincocartas.setLayout(cincocartasLayout);
         cincocartasLayout.setHorizontalGroup(
             cincocartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cincocartasLayout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(cincocartasboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cincocartasboton2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cincocartasboton3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cincocartasboton4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cincocartasboton5, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(71, Short.MAX_VALUE))
+            .addGap(0, 992, Short.MAX_VALUE)
         );
         cincocartasLayout.setVerticalGroup(
             cincocartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cincocartasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(cincocartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cincocartasboton5, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cincocartasboton4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cincocartasboton3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cincocartasboton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cincocartasboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 112, Short.MAX_VALUE)
         );
 
         cuatrocartas.setBackground(new java.awt.Color(255, 255, 255));
@@ -2375,26 +2429,26 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         cuatrocartasLayout.setHorizontalGroup(
             cuatrocartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cuatrocartasLayout.createSequentialGroup()
-                .addGap(108, 108, 108)
-                .addComponent(cuatrocartasboton3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54)
+                .addComponent(cuatrocartasboton3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cuatrocartasboton2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cuatrocartasboton2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cuatrocartasboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cuatrocartasboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cuatrocartasboton4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addComponent(cuatrocartasboton4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         cuatrocartasLayout.setVerticalGroup(
             cuatrocartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cuatrocartasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(cuatrocartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cuatrocartasboton3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cuatrocartasboton4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cuatrocartasboton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cuatrocartasboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cuatrocartasboton3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cuatrocartasboton4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cuatrocartasboton2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cuatrocartasboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         sietecartas.setBackground(new java.awt.Color(255, 255, 255));
@@ -2454,34 +2508,34 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         sietecartasLayout.setHorizontalGroup(
             sietecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sietecartasLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(sietecartasboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(sietecartasboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sietecartasboton2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sietecartasboton2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sietecartasboton3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sietecartasboton3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sietecartasboton4, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sietecartasboton4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sietecartasboton5, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sietecartasboton5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sietecartasboton6, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sietecartasboton6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sietecartasboton7, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addComponent(sietecartasboton7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(216, Short.MAX_VALUE))
         );
         sietecartasLayout.setVerticalGroup(
             sietecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sietecartasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(sietecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sietecartasboton7, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sietecartasboton6, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sietecartasboton5, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sietecartasboton4, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sietecartasboton3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sietecartasboton2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sietecartasboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(sietecartasboton7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sietecartasboton6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sietecartasboton5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sietecartasboton4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sietecartasboton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sietecartasboton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sietecartasboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -2506,37 +2560,64 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         seiscartasboton6.setContentAreaFilled(false);
 
+        cincocartasboton1.setContentAreaFilled(false);
+
+        cincocartasboton2.setContentAreaFilled(false);
+
+        cincocartasboton3.setContentAreaFilled(false);
+
+        cincocartasboton4.setContentAreaFilled(false);
+
+        cincocartasboton5.setContentAreaFilled(false);
+
         javax.swing.GroupLayout seiscartasLayout = new javax.swing.GroupLayout(seiscartas);
         seiscartas.setLayout(seiscartasLayout);
         seiscartasLayout.setHorizontalGroup(
             seiscartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(seiscartasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(seiscartasboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(seiscartasboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(seiscartasboton2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cincocartasboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(seiscartasboton3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cincocartasboton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(seiscartasboton4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cincocartasboton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(seiscartasboton5, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cincocartasboton4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(seiscartasboton6, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addComponent(cincocartasboton5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(seiscartasboton2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(seiscartasboton3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(seiscartasboton4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(seiscartasboton5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(seiscartasboton6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         seiscartasLayout.setVerticalGroup(
             seiscartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(seiscartasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(seiscartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(seiscartasboton6, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(seiscartasboton5, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(seiscartasboton4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(seiscartasboton3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(seiscartasboton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(seiscartasboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(seiscartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(seiscartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(cincocartasboton5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cincocartasboton4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cincocartasboton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cincocartasboton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cincocartasboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(seiscartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(seiscartasboton6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(seiscartasboton5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(seiscartasboton4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(seiscartasboton3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(seiscartasboton2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(seiscartasboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         nombrejugadoractual.setText("jLabel15");
@@ -2552,965 +2633,55 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         layeredpanecartasLayout.setHorizontalGroup(
             layeredpanecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layeredpanecartasLayout.createSequentialGroup()
-                .addGroup(layeredpanecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layeredpanecartasLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(cuatrocartas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layeredpanecartasLayout.createSequentialGroup()
-                        .addGap(287, 287, 287)
-                        .addComponent(nombrejugadoractual, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(cuatrocartas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layeredpanecartasLayout.createSequentialGroup()
+                .addGap(300, 300, 300)
+                .addComponent(nombrejugadoractual, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layeredpanecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layeredpanecartasLayout.createSequentialGroup()
-                    .addContainerGap(13, Short.MAX_VALUE)
-                    .addComponent(cincocartas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layeredpanecartasLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(cincocartas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addContainerGap()))
             .addGroup(layeredpanecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layeredpanecartasLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(seiscartas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(seiscartas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
             .addGroup(layeredpanecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layeredpanecartasLayout.createSequentialGroup()
-                    .addContainerGap(25, Short.MAX_VALUE)
-                    .addComponent(sietecartas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()
+                    .addComponent(sietecartas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         layeredpanecartasLayout.setVerticalGroup(
             layeredpanecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layeredpanecartasLayout.createSequentialGroup()
-                .addComponent(cuatrocartas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cuatrocartas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(nombrejugadoractual)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
             .addGroup(layeredpanecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layeredpanecartasLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(cincocartas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(28, Short.MAX_VALUE)))
+                    .addContainerGap(82, Short.MAX_VALUE)))
             .addGroup(layeredpanecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layeredpanecartasLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(seiscartas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(28, Short.MAX_VALUE)))
+                    .addContainerGap(74, Short.MAX_VALUE)))
             .addGroup(layeredpanecartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layeredpanecartasLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(sietecartas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(26, Short.MAX_VALUE)))
+                    .addContainerGap(82, Short.MAX_VALUE)))
         );
 
         TABLERO.setMinimumSize(new java.awt.Dimension(700, 600));
         TABLERO.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        boton00.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton00.setForeground(new java.awt.Color(255, 255, 255));
-        boton00.setText("null");
-        boton00.setBorder(null);
-        boton00.setBorderPainted(false);
-        boton00.setContentAreaFilled(false);
-        boton00.setEnabled(false);
-        boton00.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boton00ActionPerformed(evt);
-            }
-        });
-        TABLERO.add(boton00, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 540, 51, 53));
-
-        boton01.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton01.setForeground(new java.awt.Color(255, 255, 255));
-        boton01.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/AD.jpg"))); // NOI18N
-        boton01.setText("AD");
-        boton01.setBorder(null);
-        boton01.setBorderPainted(false);
-        TABLERO.add(boton01, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 542, 51, 53));
-
-        boton02.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton02.setForeground(new java.awt.Color(255, 255, 255));
-        boton02.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/KD.jpg"))); // NOI18N
-        boton02.setText("KD");
-        boton02.setBorder(null);
-        boton02.setBorderPainted(false);
-        boton02.setContentAreaFilled(false);
-        TABLERO.add(boton02, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 542, 51, 53));
-
-        boton04.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton04.setForeground(new java.awt.Color(255, 255, 255));
-        boton04.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/10D.jpg"))); // NOI18N
-        boton04.setText("10D");
-        boton04.setBorder(null);
-        boton04.setBorderPainted(false);
-        boton04.setContentAreaFilled(false);
-        TABLERO.add(boton04, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 540, 51, 53));
-
-        boton03.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton03.setForeground(new java.awt.Color(255, 255, 255));
-        boton03.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/QD.jpg"))); // NOI18N
-        boton03.setText("QD");
-        boton03.setBorder(null);
-        boton03.setBorderPainted(false);
-        boton03.setContentAreaFilled(false);
-        TABLERO.add(boton03, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 542, 51, 53));
-
-        boton05.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton05.setForeground(new java.awt.Color(255, 255, 255));
-        boton05.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/9D.jpg"))); // NOI18N
-        boton05.setText("9D");
-        boton05.setBorder(null);
-        boton05.setBorderPainted(false);
-        boton05.setContentAreaFilled(false);
-        TABLERO.add(boton05, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 542, 51, 53));
-
-        boton06.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton06.setForeground(new java.awt.Color(255, 255, 255));
-        boton06.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/8D.jpg"))); // NOI18N
-        boton06.setText("8D");
-        boton06.setBorder(null);
-        boton06.setBorderPainted(false);
-        boton06.setContentAreaFilled(false);
-        TABLERO.add(boton06, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 542, 51, 53));
-
-        boton07.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton07.setForeground(new java.awt.Color(255, 255, 255));
-        boton07.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/7D.jpg"))); // NOI18N
-        boton07.setText("7D");
-        boton07.setBorder(null);
-        boton07.setBorderPainted(false);
-        boton07.setContentAreaFilled(false);
-        TABLERO.add(boton07, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 542, 51, 53));
-
-        boton08.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton08.setForeground(new java.awt.Color(255, 255, 255));
-        boton08.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/6D.jpg"))); // NOI18N
-        boton08.setText("6D");
-        boton08.setBorder(null);
-        boton08.setBorderPainted(false);
-        boton08.setContentAreaFilled(false);
-        TABLERO.add(boton08, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 542, 51, 53));
-
-        boton09.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton09.setForeground(new java.awt.Color(255, 255, 255));
-        boton09.setText("null");
-        boton09.setBorder(null);
-        boton09.setBorderPainted(false);
-        boton09.setContentAreaFilled(false);
-        boton09.setEnabled(false);
-        TABLERO.add(boton09, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 542, 51, 53));
-
-        boton10.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton10.setForeground(new java.awt.Color(255, 255, 255));
-        boton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/AC.jpg"))); // NOI18N
-        boton10.setText("AC");
-        boton10.setBorder(null);
-        boton10.setBorderPainted(false);
-        boton10.setContentAreaFilled(false);
-        TABLERO.add(boton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, 51, 53));
-
-        boton11.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton11.setForeground(new java.awt.Color(255, 255, 255));
-        boton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/7S.jpg"))); // NOI18N
-        boton11.setText("7S");
-        boton11.setBorder(null);
-        boton11.setBorderPainted(false);
-        boton11.setContentAreaFilled(false);
-        TABLERO.add(boton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 483, 51, 53));
-
-        boton12.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton12.setForeground(new java.awt.Color(255, 255, 255));
-        boton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/6S.jpg"))); // NOI18N
-        boton12.setText("6S");
-        boton12.setBorder(null);
-        boton12.setBorderPainted(false);
-        boton12.setContentAreaFilled(false);
-        TABLERO.add(boton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 483, 51, 53));
-
-        boton13.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton13.setForeground(new java.awt.Color(255, 255, 255));
-        boton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/5S.jpg"))); // NOI18N
-        boton13.setText("5S");
-        boton13.setBorder(null);
-        boton13.setBorderPainted(false);
-        boton13.setContentAreaFilled(false);
-        TABLERO.add(boton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 483, 51, 53));
-
-        boton14.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton14.setForeground(new java.awt.Color(255, 255, 255));
-        boton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/4S.jpg"))); // NOI18N
-        boton14.setText("4S");
-        boton14.setBorder(null);
-        boton14.setBorderPainted(false);
-        boton14.setContentAreaFilled(false);
-        TABLERO.add(boton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 483, 51, 53));
-
-        boton15.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton15.setForeground(new java.awt.Color(255, 255, 255));
-        boton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/3S.jpg"))); // NOI18N
-        boton15.setText("3S");
-        boton15.setBorder(null);
-        boton15.setBorderPainted(false);
-        boton15.setContentAreaFilled(false);
-        TABLERO.add(boton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 483, 51, 53));
-
-        boton16.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton16.setForeground(new java.awt.Color(255, 255, 255));
-        boton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/2S.jpg"))); // NOI18N
-        boton16.setText("2S");
-        boton16.setBorder(null);
-        boton16.setBorderPainted(false);
-        boton16.setContentAreaFilled(false);
-        TABLERO.add(boton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 483, 51, 53));
-
-        boton17.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton17.setForeground(new java.awt.Color(255, 255, 255));
-        boton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/2H.jpg"))); // NOI18N
-        boton17.setText("2H");
-        boton17.setBorder(null);
-        boton17.setBorderPainted(false);
-        boton17.setContentAreaFilled(false);
-        TABLERO.add(boton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 483, 51, 53));
-
-        boton18.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton18.setForeground(new java.awt.Color(255, 255, 255));
-        boton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/3H.jpg"))); // NOI18N
-        boton18.setText("3H");
-        boton18.setBorder(null);
-        boton18.setBorderPainted(false);
-        boton18.setContentAreaFilled(false);
-        TABLERO.add(boton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 483, 51, 53));
-
-        boton19.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton19.setForeground(new java.awt.Color(255, 255, 255));
-        boton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/5D.jpg"))); // NOI18N
-        boton19.setText("5D");
-        boton19.setBorder(null);
-        boton19.setBorderPainted(false);
-        boton19.setContentAreaFilled(false);
-        TABLERO.add(boton19, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 483, 51, 53));
-
-        boton20.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton20.setForeground(new java.awt.Color(255, 255, 255));
-        boton20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/KC.jpg"))); // NOI18N
-        boton20.setText("KC");
-        boton20.setBorder(null);
-        boton20.setBorderPainted(false);
-        boton20.setContentAreaFilled(false);
-        TABLERO.add(boton20, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 423, 51, 53));
-
-        boton21.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton21.setForeground(new java.awt.Color(255, 255, 255));
-        boton21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/8S.jpg"))); // NOI18N
-        boton21.setText("8S");
-        boton21.setBorder(null);
-        boton21.setBorderPainted(false);
-        boton21.setContentAreaFilled(false);
-        TABLERO.add(boton21, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 423, 51, 53));
-
-        boton22.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton22.setForeground(new java.awt.Color(255, 255, 255));
-        boton22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/10C.jpg"))); // NOI18N
-        boton22.setText("10C");
-        boton22.setBorder(null);
-        boton22.setBorderPainted(false);
-        boton22.setContentAreaFilled(false);
-        TABLERO.add(boton22, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 423, 51, 53));
-
-        boton23.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton23.setForeground(new java.awt.Color(255, 255, 255));
-        boton23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/QC.jpg"))); // NOI18N
-        boton23.setText("QC");
-        boton23.setBorder(null);
-        boton23.setBorderPainted(false);
-        boton23.setContentAreaFilled(false);
-        TABLERO.add(boton23, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 423, 51, 53));
-
-        boton24.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton24.setForeground(new java.awt.Color(255, 255, 255));
-        boton24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/KC.jpg"))); // NOI18N
-        boton24.setText("KC");
-        boton24.setBorder(null);
-        boton24.setBorderPainted(false);
-        boton24.setContentAreaFilled(false);
-        TABLERO.add(boton24, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 423, 51, 53));
-
-        boton25.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton25.setForeground(new java.awt.Color(255, 255, 255));
-        boton25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/AC.jpg"))); // NOI18N
-        boton25.setText("AC");
-        boton25.setBorder(null);
-        boton25.setBorderPainted(false);
-        boton25.setContentAreaFilled(false);
-        TABLERO.add(boton25, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 423, 51, 53));
-
-        boton26.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton26.setForeground(new java.awt.Color(255, 255, 255));
-        boton26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/AD.jpg"))); // NOI18N
-        boton26.setText("AD");
-        boton26.setBorder(null);
-        boton26.setBorderPainted(false);
-        TABLERO.add(boton26, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 423, 51, 53));
-
-        boton27.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton27.setForeground(new java.awt.Color(255, 255, 255));
-        boton27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/KD.jpg"))); // NOI18N
-        boton27.setText("KD");
-        boton27.setBorder(null);
-        boton27.setBorderPainted(false);
-        boton27.setContentAreaFilled(false);
-        TABLERO.add(boton27, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 423, 51, 53));
-
-        boton28.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton28.setForeground(new java.awt.Color(255, 255, 255));
-        boton28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/4H.jpg"))); // NOI18N
-        boton28.setText("4H");
-        boton28.setBorder(null);
-        boton28.setBorderPainted(false);
-        boton28.setContentAreaFilled(false);
-        TABLERO.add(boton28, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 423, 51, 53));
-
-        boton29.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton29.setForeground(new java.awt.Color(255, 255, 255));
-        boton29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/4D.jpg"))); // NOI18N
-        boton29.setText("4D");
-        boton29.setBorder(null);
-        boton29.setBorderPainted(false);
-        boton29.setContentAreaFilled(false);
-        TABLERO.add(boton29, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 423, 51, 53));
-
-        boton30.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton30.setForeground(new java.awt.Color(255, 255, 255));
-        boton30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/QC.jpg"))); // NOI18N
-        boton30.setText("QC");
-        boton30.setBorder(null);
-        boton30.setBorderPainted(false);
-        boton30.setContentAreaFilled(false);
-        TABLERO.add(boton30, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 364, 51, 53));
-
-        boton31.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton31.setForeground(new java.awt.Color(255, 255, 255));
-        boton31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/9S.jpg"))); // NOI18N
-        boton31.setText("9S");
-        boton31.setBorder(null);
-        boton31.setBorderPainted(false);
-        boton31.setContentAreaFilled(false);
-        TABLERO.add(boton31, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 364, 51, 53));
-
-        boton32.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton32.setForeground(new java.awt.Color(255, 255, 255));
-        boton32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/9C.jpg"))); // NOI18N
-        boton32.setText("9C");
-        boton32.setBorder(null);
-        boton32.setBorderPainted(false);
-        boton32.setContentAreaFilled(false);
-        TABLERO.add(boton32, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 364, 51, 53));
-
-        boton33.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton33.setForeground(new java.awt.Color(255, 255, 255));
-        boton33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/8H.jpg"))); // NOI18N
-        boton33.setText("8H");
-        boton33.setBorder(null);
-        boton33.setBorderPainted(false);
-        boton33.setContentAreaFilled(false);
-        TABLERO.add(boton33, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 364, 51, 53));
-
-        boton34.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton34.setForeground(new java.awt.Color(255, 255, 255));
-        boton34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/9H.jpg"))); // NOI18N
-        boton34.setText("9H");
-        boton34.setBorder(null);
-        boton34.setBorderPainted(false);
-        boton34.setContentAreaFilled(false);
-        TABLERO.add(boton34, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 364, 51, 53));
-
-        boton35.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton35.setForeground(new java.awt.Color(255, 255, 255));
-        boton35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/10H.jpg"))); // NOI18N
-        boton35.setText("10H");
-        boton35.setBorder(null);
-        boton35.setBorderPainted(false);
-        boton35.setContentAreaFilled(false);
-        TABLERO.add(boton35, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 364, 51, 53));
-
-        boton36.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton36.setForeground(new java.awt.Color(255, 255, 255));
-        boton36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/QH.jpg"))); // NOI18N
-        boton36.setText("QH");
-        boton36.setBorder(null);
-        boton36.setBorderPainted(false);
-        boton36.setContentAreaFilled(false);
-        TABLERO.add(boton36, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 364, 51, 53));
-
-        boton37.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton37.setForeground(new java.awt.Color(255, 255, 255));
-        boton37.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/QD.jpg"))); // NOI18N
-        boton37.setText("QD");
-        boton37.setBorder(null);
-        boton37.setBorderPainted(false);
-        boton37.setContentAreaFilled(false);
-        TABLERO.add(boton37, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 364, 51, 53));
-
-        boton38.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton38.setForeground(new java.awt.Color(255, 255, 255));
-        boton38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/5H.jpg"))); // NOI18N
-        boton38.setText("5H");
-        boton38.setBorder(null);
-        boton38.setBorderPainted(false);
-        boton38.setContentAreaFilled(false);
-        TABLERO.add(boton38, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 364, 51, 53));
-
-        boton39.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton39.setForeground(new java.awt.Color(255, 255, 255));
-        boton39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/3D.jpg"))); // NOI18N
-        boton39.setText("3D");
-        boton39.setBorder(null);
-        boton39.setBorderPainted(false);
-        boton39.setContentAreaFilled(false);
-        TABLERO.add(boton39, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 364, 51, 53));
-
-        boton40.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton40.setForeground(new java.awt.Color(255, 255, 255));
-        boton40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/10C.jpg"))); // NOI18N
-        boton40.setText("10C");
-        boton40.setBorder(null);
-        boton40.setBorderPainted(false);
-        boton40.setContentAreaFilled(false);
-        TABLERO.add(boton40, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 305, 51, 53));
-
-        boton41.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton41.setForeground(new java.awt.Color(255, 255, 255));
-        boton41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/10S.jpg"))); // NOI18N
-        boton41.setText("10S");
-        boton41.setBorder(null);
-        boton41.setBorderPainted(false);
-        boton41.setContentAreaFilled(false);
-        TABLERO.add(boton41, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 305, 51, 53));
-
-        boton42.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton42.setForeground(new java.awt.Color(255, 255, 255));
-        boton42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/8C.jpg"))); // NOI18N
-        boton42.setText("8C");
-        boton42.setBorder(null);
-        boton42.setBorderPainted(false);
-        boton42.setContentAreaFilled(false);
-        TABLERO.add(boton42, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 305, 51, 53));
-
-        boton43.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton43.setForeground(new java.awt.Color(255, 255, 255));
-        boton43.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/7H.jpg"))); // NOI18N
-        boton43.setText("7H");
-        boton43.setBorder(null);
-        boton43.setBorderPainted(false);
-        boton43.setContentAreaFilled(false);
-        TABLERO.add(boton43, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 305, 51, 53));
-
-        boton44.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton44.setForeground(new java.awt.Color(255, 255, 255));
-        boton44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/2H.jpg"))); // NOI18N
-        boton44.setText("2H");
-        boton44.setBorder(null);
-        boton44.setBorderPainted(false);
-        boton44.setContentAreaFilled(false);
-        TABLERO.add(boton44, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 305, 51, 53));
-
-        boton45.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton45.setForeground(new java.awt.Color(255, 255, 255));
-        boton45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/3H.jpg"))); // NOI18N
-        boton45.setText("3H");
-        boton45.setBorder(null);
-        boton45.setBorderPainted(false);
-        boton45.setContentAreaFilled(false);
-        TABLERO.add(boton45, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 305, 51, 53));
-
-        boton46.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton46.setForeground(new java.awt.Color(255, 255, 255));
-        boton46.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/KH.jpg"))); // NOI18N
-        boton46.setText("KH");
-        boton46.setBorder(null);
-        boton46.setBorderPainted(false);
-        boton46.setContentAreaFilled(false);
-        TABLERO.add(boton46, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 305, 51, 53));
-
-        boton47.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton47.setForeground(new java.awt.Color(255, 255, 255));
-        boton47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/10D.jpg"))); // NOI18N
-        boton47.setText("10D");
-        boton47.setBorder(null);
-        boton47.setBorderPainted(false);
-        boton47.setContentAreaFilled(false);
-        TABLERO.add(boton47, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 305, 51, 53));
-
-        boton48.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton48.setForeground(new java.awt.Color(255, 255, 255));
-        boton48.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/6H.jpg"))); // NOI18N
-        boton48.setText("6H");
-        boton48.setBorder(null);
-        boton48.setBorderPainted(false);
-        boton48.setContentAreaFilled(false);
-        TABLERO.add(boton48, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 305, 51, 53));
-
-        boton49.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton49.setForeground(new java.awt.Color(255, 255, 255));
-        boton49.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/2D.jpg"))); // NOI18N
-        boton49.setText("2D");
-        boton49.setBorder(null);
-        boton49.setBorderPainted(false);
-        boton49.setContentAreaFilled(false);
-        TABLERO.add(boton49, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 305, 51, 53));
-
-        boton50.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton50.setForeground(new java.awt.Color(255, 255, 255));
-        boton50.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/9C.jpg"))); // NOI18N
-        boton50.setText("9C");
-        boton50.setBorder(null);
-        boton50.setBorderPainted(false);
-        boton50.setContentAreaFilled(false);
-        TABLERO.add(boton50, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 245, 51, 53));
-
-        boton51.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton51.setForeground(new java.awt.Color(255, 255, 255));
-        boton51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/QS.jpg"))); // NOI18N
-        boton51.setText("QS");
-        boton51.setBorder(null);
-        boton51.setBorderPainted(false);
-        boton51.setContentAreaFilled(false);
-        TABLERO.add(boton51, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 245, 51, 53));
-
-        boton52.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton52.setForeground(new java.awt.Color(255, 255, 255));
-        boton52.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/7C.jpg"))); // NOI18N
-        boton52.setText("7C");
-        boton52.setBorder(null);
-        boton52.setBorderPainted(false);
-        boton52.setContentAreaFilled(false);
-        TABLERO.add(boton52, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 245, 51, 53));
-
-        boton53.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton53.setForeground(new java.awt.Color(255, 255, 255));
-        boton53.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/6H.jpg"))); // NOI18N
-        boton53.setText("6H");
-        boton53.setBorder(null);
-        boton53.setBorderPainted(false);
-        boton53.setContentAreaFilled(false);
-        TABLERO.add(boton53, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 245, 51, 53));
-
-        boton54.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton54.setForeground(new java.awt.Color(255, 255, 255));
-        boton54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/5H.jpg"))); // NOI18N
-        boton54.setText("5H");
-        boton54.setBorder(null);
-        boton54.setBorderPainted(false);
-        boton54.setContentAreaFilled(false);
-        TABLERO.add(boton54, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 245, 51, 53));
-
-        boton55.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton55.setForeground(new java.awt.Color(255, 255, 255));
-        boton55.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/4H.jpg"))); // NOI18N
-        boton55.setText("4H");
-        boton55.setBorder(null);
-        boton55.setBorderPainted(false);
-        boton55.setContentAreaFilled(false);
-        TABLERO.add(boton55, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 245, 51, 53));
-
-        boton56.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton56.setForeground(new java.awt.Color(255, 255, 255));
-        boton56.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/AH.jpg"))); // NOI18N
-        boton56.setText("AH");
-        boton56.setBorder(null);
-        boton56.setBorderPainted(false);
-        boton56.setContentAreaFilled(false);
-        TABLERO.add(boton56, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 245, 51, 53));
-
-        boton57.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton57.setForeground(new java.awt.Color(255, 255, 255));
-        boton57.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/9D.jpg"))); // NOI18N
-        boton57.setText("9D");
-        boton57.setBorder(null);
-        boton57.setBorderPainted(false);
-        boton57.setContentAreaFilled(false);
-        TABLERO.add(boton57, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 245, 51, 53));
-
-        boton58.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton58.setForeground(new java.awt.Color(255, 255, 255));
-        boton58.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/7H.jpg"))); // NOI18N
-        boton58.setText("7H");
-        boton58.setToolTipText("");
-        boton58.setBorder(null);
-        boton58.setBorderPainted(false);
-        boton58.setContentAreaFilled(false);
-        TABLERO.add(boton58, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 245, 51, 53));
-
-        boton59.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton59.setForeground(new java.awt.Color(255, 255, 255));
-        boton59.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/AS.jpg"))); // NOI18N
-        boton59.setText("AS");
-        boton59.setBorder(null);
-        boton59.setBorderPainted(false);
-        boton59.setContentAreaFilled(false);
-        TABLERO.add(boton59, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 245, 51, 53));
-
-        boton60.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton60.setForeground(new java.awt.Color(255, 255, 255));
-        boton60.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/8C.jpg"))); // NOI18N
-        boton60.setText("8C");
-        boton60.setBorder(null);
-        boton60.setBorderPainted(false);
-        boton60.setContentAreaFilled(false);
-        TABLERO.add(boton60, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 185, 51, 53));
-
-        boton61.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton61.setForeground(new java.awt.Color(255, 255, 255));
-        boton61.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/KS.jpg"))); // NOI18N
-        boton61.setText("KS");
-        boton61.setBorder(null);
-        boton61.setBorderPainted(false);
-        boton61.setContentAreaFilled(false);
-        TABLERO.add(boton61, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 185, 51, 53));
-
-        boton62.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton62.setForeground(new java.awt.Color(255, 255, 255));
-        boton62.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/6C.jpg"))); // NOI18N
-        boton62.setText("6C");
-        boton62.setBorder(null);
-        boton62.setBorderPainted(false);
-        boton62.setContentAreaFilled(false);
-        TABLERO.add(boton62, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 185, 51, 53));
-
-        boton63.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton63.setForeground(new java.awt.Color(255, 255, 255));
-        boton63.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/5C.jpg"))); // NOI18N
-        boton63.setText("5C");
-        boton63.setBorder(null);
-        boton63.setBorderPainted(false);
-        boton63.setContentAreaFilled(false);
-        TABLERO.add(boton63, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 185, 51, 53));
-
-        boton64.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton64.setForeground(new java.awt.Color(255, 255, 255));
-        boton64.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/4C.jpg"))); // NOI18N
-        boton64.setText("4C");
-        boton64.setBorder(null);
-        boton64.setBorderPainted(false);
-        boton64.setContentAreaFilled(false);
-        TABLERO.add(boton64, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 185, 51, 53));
-
-        boton65.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton65.setForeground(new java.awt.Color(255, 255, 255));
-        boton65.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/3C.jpg"))); // NOI18N
-        boton65.setText("3C");
-        boton65.setBorder(null);
-        boton65.setBorderPainted(false);
-        boton65.setContentAreaFilled(false);
-        TABLERO.add(boton65, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 185, 51, 53));
-
-        boton66.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton66.setForeground(new java.awt.Color(255, 255, 255));
-        boton66.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/2C.jpg"))); // NOI18N
-        boton66.setText("2C");
-        boton66.setBorder(null);
-        boton66.setBorderPainted(false);
-        boton66.setContentAreaFilled(false);
-        TABLERO.add(boton66, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 185, 51, 53));
-
-        boton67.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton67.setForeground(new java.awt.Color(255, 255, 255));
-        boton67.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/8D.jpg"))); // NOI18N
-        boton67.setText("8D");
-        boton67.setBorder(null);
-        boton67.setBorderPainted(false);
-        boton67.setContentAreaFilled(false);
-        TABLERO.add(boton67, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 185, 51, 53));
-
-        boton68.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton68.setForeground(new java.awt.Color(255, 255, 255));
-        boton68.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/8H.jpg"))); // NOI18N
-        boton68.setText("8H");
-        boton68.setBorder(null);
-        boton68.setBorderPainted(false);
-        boton68.setContentAreaFilled(false);
-        TABLERO.add(boton68, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 185, 51, 53));
-
-        boton69.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton69.setForeground(new java.awt.Color(255, 255, 255));
-        boton69.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/KS.jpg"))); // NOI18N
-        boton69.setText("KS");
-        boton69.setBorder(null);
-        boton69.setBorderPainted(false);
-        boton69.setContentAreaFilled(false);
-        TABLERO.add(boton69, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 185, 51, 53));
-
-        boton70.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton70.setForeground(new java.awt.Color(255, 255, 255));
-        boton70.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/7C.jpg"))); // NOI18N
-        boton70.setText("7C");
-        boton70.setBorder(null);
-        boton70.setBorderPainted(false);
-        boton70.setContentAreaFilled(false);
-        TABLERO.add(boton70, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 125, 51, 53));
-
-        boton71.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton71.setForeground(new java.awt.Color(255, 255, 255));
-        boton71.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/AS.jpg"))); // NOI18N
-        boton71.setText("AS");
-        boton71.setBorder(null);
-        boton71.setBorderPainted(false);
-        boton71.setContentAreaFilled(false);
-        TABLERO.add(boton71, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 125, 51, 53));
-
-        boton72.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton72.setForeground(new java.awt.Color(255, 255, 255));
-        boton72.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/2D.jpg"))); // NOI18N
-        boton72.setText("2D");
-        boton72.setBorder(null);
-        boton72.setBorderPainted(false);
-        boton72.setContentAreaFilled(false);
-        TABLERO.add(boton72, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 125, 51, 53));
-
-        boton73.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton73.setForeground(new java.awt.Color(255, 255, 255));
-        boton73.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/3D.jpg"))); // NOI18N
-        boton73.setText("3D");
-        boton73.setBorder(null);
-        boton73.setBorderPainted(false);
-        boton73.setContentAreaFilled(false);
-        TABLERO.add(boton73, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 125, 51, 53));
-
-        boton74.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton74.setForeground(new java.awt.Color(255, 255, 255));
-        boton74.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/4D.jpg"))); // NOI18N
-        boton74.setText("4D");
-        boton74.setBorder(null);
-        boton74.setBorderPainted(false);
-        boton74.setContentAreaFilled(false);
-        TABLERO.add(boton74, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 125, 51, 53));
-
-        boton75.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton75.setForeground(new java.awt.Color(255, 255, 255));
-        boton75.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/5D.jpg"))); // NOI18N
-        boton75.setText("5D");
-        boton75.setBorder(null);
-        boton75.setBorderPainted(false);
-        boton75.setContentAreaFilled(false);
-        TABLERO.add(boton75, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 125, 51, 53));
-
-        boton76.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton76.setForeground(new java.awt.Color(255, 255, 255));
-        boton76.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/6D.jpg"))); // NOI18N
-        boton76.setText("6D");
-        boton76.setBorder(null);
-        boton76.setBorderPainted(false);
-        boton76.setContentAreaFilled(false);
-        TABLERO.add(boton76, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 125, 51, 53));
-
-        boton77.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton77.setForeground(new java.awt.Color(255, 255, 255));
-        boton77.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/7D.jpg"))); // NOI18N
-        boton77.setText("7D");
-        boton77.setBorder(null);
-        boton77.setBorderPainted(false);
-        boton77.setContentAreaFilled(false);
-        TABLERO.add(boton77, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 125, 51, 53));
-
-        boton78.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton78.setForeground(new java.awt.Color(255, 255, 255));
-        boton78.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/9H.jpg"))); // NOI18N
-        boton78.setText("9H");
-        boton78.setBorder(null);
-        boton78.setBorderPainted(false);
-        boton78.setContentAreaFilled(false);
-        TABLERO.add(boton78, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 125, 51, 53));
-
-        boton79.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton79.setForeground(new java.awt.Color(255, 255, 255));
-        boton79.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/QS.jpg"))); // NOI18N
-        boton79.setText("QS");
-        boton79.setBorder(null);
-        boton79.setBorderPainted(false);
-        boton79.setContentAreaFilled(false);
-        TABLERO.add(boton79, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 125, 51, 53));
-
-        boton80.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton80.setForeground(new java.awt.Color(255, 255, 255));
-        boton80.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/6C.jpg"))); // NOI18N
-        boton80.setText("6C");
-        boton80.setBorder(null);
-        boton80.setBorderPainted(false);
-        boton80.setContentAreaFilled(false);
-        TABLERO.add(boton80, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 65, 51, 53));
-
-        boton81.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton81.setForeground(new java.awt.Color(255, 255, 255));
-        boton81.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/5C.jpg"))); // NOI18N
-        boton81.setText("5C");
-        boton81.setBorder(null);
-        boton81.setBorderPainted(false);
-        boton81.setContentAreaFilled(false);
-        TABLERO.add(boton81, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 65, 51, 53));
-
-        boton82.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton82.setForeground(new java.awt.Color(255, 255, 255));
-        boton82.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/4C.jpg"))); // NOI18N
-        boton82.setText("4C");
-        boton82.setBorder(null);
-        boton82.setBorderPainted(false);
-        boton82.setContentAreaFilled(false);
-        TABLERO.add(boton82, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 65, 51, 53));
-
-        boton83.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton83.setForeground(new java.awt.Color(255, 255, 255));
-        boton83.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/3C.jpg"))); // NOI18N
-        boton83.setText("3C");
-        boton83.setBorder(null);
-        boton83.setBorderPainted(false);
-        boton83.setContentAreaFilled(false);
-        TABLERO.add(boton83, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 65, 51, 53));
-
-        boton84.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton84.setForeground(new java.awt.Color(255, 255, 255));
-        boton84.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/2C.jpg"))); // NOI18N
-        boton84.setText("2C");
-        boton84.setBorder(null);
-        boton84.setBorderPainted(false);
-        boton84.setContentAreaFilled(false);
-        TABLERO.add(boton84, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 65, 51, 53));
-
-        boton85.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton85.setForeground(new java.awt.Color(255, 255, 255));
-        boton85.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/AH.jpg"))); // NOI18N
-        boton85.setText("AH");
-        boton85.setBorder(null);
-        boton85.setBorderPainted(false);
-        boton85.setContentAreaFilled(false);
-        TABLERO.add(boton85, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 65, 51, 53));
-
-        boton86.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton86.setForeground(new java.awt.Color(255, 255, 255));
-        boton86.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/KH.jpg"))); // NOI18N
-        boton86.setText("KH");
-        boton86.setBorder(null);
-        boton86.setBorderPainted(false);
-        boton86.setContentAreaFilled(false);
-        TABLERO.add(boton86, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 65, 51, 53));
-
-        boton87.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton87.setForeground(new java.awt.Color(255, 255, 255));
-        boton87.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/QH.jpg"))); // NOI18N
-        boton87.setText("QH");
-        boton87.setBorder(null);
-        boton87.setBorderPainted(false);
-        boton87.setContentAreaFilled(false);
-        TABLERO.add(boton87, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 65, 51, 53));
-
-        boton88.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton88.setForeground(new java.awt.Color(255, 255, 255));
-        boton88.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/10H.jpg"))); // NOI18N
-        boton88.setText("10H");
-        boton88.setBorder(null);
-        boton88.setBorderPainted(false);
-        boton88.setContentAreaFilled(false);
-        TABLERO.add(boton88, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 65, 51, 53));
-
-        boton89.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton89.setForeground(new java.awt.Color(255, 255, 255));
-        boton89.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/10S.jpg"))); // NOI18N
-        boton89.setText("10S");
-        boton89.setBorder(null);
-        boton89.setBorderPainted(false);
-        boton89.setContentAreaFilled(false);
-        TABLERO.add(boton89, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 65, 51, 53));
-
-        boton90.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton90.setForeground(new java.awt.Color(255, 255, 255));
-        boton90.setText("null");
-        boton90.setBorder(null);
-        boton90.setBorderPainted(false);
-        boton90.setContentAreaFilled(false);
-        boton90.setEnabled(false);
-        TABLERO.add(boton90, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 7, 51, 53));
-
-        boton91.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton91.setForeground(new java.awt.Color(255, 255, 255));
-        boton91.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/2S.jpg"))); // NOI18N
-        boton91.setText("2S");
-        boton91.setBorder(null);
-        boton91.setBorderPainted(false);
-        boton91.setContentAreaFilled(false);
-        TABLERO.add(boton91, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 7, 51, 53));
-
-        boton92.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton92.setForeground(new java.awt.Color(255, 255, 255));
-        boton92.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/3S.jpg"))); // NOI18N
-        boton92.setText("3S");
-        boton92.setBorder(null);
-        boton92.setBorderPainted(false);
-        boton92.setContentAreaFilled(false);
-        TABLERO.add(boton92, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 7, 51, 53));
-
-        boton93.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton93.setForeground(new java.awt.Color(255, 255, 255));
-        boton93.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/4S.jpg"))); // NOI18N
-        boton93.setText("4S");
-        boton93.setBorder(null);
-        boton93.setBorderPainted(false);
-        boton93.setContentAreaFilled(false);
-        TABLERO.add(boton93, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 7, 51, 53));
-
-        boton94.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton94.setForeground(new java.awt.Color(255, 255, 255));
-        boton94.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/5S.jpg"))); // NOI18N
-        boton94.setText("5S");
-        boton94.setBorder(null);
-        boton94.setBorderPainted(false);
-        boton94.setContentAreaFilled(false);
-        TABLERO.add(boton94, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 7, 51, 53));
-
-        boton95.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton95.setForeground(new java.awt.Color(255, 255, 255));
-        boton95.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/6S.jpg"))); // NOI18N
-        boton95.setText("6S");
-        boton95.setBorder(null);
-        boton95.setBorderPainted(false);
-        boton95.setContentAreaFilled(false);
-        TABLERO.add(boton95, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 7, 51, 53));
-
-        boton96.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton96.setForeground(new java.awt.Color(255, 255, 255));
-        boton96.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/7S.jpg"))); // NOI18N
-        boton96.setText("7S");
-        boton96.setBorder(null);
-        boton96.setBorderPainted(false);
-        boton96.setContentAreaFilled(false);
-        TABLERO.add(boton96, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 7, 51, 53));
-
-        boton97.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton97.setForeground(new java.awt.Color(255, 255, 255));
-        boton97.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/8S.jpg"))); // NOI18N
-        boton97.setText("8S");
-        boton97.setToolTipText("");
-        boton97.setBorder(null);
-        boton97.setBorderPainted(false);
-        boton97.setContentAreaFilled(false);
-        TABLERO.add(boton97, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 7, 51, 53));
-
-        boton98.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton98.setForeground(new java.awt.Color(255, 255, 255));
-        boton98.setIcon(new javax.swing.ImageIcon(getClass().getResource("/normalCards/9S.jpg"))); // NOI18N
-        boton98.setText("9S");
-        boton98.setBorder(null);
-        boton98.setBorderPainted(false);
-        boton98.setContentAreaFilled(false);
-        TABLERO.add(boton98, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 7, 51, 53));
-
-        boton99.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
-        boton99.setForeground(new java.awt.Color(255, 255, 255));
-        boton99.setText("null");
-        boton99.setBorder(null);
-        boton99.setBorderPainted(false);
-        boton99.setContentAreaFilled(false);
-        boton99.setEnabled(false);
-        TABLERO.add(boton99, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 7, 51, 53));
-
-        TABLEROLABEL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tokens/tableroimg.jpg"))); // NOI18N
-        TABLEROLABEL.setToolTipText("");
-        TABLERO.add(TABLEROLABEL, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 600));
         TABLERO.add(label00, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 540, 50, 60));
         TABLERO.add(label01, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 540, 50, 60));
         TABLERO.add(label02, new org.netbeans.lib.awtextra.AbsoluteConstraints(177, 540, 50, 60));
@@ -3593,90 +2764,841 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         TABLERO.add(label97, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, 50, 50));
         TABLERO.add(label98, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, 50, 50));
         TABLERO.add(label99, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, 50, 50));
-
-        label13.setText("jLabel1");
         TABLERO.add(label13, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 480, 50, 60));
-
-        label14.setText("jLabel13");
         TABLERO.add(label14, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 480, -1, 60));
-
-        label15.setText("jLabel15");
         TABLERO.add(label15, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 480, -1, 60));
-
-        label16.setText("jLabel16");
         TABLERO.add(label16, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 480, -1, 60));
-
-        label17.setText("jLabel17");
         TABLERO.add(label17, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 480, -1, 60));
-
-        label18.setText("jLabel34");
         TABLERO.add(label18, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 480, -1, 60));
-
-        label19.setText("jLabel35");
         TABLERO.add(label19, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 480, -1, 60));
-
-        label20.setText("jLabel1");
         TABLERO.add(label20, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 430, 50, 50));
-
-        label30.setText("jLabel1");
         TABLERO.add(label30, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 50, 50));
-
-        label31.setText("jLabel13");
         TABLERO.add(label31, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 370, 50, 50));
-
-        label32.setText("jLabel15");
         TABLERO.add(label32, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 366, -1, 50));
-
-        label33.setText("jLabel16");
         TABLERO.add(label33, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, 50, 50));
-
-        label34.setText("jLabel17");
         TABLERO.add(label34, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 360, -1, 60));
-
-        label35.setText("jLabel34");
         TABLERO.add(label35, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 370, -1, 50));
-
-        label36.setText("jLabel35");
         TABLERO.add(label36, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, -1, 50));
-
-        label37.setText("jLabel36");
         TABLERO.add(label37, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 370, -1, 50));
-
-        label38.setText("jLabel37");
         TABLERO.add(label38, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 370, -1, 50));
-
-        label39.setText("jLabel38");
         TABLERO.add(label39, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 370, -1, 50));
+
+        boton86.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton86.setForeground(new java.awt.Color(255, 255, 255));
+        boton86.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/KH.jpg"))); // NOI18N
+        boton86.setBorder(null);
+        boton86.setBorderPainted(false);
+        boton86.setContentAreaFilled(false);
+        TABLERO.add(boton86, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 65, 51, 53));
+
+        boton76.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton76.setForeground(new java.awt.Color(255, 255, 255));
+        boton76.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/6D.jpg"))); // NOI18N
+        boton76.setBorder(null);
+        boton76.setBorderPainted(false);
+        boton76.setContentAreaFilled(false);
+        TABLERO.add(boton76, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 125, 51, 53));
+
+        boton69.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton69.setForeground(new java.awt.Color(255, 255, 255));
+        boton69.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/KS.jpg"))); // NOI18N
+        boton69.setBorder(null);
+        boton69.setBorderPainted(false);
+        boton69.setContentAreaFilled(false);
+        TABLERO.add(boton69, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 185, 51, 53));
+
+        boton99.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton99.setForeground(new java.awt.Color(255, 255, 255));
+        boton99.setBorder(null);
+        boton99.setBorderPainted(false);
+        boton99.setContentAreaFilled(false);
+        boton99.setEnabled(false);
+        TABLERO.add(boton99, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 7, 51, 53));
+
+        boton77.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton77.setForeground(new java.awt.Color(255, 255, 255));
+        boton77.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/7D.jpg"))); // NOI18N
+        boton77.setBorder(null);
+        boton77.setBorderPainted(false);
+        boton77.setContentAreaFilled(false);
+        TABLERO.add(boton77, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 125, 51, 53));
+
+        boton21.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton21.setForeground(new java.awt.Color(255, 255, 255));
+        boton21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/8S.jpg"))); // NOI18N
+        boton21.setBorder(null);
+        boton21.setBorderPainted(false);
+        boton21.setContentAreaFilled(false);
+        TABLERO.add(boton21, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 423, 51, 53));
+
+        boton74.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton74.setForeground(new java.awt.Color(255, 255, 255));
+        boton74.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/4D.jpg"))); // NOI18N
+        boton74.setBorder(null);
+        boton74.setBorderPainted(false);
+        boton74.setContentAreaFilled(false);
+        TABLERO.add(boton74, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 125, 51, 53));
+
+        boton18.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton18.setForeground(new java.awt.Color(255, 255, 255));
+        boton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/3H.jpg"))); // NOI18N
+        boton18.setBorder(null);
+        boton18.setBorderPainted(false);
+        boton18.setContentAreaFilled(false);
+        TABLERO.add(boton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 483, 51, 53));
+
+        boton27.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton27.setForeground(new java.awt.Color(255, 255, 255));
+        boton27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/KD.jpg"))); // NOI18N
+        boton27.setBorder(null);
+        boton27.setBorderPainted(false);
+        boton27.setContentAreaFilled(false);
+        TABLERO.add(boton27, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 423, 51, 53));
+
+        boton43.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton43.setForeground(new java.awt.Color(255, 255, 255));
+        boton43.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/7H.jpg"))); // NOI18N
+        boton43.setBorder(null);
+        boton43.setBorderPainted(false);
+        boton43.setContentAreaFilled(false);
+        TABLERO.add(boton43, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 305, 51, 53));
+
+        boton19.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton19.setForeground(new java.awt.Color(255, 255, 255));
+        boton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/5D.jpg"))); // NOI18N
+        boton19.setBorder(null);
+        boton19.setBorderPainted(false);
+        boton19.setContentAreaFilled(false);
+        TABLERO.add(boton19, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 483, 51, 53));
+
+        boton95.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton95.setForeground(new java.awt.Color(255, 255, 255));
+        boton95.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/6S.jpg"))); // NOI18N
+        boton95.setBorder(null);
+        boton95.setBorderPainted(false);
+        boton95.setContentAreaFilled(false);
+        TABLERO.add(boton95, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 7, 51, 53));
+
+        boton66.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton66.setForeground(new java.awt.Color(255, 255, 255));
+        boton66.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/2C.jpg"))); // NOI18N
+        boton66.setBorder(null);
+        boton66.setBorderPainted(false);
+        boton66.setContentAreaFilled(false);
+        TABLERO.add(boton66, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 185, 51, 53));
+
+        boton39.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton39.setForeground(new java.awt.Color(255, 255, 255));
+        boton39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/3D.jpg"))); // NOI18N
+        boton39.setBorder(null);
+        boton39.setBorderPainted(false);
+        boton39.setContentAreaFilled(false);
+        TABLERO.add(boton39, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 364, 51, 53));
+
+        boton65.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton65.setForeground(new java.awt.Color(255, 255, 255));
+        boton65.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/3C.jpg"))); // NOI18N
+        boton65.setBorder(null);
+        boton65.setBorderPainted(false);
+        boton65.setContentAreaFilled(false);
+        TABLERO.add(boton65, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 185, 51, 53));
+
+        boton00.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton00.setForeground(new java.awt.Color(255, 255, 255));
+        boton00.setBorder(null);
+        boton00.setBorderPainted(false);
+        boton00.setContentAreaFilled(false);
+        boton00.setEnabled(false);
+        boton00.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton00ActionPerformed(evt);
+            }
+        });
+        TABLERO.add(boton00, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 540, 51, 53));
+
+        boton57.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton57.setForeground(new java.awt.Color(255, 255, 255));
+        boton57.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/9D.jpg"))); // NOI18N
+        boton57.setBorder(null);
+        boton57.setBorderPainted(false);
+        boton57.setContentAreaFilled(false);
+        TABLERO.add(boton57, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 245, 51, 53));
+
+        boton83.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton83.setForeground(new java.awt.Color(255, 255, 255));
+        boton83.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/3C.jpg"))); // NOI18N
+        boton83.setBorder(null);
+        boton83.setBorderPainted(false);
+        boton83.setContentAreaFilled(false);
+        TABLERO.add(boton83, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 65, 51, 53));
+
+        boton35.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton35.setForeground(new java.awt.Color(255, 255, 255));
+        boton35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/10H.jpg"))); // NOI18N
+        boton35.setBorder(null);
+        boton35.setBorderPainted(false);
+        boton35.setContentAreaFilled(false);
+        TABLERO.add(boton35, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 364, 51, 53));
+
+        boton41.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton41.setForeground(new java.awt.Color(255, 255, 255));
+        boton41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/10S.jpg"))); // NOI18N
+        boton41.setBorder(null);
+        boton41.setBorderPainted(false);
+        boton41.setContentAreaFilled(false);
+        TABLERO.add(boton41, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 305, 51, 53));
+
+        boton22.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton22.setForeground(new java.awt.Color(255, 255, 255));
+        boton22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/10C.jpg"))); // NOI18N
+        boton22.setBorder(null);
+        boton22.setBorderPainted(false);
+        boton22.setContentAreaFilled(false);
+        TABLERO.add(boton22, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 423, 51, 53));
+
+        boton84.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton84.setForeground(new java.awt.Color(255, 255, 255));
+        boton84.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/2C.jpg"))); // NOI18N
+        boton84.setBorder(null);
+        boton84.setBorderPainted(false);
+        boton84.setContentAreaFilled(false);
+        TABLERO.add(boton84, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 65, 51, 53));
+
+        boton05.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton05.setForeground(new java.awt.Color(255, 255, 255));
+        boton05.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/9D.jpg"))); // NOI18N
+        boton05.setBorder(null);
+        boton05.setBorderPainted(false);
+        boton05.setContentAreaFilled(false);
+        TABLERO.add(boton05, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 542, 51, 53));
+
+        boton25.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton25.setForeground(new java.awt.Color(255, 255, 255));
+        boton25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/AC.jpg"))); // NOI18N
+        boton25.setBorder(null);
+        boton25.setBorderPainted(false);
+        boton25.setContentAreaFilled(false);
+        TABLERO.add(boton25, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 423, 51, 53));
+
+        boton98.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton98.setForeground(new java.awt.Color(255, 255, 255));
+        boton98.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/9S.jpg"))); // NOI18N
+        boton98.setBorder(null);
+        boton98.setBorderPainted(false);
+        boton98.setContentAreaFilled(false);
+        TABLERO.add(boton98, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 7, 51, 53));
+
+        boton32.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton32.setForeground(new java.awt.Color(255, 255, 255));
+        boton32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/9C.jpg"))); // NOI18N
+        boton32.setBorder(null);
+        boton32.setBorderPainted(false);
+        boton32.setContentAreaFilled(false);
+        TABLERO.add(boton32, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 364, 51, 53));
+
+        boton34.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton34.setForeground(new java.awt.Color(255, 255, 255));
+        boton34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/9H.jpg"))); // NOI18N
+        boton34.setBorder(null);
+        boton34.setBorderPainted(false);
+        boton34.setContentAreaFilled(false);
+        TABLERO.add(boton34, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 364, 51, 53));
+
+        boton20.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton20.setForeground(new java.awt.Color(255, 255, 255));
+        boton20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/KC.jpg"))); // NOI18N
+        boton20.setBorder(null);
+        boton20.setBorderPainted(false);
+        boton20.setContentAreaFilled(false);
+        TABLERO.add(boton20, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 423, 51, 53));
+
+        boton80.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton80.setForeground(new java.awt.Color(255, 255, 255));
+        boton80.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/6C.jpg"))); // NOI18N
+        boton80.setBorder(null);
+        boton80.setBorderPainted(false);
+        boton80.setContentAreaFilled(false);
+        TABLERO.add(boton80, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 65, 51, 53));
+
+        boton53.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton53.setForeground(new java.awt.Color(255, 255, 255));
+        boton53.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/6H.jpg"))); // NOI18N
+        boton53.setBorder(null);
+        boton53.setBorderPainted(false);
+        boton53.setContentAreaFilled(false);
+        TABLERO.add(boton53, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 245, 51, 53));
+
+        boton58.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton58.setForeground(new java.awt.Color(255, 255, 255));
+        boton58.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/7H.jpg"))); // NOI18N
+        boton58.setToolTipText("");
+        boton58.setBorder(null);
+        boton58.setBorderPainted(false);
+        boton58.setContentAreaFilled(false);
+        TABLERO.add(boton58, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 245, 51, 53));
+
+        boton52.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton52.setForeground(new java.awt.Color(255, 255, 255));
+        boton52.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/7C.jpg"))); // NOI18N
+        boton52.setBorder(null);
+        boton52.setBorderPainted(false);
+        boton52.setContentAreaFilled(false);
+        TABLERO.add(boton52, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 245, 51, 53));
+
+        boton64.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton64.setForeground(new java.awt.Color(255, 255, 255));
+        boton64.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/4C.jpg"))); // NOI18N
+        boton64.setBorder(null);
+        boton64.setBorderPainted(false);
+        boton64.setContentAreaFilled(false);
+        TABLERO.add(boton64, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 185, 51, 53));
+
+        boton07.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton07.setForeground(new java.awt.Color(255, 255, 255));
+        boton07.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/7D.jpg"))); // NOI18N
+        boton07.setBorder(null);
+        boton07.setBorderPainted(false);
+        boton07.setContentAreaFilled(false);
+        TABLERO.add(boton07, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 542, 51, 53));
+
+        boton28.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton28.setForeground(new java.awt.Color(255, 255, 255));
+        boton28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/4H.jpg"))); // NOI18N
+        boton28.setBorder(null);
+        boton28.setBorderPainted(false);
+        boton28.setContentAreaFilled(false);
+        TABLERO.add(boton28, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 423, 51, 53));
+
+        boton08.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton08.setForeground(new java.awt.Color(255, 255, 255));
+        boton08.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/6D.jpg"))); // NOI18N
+        boton08.setBorder(null);
+        boton08.setBorderPainted(false);
+        boton08.setContentAreaFilled(false);
+        TABLERO.add(boton08, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 542, 51, 53));
+
+        boton26.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton26.setForeground(new java.awt.Color(255, 255, 255));
+        boton26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/AD.jpg"))); // NOI18N
+        boton26.setBorder(null);
+        boton26.setBorderPainted(false);
+        TABLERO.add(boton26, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 423, 51, 53));
+
+        boton50.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton50.setForeground(new java.awt.Color(255, 255, 255));
+        boton50.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/9C.jpg"))); // NOI18N
+        boton50.setBorder(null);
+        boton50.setBorderPainted(false);
+        boton50.setContentAreaFilled(false);
+        TABLERO.add(boton50, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 245, 51, 53));
+
+        boton87.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton87.setForeground(new java.awt.Color(255, 255, 255));
+        boton87.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/QH.jpg"))); // NOI18N
+        boton87.setBorder(null);
+        boton87.setBorderPainted(false);
+        boton87.setContentAreaFilled(false);
+        TABLERO.add(boton87, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 65, 51, 53));
+
+        boton29.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton29.setForeground(new java.awt.Color(255, 255, 255));
+        boton29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/4D.jpg"))); // NOI18N
+        boton29.setBorder(null);
+        boton29.setBorderPainted(false);
+        boton29.setContentAreaFilled(false);
+        TABLERO.add(boton29, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 423, 51, 53));
+
+        boton89.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton89.setForeground(new java.awt.Color(255, 255, 255));
+        boton89.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/10S.jpg"))); // NOI18N
+        boton89.setBorder(null);
+        boton89.setBorderPainted(false);
+        boton89.setContentAreaFilled(false);
+        TABLERO.add(boton89, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 65, 51, 53));
+
+        boton49.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton49.setForeground(new java.awt.Color(255, 255, 255));
+        boton49.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/2D.jpg"))); // NOI18N
+        boton49.setBorder(null);
+        boton49.setBorderPainted(false);
+        boton49.setContentAreaFilled(false);
+        TABLERO.add(boton49, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 305, 51, 53));
+
+        boton55.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton55.setForeground(new java.awt.Color(255, 255, 255));
+        boton55.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/4H.jpg"))); // NOI18N
+        boton55.setBorder(null);
+        boton55.setBorderPainted(false);
+        boton55.setContentAreaFilled(false);
+        TABLERO.add(boton55, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 245, 51, 53));
+
+        boton62.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton62.setForeground(new java.awt.Color(255, 255, 255));
+        boton62.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/6C.jpg"))); // NOI18N
+        boton62.setBorder(null);
+        boton62.setBorderPainted(false);
+        boton62.setContentAreaFilled(false);
+        boton62.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton62ActionPerformed(evt);
+            }
+        });
+        TABLERO.add(boton62, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 185, 51, 53));
+
+        boton04.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton04.setForeground(new java.awt.Color(255, 255, 255));
+        boton04.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/10D.jpg"))); // NOI18N
+        boton04.setBorder(null);
+        boton04.setBorderPainted(false);
+        boton04.setContentAreaFilled(false);
+        TABLERO.add(boton04, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 540, 51, 53));
+
+        boton37.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton37.setForeground(new java.awt.Color(255, 255, 255));
+        boton37.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/QD.jpg"))); // NOI18N
+        boton37.setBorder(null);
+        boton37.setBorderPainted(false);
+        boton37.setContentAreaFilled(false);
+        TABLERO.add(boton37, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 364, 51, 53));
+
+        boton13.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton13.setForeground(new java.awt.Color(255, 255, 255));
+        boton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/5S.jpg"))); // NOI18N
+        boton13.setBorder(null);
+        boton13.setBorderPainted(false);
+        boton13.setContentAreaFilled(false);
+        TABLERO.add(boton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 483, 51, 53));
+
+        boton75.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton75.setForeground(new java.awt.Color(255, 255, 255));
+        boton75.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/5D.jpg"))); // NOI18N
+        boton75.setBorder(null);
+        boton75.setBorderPainted(false);
+        boton75.setContentAreaFilled(false);
+        TABLERO.add(boton75, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 125, 51, 53));
+
+        boton71.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton71.setForeground(new java.awt.Color(255, 255, 255));
+        boton71.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/AS.jpg"))); // NOI18N
+        boton71.setBorder(null);
+        boton71.setBorderPainted(false);
+        boton71.setContentAreaFilled(false);
+        TABLERO.add(boton71, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 125, 51, 53));
+
+        boton81.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton81.setForeground(new java.awt.Color(255, 255, 255));
+        boton81.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/5C.jpg"))); // NOI18N
+        boton81.setBorder(null);
+        boton81.setBorderPainted(false);
+        boton81.setContentAreaFilled(false);
+        TABLERO.add(boton81, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 65, 51, 53));
+
+        boton40.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton40.setForeground(new java.awt.Color(255, 255, 255));
+        boton40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/10C.jpg"))); // NOI18N
+        boton40.setBorder(null);
+        boton40.setBorderPainted(false);
+        boton40.setContentAreaFilled(false);
+        TABLERO.add(boton40, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 305, 51, 53));
+
+        boton44.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton44.setForeground(new java.awt.Color(255, 255, 255));
+        boton44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/2H.jpg"))); // NOI18N
+        boton44.setBorder(null);
+        boton44.setBorderPainted(false);
+        boton44.setContentAreaFilled(false);
+        TABLERO.add(boton44, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 305, 51, 53));
+
+        boton23.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton23.setForeground(new java.awt.Color(255, 255, 255));
+        boton23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/QC.jpg"))); // NOI18N
+        boton23.setBorder(null);
+        boton23.setBorderPainted(false);
+        boton23.setContentAreaFilled(false);
+        TABLERO.add(boton23, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 423, 51, 53));
+
+        boton61.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton61.setForeground(new java.awt.Color(255, 255, 255));
+        boton61.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/KS.jpg"))); // NOI18N
+        boton61.setBorder(null);
+        boton61.setBorderPainted(false);
+        boton61.setContentAreaFilled(false);
+        TABLERO.add(boton61, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 185, 51, 53));
+
+        boton90.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton90.setForeground(new java.awt.Color(255, 255, 255));
+        boton90.setBorder(null);
+        boton90.setBorderPainted(false);
+        boton90.setContentAreaFilled(false);
+        boton90.setEnabled(false);
+        TABLERO.add(boton90, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 7, 51, 53));
+
+        boton72.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton72.setForeground(new java.awt.Color(255, 255, 255));
+        boton72.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/2D.jpg"))); // NOI18N
+        boton72.setBorder(null);
+        boton72.setBorderPainted(false);
+        boton72.setContentAreaFilled(false);
+        TABLERO.add(boton72, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 125, 51, 53));
+
+        boton73.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton73.setForeground(new java.awt.Color(255, 255, 255));
+        boton73.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/3D.jpg"))); // NOI18N
+        boton73.setBorder(null);
+        boton73.setBorderPainted(false);
+        boton73.setContentAreaFilled(false);
+        TABLERO.add(boton73, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 125, 51, 53));
+
+        boton85.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton85.setForeground(new java.awt.Color(255, 255, 255));
+        boton85.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/AH.jpg"))); // NOI18N
+        boton85.setBorder(null);
+        boton85.setBorderPainted(false);
+        boton85.setContentAreaFilled(false);
+        TABLERO.add(boton85, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 65, 51, 53));
+
+        boton31.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton31.setForeground(new java.awt.Color(255, 255, 255));
+        boton31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/9S.jpg"))); // NOI18N
+        boton31.setBorder(null);
+        boton31.setBorderPainted(false);
+        boton31.setContentAreaFilled(false);
+        TABLERO.add(boton31, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 364, 51, 53));
+
+        boton78.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton78.setForeground(new java.awt.Color(255, 255, 255));
+        boton78.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/9H.jpg"))); // NOI18N
+        boton78.setBorder(null);
+        boton78.setBorderPainted(false);
+        boton78.setContentAreaFilled(false);
+        TABLERO.add(boton78, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 125, 51, 53));
+
+        boton45.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton45.setForeground(new java.awt.Color(255, 255, 255));
+        boton45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/3H.jpg"))); // NOI18N
+        boton45.setBorder(null);
+        boton45.setBorderPainted(false);
+        boton45.setContentAreaFilled(false);
+        TABLERO.add(boton45, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 305, 51, 53));
+
+        boton15.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton15.setForeground(new java.awt.Color(255, 255, 255));
+        boton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/3S.jpg"))); // NOI18N
+        boton15.setBorder(null);
+        boton15.setBorderPainted(false);
+        boton15.setContentAreaFilled(false);
+        TABLERO.add(boton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 483, 51, 53));
+
+        boton59.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton59.setForeground(new java.awt.Color(255, 255, 255));
+        boton59.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/AS.jpg"))); // NOI18N
+        boton59.setBorder(null);
+        boton59.setBorderPainted(false);
+        boton59.setContentAreaFilled(false);
+        TABLERO.add(boton59, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 245, 51, 53));
+
+        boton91.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton91.setForeground(new java.awt.Color(255, 255, 255));
+        boton91.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/2S.jpg"))); // NOI18N
+        boton91.setBorder(null);
+        boton91.setBorderPainted(false);
+        boton91.setContentAreaFilled(false);
+        TABLERO.add(boton91, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 7, 51, 53));
+
+        boton60.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton60.setForeground(new java.awt.Color(255, 255, 255));
+        boton60.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/8C.jpg"))); // NOI18N
+        boton60.setBorder(null);
+        boton60.setBorderPainted(false);
+        boton60.setContentAreaFilled(false);
+        TABLERO.add(boton60, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 185, 51, 53));
+
+        boton94.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton94.setForeground(new java.awt.Color(255, 255, 255));
+        boton94.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/5S.jpg"))); // NOI18N
+        boton94.setBorder(null);
+        boton94.setBorderPainted(false);
+        boton94.setContentAreaFilled(false);
+        TABLERO.add(boton94, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 7, 51, 53));
+
+        boton10.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton10.setForeground(new java.awt.Color(255, 255, 255));
+        boton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/AC.jpg"))); // NOI18N
+        boton10.setBorder(null);
+        boton10.setBorderPainted(false);
+        boton10.setContentAreaFilled(false);
+        TABLERO.add(boton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, 51, 60));
+
+        boton97.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton97.setForeground(new java.awt.Color(255, 255, 255));
+        boton97.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/8S.jpg"))); // NOI18N
+        boton97.setToolTipText("");
+        boton97.setBorder(null);
+        boton97.setBorderPainted(false);
+        boton97.setContentAreaFilled(false);
+        TABLERO.add(boton97, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 7, 51, 53));
+
+        boton47.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton47.setForeground(new java.awt.Color(255, 255, 255));
+        boton47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/10D.jpg"))); // NOI18N
+        boton47.setBorder(null);
+        boton47.setBorderPainted(false);
+        boton47.setContentAreaFilled(false);
+        TABLERO.add(boton47, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 305, 51, 53));
+
+        boton48.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton48.setForeground(new java.awt.Color(255, 255, 255));
+        boton48.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/6H.jpg"))); // NOI18N
+        boton48.setBorder(null);
+        boton48.setBorderPainted(false);
+        boton48.setContentAreaFilled(false);
+        TABLERO.add(boton48, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 305, 51, 53));
+
+        boton24.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton24.setForeground(new java.awt.Color(255, 255, 255));
+        boton24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/KC.jpg"))); // NOI18N
+        boton24.setBorder(null);
+        boton24.setBorderPainted(false);
+        boton24.setContentAreaFilled(false);
+        TABLERO.add(boton24, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 423, 51, 53));
+
+        boton06.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton06.setForeground(new java.awt.Color(255, 255, 255));
+        boton06.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/8D.jpg"))); // NOI18N
+        boton06.setBorder(null);
+        boton06.setBorderPainted(false);
+        boton06.setContentAreaFilled(false);
+        TABLERO.add(boton06, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 542, 51, 53));
+
+        boton38.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton38.setForeground(new java.awt.Color(255, 255, 255));
+        boton38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/5H.jpg"))); // NOI18N
+        boton38.setBorder(null);
+        boton38.setBorderPainted(false);
+        boton38.setContentAreaFilled(false);
+        TABLERO.add(boton38, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 364, 51, 53));
+
+        boton70.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton70.setForeground(new java.awt.Color(255, 255, 255));
+        boton70.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/7C.jpg"))); // NOI18N
+        boton70.setBorder(null);
+        boton70.setBorderPainted(false);
+        boton70.setContentAreaFilled(false);
+        TABLERO.add(boton70, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 125, 51, 53));
+
+        boton96.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton96.setForeground(new java.awt.Color(255, 255, 255));
+        boton96.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/7S.jpg"))); // NOI18N
+        boton96.setBorder(null);
+        boton96.setBorderPainted(false);
+        boton96.setContentAreaFilled(false);
+        TABLERO.add(boton96, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 7, 51, 53));
+
+        boton03.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton03.setForeground(new java.awt.Color(255, 255, 255));
+        boton03.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/QD.jpg"))); // NOI18N
+        boton03.setBorder(null);
+        boton03.setBorderPainted(false);
+        boton03.setContentAreaFilled(false);
+        TABLERO.add(boton03, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 540, 51, 53));
+
+        boton33.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton33.setForeground(new java.awt.Color(255, 255, 255));
+        boton33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/8H.jpg"))); // NOI18N
+        boton33.setBorder(null);
+        boton33.setBorderPainted(false);
+        boton33.setContentAreaFilled(false);
+        TABLERO.add(boton33, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 364, 51, 53));
+
+        boton46.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton46.setForeground(new java.awt.Color(255, 255, 255));
+        boton46.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/KH.jpg"))); // NOI18N
+        boton46.setBorder(null);
+        boton46.setBorderPainted(false);
+        boton46.setContentAreaFilled(false);
+        TABLERO.add(boton46, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 305, 51, 53));
+
+        boton12.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton12.setForeground(new java.awt.Color(255, 255, 255));
+        boton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/6S.jpg"))); // NOI18N
+        boton12.setBorder(null);
+        boton12.setBorderPainted(false);
+        boton12.setContentAreaFilled(false);
+        TABLERO.add(boton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 483, 51, 53));
+
+        boton68.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton68.setForeground(new java.awt.Color(255, 255, 255));
+        boton68.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/8H.jpg"))); // NOI18N
+        boton68.setBorder(null);
+        boton68.setBorderPainted(false);
+        boton68.setContentAreaFilled(false);
+        TABLERO.add(boton68, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 185, 51, 53));
+
+        boton09.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton09.setForeground(new java.awt.Color(255, 255, 255));
+        boton09.setBorder(null);
+        boton09.setBorderPainted(false);
+        boton09.setContentAreaFilled(false);
+        boton09.setEnabled(false);
+        TABLERO.add(boton09, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 542, 51, 53));
+
+        boton79.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton79.setForeground(new java.awt.Color(255, 255, 255));
+        boton79.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/QS.jpg"))); // NOI18N
+        boton79.setBorder(null);
+        boton79.setBorderPainted(false);
+        boton79.setContentAreaFilled(false);
+        TABLERO.add(boton79, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 125, 51, 53));
+
+        boton36.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton36.setForeground(new java.awt.Color(255, 255, 255));
+        boton36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/QH.jpg"))); // NOI18N
+        boton36.setBorder(null);
+        boton36.setBorderPainted(false);
+        boton36.setContentAreaFilled(false);
+        TABLERO.add(boton36, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 364, 51, 53));
+
+        boton01.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton01.setForeground(new java.awt.Color(255, 255, 255));
+        boton01.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/AD.jpg"))); // NOI18N
+        boton01.setBorder(null);
+        boton01.setBorderPainted(false);
+        TABLERO.add(boton01, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 542, 51, 53));
+
+        boton16.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton16.setForeground(new java.awt.Color(255, 255, 255));
+        boton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/2S.jpg"))); // NOI18N
+        boton16.setBorder(null);
+        boton16.setBorderPainted(false);
+        boton16.setContentAreaFilled(false);
+        TABLERO.add(boton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 483, 51, 53));
+
+        boton67.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton67.setForeground(new java.awt.Color(255, 255, 255));
+        boton67.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/8D.jpg"))); // NOI18N
+        boton67.setBorder(null);
+        boton67.setBorderPainted(false);
+        boton67.setContentAreaFilled(false);
+        TABLERO.add(boton67, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 185, 51, 53));
+
+        boton14.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton14.setForeground(new java.awt.Color(255, 255, 255));
+        boton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/4S.jpg"))); // NOI18N
+        boton14.setBorder(null);
+        boton14.setBorderPainted(false);
+        boton14.setContentAreaFilled(false);
+        TABLERO.add(boton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 483, 51, 53));
+
+        boton82.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton82.setForeground(new java.awt.Color(255, 255, 255));
+        boton82.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/4C.jpg"))); // NOI18N
+        boton82.setBorder(null);
+        boton82.setBorderPainted(false);
+        boton82.setContentAreaFilled(false);
+        TABLERO.add(boton82, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 65, 51, 53));
+
+        boton93.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton93.setForeground(new java.awt.Color(255, 255, 255));
+        boton93.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/4S.jpg"))); // NOI18N
+        boton93.setBorder(null);
+        boton93.setBorderPainted(false);
+        boton93.setContentAreaFilled(false);
+        TABLERO.add(boton93, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 7, 51, 53));
+
+        boton17.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton17.setForeground(new java.awt.Color(255, 255, 255));
+        boton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/2H.jpg"))); // NOI18N
+        boton17.setBorder(null);
+        boton17.setBorderPainted(false);
+        boton17.setContentAreaFilled(false);
+        TABLERO.add(boton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 483, 51, 53));
+
+        boton54.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton54.setForeground(new java.awt.Color(255, 255, 255));
+        boton54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/5H.jpg"))); // NOI18N
+        boton54.setBorder(null);
+        boton54.setBorderPainted(false);
+        boton54.setContentAreaFilled(false);
+        TABLERO.add(boton54, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 245, 51, 53));
+
+        boton51.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton51.setForeground(new java.awt.Color(255, 255, 255));
+        boton51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/QS.jpg"))); // NOI18N
+        boton51.setBorder(null);
+        boton51.setBorderPainted(false);
+        boton51.setContentAreaFilled(false);
+        TABLERO.add(boton51, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 245, 51, 53));
+
+        boton63.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton63.setForeground(new java.awt.Color(255, 255, 255));
+        boton63.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/5C.jpg"))); // NOI18N
+        boton63.setBorder(null);
+        boton63.setBorderPainted(false);
+        boton63.setContentAreaFilled(false);
+        TABLERO.add(boton63, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 185, 51, 53));
+
+        boton56.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton56.setForeground(new java.awt.Color(255, 255, 255));
+        boton56.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/AH.jpg"))); // NOI18N
+        boton56.setBorder(null);
+        boton56.setBorderPainted(false);
+        boton56.setContentAreaFilled(false);
+        TABLERO.add(boton56, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 245, 51, 53));
+
+        boton88.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton88.setForeground(new java.awt.Color(255, 255, 255));
+        boton88.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/10H.jpg"))); // NOI18N
+        boton88.setBorder(null);
+        boton88.setBorderPainted(false);
+        boton88.setContentAreaFilled(false);
+        TABLERO.add(boton88, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 65, 51, 53));
+
+        boton30.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton30.setForeground(new java.awt.Color(255, 255, 255));
+        boton30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/QC.jpg"))); // NOI18N
+        boton30.setBorder(null);
+        boton30.setBorderPainted(false);
+        boton30.setContentAreaFilled(false);
+        TABLERO.add(boton30, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 364, 51, 53));
+
+        boton11.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton11.setForeground(new java.awt.Color(255, 255, 255));
+        boton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/7S.jpg"))); // NOI18N
+        boton11.setBorder(null);
+        boton11.setBorderPainted(false);
+        boton11.setContentAreaFilled(false);
+        TABLERO.add(boton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 483, 51, 53));
+
+        boton42.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton42.setForeground(new java.awt.Color(255, 255, 255));
+        boton42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/8C.jpg"))); // NOI18N
+        boton42.setBorder(null);
+        boton42.setBorderPainted(false);
+        boton42.setContentAreaFilled(false);
+        TABLERO.add(boton42, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 305, 51, 53));
+
+        boton02.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton02.setForeground(new java.awt.Color(255, 255, 255));
+        boton02.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/KD.jpg"))); // NOI18N
+        boton02.setBorder(null);
+        boton02.setBorderPainted(false);
+        boton02.setContentAreaFilled(false);
+        TABLERO.add(boton02, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 542, 51, 53));
+
+        boton92.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        boton92.setForeground(new java.awt.Color(255, 255, 255));
+        boton92.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/3S.jpg"))); // NOI18N
+        boton92.setBorder(null);
+        boton92.setBorderPainted(false);
+        boton92.setContentAreaFilled(false);
+        TABLERO.add(boton92, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 7, 51, 53));
+
+        TABLEROLABEL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tokens/tableroimg.jpg"))); // NOI18N
+        TABLEROLABEL.setToolTipText("");
+        TABLERO.add(TABLEROLABEL, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 600));
 
         layeredpaneizq.setPreferredSize(new java.awt.Dimension(250, 802));
         layeredpaneizq.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        dosjugadoresizq.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
-
-        javax.swing.GroupLayout dosjugadoresizqLayout = new javax.swing.GroupLayout(dosjugadoresizq);
-        dosjugadoresizq.setLayout(dosjugadoresizqLayout);
-        dosjugadoresizqLayout.setHorizontalGroup(
-            dosjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dosjugadoresizqLayout.createSequentialGroup()
-                .addContainerGap(91, Short.MAX_VALUE)
-                .addGroup(dosjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dosnombrejugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(78, 78, 78))
-        );
-        dosjugadoresizqLayout.setVerticalGroup(
-            dosjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dosjugadoresizqLayout.createSequentialGroup()
-                .addGap(286, 286, 286)
-                .addComponent(dosnombrejugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addContainerGap(367, Short.MAX_VALUE))
-        );
-
-        layeredpaneizq.add(dosjugadoresizq, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 270, 820));
 
         tresjugadoresizq.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -3686,12 +3608,15 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         tresjugadoresizq.setLayout(tresjugadoresizqLayout);
         tresjugadoresizqLayout.setHorizontalGroup(
             tresjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tresjugadoresizqLayout.createSequentialGroup()
+            .addGroup(tresjugadoresizqLayout.createSequentialGroup()
                 .addContainerGap(91, Short.MAX_VALUE)
                 .addGroup(tresjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tresnombrejugador3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14))
-                .addGap(78, 78, 78))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tresjugadoresizqLayout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addGap(79, 79, 79))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tresjugadoresizqLayout.createSequentialGroup()
+                        .addComponent(tresnombrejugador3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(57, 57, 57))))
         );
         tresjugadoresizqLayout.setVerticalGroup(
             tresjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3705,6 +3630,36 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         layeredpaneizq.add(tresjugadoresizq, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 270, 820));
 
+        dosjugadoresizq.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
+
+        javax.swing.GroupLayout dosjugadoresizqLayout = new javax.swing.GroupLayout(dosjugadoresizq);
+        dosjugadoresizq.setLayout(dosjugadoresizqLayout);
+        dosjugadoresizqLayout.setHorizontalGroup(
+            dosjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dosjugadoresizqLayout.createSequentialGroup()
+                .addContainerGap(91, Short.MAX_VALUE)
+                .addGroup(dosjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dosjugadoresizqLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(79, 79, 79))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dosjugadoresizqLayout.createSequentialGroup()
+                        .addComponent(dosnombrejugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56))))
+        );
+        dosjugadoresizqLayout.setVerticalGroup(
+            dosjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dosjugadoresizqLayout.createSequentialGroup()
+                .addGap(286, 286, 286)
+                .addComponent(dosnombrejugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addContainerGap(367, Short.MAX_VALUE))
+        );
+
+        layeredpaneizq.add(dosjugadoresizq, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 270, 820));
+
         cuatrojugadoresizq.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
@@ -3715,14 +3670,19 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         cuatrojugadoresizq.setLayout(cuatrojugadoresizqLayout);
         cuatrojugadoresizqLayout.setHorizontalGroup(
             cuatrojugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cuatrojugadoresizqLayout.createSequentialGroup()
+            .addGroup(cuatrojugadoresizqLayout.createSequentialGroup()
                 .addContainerGap(89, Short.MAX_VALUE)
                 .addGroup(cuatrojugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cuatronombrejugador4, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel21)
-                    .addComponent(cuatronombrejugador3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel20))
-                .addGap(80, 80, 80))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cuatrojugadoresizqLayout.createSequentialGroup()
+                        .addGroup(cuatrojugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel21)
+                            .addComponent(jLabel20))
+                        .addGap(81, 81, 81))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cuatrojugadoresizqLayout.createSequentialGroup()
+                        .addGroup(cuatrojugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cuatronombrejugador4, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cuatronombrejugador3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(64, 64, 64))))
         );
         cuatrojugadoresizqLayout.setVerticalGroup(
             cuatrojugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3755,14 +3715,17 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
             .addGroup(seisjugadoresizqLayout.createSequentialGroup()
                 .addGap(73, 73, 73)
                 .addGroup(seisjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(seisnombrejugador4, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel24)
-                    .addComponent(seisnombrejugador5, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel25)
-                    .addGroup(seisjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(seisnombrejugador6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel26, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(96, Short.MAX_VALUE))
+                    .addComponent(jLabel26))
+                .addContainerGap(97, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, seisjugadoresizqLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(seisjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(seisnombrejugador5, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seisnombrejugador6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seisnombrejugador4, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(76, 76, 76))
         );
         seisjugadoresizqLayout.setVerticalGroup(
             seisjugadoresizqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3883,46 +3846,6 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         layeredpaneder.add(dosjugadoresder, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 270, 820));
 
-        tresjugadoresder.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel5.setText("BARAJA");
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
-        jLabel6.setText("jLabel3");
-
-        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
-
-        javax.swing.GroupLayout tresjugadoresderLayout = new javax.swing.GroupLayout(tresjugadoresder);
-        tresjugadoresder.setLayout(tresjugadoresderLayout);
-        tresjugadoresderLayout.setHorizontalGroup(
-            tresjugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tresjugadoresderLayout.createSequentialGroup()
-                .addGap(0, 86, Short.MAX_VALUE)
-                .addGroup(tresjugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(tresjugadoresderLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(tresnombrejugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel18))
-                .addGap(83, 83, 83))
-        );
-        tresjugadoresderLayout.setVerticalGroup(
-            tresjugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tresjugadoresderLayout.createSequentialGroup()
-                .addContainerGap(287, Short.MAX_VALUE)
-                .addComponent(tresnombrejugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel18)
-                .addGap(141, 141, 141)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(91, 91, 91))
-        );
-
-        layeredpaneder.add(tresjugadoresder, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 270, 820));
-
         cuatrojugadoresder.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel7.setText("BARAJA");
@@ -4035,6 +3958,50 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         layeredpaneder.add(ochojugadoresder, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 270, 820));
 
+        tresjugadoresder.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel5.setText("BARAJA");
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
+        jLabel6.setText("jLabel3");
+
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cardBack.png"))); // NOI18N
+
+        javax.swing.GroupLayout tresjugadoresderLayout = new javax.swing.GroupLayout(tresjugadoresder);
+        tresjugadoresder.setLayout(tresjugadoresderLayout);
+        tresjugadoresderLayout.setHorizontalGroup(
+            tresjugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tresjugadoresderLayout.createSequentialGroup()
+                .addGap(0, 86, Short.MAX_VALUE)
+                .addGroup(tresjugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tresjugadoresderLayout.createSequentialGroup()
+                        .addGroup(tresjugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(tresjugadoresderLayout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel18))
+                        .addGap(84, 84, 84))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tresjugadoresderLayout.createSequentialGroup()
+                        .addComponent(tresnombrejugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(59, 59, 59))))
+        );
+        tresjugadoresderLayout.setVerticalGroup(
+            tresjugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tresjugadoresderLayout.createSequentialGroup()
+                .addContainerGap(287, Short.MAX_VALUE)
+                .addComponent(tresnombrejugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel18)
+                .addGap(141, 141, 141)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(91, 91, 91))
+        );
+
+        layeredpaneder.add(tresjugadoresder, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 270, 820));
+
         seisjugadoresder.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel9.setText("BARAJA");
@@ -4058,12 +4025,16 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
                     .addGroup(seisjugadoresderLayout.createSequentialGroup()
                         .addGap(76, 76, 76)
                         .addGroup(seisjugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(seisnombrejugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel22)
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(seisnombrejugador3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel23))))
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, seisjugadoresderLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(seisjugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(seisnombrejugador3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seisnombrejugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(68, 68, 68))
         );
         seisjugadoresderLayout.setVerticalGroup(
             seisjugadoresderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4085,20 +4056,54 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
 
         layeredpaneder.add(seisjugadoresder, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 270, 820));
 
+        SALIRTABLERO.setText("Salir de la partida");
+
+        CAMBIARPOS.setText("Cambiar posicion de cartas de baraja");
+
+        ultimacarta.setFont(new java.awt.Font("Segoe UI", 0, 1)); // NOI18N
+        ultimacarta.setForeground(new java.awt.Color(255, 255, 255));
+        ultimacarta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cartas/8D.jpg"))); // NOI18N
+        ultimacarta.setBorder(null);
+        ultimacarta.setBorderPainted(false);
+        ultimacarta.setContentAreaFilled(false);
+        ultimacarta.setEnabled(false);
+
+        jLabel1.setText("Ultima Carta Seleccionada:");
+
+        DESCARTAR.setText("Descartar carta de la baraja");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(layeredpaneizq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(layeredpanecartas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TABLERO, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(layeredpaneder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(layeredpaneizq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TABLERO, javax.swing.GroupLayout.PREFERRED_SIZE, 706, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(layeredpanecartas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(67, 67, 67)
+                                .addComponent(CAMBIARPOS)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(DESCARTAR)
+                                .addGap(113, 113, 113)))
+                        .addComponent(layeredpaneder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(436, 436, 436)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ultimacarta, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(SALIRTABLERO))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4106,6 +4111,10 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(TABLERO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CAMBIARPOS)
+                            .addComponent(DESCARTAR))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(layeredpanecartas, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -4113,7 +4122,13 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(layeredpaneder, javax.swing.GroupLayout.PREFERRED_SIZE, 746, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(layeredpaneizq, javax.swing.GroupLayout.PREFERRED_SIZE, 771, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ultimacarta, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addComponent(SALIRTABLERO)
+                .addContainerGap())
         );
 
         pack();
@@ -4159,7 +4174,14 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_boton00ActionPerformed
 
+    private void boton62ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton62ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boton62ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CAMBIARPOS;
+    private javax.swing.JButton DESCARTAR;
+    private javax.swing.JButton SALIRTABLERO;
     private javax.swing.JLayeredPane TABLERO;
     private javax.swing.JLabel TABLEROLABEL;
     private javax.swing.JButton boton00;
@@ -4281,6 +4303,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel dosjugadoresder;
     private javax.swing.JPanel dosjugadoresizq;
     private javax.swing.JLabel dosnombrejugador2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -4448,6 +4471,7 @@ public class ATABLEROCOLE extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel tresjugadoresizq;
     private javax.swing.JLabel tresnombrejugador2;
     private javax.swing.JLabel tresnombrejugador3;
+    private javax.swing.JButton ultimacarta;
     // End of variables declaration//GEN-END:variables
 
 }
