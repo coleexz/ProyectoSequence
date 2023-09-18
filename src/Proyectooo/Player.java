@@ -1,6 +1,7 @@
 package Proyectooo;
 
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -8,10 +9,17 @@ public class Player extends Userr {
 
     public static ArrayList<Player> users = new ArrayList();
     public static String UsuarioLogeado;
-    String[] fechas;
+    static RandomAccessFile historial,estadisticas;
+     private Date creationDate; // Atributo para almacenar la fecha de creación.
 
     public Player(String _user, String _pass, int _puntos, String color) {
         super(_user, _pass, _puntos, color);
+        this.creationDate = new Date(); // Asignar la fecha y hora actual al atributo de creación.
+    }
+
+    // Método para obtener la fecha de creación.
+    public Date getCreationDate() {
+        return creationDate;
     }
 
     public String getUser() {
@@ -71,20 +79,7 @@ public class Player extends Userr {
             users.add(new Player(_user, _pass, 0, color));
         }
     }
-
-    //obtener fecha de creacion del user
-    public Date getfECHA() {
-        Date fecha = new Date();
-        return fecha;
-    }
-
-    //mostrar los logs
-    public void Logs(String fecha, String jugador1, String jugador2, String resultado) {
-        String[] nuevoArreglo = new String[fechas.length + 1];
-        System.arraycopy(fechas, 0, nuevoArreglo, 0, fechas.length);
-        nuevoArreglo[fechas.length] = (fechas.length) + " " + fecha + "  Jugador1: " + jugador1 + "  Jugador2: " + jugador2 + "  Resultado: " + resultado;
-        fechas = nuevoArreglo;
-    }
+  
 
     //guarda el usuario en el archivo que se creo
     public static void saveUsersToFile(String filename) {
@@ -115,4 +110,24 @@ public class Player extends Userr {
             System.out.println("Error. No se pudieron cargar los usuarios");
         }
     }
+    
+    public static void agregarEstadisticas(String text) {
+        try (RandomAccessFile rafhistorial = new RandomAccessFile("Users/historial.hstrl", "rw")) {
+            // Si el archivo no existe, RandomAccessFile lo crea automáticamente.
+            historial.seek(rafhistorial.length()); // Posicionar el puntero al final del archivo.
+            historial.writeUTF(text);     // Escribir el texto en el archivo.
+        } catch (IOException e) {
+            System.out.println("Error al escribir en el archivo: " + e.getMessage());
+        }
+    }
+    
+    public static String agarrarEstadisticas(){
+        String acum="";
+        for(Player p : users){
+            acum+="Nombre: "+p.user+" Puntos: "+p.puntos+" Fecha de creacion :"+p.getCreationDate()+"\n";
+        }
+        return acum;
+    }
+
+    
 }

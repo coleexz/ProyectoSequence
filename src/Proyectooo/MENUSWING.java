@@ -30,13 +30,16 @@ public class MENUSWING extends javax.swing.JFrame implements ActionListener {
         setResizable(false);
         setLocationRelativeTo(null);
         pack();
+        AgregarAcciones();
+
+        HISTORIAL.hide();
+        CONFIGPANEL.hide();
+        REPORT.hide();
+        ESTADISTICAS.hide();
 
         System.out.println(numerojugadores);
 
         TITULO.setText("BIENVENIDO AL MENU PRINCIPAL: " + LOGIN.JUGADORACTUAL.getUser());
-
-        REPORTESPANEL.hide();
-        CONFIGPANEL.hide();
 
         CANTIDADJUGADORES.setSelectedItem("4");
         CANTIDADJUGADORES.removeAllItems();
@@ -49,7 +52,7 @@ public class MENUSWING extends javax.swing.JFrame implements ActionListener {
         CANTIDADJUGADORES.addItem("6");
         CANTIDADJUGADORES.addItem("8");
         CANTIDADJUGADORES.setSelectedIndex(2);
-        
+
         COLOREQUIPO.addItem("rojo");
         COLOREQUIPO.addItem("azul");
         COLOREQUIPO.addItem("verde");
@@ -60,7 +63,8 @@ public class MENUSWING extends javax.swing.JFrame implements ActionListener {
         COLORPROPIO.addItem("verde");
         COLORPROPIO.addItem("amarillo");
 
-        AgregarAcciones();
+        ESTADISTICASTEXTAREA.setText(Player.agarrarEstadisticas());
+
     }
 
     /**
@@ -72,10 +76,26 @@ public class MENUSWING extends javax.swing.JFrame implements ActionListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        REPORTESPANEL = new javax.swing.JPanel();
+        ESTADISTICAS = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        ESTADISTICASTEXTAREA = new javax.swing.JTextArea();
+        VOLVERESTADISTICAS = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        PRINCIPAL = new javax.swing.JPanel();
+        JUGAR = new javax.swing.JButton();
+        TITULO = new javax.swing.JLabel();
+        CONFIG = new javax.swing.JButton();
+        REPORTES = new javax.swing.JButton();
+        SALIR = new javax.swing.JButton();
+        REPORT = new javax.swing.JPanel();
+        EST = new javax.swing.JButton();
+        HIST = new javax.swing.JButton();
         VOLVERREPORTES = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        HISTORIAL = new javax.swing.JPanel();
+        VOLVERHISTORIAL = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        HISTORIALTEXTAREA = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         CONFIGPANEL = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -86,51 +106,180 @@ public class MENUSWING extends javax.swing.JFrame implements ActionListener {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        PRINCIPAL = new javax.swing.JPanel();
-        JUGAR = new javax.swing.JButton();
-        TITULO = new javax.swing.JLabel();
-        CONFIG = new javax.swing.JButton();
-        REPORTES = new javax.swing.JButton();
-        SALIR = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        ESTADISTICASTEXTAREA.setColumns(20);
+        ESTADISTICASTEXTAREA.setRows(5);
+        jScrollPane2.setViewportView(ESTADISTICASTEXTAREA);
+
+        VOLVERESTADISTICAS.setText("VOLVER");
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel6.setText("ESTADISTICAS");
+
+        javax.swing.GroupLayout ESTADISTICASLayout = new javax.swing.GroupLayout(ESTADISTICAS);
+        ESTADISTICAS.setLayout(ESTADISTICASLayout);
+        ESTADISTICASLayout.setHorizontalGroup(
+            ESTADISTICASLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ESTADISTICASLayout.createSequentialGroup()
+                .addContainerGap(33, Short.MAX_VALUE)
+                .addGroup(ESTADISTICASLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ESTADISTICASLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ESTADISTICASLayout.createSequentialGroup()
+                        .addComponent(VOLVERESTADISTICAS)
+                        .addContainerGap())))
+            .addGroup(ESTADISTICASLayout.createSequentialGroup()
+                .addGap(116, 116, 116)
+                .addComponent(jLabel6)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        ESTADISTICASLayout.setVerticalGroup(
+            ESTADISTICASLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ESTADISTICASLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(VOLVERESTADISTICAS)
+                .addGap(17, 17, 17))
+        );
+
+        JUGAR.setText("Jugar");
+
+        CONFIG.setText("Configuracion");
+        CONFIG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CONFIGActionPerformed(evt);
+            }
+        });
+
+        REPORTES.setText("Reportes");
+
+        SALIR.setText("Salir");
+
+        javax.swing.GroupLayout PRINCIPALLayout = new javax.swing.GroupLayout(PRINCIPAL);
+        PRINCIPAL.setLayout(PRINCIPALLayout);
+        PRINCIPALLayout.setHorizontalGroup(
+            PRINCIPALLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PRINCIPALLayout.createSequentialGroup()
+                .addGap(143, 143, 143)
+                .addGroup(PRINCIPALLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(JUGAR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(CONFIG, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(REPORTES, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(SALIR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PRINCIPALLayout.createSequentialGroup()
+                .addContainerGap(57, Short.MAX_VALUE)
+                .addComponent(TITULO, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51))
+        );
+        PRINCIPALLayout.setVerticalGroup(
+            PRINCIPALLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PRINCIPALLayout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(TITULO, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(JUGAR)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CONFIG)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(REPORTES)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SALIR)
+                .addContainerGap(121, Short.MAX_VALUE))
+        );
+
+        EST.setText("ESTADISTICAS");
+
+        HIST.setText("HISTORIAL");
+
         VOLVERREPORTES.setText("VOLVER");
+        VOLVERREPORTES.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VOLVERREPORTESActionPerformed(evt);
+            }
+        });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel7.setText("BIENVENIDO AL MENU DE REPORTES");
 
-        jLabel2.setText("BIENVENIDO AL MENU DE REPORTES");
+        javax.swing.GroupLayout REPORTLayout = new javax.swing.GroupLayout(REPORT);
+        REPORT.setLayout(REPORTLayout);
+        REPORTLayout.setHorizontalGroup(
+            REPORTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(REPORTLayout.createSequentialGroup()
+                .addGap(121, 121, 121)
+                .addGroup(REPORTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(HIST, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EST, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, REPORTLayout.createSequentialGroup()
+                .addContainerGap(49, Short.MAX_VALUE)
+                .addGroup(REPORTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, REPORTLayout.createSequentialGroup()
+                        .addComponent(VOLVERREPORTES, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, REPORTLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(28, 28, 28))))
+        );
+        REPORTLayout.setVerticalGroup(
+            REPORTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, REPORTLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addComponent(HIST, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(EST, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56)
+                .addComponent(VOLVERREPORTES, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
-        javax.swing.GroupLayout REPORTESPANELLayout = new javax.swing.GroupLayout(REPORTESPANEL);
-        REPORTESPANEL.setLayout(REPORTESPANELLayout);
-        REPORTESPANELLayout.setHorizontalGroup(
-            REPORTESPANELLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(REPORTESPANELLayout.createSequentialGroup()
-                .addGroup(REPORTESPANELLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, REPORTESPANELLayout.createSequentialGroup()
+        VOLVERHISTORIAL.setText("VOLVER");
+
+        HISTORIALTEXTAREA.setColumns(20);
+        HISTORIALTEXTAREA.setRows(5);
+        jScrollPane1.setViewportView(HISTORIALTEXTAREA);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setText("HISTORIAL DE PARTIDAS");
+
+        javax.swing.GroupLayout HISTORIALLayout = new javax.swing.GroupLayout(HISTORIAL);
+        HISTORIAL.setLayout(HISTORIALLayout);
+        HISTORIALLayout.setHorizontalGroup(
+            HISTORIALLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(HISTORIALLayout.createSequentialGroup()
+                .addGroup(HISTORIALLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(HISTORIALLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(VOLVERREPORTES))
-                    .addGroup(REPORTESPANELLayout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(VOLVERHISTORIAL))
+                    .addGroup(HISTORIALLayout.createSequentialGroup()
+                        .addGroup(HISTORIALLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(HISTORIALLayout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(HISTORIALLayout.createSequentialGroup()
+                                .addGap(87, 87, 87)
+                                .addComponent(jLabel2)))
                         .addGap(0, 6, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, REPORTESPANELLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(92, 92, 92))
         );
-        REPORTESPANELLayout.setVerticalGroup(
-            REPORTESPANELLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, REPORTESPANELLayout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
+        HISTORIALLayout.setVerticalGroup(
+            HISTORIALLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HISTORIALLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(VOLVERREPORTES, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(VOLVERHISTORIAL, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -206,55 +355,9 @@ public class MENUSWING extends javax.swing.JFrame implements ActionListener {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(COLOREQUIPO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(VOLVERCONFIG)
                 .addContainerGap())
-        );
-
-        JUGAR.setText("Jugar");
-
-        CONFIG.setText("Configuracion");
-        CONFIG.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CONFIGActionPerformed(evt);
-            }
-        });
-
-        REPORTES.setText("Reportes");
-
-        SALIR.setText("Salir");
-
-        javax.swing.GroupLayout PRINCIPALLayout = new javax.swing.GroupLayout(PRINCIPAL);
-        PRINCIPAL.setLayout(PRINCIPALLayout);
-        PRINCIPALLayout.setHorizontalGroup(
-            PRINCIPALLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PRINCIPALLayout.createSequentialGroup()
-                .addGap(143, 143, 143)
-                .addGroup(PRINCIPALLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(JUGAR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(CONFIG, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(REPORTES, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(SALIR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PRINCIPALLayout.createSequentialGroup()
-                .addContainerGap(57, Short.MAX_VALUE)
-                .addComponent(TITULO, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
-        );
-        PRINCIPALLayout.setVerticalGroup(
-            PRINCIPALLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PRINCIPALLayout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(TITULO, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(JUGAR)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CONFIG)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(REPORTES)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(SALIR)
-                .addContainerGap(114, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -263,21 +366,29 @@ public class MENUSWING extends javax.swing.JFrame implements ActionListener {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 374, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(REPORTESPANEL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(HISTORIAL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(CONFIGPANEL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(PRINCIPAL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(ESTADISTICAS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(REPORT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 320, Short.MAX_VALUE)
+            .addGap(0, 327, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(REPORTESPANEL, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(HISTORIAL, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(CONFIGPANEL, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(PRINCIPAL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(ESTADISTICAS, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(REPORT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -286,6 +397,10 @@ public class MENUSWING extends javax.swing.JFrame implements ActionListener {
     private void CONFIGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CONFIGActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CONFIGActionPerformed
+
+    private void VOLVERREPORTESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VOLVERREPORTESActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_VOLVERREPORTESActionPerformed
 
     /**
      * @param args the command line arguments
@@ -328,7 +443,12 @@ public class MENUSWING extends javax.swing.JFrame implements ActionListener {
         JUGAR.addActionListener(this);
         REPORTES.addActionListener(this);
         SALIR.addActionListener(this);
+        VOLVERHISTORIAL.addActionListener(this);
+        VOLVERESTADISTICAS.addActionListener(this);
         VOLVERREPORTES.addActionListener(this);
+        EST.addActionListener(this);
+        HIST.addActionListener(this);
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -337,26 +457,36 @@ public class MENUSWING extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JComboBox<String> COLORPROPIO;
     private javax.swing.JButton CONFIG;
     private javax.swing.JPanel CONFIGPANEL;
+    private javax.swing.JButton EST;
+    private javax.swing.JPanel ESTADISTICAS;
+    private javax.swing.JTextArea ESTADISTICASTEXTAREA;
+    private javax.swing.JButton HIST;
+    private javax.swing.JPanel HISTORIAL;
+    private javax.swing.JTextArea HISTORIALTEXTAREA;
     private javax.swing.JButton JUGAR;
     private javax.swing.JPanel PRINCIPAL;
+    private javax.swing.JPanel REPORT;
     private javax.swing.JButton REPORTES;
-    private javax.swing.JPanel REPORTESPANEL;
     private javax.swing.JButton SALIR;
     private javax.swing.JLabel TITULO;
     private javax.swing.JButton VOLVERCONFIG;
+    private javax.swing.JButton VOLVERESTADISTICAS;
+    private javax.swing.JButton VOLVERHISTORIAL;
     private javax.swing.JButton VOLVERREPORTES;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == JUGAR) {
+        if (e.getSource().equals(JUGAR)) {
             if (c > 0) {
                 if (numerojugadores <= Player.users.size()) {
                     ATABLEROCOLE.players.add(LOGIN.JUGADORACTUAL);
@@ -366,16 +496,16 @@ public class MENUSWING extends javax.swing.JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(this, "el numero de jugadores seleccionados : " + numerojugadores + "\nes mayor a los jugadores\nregistrados : " + Player.users.size());
                 }
             } else {
-                JOptionPane.showMessageDialog(this,"debe de escoger sus colores de fichas");
+                JOptionPane.showMessageDialog(this, "debe de escoger sus colores de fichas");
             }
-        } else if (e.getSource() == CONFIG) {
+        } else if (e.getSource().equals(CONFIG)) {
             c++;
-            CONFIGPANEL.show();
-            PRINCIPAL.hide();
-        } else if (e.getSource() == REPORTES) {
-            REPORTESPANEL.show();
-            PRINCIPAL.hide();
-        } else if (e.getSource() == SALIR) {
+            CONFIGPANEL.setVisible(true);
+            PRINCIPAL.setVisible(false);
+        } else if (e.getSource().equals(REPORTES)) {
+            REPORT.setVisible(true);
+            PRINCIPAL.setVisible(false);
+        } else if (e.getSource().equals(SALIR)) {
             LOGIN login;
             try {
                 login = new LOGIN();
@@ -383,18 +513,28 @@ public class MENUSWING extends javax.swing.JFrame implements ActionListener {
             } catch (IOException ex) {
                 Logger.getLogger(MENUSWING.class.getName()).log(Level.SEVERE, null, ex);
             }
-
             this.dispose();
-        } else if (e.getSource() == VOLVERCONFIG) {
+        } else if (e.getSource().equals(VOLVERCONFIG)) {
             numerojugadores = Integer.parseInt(CANTIDADJUGADORES.getSelectedItem().toString());
             LOGIN.JUGADORACTUAL.setColor(COLORPROPIO.getSelectedItem().toString());
             colorequipopropio = COLOREQUIPO.getSelectedItem().toString();
-            CONFIGPANEL.hide();
-            PRINCIPAL.show();
-        } else if (e.getSource()==VOLVERREPORTES){
-            PRINCIPAL.show();
-            REPORTESPANEL.hide();
-            
+            CONFIGPANEL.setVisible(false);
+            PRINCIPAL.setVisible(true);
+        } else if (e.getSource().equals(VOLVERHISTORIAL)) {
+            REPORT.setVisible(true);
+            HISTORIAL.setVisible(false);
+        } else if (e.getSource().equals(VOLVERESTADISTICAS)) {
+            ESTADISTICAS.setVisible(false);
+            REPORT.setVisible(true);
+        } else if (e.getSource().equals(VOLVERREPORTES)) {
+            REPORT.setVisible(false);
+            PRINCIPAL.setVisible(true);
+        } else if (e.getSource().equals(EST)) {
+            ESTADISTICAS.setVisible(true);
+            REPORT.setVisible(false);
+        } else if (e.getSource().equals(HIST)) {
+            REPORT.setVisible(false);
+            HISTORIAL.setVisible(true);
         }
     }
 }
